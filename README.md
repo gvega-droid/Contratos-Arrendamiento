@@ -1,0 +1,1 @@
+Necesito un cuadro comparativo de los PDF´s la información más relevante de cada clausula (nombre del arrendatario, vigencia, fecha de firma, importe de renta, fecha de incremento, penalizaciones, deposito en garantia)
