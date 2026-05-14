@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cuadro Comparativo de Contratos de Arrendamiento</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f4f6f9;
+      color: #2c3e50;
+      padding: 32px 16px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+      color: #1a252f;
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #7f8c8d;
+      margin-bottom: 28px;
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.10);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      min-width: 800px;
+    }
+
+    thead tr {
+      background: #1a252f;
+      color: #fff;
+    }
+
+    thead th {
+      padding: 14px 16px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      text-align: left;
+      border-right: 1px solid #2c3e50;
+    }
+
+    thead th:last-child { border-right: none; }
+
+    .col-concepto {
+      background: #2c3e50;
+      color: #ecf0f1;
+      font-weight: 700;
+      font-size: 0.82rem;
+      width: 180px;
+      min-width: 150px;
+    }
+
+    tbody tr:nth-child(even) { background: #f8fafc; }
+    tbody tr:hover { background: #eaf2ff; transition: background 0.15s; }
+
+    tbody td {
+      padding: 13px 16px;
+      font-size: 0.88rem;
+      vertical-align: top;
+      border-bottom: 1px solid #e8ecf0;
+      border-right: 1px solid #e8ecf0;
+      line-height: 1.55;
+    }
+
+    tbody td:last-child { border-right: none; }
+
+    .concepto-cell {
+      font-weight: 700;
+      font-size: 0.82rem;
+      color: #1a252f;
+      background: #eaf0f6;
+      letter-spacing: 0.01em;
+    }
+
+    .highlight {
+      color: #1a6b27;
+      font-weight: 700;
+    }
+
+    .note {
+      font-size: 0.78rem;
+      color: #7f8c8d;
+      margin-top: 4px;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #d5e8f7;
+      color: #154f7a;
+      border-radius: 4px;
+      padding: 1px 7px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .tag-warn {
+      background: #fdebd0;
+      color: #7e5109;
+    }
+
+    ul.penalties {
+      padding-left: 16px;
+      margin: 0;
+    }
+
+    ul.penalties li {
+      margin-bottom: 5px;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.75rem;
+      color: #aab;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Cuadro Comparativo de Contratos de Arrendamiento</h1>
+<p class="subtitle">Arrendador: CIBANCO, S.A. (Fiduciario Fideicomiso F/1596) / Fibra Hotelera, S.C.</p>
+
+<div class="table-wrapper">
+  <table>
+    <thead>
+      <tr>
+        <th class="col-concepto">Concepto</th>
+        <th>Agro-Partes Puebla</th>
+        <th>Comercial Automotriz de los Altos</th>
+        <th>Banco Santander México</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr>
+        <td class="concepto-cell">Nombre del Arrendatario</td>
+        <td>
+          <strong>AGRO-PARTES PUEBLA, S.A. DE C.V.</strong><br>
+          <span class="note">Rep. por: Laura Fabiola Torres Pérez</span><br>
+          <span class="note">RFC: APU2302025Y9</span>
+        </td>
+        <td>
+          <strong>COMERCIAL AUTOMOTRIZ DE LOS ALTOS, S.A. DE C.V.</strong><br>
+          <span class="note">Rep. por: J. Guadalupe Ponce Ríos</span><br>
+          <span class="note">RFC: CAA890203661</span>
+        </td>
+        <td>
+          <strong>BANCO SANTANDER MÉXICO, S.A. INSTITUCIÓN DE BANCA MÚLTIPLE, GRUPO FINANCIERO SANTANDER</strong><br>
+          <span class="note">Rep. por: Arq. Edmundo de Jesús Pérez Toledo y C.P. José Luis Álvarez Montiel</span><br>
+          <span class="note">RFC: BSM970519DU8</span>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="concepto-cell">Vigencia del Contrato</td>
+        <td>
+          <span class="tag">23 Mar 2023 → 23 Mar 2028</span><br>
+          <strong>1 año forzoso + 4 voluntarios</strong> (para ambas partes), contados desde la Fecha de Apertura (15 Abr 2023).<br>
+          <span class="note">Total: 5 años</span>
+        </td>
+        <td>
+          <span class="tag">01 Dic 2024 → 01 Dic 2029</span><br>
+          <strong>2 años forzosos</strong> para el arrendatario y <strong>3 años forzosos</strong> para el arrendador, contados desde la Fecha de Apertura (01 Dic 2024).<br>
+          <span class="note">Total: 5 años</span>
+        </td>
+        <td>
+          <span class="tag">01 Sep 2023 → 01 Sep 2030</span><br>
+          <strong>5 años forzosos</strong> para ambas partes, conforme al Convenio Modificatorio firmado el 26 May 2025 (que amplió el plazo original).<br>
+          <span class="note">Total: 7 años desde el contrato original</span>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="concepto-cell">Fecha de Firma</td>
+        <td><strong>13 de marzo de 2023</strong></td>
+        <td><strong>01 de diciembre de 2024</strong></td>
+        <td>
+          Contrato original: <strong>01 de septiembre de 2023</strong><br>
+          Convenio Modificatorio: <strong>26 de mayo de 2025</strong>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="concepto-cell">Importe de Renta Mensual</td>
+        <td>
+          <span class="highlight">$15,000.00 MXN + IVA</span><br>
+          <span class="note">A partir de la Fecha de Apertura (15 Abr 2023)</span>
+        </td>
+        <td>
+          <span class="highlight">$37,809.00 MXN + IVA</span><br>
+          <span class="note">A partir de la Fecha de Apertura (01 Dic 2024)</span>
+        </td>
+        <td>
+          <span class="highlight">$201,691.51 MXN + IVA</span><br>
+          <span class="note">Renta vigente al 05 Sep 2024 (tras incremento anual). Renta original del contrato no disponible en el convenio modificatorio.</span>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="concepto-cell">Incremento de Renta</td>
+        <td>
+          <strong>Anual</strong>, conforme al <strong>INPC</strong> (Índice Nacional de Precios al Consumidor, renglón "General" – INEGI).<br>
+          <span class="note">Aplicable cada 12 meses a partir de la Fecha de Apertura. La nueva renta sustituye a la anterior para los siguientes 12 meses.</span>
+        </td>
+        <td>
+          <strong>Anual</strong>, conforme al <strong>INPC</strong> (Índice Nacional de Precios al Consumidor, renglón "General" – INEGI).<br>
+          <span class="note">Aplicable cada 12 meses a partir de la Fecha de Apertura.</span>
+        </td>
+        <td>
+          <strong>Anual</strong>, conforme al <strong>INPC</strong> (rige el contrato original).<br>
+          <span class="note">El primer incremento anual documentado se aplicó el 05 Sep 2024, resultando en $201,691.51 + IVA.</span>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="concepto-cell">Depósito en Garantía</td>
+        <td>
+          <span class="highlight">2 meses de renta = $30,000.00 MXN</span><br>
+          <span class="note">Entregado a la firma del contrato. Se actualiza conforme aumenta la renta, debiendo mantenerse siempre en el equivalente a 2 meses de renta vigente. El arrendatario tiene 5 días posteriores al incremento para cubrir la diferencia.</span>
+        </td>
+        <td>
+          <span class="highlight">2 meses de renta = $75,618.00 MXN</span><br>
+          <span class="note">Entregado a la firma del contrato. Se actualiza conforme aumenta la renta, debiendo mantenerse siempre en el equivalente a 2 meses de renta vigente. El arrendatario tiene 5 días posteriores al incremento para cubrir la diferencia.</span>
+        </td>
+        <td>
+          <span class="tag tag-warn">No especificado en el Convenio Modificatorio</span><br>
+          <span class="note">Las condiciones de depósito en garantía se rigen por el contrato original (01 Sep 2023), el cual no forma parte de los documentos disponibles.</span>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="concepto-cell">Penalizaciones</td>
+        <td>
+          <ul class="penalties">
+            <li><strong>Mora en pago:</strong> Intereses a la TIIE × 2.5 + IVA, desde la fecha de mora hasta el pago efectivo.</li>
+            <li><strong>Rescisión por causa del arrendatario:</strong> Pago de renta mensual vigente × número de meses restantes del plazo forzoso + IVA, en una sola exhibición.</li>
+            <li><strong>No desocupar al término:</strong> El arrendatario deberá seguir pagando la última renta incrementada en <strong>100%</strong> hasta la desocupación efectiva.</li>
+            <li><strong>Gastos judiciales:</strong> A cargo del arrendatario si el arrendador se ve obligado a promover juicio.</li>
+          </ul>
+        </td>
+        <td>
+          <ul class="penalties">
+            <li><strong>Mora en pago:</strong> Intereses a la TIIE × 2.5 + IVA, desde la fecha de mora hasta el pago efectivo.</li>
+            <li><strong>Rescisión por causa del arrendatario:</strong> Pago de renta mensual vigente × número de meses restantes del plazo forzoso + IVA, en una sola exhibición.</li>
+            <li><strong>No desocupar al término:</strong> El arrendatario deberá seguir pagando la última renta incrementada en <strong>100%</strong> hasta la desocupación efectiva.</li>
+            <li><strong>Gastos judiciales:</strong> A cargo del arrendatario si el arrendador se ve obligado a promover juicio.</li>
+          </ul>
+        </td>
+        <td>
+          <span class="tag tag-warn">No especificado en el Convenio Modificatorio</span><br>
+          <span class="note">Las penalizaciones se rigen por el contrato original (01 Sep 2023). El convenio únicamente modifica la cláusula de plazo (vigencia).</span>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="concepto-cell">Inmueble / Ubicación</td>
+        <td>
+          Local 179 m²<br>
+          <span class="note">Lateral Sur, Autopista México-Puebla 55, Cuautlancingo, 72710 Puebla, Puebla.</span>
+        </td>
+        <td>
+          Locales L-01, L-02 y L-03 (252.06 m²)<br>
+          <span class="note">Blvd. José María Chávez 2010, Cd Industrial, C.P. 20290, Aguascalientes, Ags.</span>
+        </td>
+        <td>
+          Local F-02A (432 m²)<br>
+          <span class="note">Paseo de Las Hdas, s/n Lote 4 Norte, Jardines de la Hacienda, 54720, Cuautitlán Izcalli, Estado de México.</span>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="concepto-cell">Giro Comercial Autorizado</td>
+        <td>Oficina de compraventa de equipos, activos y productos agrícolas.</td>
+        <td>Oficina, venta, almacenamiento y exhibición de llantas para automóviles, camionetas y camiones de motor.</td>
+        <td>Institución de Banca Múltiple (servicios bancarios).<br><span class="note">Conforme a contrato original.</span></td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+
+<footer>
+  Generado a partir de los contratos de arrendamiento del Fideicomiso F/1596 (Fibra Hotelera, S.C.) &mdash; Mayo 2025
+</footer>
+
+</body>
+</html>
