@@ -1,0 +1,168 @@
+{
+  "base_de_datos": "Contratos de Arrendamiento - FIHO (Fibra Hotelera)",
+  "arrendador": "CIBANCO, S.A., Institución de Banca Múltiple, actuando como Fiduciario del Fideicomiso F/1596, representada por FIBRA HOTELERA, S.C.",
+  "ultima_actualizacion": "2026-05-21",
+  "contratos": [
+    {
+      "id": 1,
+      "archivo_fuente": "Contrato Arrendamiento Agro Partes One Puebla 23 Marzo 2023- 23 Marzo 2028.pdf",
+      "tipo_documento": "Contrato de Arrendamiento",
+      "fecha_firma": "13 de marzo de 2023",
+      "arrendatario": {
+        "razon_social": "AGRO-PARTES PUEBLA, S.A DE C.V.",
+        "representante_legal": "Laura Fabiola Torres Pérez",
+        "rfc": "APU2302025Y9"
+      },
+      "identificacion_local": {
+        "numero_local": "No especificado en el contrato (ver Anexo A)",
+        "superficie_m2": 179,
+        "descripcion_superficie": "179 m² (ciento setenta y nueve metros cuadrados) superficie rentable aproximada",
+        "direccion": "Lateral Sur, Autopista México-Puebla 55, Cuautlancingo, 72710 Puebla, Puebla",
+        "giro_comercial": "Oficina de compraventa de equipos, activos y productos agrícolas"
+      },
+      "plazo_arrendamiento": {
+        "descripcion": "1 (un) año forzoso y 4 (cuatro) voluntarios para ambas partes, contados a partir de la Fecha de Apertura",
+        "fecha_entrega": "15 de marzo de 2023",
+        "fecha_apertura": "15 de abril de 2023",
+        "vencimiento_plazo_forzoso": "15 de abril de 2024",
+        "vencimiento_plazo_voluntario": "15 de abril de 2028"
+      },
+      "importe_renta": {
+        "monto_inicial_mensual_mnx": 15000.00,
+        "descripcion": "$15,000.00 (quince mil pesos 00/100 Moneda Nacional) más IVA, a partir de la Fecha de Apertura",
+        "cuota_mantenimiento": "10% de la renta vigente mensual más IVA"
+      },
+      "deposito_garantia": {
+        "meses_equivalentes": 2,
+        "monto_mnx": 30000.00,
+        "descripcion": "Equivalente a 2 (dos) meses de renta. Se actualiza conforme a los incrementos de renta para mantenerse siempre en 2 meses de renta vigente.",
+        "cuenta_deposito": "BBVA Bancomer Sucursal Empresas Toluca, Beneficiario F-X-DEUTSCHE BANK MEXICO NO. F/1596, Cuenta 0191885413, Cuenta CLABE: 012420001918854135"
+      },
+      "fecha_incremento_renta": {
+        "periodicidad": "Cada 12 meses a partir de la Fecha de Apertura",
+        "primer_incremento": "15 de abril de 2024",
+        "base_calculo": "Inflación del período conforme al Índice Nacional de Precios al Consumidor (INPC) renglón General, publicado por el INEGI"
+      },
+      "penalizaciones": [
+        {
+          "concepto": "Mora en pago de renta",
+          "descripcion": "Intereses calculados a la TIIE (Tasa de Interés Interbancaria de Equilibrio) multiplicada por 2.5 más IVA, desde la fecha en que incurra en mora hasta el pago efectivo"
+        },
+        {
+          "concepto": "No desocupación al vencimiento del plazo",
+          "descripcion": "El arrendatario queda obligado a seguir pagando la última renta incrementada en un 100% (cien por ciento) hasta la desocupación y entrega de la localidad arrendada"
+        },
+        {
+          "concepto": "Rescisión imputable al arrendatario",
+          "descripcion": "Pago en una sola exhibición de una cantidad equivalente a la renta mensual vigente en la fecha de rescisión, multiplicada por el número de meses que falten para el término de su plazo forzoso, más IVA"
+        },
+        {
+          "concepto": "Gastos y costas judiciales",
+          "descripcion": "Todos los gastos y costas judiciales que el arrendador se vea precisado a erogar en caso de promover juicio en contra del arrendatario"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "archivo_fuente": "Contrato Arrendamiento Comercial Automotriz de los Altos 01 Dic 2024 - 01 Dic 2029.pdf",
+      "tipo_documento": "Contrato de Arrendamiento",
+      "fecha_firma": "01 de diciembre de 2024",
+      "arrendatario": {
+        "razon_social": "COMERCIAL AUTOMOTRIZ DE LOS ALTOS, S.A DE C.V.",
+        "representante_legal": "J. Guadalupe Ponce Ríos",
+        "rfc": "CAA890203661"
+      },
+      "identificacion_local": {
+        "numero_local": "L-01, L-02 y L-03",
+        "superficie_m2": 252.06,
+        "descripcion_superficie": "252.06 m² (doscientos cincuenta y dos metros con cero seis decímetros cuadrados) superficie rentable aproximada",
+        "direccion": "Blvd. José María Chávez 2010, Cd Industrial, C.P. 20290, Aguascalientes, Ags.",
+        "giro_comercial": "Oficina de venta, almacenamiento y exhibición de llantas para automóviles, camionetas y camiones de motor"
+      },
+      "plazo_arrendamiento": {
+        "descripcion": "2 (dos) años forzosos para el arrendatario y 3 (tres) años forzosos para el arrendador, contados a partir de la Fecha de Apertura",
+        "fecha_entrega": "1 de noviembre de 2024",
+        "fecha_apertura": "1 de diciembre de 2024",
+        "vencimiento_forzoso_arrendatario": "1 de diciembre de 2026",
+        "vencimiento_forzoso_arrendador": "1 de diciembre de 2027"
+      },
+      "importe_renta": {
+        "monto_inicial_mensual_mnx": 37809.00,
+        "descripcion": "$37,809.00 (treinta y siete mil ochocientos nueve pesos 00/100 Moneda Nacional) más IVA, a partir de la Fecha de Apertura"
+      },
+      "deposito_garantia": {
+        "meses_equivalentes": 2,
+        "monto_mnx": 75618.00,
+        "descripcion": "Equivalente a 2 (dos) meses de renta. Se actualiza conforme a los incrementos de renta para mantenerse siempre en 2 meses de renta vigente.",
+        "cuenta_deposito": "BBVA Bancomer Sucursal Empresas Toluca, Beneficiario F-X-DEUTSCHE BANK MEXICO NO. F/1596, Cuenta 0191885413, Cuenta CLABE: 012420001918854135"
+      },
+      "fecha_incremento_renta": {
+        "periodicidad": "Cada 12 meses a partir de la Fecha de Apertura",
+        "primer_incremento": "1 de diciembre de 2025",
+        "base_calculo": "Inflación del período conforme al Índice Nacional de Precios al Consumidor (INPC) renglón General, publicado por el INEGI"
+      },
+      "penalizaciones": [
+        {
+          "concepto": "Mora en pago de renta",
+          "descripcion": "Intereses calculados a la TIIE (Tasa de Interés Interbancaria de Equilibrio) multiplicada por 2.5 más IVA, desde la fecha en que incurra en mora hasta el pago efectivo"
+        },
+        {
+          "concepto": "No desocupación al vencimiento del plazo",
+          "descripcion": "El arrendatario queda obligado a seguir pagando la última renta incrementada en un 100% (cien por ciento) hasta la desocupación y entrega de la localidad arrendada"
+        },
+        {
+          "concepto": "Rescisión imputable al arrendatario",
+          "descripcion": "Pago en una sola exhibición de una cantidad equivalente a la renta mensual vigente en la fecha de rescisión, multiplicada por el número de meses que falten para el término de su plazo forzoso, más IVA"
+        },
+        {
+          "concepto": "Gastos y costas judiciales",
+          "descripcion": "Todos los gastos y costas judiciales que el arrendador se vea precisado a erogar en caso de promover juicio en contra del arrendatario"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "archivo_fuente": "Convenio Arrendamiento Banco Santander 26 mayo 2025 - 01 septiembre 2030.pdf",
+      "tipo_documento": "Convenio Modificatorio al Contrato de Arrendamiento",
+      "nota_documento": "Este archivo es un CONVENIO MODIFICATORIO al contrato original firmado el 01 de septiembre de 2023. Solo modifica la Cláusula Segunda (Plazo). Los demás términos del contrato original (renta inicial, depósito, penalizaciones) se rigen por el contrato original, el cual no está disponible en este repositorio.",
+      "fecha_contrato_original": "01 de septiembre de 2023",
+      "fecha_convenio_modificatorio": "26 de mayo de 2025",
+      "arrendatario": {
+        "razon_social": "BANCO SANTANDER MÉXICO, S.A. INSTITUCIÓN DE BANCA MÚLTIPLE, GRUPO FINANCIERO SANTANDER",
+        "representantes": [
+          "ARQ. EDMUNDO DE JESÚS PÉREZ TOLEDO (Apoderado)",
+          "C.P. JOSÉ LUIS ÁLVAREZ MONTIEL (Apoderado)"
+        ],
+        "rfc": "BSM970519DU8"
+      },
+      "identificacion_local": {
+        "numero_local": "F-02A",
+        "superficie_m2": 432,
+        "descripcion_superficie": "432 m² (cuatrocientos treinta y dos metros cuadrados)",
+        "direccion": "Paseo de Las Hdas, s/n Lote 4, Norte, Jardines de la Hacienda, 54720, Cuautitlán Izcalli, Estado de México"
+      },
+      "plazo_arrendamiento": {
+        "descripcion": "5 (cinco) años forzosos para ambas partes (modificado por convenio del 26 mayo 2025)",
+        "fecha_inicio_contrato_original": "01 de septiembre de 2023",
+        "vencimiento": "01 de septiembre de 2030"
+      },
+      "importe_renta": {
+        "monto_vigente_desde_sep2024_mnx": 201691.51,
+        "descripcion": "$201,691.51 (doscientos un mil seiscientos noventa y uno pesos 51/100 Moneda Nacional) más IVA. Este es el monto vigente a partir del incremento anual realizado el 05 de septiembre de 2024. La renta inicial del contrato original no está especificada en el convenio modificatorio.",
+        "renta_inicial_contrato_original": "No especificada en el convenio modificatorio disponible"
+      },
+      "deposito_garantia": {
+        "descripcion": "No especificado en el convenio modificatorio. Los términos del depósito corresponden al contrato original del 01 de septiembre de 2023, el cual no está disponible en este repositorio."
+      },
+      "fecha_incremento_renta": {
+        "periodicidad": "Cada 12 meses a partir de la fecha de inicio del contrato original (01 septiembre 2023)",
+        "incremento_registrado": "05 de septiembre de 2024 (renta resultante: $201,691.51 + IVA)",
+        "proximo_incremento_estimado": "01 de septiembre de 2025",
+        "base_calculo": "Conforme al contrato original (no especificado en el convenio modificatorio)"
+      },
+      "penalizaciones": {
+        "descripcion": "Las penalizaciones corresponden al contrato original del 01 de septiembre de 2023. El convenio modificatorio únicamente modifica el plazo (Cláusula Segunda). El contrato original no está disponible en este repositorio."
+      }
+    }
+  ]
+}
