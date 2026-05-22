@@ -39,14 +39,15 @@ col_labels = [
     'COBRO\nDE LUZ',
 ]
 keys = ['no','arrendatario','sup','ciudad','vigencia','renta','incr','deposito','penalizacion','agua','luz']
-col_widths = [0.32, 2.5, 0.85, 1.5, 2.1, 2.0, 1.15, 1.5, 1.9, 1.45, 1.45]
+# Landscape: ancho ~30", alto ~20"
+col_widths = [0.5, 4.4, 1.4, 2.6, 3.7, 3.5, 2.0, 2.6, 3.4, 2.5, 2.5]
 
 n_rows = len(contratos)
 n_cols = len(col_labels)
-row_height = 1.25
+row_height = 1.0
 
-fig_w = sum(col_widths) + 0.5
-fig_h = n_rows * row_height + 2.4
+fig_w = sum(col_widths) + 0.5   # ≈ 29.6"
+fig_h = n_rows * row_height + 2.2  # ≈ 22.2"
 fig, ax = plt.subplots(figsize=(fig_w, fig_h))
 ax.axis('off')
 
@@ -73,13 +74,13 @@ table = ax.table(
     cellLoc='left',
 )
 table.auto_set_font_size(False)
-table.set_fontsize(6.2)
+table.set_fontsize(7.0)
 
 for j in range(n_cols):
     cell = table[0, j]
     cell.set_facecolor(header_color)
-    cell.set_text_props(color='white', fontweight='bold', fontsize=6.5)
-    cell.set_height(0.055)
+    cell.set_text_props(color='white', fontweight='bold', fontsize=7.5)
+    cell.set_height(0.05)
 
 for i in range(1, n_rows + 1):
     for j in range(n_cols):
