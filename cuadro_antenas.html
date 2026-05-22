@@ -1,374 +1,213 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>FIHO — Contratos de Arrendamiento de Antenas</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@700;900&display=swap" rel="stylesheet"/>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --att:#009FDB;--zeliks:#FF6B35;--mxt:#8B2FC9;--intelli:#00897B;
+      --megacable:#C0392B;--mtp:#1565C0;--capsa:#2E7D32;
+      --navy:#0D1B3E;--gold:#F0A500;--danger:#E53E3E;
+      --ift:#2563EB;--pc:#D97706;--const:#7C3AED;--uso:#0D9488;
+      --inah:#92400E;--semarnat:#166534;--afac:#9F1239;
+    }
+    body{font-family:'Inter',sans-serif;background:linear-gradient(160deg,#0D1B3E 0%,#1a3560 40%,#0f2a50 100%);min-height:100vh;color:#1A2340}
 
-    :root {
-      --att:       #009FDB;
-      --zeliks:    #FF6B35;
-      --mxt:       #8B2FC9;
-      --intelli:   #00897B;
-      --megacable: #C0392B;
-      --mtp:       #1565C0;
-      --capsa:     #2E7D32;
-      --navy:      #0D1B3E;
-      --gold:      #F0A500;
-      --light:     #F4F7FB;
-      --mid:       #E1EAF5;
-      --border:    #C5D3E8;
-      --text:      #1A2340;
-      --muted:     #6B7A99;
-      --danger:    #E53E3E;
-      --warn-hot:  #DD6B20;
-      --warn-mid:  #D69E2E;
-      --warn-low:  #2F855A;
-    }
+    /* HERO */
+    .hero{padding:44px 48px 28px;text-align:center;position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(240,165,0,.18) 0%,transparent 70%);pointer-events:none}
+    .hero-badge{display:inline-block;background:rgba(240,165,0,.15);border:1px solid rgba(240,165,0,.45);color:var(--gold);font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;padding:5px 18px;border-radius:50px;margin-bottom:16px}
+    .hero h1{font-family:'Montserrat',sans-serif;font-size:clamp(18px,3vw,32px);font-weight:900;color:#fff;line-height:1.15;margin-bottom:8px}
+    .hero h1 span{color:var(--gold)}
+    .hero p{color:rgba(255,255,255,.5);font-size:12.5px}
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(160deg, #0D1B3E 0%, #1a3560 40%, #0f2a50 100%);
-      min-height: 100vh;
-      color: var(--text);
-    }
+    /* STATS */
+    .stats{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;padding:0 48px 28px}
+    .stat-card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:14px 24px;text-align:center;min-width:110px}
+    .stat-card .num{font-size:24px;font-weight:800;color:var(--gold);line-height:1}
+    .stat-card .lbl{font-size:10px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:1.2px;margin-top:4px}
 
-    /* ── HERO ── */
-    .hero {
-      padding: 48px 48px 32px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(240,165,0,.18) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .hero-badge {
-      display: inline-block;
-      background: rgba(240,165,0,.15);
-      border: 1px solid rgba(240,165,0,.45);
-      color: var(--gold);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-      padding: 5px 18px;
-      border-radius: 50px;
-      margin-bottom: 18px;
-    }
-    .hero h1 {
-      font-family: 'Montserrat', sans-serif;
-      font-size: clamp(20px, 3vw, 34px);
-      font-weight: 900;
-      color: #fff;
-      line-height: 1.15;
-      letter-spacing: -0.5px;
-      margin-bottom: 10px;
-    }
-    .hero h1 span { color: var(--gold); }
-    .hero p {
-      color: rgba(255,255,255,.5);
-      font-size: 13px;
-      font-weight: 400;
-    }
+    /* LEGEND */
+    .legend{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;padding:0 48px 24px}
+    .legend-item{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:50px;padding:4px 12px 4px 8px;font-size:11px;font-weight:600;color:#fff}
+    .legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
 
-    /* ── STAT CARDS ── */
-    .stats {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 14px;
-      padding: 0 48px 32px;
-    }
-    .stat-card {
-      background: rgba(255,255,255,.07);
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 14px;
-      padding: 16px 26px;
-      text-align: center;
-      backdrop-filter: blur(6px);
-      min-width: 120px;
-    }
-    .stat-card .num { font-size: 26px; font-weight: 800; color: var(--gold); line-height: 1; }
-    .stat-card .lbl { font-size: 10px; font-weight: 700; color: rgba(255,255,255,.5); text-transform: uppercase; letter-spacing: 1.2px; margin-top: 5px; }
+    /* TABS */
+    .tabs-bar{display:flex;gap:6px;padding:0 32px 18px;flex-wrap:wrap}
+    .tab-btn{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:10px;color:rgba(255,255,255,.6);font-family:'Inter',sans-serif;font-size:13px;font-weight:600;padding:9px 18px;cursor:pointer;transition:all .18s}
+    .tab-btn:hover{background:rgba(255,255,255,.12);color:#fff}
+    .tab-btn.active{background:var(--gold);border-color:var(--gold);color:#0D1B3E}
+    .tab-btn .abadge{background:var(--danger);color:#fff;font-size:10px;font-weight:800;padding:1px 7px;border-radius:50px}
+    .tab-btn.active .abadge{background:rgba(13,27,62,.3);color:#fff}
+    .tab-panel{display:none}
+    .tab-panel.active{display:block}
 
-    /* ── LEGEND ── */
-    .legend {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      padding: 0 48px 28px;
-    }
-    .legend-item {
-      display: flex; align-items: center; gap: 7px;
-      background: rgba(255,255,255,.07);
-      border: 1px solid rgba(255,255,255,.1);
-      border-radius: 50px;
-      padding: 5px 14px 5px 10px;
-      font-size: 11.5px; font-weight: 600; color: #fff;
-    }
-    .legend-dot { width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0; }
+    /* TOOLBAR */
+    .toolbar{display:flex;align-items:center;gap:12px;padding:0 32px 16px;flex-wrap:wrap}
+    .search-wrap{position:relative;flex:1;min-width:200px}
+    .search-wrap svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,.4)}
+    .search-wrap input{width:100%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:10px;color:#fff;font-size:13px;font-family:'Inter',sans-serif;padding:9px 12px 9px 36px;outline:none;transition:border-color .2s}
+    .search-wrap input::placeholder{color:rgba(255,255,255,.35)}
+    .search-wrap input:focus{border-color:var(--gold)}
+    .count-badge{background:rgba(240,165,0,.15);border:1px solid rgba(240,165,0,.35);color:var(--gold);font-size:12px;font-weight:700;padding:5px 14px;border-radius:50px;white-space:nowrap}
 
-    /* ── TABS ── */
-    .tabs-bar {
-      display: flex;
-      gap: 6px;
-      padding: 0 32px 20px;
-      flex-wrap: wrap;
-    }
-    .tab-btn {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255,255,255,.07);
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 10px;
-      color: rgba(255,255,255,.6);
-      font-family: 'Inter', sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      padding: 9px 20px;
-      cursor: pointer;
-      transition: all .18s;
-    }
-    .tab-btn:hover { background: rgba(255,255,255,.12); color: #fff; }
-    .tab-btn.active {
-      background: var(--gold);
-      border-color: var(--gold);
-      color: #0D1B3E;
-    }
-    .tab-btn .alert-badge {
-      background: var(--danger);
-      color: #fff;
-      font-size: 10px;
-      font-weight: 800;
-      padding: 1px 7px;
-      border-radius: 50px;
-      line-height: 1.6;
-    }
-    .tab-btn.active .alert-badge {
-      background: rgba(13,27,62,.35);
-      color: #fff;
-    }
+    /* TABLE */
+    .table-wrap{margin:0 24px 40px;border-radius:18px;overflow:hidden;border:1px solid rgba(255,255,255,.1);box-shadow:0 24px 80px rgba(0,0,0,.4)}
+    .table-scroll{overflow-x:auto}
+    table{width:100%;border-collapse:collapse;min-width:1200px}
+    thead tr{background:linear-gradient(135deg,#0D1B3E 0%,#163260 100%)}
+    th{padding:13px 11px;font-size:9.5px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:rgba(255,255,255,.72);text-align:left;border-bottom:2px solid rgba(240,165,0,.35);white-space:nowrap;cursor:pointer;user-select:none;transition:color .15s}
+    th:hover{color:var(--gold)}
+    th .si{opacity:.35;margin-left:3px;font-size:9px}
+    th.sorted{color:var(--gold)}
+    th.sorted .si{opacity:1}
+    th:first-child{text-align:center;width:40px}
+    tbody tr{border-bottom:1px solid rgba(255,255,255,.06);transition:background .15s}
+    tbody tr:nth-child(even){background:rgba(255,255,255,.04)}
+    tbody tr:nth-child(odd){background:rgba(255,255,255,.015)}
+    tbody tr:hover{background:rgba(240,165,0,.07)!important}
+    tbody tr.hidden{display:none}
+    td{padding:11px 11px;font-size:12px;color:rgba(255,255,255,.82);vertical-align:top;line-height:1.5}
+    td:first-child{text-align:center;font-weight:700;color:var(--gold);font-size:13px}
+    td.op-stripe{border-left:4px solid transparent}
+    .op-pill{display:inline-block;padding:2px 9px;border-radius:50px;font-size:9.5px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;margin-bottom:4px;color:#fff}
+    .op-name{font-size:11.5px;font-weight:600;color:#fff;line-height:1.4}
+    .hotel-name{font-weight:700;font-size:12.5px;color:#fff}
+    .hotel-city{font-size:10.5px;color:rgba(255,255,255,.5);margin-top:1px}
+    .plazo-years{display:inline-block;background:rgba(240,165,0,.15);border:1px solid rgba(240,165,0,.3);color:var(--gold);font-size:9.5px;font-weight:700;padding:2px 8px;border-radius:50px;margin-bottom:3px}
+    .plazo-dates{font-size:11px;color:rgba(255,255,255,.62)}
+    .renta-amount{font-weight:700;font-size:12.5px;color:#6EE7B7}
+    .renta-note{font-size:10.5px;color:rgba(255,255,255,.45)}
+    .incr-month{font-weight:700;font-size:12.5px;color:#93C5FD;text-transform:uppercase;letter-spacing:.4px}
+    .incr-note{font-size:10.5px;color:rgba(255,255,255,.45)}
+    .penal-text{font-size:11.5px;color:rgba(255,210,100,.85)}
+    .na{font-size:10.5px;color:rgba(255,255,255,.28);font-style:italic}
+    .no-results{text-align:center;padding:40px;color:rgba(255,255,255,.3);font-size:14px;display:none}
 
-    /* ── PANEL ── */
-    .tab-panel { display: none; }
-    .tab-panel.active { display: block; }
+    /* PERMIT BADGES in table */
+    .pbadges{display:flex;flex-wrap:wrap;gap:3px}
+    .pb{display:inline-flex;align-items:center;gap:3px;font-size:9px;font-weight:700;letter-spacing:.4px;padding:2px 7px;border-radius:50px;text-transform:uppercase;color:#fff;border:1px solid transparent}
+    .pb-ift{background:rgba(37,99,235,.35);border-color:rgba(37,99,235,.6);color:#93C5FD}
+    .pb-pc{background:rgba(217,119,6,.35);border-color:rgba(217,119,6,.6);color:#FCD34D}
+    .pb-const{background:rgba(124,58,237,.35);border-color:rgba(124,58,237,.6);color:#C4B5FD}
+    .pb-uso{background:rgba(13,148,136,.35);border-color:rgba(13,148,136,.6);color:#5EEAD4}
+    .pb-inah{background:rgba(146,64,14,.45);border-color:rgba(146,64,14,.7);color:#FDE68A}
+    .pb-semarnat{background:rgba(22,101,52,.45);border-color:rgba(22,101,52,.7);color:#86EFAC}
+    .pb-afac{background:rgba(159,18,57,.45);border-color:rgba(159,18,57,.7);color:#FCA5A5}
 
-    /* ── TOOLBAR ── */
-    .toolbar {
-      display: flex; align-items: center; gap: 14px;
-      padding: 0 32px 18px; flex-wrap: wrap;
-    }
-    .search-wrap { position: relative; flex: 1; min-width: 220px; }
-    .search-wrap svg {
-      position: absolute; left: 13px; top: 50%; transform: translateY(-50%);
-      color: rgba(255,255,255,.4);
-    }
-    .search-wrap input {
-      width: 100%;
-      background: rgba(255,255,255,.08);
-      border: 1px solid rgba(255,255,255,.15);
-      border-radius: 10px;
-      color: #fff;
-      font-size: 13px;
-      font-family: 'Inter', sans-serif;
-      padding: 10px 14px 10px 38px;
-      outline: none;
-      transition: border-color .2s;
-    }
-    .search-wrap input::placeholder { color: rgba(255,255,255,.35); }
-    .search-wrap input:focus { border-color: var(--gold); }
-    .count-badge {
-      background: rgba(240,165,0,.15);
-      border: 1px solid rgba(240,165,0,.35);
-      color: var(--gold);
-      font-size: 12px; font-weight: 700;
-      padding: 5px 14px; border-radius: 50px; white-space: nowrap;
-    }
+    /* PERMIT LEGEND */
+    .perm-legend{display:flex;flex-wrap:wrap;gap:8px;padding:0 32px 20px}
+    .pl-item{display:flex;align-items:center;gap:5px;font-size:11px;color:rgba(255,255,255,.6)}
 
-    /* ── TABLE ── */
-    .table-wrap {
-      margin: 0 24px 48px;
-      border-radius: 18px;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,.1);
-      box-shadow: 0 24px 80px rgba(0,0,0,.4);
-    }
-    .table-scroll { overflow-x: auto; }
-    table { width: 100%; border-collapse: collapse; min-width: 1080px; }
+    /* ALERT TAB */
+    .alert-panel{padding:0 32px 48px}
+    .alert-section-title{display:flex;align-items:center;gap:10px;margin-bottom:14px;margin-top:28px}
+    .alert-section-title:first-child{margin-top:0}
+    .alert-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}
+    .alert-section-title h3{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px}
+    .alert-section-title .pc{background:rgba(255,255,255,.1);border-radius:50px;font-size:10px;font-weight:700;color:rgba(255,255,255,.55);padding:2px 9px}
+    .alert-cards{display:flex;flex-wrap:wrap;gap:12px}
+    .alert-card{flex:1;min-width:260px;max-width:440px;border-radius:14px;padding:16px 18px}
+    .alert-card.red{background:rgba(197,48,48,.18);border:1px solid rgba(197,48,48,.4)}
+    .alert-card.orange{background:rgba(221,107,32,.18);border:1px solid rgba(221,107,32,.4)}
+    .alert-card.yellow{background:rgba(214,158,46,.18);border:1px solid rgba(214,158,46,.4)}
+    .alert-card.green{background:rgba(47,133,90,.18);border:1px solid rgba(47,133,90,.4)}
+    .alert-card-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;gap:8px}
+    .alert-num{font-size:10px;font-weight:800;color:rgba(255,255,255,.4);letter-spacing:1px;margin-bottom:2px}
+    .alert-hotel{font-size:14px;font-weight:700;color:#fff;line-height:1.2}
+    .alert-op{font-size:10.5px;color:rgba(255,255,255,.48);margin-top:2px}
+    .alert-time-badge{flex-shrink:0;border-radius:9px;padding:5px 11px;font-size:11px;font-weight:800;text-align:center;line-height:1.3;white-space:nowrap}
+    .red .alert-time-badge{background:rgba(197,48,48,.4);color:#FEB2B2;border:1px solid rgba(197,48,48,.5)}
+    .orange .alert-time-badge{background:rgba(221,107,32,.4);color:#FBD38D;border:1px solid rgba(221,107,32,.5)}
+    .yellow .alert-time-badge{background:rgba(214,158,46,.4);color:#FAF089;border:1px solid rgba(214,158,46,.5)}
+    .green .alert-time-badge{background:rgba(47,133,90,.4);color:#9AE6B4;border:1px solid rgba(47,133,90,.5)}
+    .alert-meta{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:7px}
+    .alert-meta-item{background:rgba(0,0,0,.2);border-radius:8px;padding:7px 9px}
+    .alert-meta-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.38);margin-bottom:2px}
+    .alert-meta-val{font-size:11.5px;font-weight:600;color:rgba(255,255,255,.82)}
+    .alert-divider{height:1px;background:rgba(255,255,255,.07);margin:24px 0 0}
 
-    thead tr { background: linear-gradient(135deg, #0D1B3E 0%, #163260 100%); }
-    th {
-      padding: 14px 13px;
-      font-size: 10px; font-weight: 700; letter-spacing: 1.4px;
-      text-transform: uppercase; color: rgba(255,255,255,.72);
-      text-align: left;
-      border-bottom: 2px solid rgba(240,165,0,.35);
-      white-space: nowrap; cursor: pointer; user-select: none;
-      transition: color .15s;
-    }
-    th:hover { color: var(--gold); }
-    th .si { opacity: .35; margin-left: 4px; font-size: 9px; }
-    th.sorted { color: var(--gold); }
-    th.sorted .si { opacity: 1; }
-    th:first-child { text-align: center; width: 42px; }
+    /* DOCS TAB */
+    .docs-panel{padding:0 32px 48px}
+    .docs-filter{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px;align-items:center}
+    .docs-filter select{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:9px;color:#fff;font-size:13px;font-family:'Inter',sans-serif;padding:8px 12px;outline:none;cursor:pointer}
+    .docs-filter select option{background:#1a3560;color:#fff}
+    .docs-stats{display:flex;gap:10px;margin-bottom:22px;flex-wrap:wrap}
+    .ds-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:12px 18px;text-align:center;min-width:100px}
+    .ds-card .dsn{font-size:22px;font-weight:800;line-height:1}
+    .ds-card .dsl{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.45);margin-top:3px}
+    .contract-block{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:16px;margin-bottom:16px;overflow:hidden}
+    .cb-header{display:flex;align-items:center;gap:12px;padding:14px 18px;cursor:pointer;transition:background .15s;border-bottom:1px solid rgba(255,255,255,.07)}
+    .cb-header:hover{background:rgba(255,255,255,.04)}
+    .cb-num{background:rgba(240,165,0,.2);border:1px solid rgba(240,165,0,.4);color:var(--gold);font-size:11px;font-weight:800;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .cb-info{flex:1}
+    .cb-hotel{font-size:13.5px;font-weight:700;color:#fff}
+    .cb-op{font-size:11px;color:rgba(255,255,255,.45)}
+    .cb-progress{display:flex;align-items:center;gap:10px;margin-left:auto}
+    .progress-bar-wrap{width:90px;height:6px;background:rgba(255,255,255,.1);border-radius:50px;overflow:hidden}
+    .progress-bar-fill{height:100%;border-radius:50px;background:linear-gradient(90deg,#22c55e,#16a34a);transition:width .4s}
+    .progress-pct{font-size:11px;font-weight:700;color:rgba(255,255,255,.6);white-space:nowrap}
+    .cb-toggle{color:rgba(255,255,255,.4);font-size:12px;transition:transform .2s;flex-shrink:0}
+    .cb-toggle.open{transform:rotate(180deg)}
+    .perms-grid{display:none;padding:14px 18px;gap:10px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+    .perms-grid.open{display:grid}
+    .perm-card{background:rgba(0,0,0,.25);border-radius:12px;padding:14px;border:1px solid rgba(255,255,255,.08);transition:border-color .2s}
+    .perm-card:hover{border-color:rgba(255,255,255,.2)}
+    .perm-card-top{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px}
+    .perm-type-badge{flex-shrink:0;width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px}
+    .perm-card-title{font-size:12.5px;font-weight:700;color:#fff;line-height:1.35}
+    .perm-base{font-size:10.5px;color:rgba(255,255,255,.42);margin-top:2px;line-height:1.4}
+    .perm-meta-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+    .perm-freq{font-size:9.5px;font-weight:600;padding:2px 8px;border-radius:50px}
+    .freq-anual{background:rgba(37,99,235,.25);color:#93C5FD;border:1px solid rgba(37,99,235,.4)}
+    .freq-unica{background:rgba(13,148,136,.25);color:#5EEAD4;border:1px solid rgba(13,148,136,.4)}
+    .freq-variable{background:rgba(217,119,6,.25);color:#FCD34D;border:1px solid rgba(217,119,6,.4)}
+    .perm-status-row{display:flex;align-items:center;justify-content:space-between;gap:8px}
+    .status-badge{font-size:10px;font-weight:700;padding:3px 10px;border-radius:50px}
+    .s-ok{background:rgba(22,163,74,.25);color:#86EFAC;border:1px solid rgba(22,163,74,.4)}
+    .s-pending{background:rgba(100,116,139,.2);color:rgba(255,255,255,.5);border:1px solid rgba(100,116,139,.35)}
+    .s-warn{background:rgba(217,119,6,.25);color:#FCD34D;border:1px solid rgba(217,119,6,.4)}
+    .s-exp{background:rgba(220,38,38,.25);color:#FCA5A5;border:1px solid rgba(220,38,38,.4)}
+    .perm-actions{display:flex;gap:6px}
+    .btn-upload{background:rgba(240,165,0,.15);border:1px solid rgba(240,165,0,.4);color:var(--gold);font-family:'Inter',sans-serif;font-size:11px;font-weight:700;padding:5px 12px;border-radius:8px;cursor:pointer;transition:all .15s}
+    .btn-upload:hover{background:rgba(240,165,0,.28)}
+    .btn-view{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.7);font-family:'Inter',sans-serif;font-size:11px;font-weight:600;padding:5px 12px;border-radius:8px;cursor:pointer;transition:all .15s;text-decoration:none;display:inline-flex;align-items:center}
+    .btn-view:hover{background:rgba(255,255,255,.15)}
+    .perm-doc-info{font-size:10.5px;color:rgba(255,255,255,.42);margin-top:6px;line-height:1.5}
+    .expiry-input{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:7px;color:#fff;font-size:11px;font-family:'Inter',sans-serif;padding:4px 8px;outline:none;width:120px}
+    .expiry-input:focus{border-color:var(--gold)}
+    label.expiry-lbl{font-size:10px;color:rgba(255,255,255,.4);margin-right:4px}
+    .hidden-input{display:none}
+    .docs-note{background:rgba(37,99,235,.1);border:1px solid rgba(37,99,235,.3);border-radius:12px;padding:12px 16px;margin-bottom:20px;font-size:12px;color:rgba(255,255,255,.65);line-height:1.6}
+    .docs-note strong{color:#93C5FD}
 
-    tbody tr {
-      border-bottom: 1px solid rgba(255,255,255,.06);
-      transition: background .15s;
-    }
-    tbody tr:nth-child(even)  { background: rgba(255,255,255,.04); }
-    tbody tr:nth-child(odd)   { background: rgba(255,255,255,.015); }
-    tbody tr:hover            { background: rgba(240,165,0,.07) !important; }
-    tbody tr.hidden           { display: none; }
-
-    td { padding: 12px 13px; font-size: 12.5px; color: rgba(255,255,255,.82); vertical-align: top; line-height: 1.55; }
-    td:first-child { text-align: center; font-weight: 700; color: var(--gold); font-size: 13px; }
-    td.op-stripe { border-left: 4px solid transparent; }
-
-    .op-pill {
-      display: inline-block; padding: 2px 10px; border-radius: 50px;
-      font-size: 10px; font-weight: 700; letter-spacing: .6px;
-      text-transform: uppercase; margin-bottom: 5px; color: #fff;
-    }
-    .op-name { font-size: 12px; font-weight: 600; color: #fff; line-height: 1.4; }
-    .hotel-name { font-weight: 700; font-size: 13px; color: #fff; }
-    .hotel-city { font-size: 11px; color: rgba(255,255,255,.5); margin-top: 1px; }
-
-    .plazo-years {
-      display: inline-block;
-      background: rgba(240,165,0,.15); border: 1px solid rgba(240,165,0,.3);
-      color: var(--gold); font-size: 10px; font-weight: 700;
-      padding: 2px 9px; border-radius: 50px; margin-bottom: 4px;
-    }
-    .plazo-dates { font-size: 11.5px; color: rgba(255,255,255,.62); }
-    .renta-amount { font-weight: 700; font-size: 13px; color: #6EE7B7; }
-    .renta-note { font-size: 11px; color: rgba(255,255,255,.48); }
-    .incr-month {
-      font-weight: 700; font-size: 13px; color: #93C5FD;
-      text-transform: uppercase; letter-spacing: .5px;
-    }
-    .incr-note { font-size: 11px; color: rgba(255,255,255,.48); }
-    .penal-text { font-size: 12px; color: rgba(255,210,100,.85); }
-    .na { font-size: 11px; color: rgba(255,255,255,.28); font-style: italic; }
-    .no-results { text-align: center; padding: 48px; color: rgba(255,255,255,.3); font-size: 14px; display: none; }
-
-    /* ── ALERT TAB ── */
-    .alert-panel { padding: 0 32px 48px; }
-    .alert-section-title {
-      display: flex; align-items: center; gap: 12px;
-      margin-bottom: 16px; margin-top: 32px;
-    }
-    .alert-section-title:first-child { margin-top: 0; }
-    .alert-dot {
-      width: 13px; height: 13px; border-radius: 50%; flex-shrink: 0;
-    }
-    .alert-section-title h3 {
-      font-size: 13px; font-weight: 800; text-transform: uppercase;
-      letter-spacing: 1.6px;
-    }
-    .alert-section-title .pill-count {
-      background: rgba(255,255,255,.1);
-      border-radius: 50px;
-      font-size: 10.5px; font-weight: 700; color: rgba(255,255,255,.6);
-      padding: 2px 10px;
-    }
-    .alert-cards { display: flex; flex-wrap: wrap; gap: 14px; }
-    .alert-card {
-      flex: 1; min-width: 280px; max-width: 460px;
-      border-radius: 14px;
-      padding: 18px 20px;
-      position: relative;
-      overflow: hidden;
-    }
-    .alert-card::before {
-      content: '';
-      position: absolute; inset: 0;
-      border-radius: 14px;
-      opacity: .07;
-    }
-    .alert-card.red   { background: rgba(197,48,48,.18); border: 1px solid rgba(197,48,48,.4); }
-    .alert-card.red::before { background: #E53E3E; }
-    .alert-card.orange{ background: rgba(221,107,32,.18); border: 1px solid rgba(221,107,32,.4); }
-    .alert-card.orange::before { background: #DD6B20; }
-    .alert-card.yellow{ background: rgba(214,158,46,.18); border: 1px solid rgba(214,158,46,.4); }
-    .alert-card.yellow::before { background: #D69E2E; }
-    .alert-card.green { background: rgba(47,133,90,.18); border: 1px solid rgba(47,133,90,.4); }
-    .alert-card.green::before { background: #2F855A; }
-
-    .alert-card-header {
-      display: flex; align-items: flex-start; justify-content: space-between;
-      margin-bottom: 12px; gap: 10px;
-    }
-    .alert-num {
-      font-size: 11px; font-weight: 800; color: rgba(255,255,255,.45);
-      letter-spacing: 1px; margin-bottom: 3px;
-    }
-    .alert-hotel { font-size: 15px; font-weight: 700; color: #fff; line-height: 1.25; }
-    .alert-op { font-size: 11px; color: rgba(255,255,255,.5); margin-top: 3px; }
-    .alert-time-badge {
-      flex-shrink: 0;
-      border-radius: 10px;
-      padding: 6px 12px;
-      font-size: 11.5px; font-weight: 800;
-      text-align: center; line-height: 1.3;
-      white-space: nowrap;
-    }
-    .red   .alert-time-badge { background: rgba(197,48,48,.4);  color: #FEB2B2; border: 1px solid rgba(197,48,48,.5); }
-    .orange .alert-time-badge{ background: rgba(221,107,32,.4); color: #FBD38D; border: 1px solid rgba(221,107,32,.5); }
-    .yellow .alert-time-badge{ background: rgba(214,158,46,.4); color: #FAF089; border: 1px solid rgba(214,158,46,.5); }
-    .green  .alert-time-badge{ background: rgba(47,133,90,.4);  color: #9AE6B4; border: 1px solid rgba(47,133,90,.5); }
-
-    .alert-meta {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 8px; margin-top: 8px;
-    }
-    .alert-meta-item { background: rgba(0,0,0,.2); border-radius: 8px; padding: 8px 10px; }
-    .alert-meta-label { font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,.4); margin-bottom: 2px; }
-    .alert-meta-val { font-size: 12px; font-weight: 600; color: rgba(255,255,255,.85); }
-
-    .alert-divider { height: 1px; background: rgba(255,255,255,.07); margin: 28px 0 0; }
-
-    /* ── FOOTER ── */
-    .footer {
-      text-align: center; padding: 0 24px 40px;
-      font-size: 11.5px; color: rgba(255,255,255,.28); line-height: 1.8;
-    }
-    .footer strong { color: rgba(255,255,255,.48); }
-
-    @media (max-width: 700px) {
-      .hero, .stats, .legend, .tabs-bar, .toolbar, .alert-panel { padding-left: 14px; padding-right: 14px; }
-      .table-wrap { margin: 0 10px 32px; }
+    /* FOOTER */
+    .footer{text-align:center;padding:0 24px 36px;font-size:11px;color:rgba(255,255,255,.27);line-height:1.8}
+    .footer strong{color:rgba(255,255,255,.45)}
+    @media(max-width:700px){
+      .hero,.stats,.legend,.tabs-bar,.toolbar,.alert-panel,.docs-panel,.perm-legend{padding-left:14px;padding-right:14px}
+      .table-wrap{margin:0 10px 28px}
     }
   </style>
 </head>
 <body>
 
-<!-- HERO -->
 <div class="hero">
   <div class="hero-badge">Fideicomiso F/1596 &bull; FIHO</div>
   <h1>Contratos de Arrendamiento<br/><span>de Antenas y Telecomunicaciones</span></h1>
   <p>Base de datos &mdash; información extraída directamente de los contratos originales &bull; Carpeta CONTRATOS ANTENAS FIHO</p>
 </div>
 
-<!-- STATS -->
 <div class="stats">
   <div class="stat-card"><div class="num">17</div><div class="lbl">Contratos</div></div>
   <div class="stat-card"><div class="num">7</div><div class="lbl">Operadores</div></div>
-  <div class="stat-card"><div class="num">15</div><div class="lbl">Hoteles / Sitios</div></div>
-  <div class="stat-card"><div class="num" style="color:#E53E3E">6</div><div class="lbl">Alertas activas</div></div>
+  <div class="stat-card"><div class="num">15</div><div class="lbl">Hoteles</div></div>
+  <div class="stat-card"><div class="num" style="color:#E53E3E">6</div><div class="lbl">Alertas</div></div>
 </div>
 
-<!-- LEGEND -->
 <div class="legend">
   <div class="legend-item"><div class="legend-dot" style="background:var(--att)"></div>AT&amp;T</div>
   <div class="legend-item"><div class="legend-dot" style="background:var(--zeliks)"></div>ZELIKS</div>
@@ -379,412 +218,341 @@
   <div class="legend-item"><div class="legend-dot" style="background:var(--capsa)"></div>CAPSA</div>
 </div>
 
-<!-- TABS -->
 <div class="tabs-bar">
-  <button class="tab-btn active" onclick="switchTab('tabla', this)">
+  <button class="tab-btn active" onclick="switchTab('tabla',this)">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
-    Todos los contratos
+    Contratos
   </button>
-  <button class="tab-btn" onclick="switchTab('alertas', this)">
+  <button class="tab-btn" onclick="switchTab('alertas',this)">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-    Alertas de Vencimiento
-    <span class="alert-badge">6</span>
+    Alertas de Vencimiento <span class="abadge">6</span>
+  </button>
+  <button class="tab-btn" onclick="switchTab('docs',this)">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+    Permisos y Documentación
   </button>
 </div>
 
-<!-- ══════════════ PANEL TABLA ══════════════ -->
+<!-- ═══════════ PANEL CONTRATOS ═══════════ -->
 <div class="tab-panel active" id="panel-tabla">
+  <!-- permit badge legend -->
+  <div class="perm-legend">
+    <span style="font-size:10.5px;font-weight:700;color:rgba(255,255,255,.45);margin-right:4px;text-transform:uppercase;letter-spacing:1px">Permisos:</span>
+    <span class="pl-item"><span class="pb pb-ift">IFT</span> Concesión Federal</span>
+    <span class="pl-item"><span class="pb pb-pc">PC</span> Protección Civil</span>
+    <span class="pl-item"><span class="pb pb-const">CONST</span> Licencia Construcción</span>
+    <span class="pl-item"><span class="pb pb-uso">USO</span> Uso de Suelo</span>
+    <span class="pl-item"><span class="pb pb-inah">INAH</span> Zona Histórica</span>
+    <span class="pl-item"><span class="pb pb-semarnat">SEMAR</span> Zona Costera/Ambiental</span>
+    <span class="pl-item"><span class="pb pb-afac">AFAC</span> Aeronáutico</span>
+  </div>
   <div class="toolbar">
     <div class="search-wrap">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input type="text" id="searchInput" placeholder="Buscar por arrendatario, hotel, ciudad…" oninput="filterTable()" />
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="searchInput" placeholder="Buscar por arrendatario, hotel, ciudad…" oninput="filterTable()"/>
     </div>
     <div class="count-badge" id="countBadge">17 contratos</div>
   </div>
-
   <div class="table-wrap">
     <div class="table-scroll">
       <table id="mainTable">
-        <thead>
-          <tr>
-            <th onclick="sortTable(0)">#<span class="si">⇅</span></th>
-            <th onclick="sortTable(1)">ARRENDATARIO<span class="si">⇅</span></th>
-            <th onclick="sortTable(2)">HOTEL<span class="si">⇅</span></th>
-            <th onclick="sortTable(3)">SITIO / SUPERFICIE<span class="si">⇅</span></th>
-            <th onclick="sortTable(4)">PLAZO / VIGENCIA<span class="si">⇅</span></th>
-            <th onclick="sortTable(5)">RENTA<span class="si">⇅</span></th>
-            <th onclick="sortTable(6)">MES DE INCREMENTO<span class="si">⇅</span></th>
-            <th onclick="sortTable(7)">PENALIZACIÓN<span class="si">⇅</span></th>
-          </tr>
-        </thead>
+        <thead><tr>
+          <th onclick="sortTable(0)">#<span class="si">⇅</span></th>
+          <th onclick="sortTable(1)">ARRENDATARIO<span class="si">⇅</span></th>
+          <th onclick="sortTable(2)">HOTEL<span class="si">⇅</span></th>
+          <th onclick="sortTable(3)">SITIO<span class="si">⇅</span></th>
+          <th onclick="sortTable(4)">PLAZO<span class="si">⇅</span></th>
+          <th onclick="sortTable(5)">RENTA<span class="si">⇅</span></th>
+          <th onclick="sortTable(6)">MES INCREMENTO<span class="si">⇅</span></th>
+          <th onclick="sortTable(7)">PENALIZACIÓN<span class="si">⇅</span></th>
+          <th>PERMISOS Y LICENCIAS<br/><span style="font-size:9px;font-weight:400;text-transform:none;letter-spacing:0;color:rgba(255,255,255,.4)">(obligación del arrendatario)</span></th>
+        </tr></thead>
         <tbody id="tableBody">
 
-          <!-- 1 AT&T -->
-          <tr>
-            <td>1</td>
-            <td class="op-stripe" style="border-left-color:var(--att)">
-              <span class="op-pill" style="background:var(--att)">AT&amp;T</span><br/>
-              <span class="op-name">AT&amp;T Comunicaciones Digitales S.A. de C.V.</span>
-            </td>
-            <td><div class="hotel-name">Fiesta Inn Nuevo Laredo</div><div class="hotel-city">Nuevo Laredo, Tamaulipas</div></td>
-            <td>Azotea <strong>88.20 m²</strong><br/><span style="font-size:11px;color:rgba(255,255,255,.5)">Av. Reforma 5102, Nuevo Laredo</span></td>
-            <td><div class="plazo-years">6 años forzosos</div><div class="plazo-dates">25-oct-2023 → 25-oct-2029</div></td>
-            <td><div class="renta-amount">$51,142.99 MN/mes</div><div class="renta-note">+ IVA</div></td>
-            <td><div class="incr-month">Octubre</div><div class="incr-note">Anual INPC (aniversario)</div></td>
-            <td class="penal-text">Rentas faltantes por vencer + daños</td>
-          </tr>
+<tr>
+  <td>1</td>
+  <td class="op-stripe" style="border-left-color:var(--att)"><span class="op-pill" style="background:var(--att)">AT&amp;T</span><br/><span class="op-name">AT&amp;T Comunicaciones Digitales S.A. de C.V.</span></td>
+  <td><div class="hotel-name">Fiesta Inn Nuevo Laredo</div><div class="hotel-city">Nuevo Laredo, Tamaulipas</div></td>
+  <td>Azotea <b>88.20 m²</b><br/><span style="font-size:10.5px;color:rgba(255,255,255,.48)">Av. Reforma 5102</span></td>
+  <td><div class="plazo-years">6 años forz.</div><div class="plazo-dates">25-oct-2023 → 25-oct-2029</div></td>
+  <td><div class="renta-amount">$51,142.99/mes</div><div class="renta-note">+ IVA</div></td>
+  <td><div class="incr-month">Octubre</div><div class="incr-note">Anual INPC</div></td>
+  <td class="penal-text">Rentas faltantes + daños</td>
+  <td><div class="pbadges"><span class="pb pb-ift">IFT</span><span class="pb pb-const">CONST</span><span class="pb pb-uso">USO</span><span class="pb pb-pc">PC</span></div><div style="font-size:10px;color:rgba(255,255,255,.38);margin-top:5px">Municipio Nuevo Laredo<br/>Ley PC Tamaulipas</div></td>
+</tr>
 
-          <!-- 2 ZELIKS -->
-          <tr>
-            <td>2</td>
-            <td class="op-stripe" style="border-left-color:var(--zeliks)">
-              <span class="op-pill" style="background:var(--zeliks)">ZELIKS</span><br/>
-              <span class="op-name">ZELIKS S.A.P.I. de C.V.<br/><span style="font-size:10px;color:rgba(255,255,255,.38)">(carpeta: Nuviax)</span></span>
-            </td>
-            <td><div class="hotel-name">One Guadalajara</div><div class="hotel-city">Tlaquepaque, Jalisco</div></td>
-            <td>Azotea <strong>46 m²</strong><br/><span style="font-size:11px;color:rgba(255,255,255,.5)">Tlaquepaque, Jalisco</span></td>
-            <td><div class="plazo-years">10 años forzosos</div><div class="plazo-dates">01-jul-2019 → 01-jul-2029</div></td>
-            <td><div class="renta-amount">$18,000 MN/mes</div><div class="renta-note">+ IVA</div></td>
-            <td><div class="incr-month">Julio</div><div class="incr-note">Anual INPC (aniversario)</div></td>
-            <td class="penal-text">Rentas faltantes por vencer</td>
-          </tr>
+<tr>
+  <td>2</td>
+  <td class="op-stripe" style="border-left-color:var(--zeliks)"><span class="op-pill" style="background:var(--zeliks)">ZELIKS</span><br/><span class="op-name">ZELIKS S.A.P.I. de C.V.</span></td>
+  <td><div class="hotel-name">One Guadalajara</div><div class="hotel-city">Tlaquepaque, Jalisco</div></td>
+  <td>Azotea <b>46 m²</b><br/><span style="font-size:10.5px;color:rgba(255,255,255,.48)">Tlaquepaque, Jal.</span></td>
+  <td><div class="plazo-years">10 años forz.</div><div class="plazo-dates">01-jul-2019 → 01-jul-2029</div></td>
+  <td><div class="renta-amount">$18,000/mes</div><div class="renta-note">+ IVA</div></td>
+  <td><div class="incr-month">Julio</div><div class="incr-note">Anual INPC</div></td>
+  <td class="penal-text">Rentas faltantes</td>
+  <td><div class="pbadges"><span class="pb pb-ift">IFT</span><span class="pb pb-const">CONST</span><span class="pb pb-uso">USO</span><span class="pb pb-pc">PC</span></div><div style="font-size:10px;color:rgba(255,255,255,.38);margin-top:5px">Municipio Tlaquepaque<br/>Ley PC Jalisco</div></td>
+</tr>
 
-          <!-- 3 MXT Morelia -->
-          <tr>
-            <td>3</td>
-            <td class="op-stripe" style="border-left-color:var(--mxt)">
-              <span class="op-pill" style="background:var(--mxt)">MXT Capital</span><br/>
-              <span class="op-name">MXT Capital Partners S.A.P.I. de C.V.</span>
-            </td>
-            <td><div class="hotel-name">Hotel Real Inn Morelia</div><div class="hotel-city">Morelia, Michoacán</div></td>
-            <td>Azotea <strong>~55 m²</strong><br/><span style="font-size:11px;color:rgba(255,255,255,.5)">Ejido Jesús del Monte, Morelia</span></td>
-            <td><div class="plazo-years">10 años forzosos</div><div class="plazo-dates">01-dic-2017 → 01-dic-2027</div></td>
-            <td><div class="renta-amount">$20,000 MN/mes</div><div class="renta-note">+ IVA</div></td>
-            <td><div class="incr-month">Diciembre</div><div class="incr-note">Anual INPC (aniversario)</div></td>
-            <td class="penal-text">2 meses renta + IVA<br/><span style="font-size:10.5px">(con 60 días aviso)</span></td>
-          </tr>
+<tr>
+  <td>3</td>
+  <td class="op-stripe" style="border-left-color:var(--mxt)"><span class="op-pill" style="background:var(--mxt)">MXT Capital</span><br/><span class="op-name">MXT Capital Partners S.A.P.I. de C.V.</span></td>
+  <td><div class="hotel-name">Hotel Real Inn Morelia</div><div class="hotel-city">Morelia, Michoacán</div></td>
+  <td>Azotea <b>~55 m²</b><br/><span style="font-size:10.5px;color:rgba(255,255,255,.48)">Ejido Jesús del Monte</span></td>
+  <td><div class="plazo-years">10 años forz.</div><div class="plazo-dates">01-dic-2017 → 01-dic-2027</div></td>
+  <td><div class="renta-amount">$20,000/mes</div><div class="renta-note">+ IVA</div></td>
+  <td><div class="incr-month">Diciembre</div><div class="incr-note">Anual INPC</div></td>
+  <td class="penal-text">2 meses + IVA<br/>(60 días aviso)</td>
+  <td><div class="pbadges"><span class="pb pb-ift">IFT</span><span class="pb pb-const">CONST</span><span class="pb pb-uso">USO</span><span class="pb pb-pc">PC</span></div><div style="font-size:10px;color:rgba(255,255,255,.38);margin-top:5px">Municipio Morelia<br/>Ley PC Michoacán</div></td>
+</tr>
 
-          <!-- 4 MXT Juriquilla -->
-          <tr>
-            <td>4</td>
-            <td class="op-stripe" style="border-left-color:var(--mxt)">
-              <span class="op-pill" style="background:var(--mxt)">MXT Capital</span><br/>
-              <span class="op-name">MXT Capital Partners S.A.P.I. de C.V.</span>
-            </td>
-            <td><div class="hotel-name">AC Marriott Juriquilla</div><div class="hotel-city">Juriquilla, Querétaro</div></td>
-            <td>Azotea <strong>101.82 m²</strong><br/><span style="font-size:11px;color:rgba(255,255,255,.5)">Antea, Juriquilla, Querétaro</span></td>
-            <td><div class="plazo-years">10 años forzosos</div><div class="plazo-dates">02-ago-2017 → 02-ago-2027</div></td>
-            <td><div class="renta-amount">$20,000 MN/mes</div><div class="renta-note">+ IVA (inicio pagos: oct-2017)</div></td>
-            <td><div class="incr-month">Agosto</div><div class="incr-note">Anual INPC (aniversario)</div></td>
-            <td class="penal-text">2 meses renta + IVA<br/><span style="font-size:10.5px">(con 60 días aviso)</span></td>
-          </tr>
+<tr>
+  <td>4</td>
+  <td class="op-stripe" style="border-left-color:var(--mxt)"><span class="op-pill" style="background:var(--mxt)">MXT Capital</span><br/><span class="op-name">MXT Capital Partners S.A.P.I. de C.V.</span></td>
+  <td><div class="hotel-name">AC Marriott Juriquilla</div><div class="hotel-city">Juriquilla, Querétaro</div></td>
+  <td>Azotea <b>101.82 m²</b><br/><span style="font-size:10.5px;color:rgba(255,255,255,.48)">Antea, Juriquilla</span></td>
+  <td><div class="plazo-years">10 años forz.</div><div class="plazo-dates">02-ago-2017 → 02-ago-2027</div></td>
+  <td><div class="renta-amount">$20,000/mes</div><div class="renta-note">+ IVA (inicio oct-2017)</div></td>
+  <td><div class="incr-month">Agosto</div><div class="incr-note">Anual INPC</div></td>
+  <td class="penal-text">2 meses + IVA<br/>(60 días aviso)</td>
+  <td><div class="pbadges"><span class="pb pb-ift">IFT</span><span class="pb pb-const">CONST</span><span class="pb pb-uso">USO</span><span class="pb pb-pc">PC</span></div><div style="font-size:10px;color:rgba(255,255,255,.38);margin-top:5px">Municipio Querétaro<br/>Ley PC Querétaro</div></td>
+</tr>
 
-          <!-- 5 Intelli Hermosillo -->
-          <tr>
-            <td>5</td>
-            <td class="op-stripe" style="border-left-color:var(--intelli)">
-              <span class="op-pill" style="background:var(--intelli)">Intelli Site</span><br/>
-              <span class="op-name">Intelli Site Solutions S.A.P.I. de C.V.</span>
-            </td>
-            <td><div class="hotel-name">Fiesta Inn Hermosillo</div><div class="hotel-city">Hermosillo, Sonora</div></td>
-            <td>Azotea <strong>9.68 m²</strong><br/><span style="font-size:11px;color:rgba(255,255,255,.5)">Blvd. Eusebio Kino 369, Hermosillo</span></td>
-            <td><div class="plazo-years">10 años forzosos</div><div class="plazo-dates">01-sep-2019 → 01-sep-2029</div></td>
-            <td><div class="renta-amount">$22,000 MN/mes</div><div class="renta-note">+ IVA (+$3,500 mant. energía)</div></td>
-            <td><div class="incr-month">Septiembre</div><div class="incr-note">Anual INPC (aniversario)</div></td>
-            <td class="penal-text">Rentas faltantes por vencer</td>
-          </tr>
+<tr>
+  <td>5</td>
+  <td class="op-stripe" style="border-left-color:var(--intelli)"><span class="op-pill" style="background:var(--intelli)">Intelli Site</span><br/><span class="op-name">Intelli Site Solutions S.A.P.I. de C.V.</span></td>
+  <td><div class="hotel-name">Fiesta Inn Hermosillo</div><div class="hotel-city">Hermosillo, Sonora</div></td>
+  <td>Azotea <b>9.68 m²</b><br/><span style="font-size:10.5px;color:rgba(255,255,255,.48)">Blvd. Eusebio Kino 369</span></td>
+  <td><div class="plazo-years">10 años forz.</div><div class="plazo-dates">01-sep-2019 → 01-sep-2029</div></td>
+  <td><div class="renta-amount">$22,000/mes</div><div class="renta-note">+ IVA (+$3,500 mant.)</div></td>
+  <td><div class="incr-month">Septiembre</div><div class="incr-note">Anual INPC</div></td>
+  <td class="penal-text">Rentas faltantes</td>
+  <td><div class="pbadges"><span class="pb pb-ift">IFT</span><span class="pb pb-const">CONST</span><span class="pb pb-uso">USO</span><span class="pb pb-pc">PC</span></div><div style="font-size:10px;color:rgba(255,255,255,.38);margin-top:5px">Municipio Hermosillo<br/>Ley PC Sonora</div></td>
+</tr>
 
-          <!-- 6 Intelli Chihuahua -->
-          <tr>
-            <td>6</td>
-            <td class="op-stripe" style="border-left-color:var(--intelli)">
-              <span class="op-pill" style="background:var(--intelli)">Intelli Site</span><br/>
-              <span class="op-name">Intelli Site Solutions S.A.P.I. de C.V.</span>
-            </td>
-            <td><div class="hotel-name">Fiesta Inn Chihuahua</div><div class="hotel-city">Chihuahua, Chihuahua</div></td>
-            <td>Azotea <strong>40.99 m²</strong><br/><span style="font-size:11px;color:rgba(255,255,255,.5)">Blvd. A. Ortiz Mena 2801, Chihuahua</span></td>
-            <td><div class="plazo-years">10 años forzosos</div><div class="plazo-dates">01-sep-2019 → 01-sep-2029</div></td>
-            <td><div class="renta-amount">$22,000 MN/mes</div><div class="renta-note">+ IVA</div></td>
-            <td><div class="incr-month">Septiembre</div><div class="incr-note">Anual INPC (aniversario)</div></td>
-            <td class="penal-text">Rentas faltantes por vencer</td>
-          </tr>
+<tr>
+  <td>6</td>
+  <td class="op-stripe" style="border-left-color:var(--intelli)"><span class="op-pill" style="background:var(--intelli)">Intelli Site</span><br/><span class="op-name">Intelli Site Solutions S.A.P.I. de C.V.</span></td>
+  <td><div class="hotel-name">Fiesta Inn Chihuahua</div><div class="hotel-city">Chihuahua, Chihuahua</div></td>
+  <td>Azotea <b>40.99 m²</b><br/><span style="font-size:10.5px;color:rgba(255,255,255,.48)">Blvd. A. Ortiz Mena 2801</span></td>
+  <td><div class="plazo-years">10 años forz.</div><div class="plazo-dates">01-sep-2019 → 01-sep-2029</div></td>
+  <td><div class="renta-amount">$22,000/mes</div><div class="renta-note">+ IVA</div></td>
+  <td><div class="incr-month">Septiembre</div><div class="incr-note">Anual INPC</div></td>
+  <td class="penal-text">Rentas faltantes</td>
+  <td><div class="pbadges"><span class="pb pb-ift">IFT</span><span class="pb pb-const">CONST</span><span class="pb pb-uso">USO</span><span class="pb pb-pc">PC</span></div><div style="font-size:10px;color:rgba(255,255,255,.38);margin-top:5px">Municipio Chihuahua<br/>Ley PC Chihuahua</div></td>
+</tr>
 
-          <!-- 7 Megacable Monterrey -->
-          <tr>
-            <td>7</td>
-            <td class="op-stripe" style="border-left-color:var(--megacable)">
-              <span class="op-pill" style="background:var(--megacable)">Megacable</span><br/>
-              <span class="op-name">Megacable Comunicaciones de México S.A. de C.V.</span>
-            </td>
-            <td><div class="hotel-name">Hotel One Mty. Aeropuerto</div><div class="hotel-city">Apodaca, Nuevo León</div></td>
-            <td>Polígono I<br/><span style="font-size:11px;color:rgba(255,255,255,.5)">Blvd. Aeropuerto, Parque Ind. Milenium</span></td>
-            <td><div class="plazo-years">5 años forzosos</div><div class="plazo-dates">01-abr-2020 → 01-abr-2025</div></td>
-            <td><div class="renta-amount">$364,044.83 MN/año</div><div class="renta-note">pago anticipado + IVA</div></td>
-            <td><div class="incr-month">Abril</div><div class="incr-note">Anual INPC (aniversario)</div></td>
-            <td class="penal-text">3 meses renta<br/><span style="font-size:10.5px">(con 90 días aviso)</span></td>
-          </tr>
+<tr>
+  <td>7</td>
+  <td class="op-stripe" style="border-left-color:var(--megacable)"><span class="op-pill" style="background:var(--megacable)">Megacable</span><br/><span class="op-name">Megacable Comunicaciones de México S.A. de C.V.</span></td>
+  <td><div class="hotel-name">Hotel One Mty. Aeropuerto</div><div class="hotel-city">Apodaca, Nuevo León</div></td>
+  <td>Polígono I<br/><span style="font-size:10.5px;color:rgba(255,255,255,.48)">Parque Ind. Milenium</span></td>
+  <td><div class="plazo-years">5 años forz.</div><div class="plazo-dates">01-abr-2020 → 01-abr-2025</div></td>
+  <td><div class="renta-amount">$364,044.83/año</div><div class="renta-note">anticipado + IVA</div></td>
+  <td><div class="incr-month">Abril</div><div class="incr-note">Anual INPC</div></td>
+  <td class="penal-text">3 meses renta<br/>(90 días aviso)</td>
+  <td><div class="pbadges"><span class="pb pb-ift">IFT</span><span class="pb pb-const">CONST</span><span class="pb pb-uso">USO</span><span class="pb pb-pc">PC</span><span class="pb pb-afac">AFAC</span></div><div style="font-size:10px;color:rgba(255,255,255,.38);margin-top:5px">Municipio Apodaca · Ley PC NL<br/>Permiso AFAC altura (Aeropuerto MTY)</div></td>
+</tr>
 
-          <!-- 8 Megacable Perisur -->
-          <tr>
-            <td>8</td>
-            <td class="op-stripe" style="border-left-color:var(--megacable)">
-              <span class="op-pill" style="background:var(--megacable)">Megacable</span><br/>
-              <span class="op-name">Megacable Comunicaciones de México S.A. de C.V.<br/><span style="font-size:10px;color:rgba(255,255,255,.38)">(subarrendatario — convenio mod.)</span></span>
-            </td>
-            <td><div class="hotel-name">Fiesta Inn Periférico Sur</div><div class="hotel-city">Pedregal de Carrasco, CDMX</div></td>
-            <td>Azotea <strong>31.27 m²</strong><br/><span style="font-size:11px;color:rgba(255,255,255,.5)">Periférico Sur 5530, CDMX</span></td>
-            <td><div class="plazo-years">5 años forzosos</div><div class="plazo-dates">Desde 01-ene-2015 (conv. mod.)</div></td>
-            <td><div class="renta-amount">$300,000 MN/año</div><div class="renta-note">pago ant. + IVA<br/>50% Arrendador / 50% Posadas</div></td>
-            <td><div class="incr-month">Enero</div><div class="incr-note">Anual INPC (aniversario)</div></td>
-            <td class="penal-text">Rentas faltantes por vencer</td>
-          </tr>
+<tr>
+  <td>8</td>
+  <td class="op-stripe" style="border-left-color:var(--megacable)"><span class="op-pill" style="background:var(--megacable)">Megacable</span><br/><span class="op-name">Megacable (subarrendatario)<br/><span style="font-size:10px;color:rgba(255,255,255,.38)">conv. mod.</span></span></td>
+  <td><div class="hotel-name">Fiesta Inn Periférico Sur</div><div class="hotel-city">Tlalpan, CDMX</div></td>
+  <td>Azotea <b>31.27 m²</b><br/><span style="font-size:10.5px;color:rgba(255,255,255,.48)">Periférico Sur 5530</span></td>
+  <td><div class="plazo-years">5 años forz.</div><div class="plazo-dates">Desde 01-ene-2015 (conv.)</div></td>
+  <td><div class="renta-amount">$300,000/año</div><div class="renta-note">ant. + IVA · 50/50 Posadas</div></td>
+  <td><div class="incr-month">Enero</div><div class="incr-note">Anual INPC</div></td>
+  <td class="penal-text">Rentas faltantes</td>
+  <td><div class="pbadges"><span class="pb pb-ift">IFT</span><span class="pb pb-const">CONST</span><span class="pb pb-uso">USO</span><span class="pb pb-pc">PC</span></div><div style="font-size:10px;color:rgba(255,255,255,.38);margin-top:5px">Alcaldía Tlalpan · Regl. Const. CDMX<br/>Ley PC CDMX · Reg. SEDEMA</div></td>
+</tr>
 
-          <!-- 9 MTP Live Aqua -->
-          <tr>
-            <td>9</td>
-            <td class="op-stripe" style="border-left-color:var(--mtp)">
-              <span class="op-pill" style="background:var(--mtp)">MTP</span><br/>
-              <span class="op-name">Mexico Tower Partners S.A.P.I. de C.V.</span>
-            </td>
-            <td><div class="hotel-name">Live Aqua San Miguel de Allende</div><div class="hotel-city">San Miguel de Allende, Gto.</div></td>
-            <td>Línea de instalación<br/><span style="font-size:11px;color:rgba(255,255,255,.5)">Calzada de la Presa 85, San Miguel</span></td>
-            <td><div class="plazo-years">10 años forz. (F/1596)</div><div class="plazo-dates">Desde 31-jul-2019<br/><span style="font-size:10px;color:rgba(255,255,255,.38)">MTP puede term. c/30 días aviso</span></div></td>
-            <td><div class="renta-amount">$5,000 ó $12,500/mes</div><div class="renta-note">+ IVA (1-2 oper. / 3+ oper.)</div></td>
-            <td><div class="incr-month">Julio</div><div class="incr-note">Anual INPC (aniversario)</div></td>
-            <td class="penal-text">Contraprestaciones faltantes por vencer</td>
-          </tr>
+<tr>
+  <td>9</td>
+  <td class="op-stripe" style="border-left-color:var(--mtp)"><span class="op-pill" style="background:var(--mtp)">MTP</span><br/><span class="op-name">Mexico Tower Partners S.A.P.I. de C.V.</span></td>
+  <td><div class="hotel-name">Live Aqua San Miguel de Allende</div><div class="hotel-city">San Miguel de Allende, Gto.</div></td>
+  <td>Línea instalación<br/><span style="font-size:10.5px;color:rgba(255,255,255,.48)">Calzada de la Presa 85</span></td>
+  <td><div class="plazo-years">10 años forz. (F/1596)</div><div class="plazo-dates">Desde 31-jul-2019</div></td>
+  <td><div class="renta-amount">$5,000 ó $12,500/mes</div><div class="renta-note">+ IVA (1-2 / 3+ oper.)</div></td>
+  <td><div class="incr-month">Julio</div><div class="incr-note">Anual INPC</div></td>
+  <td class="penal-text">Contraprest. faltantes</td>
+  <td><div class="pbadges"><span class="pb pb-ift">IFT</span><span class="pb pb-inah">INAH</span><span class="pb pb-const">CONST</span><span class="pb pb-pc">PC</span></div><div style="font-size:10px;color:rgba(255,255,255,.38);margin-top:5px">Zona Monumentos Históricos SMA<br/>INAH obligatorio · Ley PC Guanajuato</div></td>
+</tr>
 
-          <!-- 10 MTP Perinorte -->
-          <tr>
-            <td>10</td>
-            <td class="op-stripe" style="border-left-color:var(--mtp)">
-              <span class="op-pill" style="background:var(--mtp)">MTP</span><br/>
-              <span class="op-name">Mexico Tower Partners S.A.P.I. de C.V.<br/><span style="font-size:10px;color:rgba(255,255,255,.38)">(convenio modificatorio)</span></span>
-            </td>
-            <td><div class="hotel-name">Fiesta Inn Perinorte</div><div class="hotel-city">Tultitlán, Estado de México</div></td>
-            <td>Área <strong>~16 m²</strong><br/><span style="font-size:11px;color:rgba(255,255,255,.5)">Carretera México-Cuautitlán Lote 1</span></td>
-            <td><div class="plazo-years">5 + 5 años (prórroga automática)</div><div class="plazo-dates">Desde feb-2025 (convenio)</div></td>
-            <td><div class="renta-amount">$39,556.26 MN/mes</div><div class="renta-note">+ IVA (desde feb-2025)</div></td>
-            <td><div class="incr-month">Febrero</div><div class="incr-note">Anual INPC (aniversario)</div></td>
-            <td class="penal-text">12 meses de renta</td>
-          </tr>
+<tr>
+  <td>10</td>
+  <td class="op-stripe" style="border-left-color:var(--mtp)"><span class="op-pill" style="background:var(--mtp)">MTP</span><br/><span class="op-name">Mexico Tower Partners S.A.P.I. de C.V.<br/><span style="font-size:10px;color:rgba(255,255,255,.38)">(convenio mod.)</span></span></td>
+  <td><div class="hotel-name">Fiesta Inn Perinorte</div><div class="hotel-city">Tultitlán, Estado de México</div></td>
+  <td>Área <b>~16 m²</b><br/><span style="font-size:10.5px;color:rgba(255,255,255,.48)">Carretera Méx-Cuautitlán Lote 1</span></td>
+  <td><div class="plazo-years">5+5 años (prórroga auto.)</div><div class="plazo-dates">Desde feb-2025</div></td>
+  <td><div class="renta-amount">$39,556.26/mes</div><div class="renta-note">+ IVA (desde feb-2025)</div></td>
+  <td><div class="incr-month">Febrero</div><div class="incr-note">Anual INPC</div></td>
+  <td class="penal-text">12 meses de renta</td>
+  <td><div class="pbadges"><span class="pb pb-ift">IFT</span><span class="pb pb-const">CONST</span><span class="pb pb-uso">USO</span><span class="pb pb-pc">PC</span></div><div style="font-size:10px;color:rgba(255,255,255,.38);margin-top:5px">Municipio Tultitlán<br/>Ley PC Estado de México</div></td>
+</tr>
 
-          <!-- 11 CAPSA Oaxaca -->
-          <tr>
-            <td>11</td>
-            <td class="op-stripe" style="border-left-color:var(--capsa)">
-              <span class="op-pill" style="background:var(--capsa)">CAPSA</span><br/>
-              <span class="op-name">Canalizaciones y Accesos Profesionales S. de R.L. de C.V.<br/><span style="font-size:10px;color:rgba(255,255,255,.38)">(convenio mod.)</span></span>
-            </td>
-            <td><div class="hotel-name">Fiesta Inn Oaxaca</div><div class="hotel-city">Oaxaca, Oaxaca</div></td>
-            <td>Azotea <strong>29.55 m²</strong><br/><span style="font-size:11px;color:rgba(255,255,255,.5)">Av. Universidad 140, Oaxaca</span></td>
-            <td><div class="plazo-years">Extendido 5 años forz.</div><div class="plazo-dates">Hasta 31-jul-2028<br/><span style="font-size:10px;color:rgba(255,255,255,.38)">(desde jul-2023)</span></div></td>
-            <td><span class="na">No especificado en convenio<br/>(rige contrato orig. 31-jul-2018)</span></td>
-            <td><span class="na">No especificado<br/>en convenio</span></td>
-            <td><span class="na">No especificado en convenio</span></td>
-          </tr>
+<tr>
+  <td>11</td>
+  <td class="op-stripe" style="border-left-color:var(--capsa)"><span class="op-pill" style="background:var(--capsa)">CAPSA</span><br/><span class="op-name">Canalizaciones y Accesos Profesionales<br/><span style="font-size:10px;color:rgba(255,255,255,.38)">(convenio mod.)</span></span></td>
+  <td><div class="hotel-name">Fiesta Inn Oaxaca</div><div class="hotel-city">Oaxaca de Juárez, Oaxaca</div></td>
+  <td>Azotea <b>29.55 m²</b><br/><span style="font-size:10.5px;color:rgba(255,255,255,.48)">Av. Universidad 140</span></td>
+  <td><div class="plazo-years">Extendido 5 años forz.</div><div class="plazo-dates">Hasta 31-jul-2028</div></td>
+  <td><span class="na">No espec. en convenio</span></td>
+  <td><span class="na">No espec. en convenio</span></td>
+  <td><span class="na">No espec. en convenio</span></td>
+  <td><div class="pbadges"><span class="pb pb-ift">IFT</span><span class="pb pb-inah">INAH</span><span class="pb pb-const">CONST</span><span class="pb pb-pc">PC</span></div><div style="font-size:10px;color:rgba(255,255,255,.38);margin-top:5px">Zona Monumentos Históricos Oaxaca<br/>INAH obligatorio · Ley PC Oaxaca</div></td>
+</tr>
 
-          <!-- 12 CAPSA Guadalajara -->
-          <tr>
-            <td>12</td>
-            <td class="op-stripe" style="border-left-color:var(--capsa)">
-              <span class="op-pill" style="background:var(--capsa)">CAPSA</span><br/>
-              <span class="op-name">Canalizaciones y Accesos Profesionales S. de R.L. de C.V.<br/><span style="font-size:10px;color:rgba(255,255,255,.38)">(convenio mod.)</span></span>
-            </td>
-            <td><div class="hotel-name">Fiesta Inn Guadalajara</div><div class="hotel-city">Guadalajara, Jalisco</div></td>
-            <td>Azotea <span class="na">(sup. no espec. en conv.)</span><br/><span style="font-size:11px;color:rgba(255,255,255,.5)">Av. Mariano Otero 1550, Guadalajara</span></td>
-            <td><div class="plazo-years">Extendido 5 años forz.</div><div class="plazo-dates">Hasta 31-ene-2028<br/><span style="font-size:10px;color:rgba(255,255,255,.38)">(desde ene-2023)</span></div></td>
-            <td><span class="na">No especificado en convenio<br/>(rige contrato orig. 01-feb-2018)</span></td>
-            <td><span class="na">No especificado<br/>en convenio</span></td>
-            <td><span class="na">No especificado en convenio</span></td>
-          </tr>
+<tr>
+  <td>12</td>
+  <td class="op-stripe" style="border-left-color:var(--capsa)"><span class="op-pill" style="background:var(--capsa)">CAPSA</span><br/><span class="op-name">Canalizaciones y Accesos Profesionales<br/><span style="font-size:10px;color:rgba(255,255,255,.38)">(convenio mod.)</span></span></td>
+  <td><div class="hotel-name">Fiesta Inn Guadalajara</div><div class="hotel-city">Guadalajara, Jalisco</div></td>
+  <td>Azotea<br/><span style="font-size:10.5px;color:rgba(255,255,255,.48)">Av. Mariano Otero 1550</span></td>
+  <td><div class="plazo-years">Extendido 5 años forz.</div><div class="plazo-dates">Hasta 31-ene-2028</div></td>
+  <td><span class="na">No espec. en convenio</span></td>
+  <td><span class="na">No espec. en convenio</span></td>
+  <td><span class="na">No espec. en convenio</span></td>
+  <td><div class="pbadges"><span class="pb pb-ift">IFT</span><span class="pb pb-const">CONST</span><span class="pb pb-uso">USO</span><span class="pb pb-pc">PC</span></div><div style="font-size:10px;color:rgba(255,255,255,.38);margin-top:5px">Regl. Sitios Telecom. Guadalajara<br/>Ley PC Jalisco</div></td>
+</tr>
 
-          <!-- 13 CAPSA Cancún anual -->
-          <tr>
-            <td>13</td>
-            <td class="op-stripe" style="border-left-color:var(--capsa)">
-              <span class="op-pill" style="background:var(--capsa)">CAPSA</span><br/>
-              <span class="op-name">Canalizaciones y Accesos Profesionales S. de R.L. de C.V.<br/><span style="font-size:10px;color:rgba(255,255,255,.38)">(convenio mod. 2025 — contrato anual)</span></span>
-            </td>
-            <td><div class="hotel-name">FA Condesa Cancún</div><div class="hotel-city">Torre Mar + Torre Luna, Cancún, Q.Roo</div></td>
-            <td>23 m² Torre Mar + 3 m² Torre Luna<br/><span style="font-size:11px;color:rgba(255,255,255,.5)">Blvd. Kukulkán Km. 16.5, Cancún</span></td>
-            <td><div class="plazo-years">10 años forzosos</div><div class="plazo-dates">01-nov-2025 → 31-oct-2035<br/><span style="font-size:10px;color:rgba(255,255,255,.38)">(conv. mod. contrato 01-nov-2010)</span></div></td>
-            <td><div class="renta-amount">$347,557.98 MN/año</div><div class="renta-note">+ IVA</div></td>
-            <td><div class="incr-month">Septiembre</div><div class="incr-note">Anual INPC<br/>(estipulado expresamente)</div></td>
-            <td class="penal-text">Per contrato original</td>
-          </tr>
+<tr>
+  <td>13</td>
+  <td class="op-stripe" style="border-left-color:var(--capsa)"><span class="op-pill" style="background:var(--capsa)">CAPSA</span><br/><span class="op-name">Canalizaciones y Accesos Profesionales<br/><span style="font-size:10px;color:rgba(255,255,255,.38)">(conv. 2025 — anual)</span></span></td>
+  <td><div class="hotel-name">FA Condesa Cancún</div><div class="hotel-city">Torre Mar + Torre Luna, Q.Roo</div></td>
+  <td>23 m² + 3 m²<br/><span style="font-size:10.5px;color:rgba(255,255,255,.48)">Blvd. Kukulkán Km. 16.5</span></td>
+  <td><div class="plazo-years">10 años forz.</div><div class="plazo-dates">01-nov-2025 → 31-oct-2035</div></td>
+  <td><div class="renta-amount">$347,557.98/año</div><div class="renta-note">+ IVA</div></td>
+  <td><div class="incr-month">Septiembre</div><div class="incr-note">Anual INPC (estipulado)</div></td>
+  <td class="penal-text">Per contrato original</td>
+  <td><div class="pbadges"><span class="pb pb-ift">IFT</span><span class="pb pb-const">CONST</span><span class="pb pb-uso">USO</span><span class="pb pb-pc">PC</span><span class="pb pb-semarnat">SEMAR</span></div><div style="font-size:10px;color:rgba(255,255,255,.38);margin-top:5px">Municipio Benito Juárez · LGEEPA<br/>SEMARNAT zona costera · Ley PC Q.Roo</div></td>
+</tr>
 
-          <!-- 14 CAPSA Cancún mensual -->
-          <tr>
-            <td>14</td>
-            <td class="op-stripe" style="border-left-color:var(--capsa)">
-              <span class="op-pill" style="background:var(--capsa)">CAPSA</span><br/>
-              <span class="op-name">Canalizaciones y Accesos Profesionales S. de R.L. de C.V.<br/><span style="font-size:10px;color:rgba(255,255,255,.38)">(contrato mensual 2019)</span></span>
-            </td>
-            <td><div class="hotel-name">FA Condesa Cancún</div><div class="hotel-city">Cancún, Quintana Roo</div></td>
-            <td>Azotea<br/><span style="font-size:11px;color:rgba(255,255,255,.5)">Blvd. Kukulkán Km. 16.5, Cancún</span></td>
-            <td><div class="plazo-years">10 años forzosos</div><div class="plazo-dates">15-ago-2019 → 15-ago-2029</div></td>
-            <td><div class="renta-amount">$20,000 MN/mes</div><div class="renta-note">+ IVA</div></td>
-            <td><div class="incr-month">Agosto</div><div class="incr-note">Anual INPC (1° y 12° mes)</div></td>
-            <td class="penal-text">Rentas faltantes por vencer</td>
-          </tr>
+<tr>
+  <td>14</td>
+  <td class="op-stripe" style="border-left-color:var(--capsa)"><span class="op-pill" style="background:var(--capsa)">CAPSA</span><br/><span class="op-name">Canalizaciones y Accesos Profesionales<br/><span style="font-size:10px;color:rgba(255,255,255,.38)">(contrato mensual 2019)</span></span></td>
+  <td><div class="hotel-name">FA Condesa Cancún</div><div class="hotel-city">Cancún, Quintana Roo</div></td>
+  <td>Azotea<br/><span style="font-size:10.5px;color:rgba(255,255,255,.48)">Blvd. Kukulkán Km. 16.5</span></td>
+  <td><div class="plazo-years">10 años forz.</div><div class="plazo-dates">15-ago-2019 → 15-ago-2029</div></td>
+  <td><div class="renta-amount">$20,000/mes</div><div class="renta-note">+ IVA</div></td>
+  <td><div class="incr-month">Agosto</div><div class="incr-note">Anual INPC (1° y 12° mes)</div></td>
+  <td class="penal-text">Rentas faltantes</td>
+  <td><div class="pbadges"><span class="pb pb-ift">IFT</span><span class="pb pb-const">CONST</span><span class="pb pb-uso">USO</span><span class="pb pb-pc">PC</span><span class="pb pb-semarnat">SEMAR</span></div><div style="font-size:10px;color:rgba(255,255,255,.38);margin-top:5px">Municipio Benito Juárez · LGEEPA<br/>SEMARNAT zona costera · Ley PC Q.Roo</div></td>
+</tr>
 
-          <!-- 15 CAPSA Durango -->
-          <tr>
-            <td>15</td>
-            <td class="op-stripe" style="border-left-color:var(--capsa)">
-              <span class="op-pill" style="background:var(--capsa)">CAPSA</span><br/>
-              <span class="op-name">Canalizaciones y Accesos Profesionales S. de R.L. de C.V.<br/><span style="font-size:10px;color:rgba(255,255,255,.38)">(convenio mod.)</span></span>
-            </td>
-            <td><div class="hotel-name">Fiesta Inn Durango</div><div class="hotel-city">Durango, Durango</div></td>
-            <td>Azotea <strong>30 m²</strong><br/><span style="font-size:11px;color:rgba(255,255,255,.5)">Blvd. Felipe Pescador 1401, Durango</span></td>
-            <td><div class="plazo-years">Extendido 5 años forz.</div><div class="plazo-dates">Hasta 12-feb-2030<br/><span style="font-size:10px;color:rgba(255,255,255,.38)">(desde feb-2025)</span></div></td>
-            <td><div class="renta-amount">$378,048.58 MN/año</div><div class="renta-note">+ IVA (vigente al convenio)</div></td>
-            <td><div class="incr-month">Septiembre</div><div class="incr-note">Anual INPC<br/>(estipulado expresamente)</div></td>
-            <td class="penal-text">Rentas faltantes por vencer</td>
-          </tr>
+<tr>
+  <td>15</td>
+  <td class="op-stripe" style="border-left-color:var(--capsa)"><span class="op-pill" style="background:var(--capsa)">CAPSA</span><br/><span class="op-name">Canalizaciones y Accesos Profesionales<br/><span style="font-size:10px;color:rgba(255,255,255,.38)">(convenio mod.)</span></span></td>
+  <td><div class="hotel-name">Fiesta Inn Durango</div><div class="hotel-city">Durango, Durango</div></td>
+  <td>Azotea <b>30 m²</b><br/><span style="font-size:10.5px;color:rgba(255,255,255,.48)">Blvd. Felipe Pescador 1401</span></td>
+  <td><div class="plazo-years">Extendido 5 años forz.</div><div class="plazo-dates">Hasta 12-feb-2030</div></td>
+  <td><div class="renta-amount">$378,048.58/año</div><div class="renta-note">+ IVA (vigente al conv.)</div></td>
+  <td><div class="incr-month">Septiembre</div><div class="incr-note">Anual INPC (estipulado)</div></td>
+  <td class="penal-text">Rentas faltantes</td>
+  <td><div class="pbadges"><span class="pb pb-ift">IFT</span><span class="pb pb-const">CONST</span><span class="pb pb-uso">USO</span><span class="pb pb-pc">PC</span></div><div style="font-size:10px;color:rgba(255,255,255,.38);margin-top:5px">Municipio de Durango<br/>Ley PC Durango</div></td>
+</tr>
 
-          <!-- 16 CAPSA Cuautitlán -->
-          <tr>
-            <td>16</td>
-            <td class="op-stripe" style="border-left-color:var(--capsa)">
-              <span class="op-pill" style="background:var(--capsa)">CAPSA</span><br/>
-              <span class="op-name">Canalizaciones y Accesos Profesionales S. de R.L. de C.V.</span>
-            </td>
-            <td><div class="hotel-name">Fiesta Inn Cuautitlán</div><div class="hotel-city">Cuautitlán Izcalli, Estado de México</div></td>
-            <td>Azotea <strong>85.52 m²</strong><br/><span style="font-size:11px;color:rgba(255,255,255,.5)">Av. Chalma s/n esq. Méx-Qro Lote 8</span></td>
-            <td><div class="plazo-years">5 años forzosos</div><div class="plazo-dates">01-ago-2024 → 01-ago-2029</div></td>
-            <td><div class="renta-amount">$385,583.66 MN/año</div><div class="renta-note">pago anticipado + IVA</div></td>
-            <td><div class="incr-month">Agosto</div><div class="incr-note">Anual INPC<br/>(+5% adicional al renovar)</div></td>
-            <td class="penal-text">Renta vigente × meses faltantes + IVA</td>
-          </tr>
+<tr>
+  <td>16</td>
+  <td class="op-stripe" style="border-left-color:var(--capsa)"><span class="op-pill" style="background:var(--capsa)">CAPSA</span><br/><span class="op-name">Canalizaciones y Accesos Profesionales S. de R.L. de C.V.</span></td>
+  <td><div class="hotel-name">Fiesta Inn Cuautitlán</div><div class="hotel-city">Cuautitlán Izcalli, Edomex</div></td>
+  <td>Azotea <b>85.52 m²</b><br/><span style="font-size:10.5px;color:rgba(255,255,255,.48)">Av. Chalma s/n, Cuautitlán Izcalli</span></td>
+  <td><div class="plazo-years">5 años forz.</div><div class="plazo-dates">01-ago-2024 → 01-ago-2029</div></td>
+  <td><div class="renta-amount">$385,583.66/año</div><div class="renta-note">anticipado + IVA</div></td>
+  <td><div class="incr-month">Agosto</div><div class="incr-note">Anual INPC (+5% renovar)</div></td>
+  <td class="penal-text">Renta × meses falt. + IVA</td>
+  <td><div class="pbadges"><span class="pb pb-ift">IFT</span><span class="pb pb-const">CONST</span><span class="pb pb-uso">USO</span><span class="pb pb-pc">PC</span></div><div style="font-size:10px;color:rgba(255,255,255,.38);margin-top:5px">Municipio Cuautitlán Izcalli<br/>Ley PC Estado de México</div></td>
+</tr>
 
-          <!-- 17 CAPSA Puebla -->
-          <tr>
-            <td>17</td>
-            <td class="op-stripe" style="border-left-color:var(--capsa)">
-              <span class="op-pill" style="background:var(--capsa)">CAPSA</span><br/>
-              <span class="op-name">Canalizaciones y Accesos Profesionales S. de R.L. de C.V.</span>
-            </td>
-            <td><div class="hotel-name">Camino Real Puebla</div><div class="hotel-city">Puebla, Puebla</div></td>
-            <td>Azotea <strong>36 m²</strong><br/><span style="font-size:11px;color:rgba(255,255,255,.5)">Blvd. Atlixcayotl Km 5, Fracc. La Vista</span></td>
-            <td><div class="plazo-years">5 años forzosos</div><div class="plazo-dates">01-feb-2024 → 01-feb-2029</div></td>
-            <td><div class="renta-amount">$437,668.81 MN/año</div><div class="renta-note">pago anticipado + IVA</div></td>
-            <td><div class="incr-month">Febrero</div><div class="incr-note">Anual INPC<br/>(+5% adicional al renovar)</div></td>
-            <td class="penal-text">Renta vigente × meses faltantes + IVA</td>
-          </tr>
+<tr>
+  <td>17</td>
+  <td class="op-stripe" style="border-left-color:var(--capsa)"><span class="op-pill" style="background:var(--capsa)">CAPSA</span><br/><span class="op-name">Canalizaciones y Accesos Profesionales S. de R.L. de C.V.</span></td>
+  <td><div class="hotel-name">Camino Real Puebla</div><div class="hotel-city">Puebla, Puebla</div></td>
+  <td>Azotea <b>36 m²</b><br/><span style="font-size:10.5px;color:rgba(255,255,255,.48)">Blvd. Atlixcayotl Km 5</span></td>
+  <td><div class="plazo-years">5 años forz.</div><div class="plazo-dates">01-feb-2024 → 01-feb-2029</div></td>
+  <td><div class="renta-amount">$437,668.81/año</div><div class="renta-note">anticipado + IVA</div></td>
+  <td><div class="incr-month">Febrero</div><div class="incr-note">Anual INPC (+5% renovar)</div></td>
+  <td class="penal-text">Renta × meses falt. + IVA</td>
+  <td><div class="pbadges"><span class="pb pb-ift">IFT</span><span class="pb pb-inah">INAH</span><span class="pb pb-const">CONST</span><span class="pb pb-uso">USO</span><span class="pb pb-pc">PC</span></div><div style="font-size:10px;color:rgba(255,255,255,.38);margin-top:5px">Zona Monumentos Históricos Puebla<br/>INAH · SCOP Puebla · Ley PC Puebla</div></td>
+</tr>
 
         </tbody>
       </table>
-      <div class="no-results" id="noResults">No se encontraron contratos que coincidan con la búsqueda.</div>
+      <div class="no-results" id="noResults">No se encontraron contratos.</div>
     </div>
   </div>
-</div><!-- /panel-tabla -->
+</div>
 
-<!-- ══════════════ PANEL ALERTAS ══════════════ -->
+<!-- ═══════════ PANEL ALERTAS ═══════════ -->
 <div class="tab-panel" id="panel-alertas">
   <div class="alert-panel">
-
-    <!-- VENCIDOS -->
     <div class="alert-section-title">
       <div class="alert-dot" style="background:#E53E3E"></div>
-      <h3 style="color:#FC8181">Contratos Vencidos</h3>
-      <span class="pill-count">2 contratos</span>
+      <h3 style="color:#FC8181">Contratos Vencidos</h3><span class="pc">2</span>
     </div>
     <div class="alert-cards">
       <div class="alert-card red">
         <div class="alert-card-header">
-          <div>
-            <div class="alert-num">CONTRATO #7</div>
-            <div class="alert-hotel">Hotel One Mty. Aeropuerto</div>
-            <div class="alert-op">Megacable Comunicaciones de México S.A. de C.V.</div>
-          </div>
+          <div><div class="alert-num">CONTRATO #7</div><div class="alert-hotel">Hotel One Mty. Aeropuerto</div><div class="alert-op">Megacable Comunicaciones de México S.A. de C.V.</div></div>
           <div class="alert-time-badge">VENCIDO<br/>hace ~13 meses</div>
         </div>
         <div class="alert-meta">
           <div class="alert-meta-item"><div class="alert-meta-label">Vencimiento</div><div class="alert-meta-val">01-abr-2025</div></div>
-          <div class="alert-meta-item"><div class="alert-meta-label">Plazo original</div><div class="alert-meta-val">5 años forzosos</div></div>
+          <div class="alert-meta-item"><div class="alert-meta-label">Plazo</div><div class="alert-meta-val">5 años forzosos</div></div>
           <div class="alert-meta-item"><div class="alert-meta-label">Renta</div><div class="alert-meta-val">$364,044.83/año</div></div>
           <div class="alert-meta-item"><div class="alert-meta-label">Penalización</div><div class="alert-meta-val">3 meses renta</div></div>
         </div>
       </div>
       <div class="alert-card red">
         <div class="alert-card-header">
-          <div>
-            <div class="alert-num">CONTRATO #8</div>
-            <div class="alert-hotel">Fiesta Inn Periférico Sur</div>
-            <div class="alert-op">Megacable Comunicaciones de México S.A. de C.V. (subarrendatario)</div>
-          </div>
+          <div><div class="alert-num">CONTRATO #8</div><div class="alert-hotel">Fiesta Inn Periférico Sur</div><div class="alert-op">Megacable (subarrendatario) — plazo forz. venció ene-2020</div></div>
           <div class="alert-time-badge">VENCIDO<br/>(plazo forz. 2020)</div>
         </div>
         <div class="alert-meta">
           <div class="alert-meta-item"><div class="alert-meta-label">Plazo forz. hasta</div><div class="alert-meta-val">01-ene-2020</div></div>
-          <div class="alert-meta-item"><div class="alert-meta-label">Origen</div><div class="alert-meta-val">Conv. mod. 01-ene-2015</div></div>
+          <div class="alert-meta-item"><div class="alert-meta-label">Origen conv.</div><div class="alert-meta-val">01-ene-2015</div></div>
           <div class="alert-meta-item"><div class="alert-meta-label">Renta</div><div class="alert-meta-val">$300,000/año</div></div>
           <div class="alert-meta-item"><div class="alert-meta-label">Penalización</div><div class="alert-meta-val">Rentas faltantes</div></div>
         </div>
       </div>
     </div>
-
     <div class="alert-divider"></div>
-
-    <!-- PRÓXIMOS 18 MESES -->
     <div class="alert-section-title">
       <div class="alert-dot" style="background:#DD6B20"></div>
-      <h3 style="color:#FBD38D">Vence en menos de 18 meses</h3>
-      <span class="pill-count">1 contrato</span>
+      <h3 style="color:#FBD38D">Vence en menos de 18 meses</h3><span class="pc">1</span>
     </div>
     <div class="alert-cards">
       <div class="alert-card orange">
         <div class="alert-card-header">
-          <div>
-            <div class="alert-num">CONTRATO #4</div>
-            <div class="alert-hotel">AC Marriott Juriquilla</div>
-            <div class="alert-op">MXT Capital Partners S.A.P.I. de C.V.</div>
-          </div>
+          <div><div class="alert-num">CONTRATO #4</div><div class="alert-hotel">AC Marriott Juriquilla</div><div class="alert-op">MXT Capital Partners S.A.P.I. de C.V.</div></div>
           <div class="alert-time-badge">Vence en<br/>~14 meses</div>
         </div>
         <div class="alert-meta">
           <div class="alert-meta-item"><div class="alert-meta-label">Vencimiento</div><div class="alert-meta-val">02-ago-2027</div></div>
-          <div class="alert-meta-item"><div class="alert-meta-label">Plazo original</div><div class="alert-meta-val">10 años forzosos</div></div>
+          <div class="alert-meta-item"><div class="alert-meta-label">Plazo</div><div class="alert-meta-val">10 años forzosos</div></div>
           <div class="alert-meta-item"><div class="alert-meta-label">Renta</div><div class="alert-meta-val">$20,000/mes + IVA</div></div>
           <div class="alert-meta-item"><div class="alert-meta-label">Penalización</div><div class="alert-meta-val">2 meses + IVA</div></div>
         </div>
       </div>
     </div>
-
     <div class="alert-divider"></div>
-
-    <!-- PRÓXIMOS 24 MESES -->
     <div class="alert-section-title">
       <div class="alert-dot" style="background:#D69E2E"></div>
-      <h3 style="color:#FAF089">Vence en menos de 24 meses</h3>
-      <span class="pill-count">2 contratos</span>
+      <h3 style="color:#FAF089">Vence en menos de 24 meses</h3><span class="pc">2</span>
     </div>
     <div class="alert-cards">
       <div class="alert-card yellow">
         <div class="alert-card-header">
-          <div>
-            <div class="alert-num">CONTRATO #3</div>
-            <div class="alert-hotel">Hotel Real Inn Morelia</div>
-            <div class="alert-op">MXT Capital Partners S.A.P.I. de C.V.</div>
-          </div>
+          <div><div class="alert-num">CONTRATO #3</div><div class="alert-hotel">Hotel Real Inn Morelia</div><div class="alert-op">MXT Capital Partners S.A.P.I. de C.V.</div></div>
           <div class="alert-time-badge">Vence en<br/>~18 meses</div>
         </div>
         <div class="alert-meta">
           <div class="alert-meta-item"><div class="alert-meta-label">Vencimiento</div><div class="alert-meta-val">01-dic-2027</div></div>
-          <div class="alert-meta-item"><div class="alert-meta-label">Plazo original</div><div class="alert-meta-val">10 años forzosos</div></div>
           <div class="alert-meta-item"><div class="alert-meta-label">Renta</div><div class="alert-meta-val">$20,000/mes + IVA</div></div>
           <div class="alert-meta-item"><div class="alert-meta-label">Penalización</div><div class="alert-meta-val">2 meses + IVA</div></div>
+          <div class="alert-meta-item"><div class="alert-meta-label">Plazo</div><div class="alert-meta-val">10 años forzosos</div></div>
         </div>
       </div>
       <div class="alert-card yellow">
         <div class="alert-card-header">
-          <div>
-            <div class="alert-num">CONTRATO #12</div>
-            <div class="alert-hotel">Fiesta Inn Guadalajara</div>
-            <div class="alert-op">CAPSA (convenio mod.) — renta: rige contrato original</div>
-          </div>
+          <div><div class="alert-num">CONTRATO #12</div><div class="alert-hotel">Fiesta Inn Guadalajara</div><div class="alert-op">CAPSA — renta rige por contrato original</div></div>
           <div class="alert-time-badge">Vence en<br/>~20 meses</div>
         </div>
         <div class="alert-meta">
@@ -795,87 +563,384 @@
         </div>
       </div>
     </div>
-
     <div class="alert-divider"></div>
-
-    <!-- PRÓXIMOS 36 MESES -->
     <div class="alert-section-title">
       <div class="alert-dot" style="background:#2F855A"></div>
-      <h3 style="color:#9AE6B4">Vence en menos de 36 meses</h3>
-      <span class="pill-count">1 contrato</span>
+      <h3 style="color:#9AE6B4">Vence en menos de 36 meses</h3><span class="pc">1</span>
     </div>
     <div class="alert-cards">
       <div class="alert-card green">
         <div class="alert-card-header">
-          <div>
-            <div class="alert-num">CONTRATO #11</div>
-            <div class="alert-hotel">Fiesta Inn Oaxaca</div>
-            <div class="alert-op">CAPSA (convenio mod.) — renta: rige contrato original</div>
-          </div>
+          <div><div class="alert-num">CONTRATO #11</div><div class="alert-hotel">Fiesta Inn Oaxaca</div><div class="alert-op">CAPSA — renta rige por contrato original</div></div>
           <div class="alert-time-badge">Vence en<br/>~26 meses</div>
         </div>
         <div class="alert-meta">
           <div class="alert-meta-item"><div class="alert-meta-label">Vencimiento</div><div class="alert-meta-val">31-jul-2028</div></div>
-          <div class="alert-meta-item"><div class="alert-meta-label">Origen conv.</div><div class="alert-meta-val">31-jul-2018</div></div>
           <div class="alert-meta-item"><div class="alert-meta-label">Superficie</div><div class="alert-meta-val">Azotea 29.55 m²</div></div>
+          <div class="alert-meta-item"><div class="alert-meta-label">Origen conv.</div><div class="alert-meta-val">31-jul-2018</div></div>
           <div class="alert-meta-item"><div class="alert-meta-label">Renta</div><div class="alert-meta-val">No espec. en convenio</div></div>
         </div>
       </div>
     </div>
+  </div>
+</div>
 
-  </div><!-- /alert-panel -->
-</div><!-- /panel-alertas -->
+<!-- ═══════════ PANEL PERMISOS Y DOCUMENTACIÓN ═══════════ -->
+<div class="tab-panel" id="panel-docs">
+  <div class="docs-panel">
+    <div class="docs-note">
+      <strong>Instrucciones:</strong> Cargue aquí los permisos y licencias vigentes de cada contrato. Seleccione la fecha de vencimiento para activar las alertas automáticas. Los datos se guardan localmente en este navegador. Para transferir el registro a otro equipo, use el botón <strong>Exportar</strong>.
+    </div>
+    <div style="display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap;align-items:center">
+      <div class="docs-filter">
+        <select id="filterOp" onchange="renderDocs()">
+          <option value="">Todos los operadores</option>
+          <option value="AT&T">AT&amp;T</option>
+          <option value="ZELIKS">ZELIKS</option>
+          <option value="MXT Capital">MXT Capital</option>
+          <option value="Intelli Site">Intelli Site</option>
+          <option value="Megacable">Megacable</option>
+          <option value="MTP">Mexico Tower Partners</option>
+          <option value="CAPSA">CAPSA</option>
+        </select>
+      </div>
+      <button class="btn-upload" onclick="exportData()" style="padding:7px 16px">⬇ Exportar JSON</button>
+      <label class="btn-upload" style="padding:7px 16px;cursor:pointer">⬆ Importar JSON<input type="file" accept=".json" onchange="importData(event)" style="display:none"></label>
+      <button class="btn-upload" onclick="if(confirm('¿Eliminar todos los registros?')){localStorage.removeItem('fiho_antenas_docs');renderDocs()}" style="background:rgba(220,38,38,.15);border-color:rgba(220,38,38,.4);color:#FCA5A5;padding:7px 16px">🗑 Limpiar</button>
+    </div>
+    <div class="docs-stats" id="docsStats"></div>
+    <div id="docsContainer"></div>
+  </div>
+</div>
 
-<!-- FOOTER -->
 <div class="footer">
   <strong>FIBRA HOTELERA — Fideicomiso F/1596 (FIHO)</strong><br/>
-  Información extraída directamente de los contratos originales. No se ha inventado ni inferido ningún dato.<br/>
-  Los campos "No especificado en convenio" corresponden a contratos cuyo original no se encontró en la carpeta analizada.<br/>
-  Los meses de incremento indicados como "(aniversario)" corresponden a la fecha de inicio del contrato, conforme a la cláusula de incremento anual.<br/>
-  Fecha de referencia para alertas: <strong>22-may-2026</strong>
+  Permisos y licencias según: Ley Federal de Telecomunicaciones y Radiodifusión (LFTR 2014) · Reglamentos municipales de construcción · Leyes estatales de Protección Civil · Ley Federal de Monumentos y Zonas Arqueológicos (INAH) · LGEEPA (SEMARNAT) · Reglamento Aeronáutico AFAC.<br/>
+  La obligación de obtener y mantener vigentes los permisos corresponde al arrendatario conforme a cada contrato de arrendamiento.<br/>
+  Ref. vencimientos: <strong>22-may-2026</strong>
 </div>
 
 <script>
-  /* ── TABS ── */
-  function switchTab(id, btn) {
-    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById('panel-' + id).classList.add('active');
-    btn.classList.add('active');
-  }
+/* ── PERMISOS DATA ── */
+const PERMISOS_DB = [
+  {cid:1, op:'AT&T', hotel:'Fiesta Inn Nuevo Laredo', ciudad:'Nuevo Laredo, Tamps.', permisos:[
+    {id:'1a',tipo:'ift',   nombre:'Concesión / Autorización IFT',                base:'LFTR Art. 66-72',                                      freq:'variable', obligado:'Arrendatario'},
+    {id:'1b',tipo:'const', nombre:'Licencia de Construcción de Antena/Torre',    base:'Reglamento de Construcción de Nuevo Laredo',           freq:'unica',    obligado:'Arrendatario'},
+    {id:'1c',tipo:'uso',   nombre:'Licencia de Uso de Suelo (telecom)',           base:'Regl. de Zonificación Municipio Nuevo Laredo',         freq:'unica',    obligado:'Arrendatario'},
+    {id:'1d',tipo:'pc',    nombre:'Dictamen de Protección Civil',                 base:'Ley de Protección Civil del Estado de Tamaulipas',     freq:'anual',    obligado:'Arrendatario'},
+  ]},
+  {cid:2, op:'ZELIKS', hotel:'One Guadalajara', ciudad:'Tlaquepaque, Jal.', permisos:[
+    {id:'2a',tipo:'ift',   nombre:'Concesión / Autorización IFT',                base:'LFTR Art. 66-72',                                      freq:'variable', obligado:'Arrendatario'},
+    {id:'2b',tipo:'const', nombre:'Licencia de Construcción de Antena/Torre',    base:'Reglamento de Construcción Municipio Tlaquepaque',     freq:'unica',    obligado:'Arrendatario'},
+    {id:'2c',tipo:'uso',   nombre:'Licencia de Uso de Suelo (telecom)',           base:'Regl. de Desarrollo Urbano Tlaquepaque',               freq:'unica',    obligado:'Arrendatario'},
+    {id:'2d',tipo:'pc',    nombre:'Dictamen de Protección Civil',                 base:'Ley de Protección Civil del Estado de Jalisco',        freq:'anual',    obligado:'Arrendatario'},
+  ]},
+  {cid:3, op:'MXT Capital', hotel:'Hotel Real Inn Morelia', ciudad:'Morelia, Mich.', permisos:[
+    {id:'3a',tipo:'ift',   nombre:'Concesión / Autorización IFT',                base:'LFTR Art. 66-72',                                      freq:'variable', obligado:'Arrendatario'},
+    {id:'3b',tipo:'const', nombre:'Licencia de Construcción de Antena/Torre',    base:'Reglamento de Construcción del Municipio de Morelia',  freq:'unica',    obligado:'Arrendatario'},
+    {id:'3c',tipo:'uso',   nombre:'Licencia de Uso de Suelo (telecom)',           base:'Plan de Desarrollo Urbano Morelia',                    freq:'unica',    obligado:'Arrendatario'},
+    {id:'3d',tipo:'pc',    nombre:'Dictamen de Protección Civil',                 base:'Ley de Protección Civil de Michoacán',                 freq:'anual',    obligado:'Arrendatario'},
+  ]},
+  {cid:4, op:'MXT Capital', hotel:'AC Marriott Juriquilla', ciudad:'Querétaro, Qro.', permisos:[
+    {id:'4a',tipo:'ift',   nombre:'Concesión / Autorización IFT',                base:'LFTR Art. 66-72',                                      freq:'variable', obligado:'Arrendatario'},
+    {id:'4b',tipo:'const', nombre:'Licencia de Construcción de Antena/Torre',    base:'Reglamento de Construcción Municipio Querétaro',       freq:'unica',    obligado:'Arrendatario'},
+    {id:'4c',tipo:'uso',   nombre:'Licencia de Uso de Suelo (telecom)',           base:'Plan Municipal de Desarrollo Urbano Querétaro',        freq:'unica',    obligado:'Arrendatario'},
+    {id:'4d',tipo:'pc',    nombre:'Dictamen de Protección Civil',                 base:'Ley de Protección Civil de Querétaro',                 freq:'anual',    obligado:'Arrendatario'},
+  ]},
+  {cid:5, op:'Intelli Site', hotel:'Fiesta Inn Hermosillo', ciudad:'Hermosillo, Son.', permisos:[
+    {id:'5a',tipo:'ift',   nombre:'Concesión / Autorización IFT',                base:'LFTR Art. 66-72',                                      freq:'variable', obligado:'Arrendatario'},
+    {id:'5b',tipo:'const', nombre:'Licencia de Construcción de Antena/Torre',    base:'Reglamento de Construcción Municipio Hermosillo',      freq:'unica',    obligado:'Arrendatario'},
+    {id:'5c',tipo:'uso',   nombre:'Licencia de Uso de Suelo (telecom)',           base:'Reglamento de Zonificación Hermosillo',                freq:'unica',    obligado:'Arrendatario'},
+    {id:'5d',tipo:'pc',    nombre:'Dictamen de Protección Civil',                 base:'Ley de Protección Civil del Estado de Sonora',         freq:'anual',    obligado:'Arrendatario'},
+  ]},
+  {cid:6, op:'Intelli Site', hotel:'Fiesta Inn Chihuahua', ciudad:'Chihuahua, Chih.', permisos:[
+    {id:'6a',tipo:'ift',   nombre:'Concesión / Autorización IFT',                base:'LFTR Art. 66-72',                                      freq:'variable', obligado:'Arrendatario'},
+    {id:'6b',tipo:'const', nombre:'Licencia de Construcción de Antena/Torre',    base:'Reglamento de Construcción Municipio Chihuahua',       freq:'unica',    obligado:'Arrendatario'},
+    {id:'6c',tipo:'uso',   nombre:'Licencia de Uso de Suelo (telecom)',           base:'Plan de Desarrollo Urbano Chihuahua',                  freq:'unica',    obligado:'Arrendatario'},
+    {id:'6d',tipo:'pc',    nombre:'Dictamen de Protección Civil',                 base:'Ley de Protección Civil del Estado de Chihuahua',      freq:'anual',    obligado:'Arrendatario'},
+  ]},
+  {cid:7, op:'Megacable', hotel:'Hotel One Mty. Aeropuerto', ciudad:'Apodaca, N.L.', permisos:[
+    {id:'7a',tipo:'ift',   nombre:'Concesión / Autorización IFT',                base:'LFTR Art. 66-72',                                      freq:'variable', obligado:'Arrendatario'},
+    {id:'7b',tipo:'const', nombre:'Licencia de Construcción de Antena/Torre',    base:'Reglamento de Construcción Municipio Apodaca NL',      freq:'unica',    obligado:'Arrendatario'},
+    {id:'7c',tipo:'uso',   nombre:'Licencia de Uso de Suelo (telecom)',           base:'Plan de Desarrollo Urbano Apodaca',                    freq:'unica',    obligado:'Arrendatario'},
+    {id:'7d',tipo:'pc',    nombre:'Dictamen de Protección Civil',                 base:'Ley de Protección Civil de Nuevo León',                freq:'anual',    obligado:'Arrendatario'},
+    {id:'7e',tipo:'afac',  nombre:'Permiso AFAC — Obstáculo Aeronáutico',        base:'Ley de Aviación Civil Art. 9 · Regl. AFAC altura obs.','freq':'unica',   obligado:'Arrendatario'},
+  ]},
+  {cid:8, op:'Megacable', hotel:'Fiesta Inn Periférico Sur', ciudad:'Tlalpan, CDMX', permisos:[
+    {id:'8a',tipo:'ift',   nombre:'Concesión / Autorización IFT',                base:'LFTR Art. 66-72',                                      freq:'variable', obligado:'Arrendatario'},
+    {id:'8b',tipo:'const', nombre:'Licencia de Construcción de Antena/Torre',    base:'Reglamento de Construcciones para el D.F. (RCDF)',     freq:'unica',    obligado:'Arrendatario'},
+    {id:'8c',tipo:'uso',   nombre:'Licencia de Uso de Suelo (telecom)',           base:'Programa Delegacional Desarrollo Urbano Tlalpan',      freq:'unica',    obligado:'Arrendatario'},
+    {id:'8d',tipo:'pc',    nombre:'Dictamen de Protección Civil CDMX',            base:'Ley del Sistema de Protección Civil de la CDMX',       freq:'anual',    obligado:'Arrendatario'},
+    {id:'8e',tipo:'semarnat',nombre:'Registro Ambiental SEDEMA',                 base:'Ley Ambiental de Protección a la Tierra en CDMX',      freq:'variable', obligado:'Arrendatario'},
+  ]},
+  {cid:9, op:'MTP', hotel:'Live Aqua San Miguel de Allende', ciudad:'San Miguel de Allende, Gto.', permisos:[
+    {id:'9a',tipo:'ift',   nombre:'Concesión / Autorización IFT',                base:'LFTR Art. 66-72',                                      freq:'variable', obligado:'Arrendatario'},
+    {id:'9b',tipo:'inah',  nombre:'Autorización INAH — Zona de Monumentos',      base:'Ley Federal de Zonas y Monumentos Históricos Art. 18-19','freq':'variable',obligado:'Arrendatario'},
+    {id:'9c',tipo:'const', nombre:'Licencia de Construcción / Intervención',     base:'Reglamento de Construcción Municipio SMA',             freq:'unica',    obligado:'Arrendatario'},
+    {id:'9d',tipo:'pc',    nombre:'Dictamen de Protección Civil',                 base:'Ley de Protección Civil del Estado de Guanajuato',     freq:'anual',    obligado:'Arrendatario'},
+  ]},
+  {cid:10, op:'MTP', hotel:'Fiesta Inn Perinorte', ciudad:'Tultitlán, Edomex', permisos:[
+    {id:'10a',tipo:'ift',  nombre:'Concesión / Autorización IFT',                base:'LFTR Art. 66-72',                                      freq:'variable', obligado:'Arrendatario'},
+    {id:'10b',tipo:'const',nombre:'Licencia de Construcción de Antena/Torre',    base:'Reglamento de Construcción del Estado de México',      freq:'unica',    obligado:'Arrendatario'},
+    {id:'10c',tipo:'uso',  nombre:'Licencia de Uso de Suelo (telecom)',           base:'Plan Municipal de Desarrollo Urbano Tultitlán',        freq:'unica',    obligado:'Arrendatario'},
+    {id:'10d',tipo:'pc',   nombre:'Dictamen de Protección Civil',                 base:'Ley de Protección Civil del Estado de México',         freq:'anual',    obligado:'Arrendatario'},
+  ]},
+  {cid:11, op:'CAPSA', hotel:'Fiesta Inn Oaxaca', ciudad:'Oaxaca de Juárez, Oax.', permisos:[
+    {id:'11a',tipo:'ift',  nombre:'Concesión / Autorización IFT',                base:'LFTR Art. 66-72',                                      freq:'variable', obligado:'Arrendatario'},
+    {id:'11b',tipo:'inah', nombre:'Autorización INAH — Zona de Monumentos',      base:'Ley Federal de Zonas y Monumentos Art. 18-19',         freq:'variable', obligado:'Arrendatario'},
+    {id:'11c',tipo:'const',nombre:'Licencia de Construcción / Intervención',     base:'Reglamento de Construcción Municipio Oaxaca de Juárez',freq:'unica',    obligado:'Arrendatario'},
+    {id:'11d',tipo:'pc',   nombre:'Dictamen de Protección Civil',                 base:'Ley de Protección Civil del Estado de Oaxaca',         freq:'anual',    obligado:'Arrendatario'},
+  ]},
+  {cid:12, op:'CAPSA', hotel:'Fiesta Inn Guadalajara', ciudad:'Guadalajara, Jal.', permisos:[
+    {id:'12a',tipo:'ift',  nombre:'Concesión / Autorización IFT',                base:'LFTR Art. 66-72',                                      freq:'variable', obligado:'Arrendatario'},
+    {id:'12b',tipo:'const',nombre:'Autorización Sitio Telecomunicaciones',       base:'Reglamento para Instalación de Sitios Telecom. Guadalajara','freq':'unica',obligado:'Arrendatario'},
+    {id:'12c',tipo:'uso',  nombre:'Licencia de Uso de Suelo (telecom)',           base:'Reglamento de Zonificación del Estado de Jalisco',     freq:'unica',    obligado:'Arrendatario'},
+    {id:'12d',tipo:'pc',   nombre:'Dictamen de Protección Civil',                 base:'Ley de Protección Civil del Estado de Jalisco',        freq:'anual',    obligado:'Arrendatario'},
+  ]},
+  {cid:13, op:'CAPSA', hotel:'FA Condesa Cancún (contrato anual)', ciudad:'Cancún, Q.Roo', permisos:[
+    {id:'13a',tipo:'ift',     nombre:'Concesión / Autorización IFT',             base:'LFTR Art. 66-72',                                      freq:'variable', obligado:'Arrendatario'},
+    {id:'13b',tipo:'const',   nombre:'Licencia de Construcción (Benito Juárez)', base:'Reglamento de Construcción Municipio Benito Juárez',   freq:'unica',    obligado:'Arrendatario'},
+    {id:'13c',tipo:'uso',     nombre:'Licencia de Uso de Suelo (telecom)',        base:'Plan de Desarrollo Urbano Benito Juárez',              freq:'unica',    obligado:'Arrendatario'},
+    {id:'13d',tipo:'pc',      nombre:'Dictamen de Protección Civil',              base:'Ley de Protección Civil del Estado de Quintana Roo',   freq:'anual',    obligado:'Arrendatario'},
+    {id:'13e',tipo:'semarnat',nombre:'Autorización SEMARNAT — Zona Costera',     base:'LGEEPA Art. 28 · Regl. en Materia de Evaluación de Impacto Ambiental','freq':'variable',obligado:'Arrendatario'},
+  ]},
+  {cid:14, op:'CAPSA', hotel:'FA Condesa Cancún (contrato mensual)', ciudad:'Cancún, Q.Roo', permisos:[
+    {id:'14a',tipo:'ift',     nombre:'Concesión / Autorización IFT',             base:'LFTR Art. 66-72',                                      freq:'variable', obligado:'Arrendatario'},
+    {id:'14b',tipo:'const',   nombre:'Licencia de Construcción (Benito Juárez)', base:'Reglamento de Construcción Municipio Benito Juárez',   freq:'unica',    obligado:'Arrendatario'},
+    {id:'14c',tipo:'uso',     nombre:'Licencia de Uso de Suelo (telecom)',        base:'Plan de Desarrollo Urbano Benito Juárez',              freq:'unica',    obligado:'Arrendatario'},
+    {id:'14d',tipo:'pc',      nombre:'Dictamen de Protección Civil',              base:'Ley de Protección Civil del Estado de Quintana Roo',   freq:'anual',    obligado:'Arrendatario'},
+    {id:'14e',tipo:'semarnat',nombre:'Autorización SEMARNAT — Zona Costera',     base:'LGEEPA Art. 28 · Regl. Impacto Ambiental',            freq:'variable', obligado:'Arrendatario'},
+  ]},
+  {cid:15, op:'CAPSA', hotel:'Fiesta Inn Durango', ciudad:'Durango, Dgo.', permisos:[
+    {id:'15a',tipo:'ift',  nombre:'Concesión / Autorización IFT',                base:'LFTR Art. 66-72',                                      freq:'variable', obligado:'Arrendatario'},
+    {id:'15b',tipo:'const',nombre:'Licencia de Construcción de Antena/Torre',    base:'Reglamento de Construcción del Municipio de Durango',  freq:'unica',    obligado:'Arrendatario'},
+    {id:'15c',tipo:'uso',  nombre:'Licencia de Uso de Suelo (telecom)',           base:'Plan de Desarrollo Urbano Durango',                    freq:'unica',    obligado:'Arrendatario'},
+    {id:'15d',tipo:'pc',   nombre:'Dictamen de Protección Civil',                 base:'Ley de Protección Civil del Estado de Durango',        freq:'anual',    obligado:'Arrendatario'},
+  ]},
+  {cid:16, op:'CAPSA', hotel:'Fiesta Inn Cuautitlán', ciudad:'Cuautitlán Izcalli, Edomex', permisos:[
+    {id:'16a',tipo:'ift',  nombre:'Concesión / Autorización IFT',                base:'LFTR Art. 66-72',                                      freq:'variable', obligado:'Arrendatario'},
+    {id:'16b',tipo:'const',nombre:'Licencia de Construcción de Antena/Torre',    base:'Reglamento de Construcción Cuautitlán Izcalli',        freq:'unica',    obligado:'Arrendatario'},
+    {id:'16c',tipo:'uso',  nombre:'Licencia de Uso de Suelo (telecom)',           base:'Plan de Desarrollo Urbano Cuautitlán Izcalli',         freq:'unica',    obligado:'Arrendatario'},
+    {id:'16d',tipo:'pc',   nombre:'Dictamen de Protección Civil',                 base:'Ley de Protección Civil del Estado de México',         freq:'anual',    obligado:'Arrendatario'},
+  ]},
+  {cid:17, op:'CAPSA', hotel:'Camino Real Puebla', ciudad:'Puebla, Pue.', permisos:[
+    {id:'17a',tipo:'ift',  nombre:'Concesión / Autorización IFT',                base:'LFTR Art. 66-72',                                      freq:'variable', obligado:'Arrendatario'},
+    {id:'17b',tipo:'inah', nombre:'Autorización INAH / INBA — Zona Monumentos',  base:'Ley Federal de Zonas y Monumentos Art. 18-19',         freq:'variable', obligado:'Arrendatario'},
+    {id:'17c',tipo:'const',nombre:'Licencia de Construcción / Intervención',     base:'Reglamento de Construcciones Municipio de Puebla',     freq:'unica',    obligado:'Arrendatario'},
+    {id:'17d',tipo:'uso',  nombre:'Licencia de Uso de Suelo (telecom)',           base:'Programa Municipal de Desarrollo Urbano de Puebla',    freq:'unica',    obligado:'Arrendatario'},
+    {id:'17e',tipo:'pc',   nombre:'Dictamen de Protección Civil',                 base:'Ley de Protección Civil del Estado de Puebla',         freq:'anual',    obligado:'Arrendatario'},
+  ]},
+];
 
-  /* ── SEARCH ── */
-  function filterTable() {
-    const q = document.getElementById('searchInput').value.toLowerCase();
-    const rows = document.querySelectorAll('#tableBody tr');
-    let visible = 0;
-    rows.forEach(r => {
-      const match = r.textContent.toLowerCase().includes(q);
-      r.classList.toggle('hidden', !match);
-      if (match) visible++;
-    });
-    document.getElementById('countBadge').textContent = visible + ' contrato' + (visible !== 1 ? 's' : '');
-    document.getElementById('noResults').style.display = visible === 0 ? 'block' : 'none';
-  }
+const TIPO_META = {
+  ift:     {label:'IFT',      emoji:'📡', cls:'pb-ift',     bg:'rgba(37,99,235,.2)'},
+  const:   {label:'CONST',    emoji:'🏗', cls:'pb-const',   bg:'rgba(124,58,237,.2)'},
+  uso:     {label:'USO',      emoji:'📋', cls:'pb-uso',     bg:'rgba(13,148,136,.2)'},
+  pc:      {label:'PC',       emoji:'🛡', cls:'pb-pc',      bg:'rgba(217,119,6,.2)'},
+  inah:    {label:'INAH',     emoji:'🏛', cls:'pb-inah',    bg:'rgba(146,64,14,.3)'},
+  semarnat:{label:'SEMAR',    emoji:'🌿', cls:'pb-semarnat',bg:'rgba(22,101,52,.3)'},
+  afac:    {label:'AFAC',     emoji:'✈', cls:'pb-afac',    bg:'rgba(159,18,57,.3)'},
+};
+const FREQ_META = {
+  anual:   {label:'Anual',    cls:'freq-anual'},
+  unica:   {label:'Única vez',cls:'freq-unica'},
+  variable:{label:'Variable', cls:'freq-variable'},
+};
 
-  /* ── SORT ── */
-  let sortCol = -1, sortAsc = true;
-  function sortTable(col) {
-    const tbody = document.getElementById('tableBody');
-    const rows = Array.from(tbody.querySelectorAll('tr'));
-    if (sortCol === col) { sortAsc = !sortAsc; } else { sortCol = col; sortAsc = true; }
-    rows.sort((a, b) => {
-      const va = a.cells[col]?.textContent.trim() || '';
-      const vb = b.cells[col]?.textContent.trim() || '';
-      return sortAsc ? va.localeCompare(vb, 'es') : vb.localeCompare(va, 'es');
+/* ── localStorage helpers ── */
+function loadDocs(){return JSON.parse(localStorage.getItem('fiho_antenas_docs')||'{}')}
+function saveDocs(d){localStorage.setItem('fiho_antenas_docs',JSON.stringify(d))}
+function getDoc(pid){return loadDocs()[pid]||null}
+function setDoc(pid,data){const d=loadDocs();d[pid]=data;saveDocs(d)}
+
+function statusFor(doc){
+  if(!doc||!doc.uploaded) return 'pending';
+  if(!doc.expiry) return 'ok';
+  const exp=new Date(doc.expiry), now=new Date('2026-05-22');
+  const diff=(exp-now)/(1000*60*60*24);
+  if(diff<0) return 'expired';
+  if(diff<90) return 'warn';
+  return 'ok';
+}
+const STATUS_META={
+  pending: {label:'Pendiente',  cls:'s-pending'},
+  ok:      {label:'Vigente',    cls:'s-ok'},
+  warn:    {label:'Por vencer', cls:'s-warn'},
+  expired: {label:'Vencido',    cls:'s-exp'},
+};
+
+/* ── RENDER DOCS TAB ── */
+function renderDocs(){
+  const filterOp = document.getElementById('filterOp').value;
+  const docs = loadDocs();
+  let total=0, ok=0, warn=0, pending=0, expired=0;
+
+  PERMISOS_DB.forEach(c=>{
+    c.permisos.forEach(p=>{
+      total++;
+      const s=statusFor(docs[p.id]);
+      if(s==='ok') ok++;
+      else if(s==='warn') warn++;
+      else if(s==='pending') pending++;
+      else if(s==='expired') expired++;
     });
-    rows.forEach(r => tbody.appendChild(r));
-    document.querySelectorAll('th').forEach((th, i) => {
-      th.classList.toggle('sorted', i === col);
-      const icon = th.querySelector('.si');
-      if (icon) icon.textContent = i === col ? (sortAsc ? ' ↑' : ' ↓') : ' ⇅';
-    });
+  });
+
+  document.getElementById('docsStats').innerHTML=`
+    <div class="ds-card"><div class="dsn" style="color:#6EE7B7">${ok}</div><div class="dsl">Vigentes</div></div>
+    <div class="ds-card"><div class="dsn" style="color:#FCD34D">${warn}</div><div class="dsl">Por vencer</div></div>
+    <div class="ds-card"><div class="dsn" style="color:#FCA5A5">${expired}</div><div class="dsl">Vencidos</div></div>
+    <div class="ds-card"><div class="dsn" style="color:rgba(255,255,255,.4)">${pending}</div><div class="dsl">Pendientes</div></div>
+    <div class="ds-card"><div class="dsn" style="color:var(--gold)">${total}</div><div class="dsl">Total permisos</div></div>
+  `;
+
+  const filtered = filterOp ? PERMISOS_DB.filter(c=>c.op===filterOp) : PERMISOS_DB;
+  document.getElementById('docsContainer').innerHTML = filtered.map(c=>{
+    const cDocs = c.permisos.map(p=>statusFor(docs[p.id]));
+    const cTotal = c.permisos.length;
+    const cOk = cDocs.filter(s=>s==='ok').length;
+    const pct = Math.round(cOk/cTotal*100);
+    const permsHtml = c.permisos.map(p=>{
+      const d=docs[p.id]||{};
+      const s=statusFor(d);
+      const sm=STATUS_META[s];
+      const tm=TIPO_META[p.tipo];
+      const fm=FREQ_META[p.freq];
+      return `<div class="perm-card">
+        <div class="perm-card-top">
+          <div class="perm-type-badge" style="background:${tm.bg}">${tm.emoji}</div>
+          <div>
+            <div class="perm-card-title"><span class="pb ${tm.cls}" style="margin-right:5px">${tm.label}</span>${p.nombre}</div>
+            <div class="perm-base">${p.base}</div>
+          </div>
+        </div>
+        <div class="perm-meta-row">
+          <span class="perm-freq ${fm.cls}">${fm.label}</span>
+          ${d.filename?`<span style="font-size:10px;color:rgba(255,255,255,.45)">📄 ${d.filename}</span>`:''}
+        </div>
+        <div class="perm-status-row">
+          <span class="status-badge ${sm.cls}">${sm.label}</span>
+          <div class="perm-actions">
+            <label class="btn-upload" style="padding:4px 10px;font-size:10.5px;cursor:pointer">
+              ${d.uploaded?'↺ Actualizar':'⬆ Cargar'}
+              <input type="file" class="hidden-input" accept=".pdf,.jpg,.jpeg,.png" onchange="uploadDoc('${p.id}',this)">
+            </label>
+            ${d.uploaded?`<button class="btn-view" onclick="viewDoc('${p.id}')" style="font-size:10.5px;padding:4px 10px">👁 Ver</button>`:''}
+          </div>
+        </div>
+        <div class="perm-doc-info" style="margin-top:8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+          <label class="expiry-lbl">Vencimiento:</label>
+          <input type="date" class="expiry-input" value="${d.expiry||''}" onchange="setExpiry('${p.id}',this.value)" />
+          ${d.uploadDate?`<span style="font-size:10px;color:rgba(255,255,255,.3)">Cargado: ${d.uploadDate}</span>`:''}
+        </div>
+        ${d.notes?`<div style="font-size:10.5px;color:rgba(255,255,255,.45);margin-top:6px;font-style:italic">${d.notes}</div>`:''}
+      </div>`;
+    }).join('');
+    return `<div class="contract-block">
+      <div class="cb-header" onclick="toggleBlock(${c.cid})">
+        <div class="cb-num">${c.cid}</div>
+        <div class="cb-info">
+          <div class="cb-hotel">${c.hotel}</div>
+          <div class="cb-op">${c.op} &bull; ${c.ciudad}</div>
+        </div>
+        <div class="cb-progress">
+          <div class="progress-bar-wrap"><div class="progress-bar-fill" id="pb${c.cid}" style="width:${pct}%"></div></div>
+          <span class="progress-pct">${cOk}/${cTotal}</span>
+        </div>
+        <span class="cb-toggle" id="toggle${c.cid}">▼</span>
+      </div>
+      <div class="perms-grid" id="block${c.cid}">${permsHtml}</div>
+    </div>`;
+  }).join('');
+}
+
+function toggleBlock(cid){
+  const grid=document.getElementById('block'+cid);
+  const tog=document.getElementById('toggle'+cid);
+  grid.classList.toggle('open');
+  tog.classList.toggle('open');
+}
+
+function uploadDoc(pid, input){
+  if(!input.files[0]) return;
+  const f=input.files[0];
+  const reader=new FileReader();
+  reader.onload=e=>{
+    const d=getDoc(pid)||{};
+    d.uploaded=true;
+    d.filename=f.name;
+    d.uploadDate=new Date().toLocaleDateString('es-MX');
+    d.fileData=e.target.result;
+    setDoc(pid,d);
+    renderDocs();
+  };
+  reader.readAsDataURL(f);
+}
+
+function viewDoc(pid){
+  const d=getDoc(pid);
+  if(!d||!d.fileData) return;
+  const win=window.open();
+  if(d.fileData.startsWith('data:application/pdf')){
+    win.document.write(`<iframe src="${d.fileData}" style="width:100%;height:100vh;border:none"></iframe>`);
+  } else {
+    win.document.write(`<img src="${d.fileData}" style="max-width:100%;display:block;margin:auto">`);
   }
+}
+
+function setExpiry(pid, val){
+  const d=getDoc(pid)||{};
+  d.expiry=val;
+  if(!d.uploaded) d.uploaded=false;
+  setDoc(pid,d);
+  renderDocs();
+}
+
+function exportData(){
+  const data=JSON.stringify(loadDocs(),null,2);
+  const a=document.createElement('a');
+  a.href='data:application/json;charset=utf-8,'+encodeURIComponent(data);
+  a.download='fiho_antenas_permisos_'+new Date().toISOString().slice(0,10)+'.json';
+  a.click();
+}
+
+function importData(e){
+  const f=e.target.files[0];
+  if(!f) return;
+  const r=new FileReader();
+  r.onload=ev=>{try{const d=JSON.parse(ev.target.result);saveDocs(d);renderDocs();alert('Importado correctamente.');}catch{alert('Error al leer el archivo.')}};
+  r.readAsText(f);
+}
+
+/* ── TABS ── */
+function switchTab(id,btn){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  btn.classList.add('active');
+  if(id==='docs') renderDocs();
+}
+
+/* ── SEARCH ── */
+function filterTable(){
+  const q=document.getElementById('searchInput').value.toLowerCase();
+  const rows=document.querySelectorAll('#tableBody tr');
+  let v=0;
+  rows.forEach(r=>{const m=r.textContent.toLowerCase().includes(q);r.classList.toggle('hidden',!m);if(m)v++;});
+  document.getElementById('countBadge').textContent=v+' contrato'+(v!==1?'s':'');
+  document.getElementById('noResults').style.display=v===0?'block':'none';
+}
+
+/* ── SORT ── */
+let sc=-1,sa=true;
+function sortTable(col){
+  const tb=document.getElementById('tableBody');
+  const rows=Array.from(tb.querySelectorAll('tr'));
+  if(sc===col){sa=!sa;}else{sc=col;sa=true;}
+  rows.sort((a,b)=>{const va=a.cells[col]?.textContent.trim()||'';const vb=b.cells[col]?.textContent.trim()||'';return sa?va.localeCompare(vb,'es'):vb.localeCompare(va,'es');});
+  rows.forEach(r=>tb.appendChild(r));
+  document.querySelectorAll('th').forEach((th,i)=>{th.classList.toggle('sorted',i===col);const s=th.querySelector('.si');if(s)s.textContent=i===col?(sa?' ↑':' ↓'):' ⇅';});
+}
 </script>
 </body>
 </html>
