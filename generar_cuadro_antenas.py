@@ -149,11 +149,10 @@ col_labels = [
     'PLAZO / VIGENCIA',
     'RENTA',
     'FECHA / CRITERIO\nDE INCREMENTO',
-    'DEPÓSITO EN\nGARANTÍA',
     'PENALIZACIÓN POR\nRESCISIÓN ANTICIP.',
 ]
-keys = ['no','arrendatario','hotel','sitio','plazo','renta','incremento','deposito','penalizacion']
-col_widths = [0.5, 5.8, 3.5, 5.5, 4.2, 4.5, 2.8, 2.8, 4.4]
+keys = ['no','arrendatario','hotel','sitio','plazo','renta','incremento','penalizacion']
+col_widths = [0.5, 5.8, 3.5, 5.5, 4.2, 4.5, 2.8, 4.4]
 
 n_rows = len(contratos)
 n_cols = len(col_labels)
