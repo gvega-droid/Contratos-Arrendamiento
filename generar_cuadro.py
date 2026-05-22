@@ -35,25 +35,23 @@ col_labels = [
     'INCREMENTO\nDE RENTA',
     'DEPÓSITO\nEN GARANTÍA',
     'PENALIZACIÓN POR\nRESCISIÓN ANTICIP.',
-    'COBRO\nDE AGUA',
-    'COBRO\nDE LUZ',
 ]
-keys = ['no','arrendatario','sup','ciudad','vigencia','renta','incr','deposito','penalizacion','agua','luz']
-# Landscape: ancho ~30", alto ~20"
-col_widths = [0.5, 4.4, 1.4, 2.6, 3.7, 3.5, 2.0, 2.6, 3.4, 2.5, 2.5]
+keys = ['no','arrendatario','sup','ciudad','vigencia','renta','incr','deposito','penalizacion']
+# Landscape sin columnas de agua y luz
+col_widths = [0.6, 5.5, 1.8, 3.2, 4.8, 4.5, 2.5, 3.5, 5.0]
 
 n_rows = len(contratos)
 n_cols = len(col_labels)
-row_height = 1.0
+row_height = 1.1
 
-fig_w = sum(col_widths) + 0.5   # ≈ 29.6"
-fig_h = n_rows * row_height + 2.2  # ≈ 22.2"
+fig_w = sum(col_widths) + 0.5   # ≈ 34.1"
+fig_h = n_rows * row_height + 2.4  # ≈ 24.4"
 fig, ax = plt.subplots(figsize=(fig_w, fig_h))
 ax.axis('off')
 
 fig.suptitle(
     'FIBRA HOTELERA (FIHO) — Cuadro Comparativo de Contratos de Arrendamiento (20 contratos)',
-    fontsize=11, fontweight='bold', y=0.995, x=0.5, ha='center'
+    fontsize=14, fontweight='bold', y=0.995, x=0.5, ha='center'
 )
 
 header_color = '#1a3a5c'
@@ -71,25 +69,25 @@ table = ax.table(
     cellColours=cell_colors,
     colWidths=[w / fig_w for w in col_widths],
     loc='center',
-    cellLoc='left',
+    cellLoc='center',
 )
 table.auto_set_font_size(False)
-table.set_fontsize(7.0)
+table.set_fontsize(9.0)
 
 for j in range(n_cols):
     cell = table[0, j]
     cell.set_facecolor(header_color)
-    cell.set_text_props(color='white', fontweight='bold', fontsize=7.5)
+    cell.set_text_props(color='white', fontweight='bold', fontsize=9.5)
     cell.set_height(0.05)
 
 for i in range(1, n_rows + 1):
     for j in range(n_cols):
         cell = table[i, j]
         cell.set_height(row_height / fig_h)
-        cell.PAD = 0.018
+        cell.PAD = 0.022
 
 plt.tight_layout(rect=[0, 0, 1, 0.993])
 out = '/home/user/Contratos-Arrendamiento/cuadro_contratos.png'
-plt.savefig(out, dpi=130, bbox_inches='tight', facecolor='white', edgecolor='none')
+plt.savefig(out, dpi=120, bbox_inches='tight', facecolor='white', edgecolor='none')
 plt.close()
 print(f"Guardado: {out}")
