@@ -51,7 +51,7 @@ Adicionalmente, se tiene en proceso de cierre un segundo arrendamiento con las s
 | **Renta mensual** | $25,000 |
 | **Estatus** | En negociación — pendiente de firma |
 
-### Indicadores de cumplimiento:
+### Indicadores de cumplimiento — Superficie:
 
 | Indicador | Valor |
 |---|---|
@@ -60,6 +60,22 @@ Adicionalmente, se tiene en proceso de cierre un segundo arrendamiento con las s
 | **Cumplimiento actual** | **90.1%** |
 | Superficie incluyendo prospecto en negociación | 293.15 m² |
 | **Cumplimiento proyectado (cierre de prospecto)** | **132%** ✓ |
+
+### Indicadores de cumplimiento — Ingresos de renta:
+
+El objetivo establece una meta de ingreso anual de **$2,000,000** al colocar 888 m² durante el año (equivalente a $500,000 anualizados por trimestre). La siguiente tabla muestra el avance en términos de ingreso de renta generado con las colocaciones del 1Q:
+
+| Arrendatario | Propiedad | Estatus | Renta mensual | Ingreso anual proyectado | % de la meta anual ($2 mdp) | % de la meta del 1Q ($500K) |
+|---|---|---|---|---|---|---|
+| Circle K | One Acapulco | Firmado | $38,000* | $456,000 | 22.8% | 91.2% |
+| Gloria JH | Plaza One Monterrey | En negociación | $25,000 | $300,000 | 15.0% | 60.0% |
+| **Total con prospecto** | | | **$63,000** | **$756,000** | **37.8%** | **151.2%** ✓ |
+
+*La renta de Circle K corresponde a $38,000 o el 8% de las ventas netas mensuales, lo que resulte mayor; se considera la renta base mínima garantizada para efectos del cálculo.
+
+**Interpretación:**
+- Con el contrato firmado de Circle K, el área genera el **91.2%** del ingreso anualizado esperado para el primer trimestre.
+- De cerrarse la negociación con Gloria JH, el ingreso anualizado del 1Q alcanzaría los **$756,000**, representando el **151.2%** de la meta trimestral de ingresos y el **37.8%** de la meta anual total.
 
 ### Observaciones:
 
