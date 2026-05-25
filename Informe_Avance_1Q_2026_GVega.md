@@ -37,7 +37,7 @@ Se logró la colocación y formalización de un contrato de arrendamiento con la
 | **Renta mensual** | $38,000 o el 8% de las ventas netas mensuales, lo que resulte mayor |
 | **Estatus del contrato** | Firmado y formalizado |
 
-Este contrato representa una **renta base garantizada mínima de $456,000 anuales**, sujeta a incremento en función del desempeño de ventas del arrendatario.
+Este contrato representa una renta base garantizada mínima de **$38,000 mensuales** ($456,000 anualizados), con inicio de vigencia en **junio de 2026**, por lo que el ingreso efectivo para el ejercicio 2026 es de **$266,000** (junio a diciembre, 7 meses), sujeto a incremento en función del desempeño de ventas del arrendatario.
 
 **B) Prospecto en negociación avanzada**
 
@@ -65,14 +65,14 @@ Adicionalmente, se tiene en proceso de cierre un segundo arrendamiento con las s
 
 El objetivo establece una meta de ingreso anual de **$2,000,000** al colocar 888 m² durante el año (equivalente a $500,000 anualizados por trimestre). La siguiente tabla muestra el avance en términos de ingreso de renta generado con las colocaciones del 1Q:
 
-| Arrendatario | Propiedad | Estatus | Renta mensual | Ingreso anual proyectado | % de la meta anual ($2 mdp) | % de la meta del 1Q ($500K) |
-|---|---|---|---|---|---|---|
-| Circle K | One Acapulco | Firmado | $38,000* | $456,000 | 22.8% | **91.2%** |
+| Arrendatario | Propiedad | Estatus | Renta mensual | Período 2026 | Ingreso efectivo 2026 | % de la meta anual ($2 mdp) | % de la meta del 1Q ($500K) |
+|---|---|---|---|---|---|---|---|
+| Circle K | One Acapulco | Firmado | $38,000* | Jun – Dic (7 meses) | $266,000 | 13.3% | **53.2%** |
 
 *La renta de Circle K corresponde a $38,000 o el 8% de las ventas netas mensuales, lo que resulte mayor; se considera la renta base mínima garantizada para efectos del cálculo.
 
 **Interpretación:**
-- Con el contrato firmado de Circle K, el área genera el **91.2%** del ingreso anualizado esperado para el primer trimestre, equivalente al **22.8%** de la meta anual de $2,000,000.
+- Considerando el período de vigencia del contrato en 2026 (junio a diciembre, 7 meses), el ingreso efectivo de Circle K asciende a **$266,000**, lo que representa el **53.2%** de la meta de ingresos del 1Q y el **13.3%** de la meta anual de $2,000,000. La tasa mensual de $38,000 equivale a un ingreso anualizado de $456,000 en ejercicios completos.
 
 ### Observaciones:
 
