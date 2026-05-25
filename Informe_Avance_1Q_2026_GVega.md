@@ -32,13 +32,13 @@ Se formalizó el contrato de arrendamiento con **Circle K** en One Acapulco (200
 | Contratado (firmado) | 200 m² — **90.1%** |
 | Incluyendo prospecto | 293.15 m² — **132%** |
 
-**Cumplimiento de ingresos (Circle K, jun–dic 2026):**
+**Cumplimiento de ingresos (Circle K, 12 meses):**
 
 | Concepto | Valor |
 |---|---|
-| Ingreso efectivo 2026 (7 meses) | $266,000 |
-| % de la meta anual ($2 mdp) | 13.3% |
-| % de la meta del 1Q ($500K) | 53.2% |
+| Ingreso anual proyectado | $456,000 |
+| % de la meta anual ($2 mdp) | 22.8% |
+| % de la meta del 1Q ($500K) | 91.2% |
 
 ---
 
