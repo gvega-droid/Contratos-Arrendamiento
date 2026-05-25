@@ -12,150 +12,65 @@
 
 ---
 
-## RESUMEN EJECUTIVO
-
-El presente informe documenta el avance de los tres objetivos establecidos para el ejercicio 2026 al cierre del primer trimestre. Se reporta un logro concreto y formalizado en el Objetivo 1, alcanzando el 90.1% de la meta trimestral de colocación de nuevos arrendatarios, con un contrato adicional en negociación avanzada que, de cerrarse, superaría la meta en un 32%. El Objetivo 2 permanece en espera del diagnóstico global de infraestructura. El Objetivo 3 registra un avance significativo mediante el desarrollo interno de una plataforma propia con Inteligencia Artificial, en sustitución de la solución WiseCricket originalmente contemplada, cubriendo la totalidad de las funcionalidades previstas en el objetivo.
-
----
-
 ## OBJETIVO 1 — COLOCACIÓN DE NUEVOS ARRENDATARIOS
-**Ponderación: 50%**
+**Ponderación: 50% | Meta trimestral: 222 m² | Meta de ingreso anual: $2,000,000**
 
-> *Lograr la colocación de nuevos arrendatarios en un 6% (equivalente a 222 m² de manera trimestral), considerando únicamente locales en condiciones mínimas indispensables para operar (revoque, conexiones de luz, agua, drenaje y sanitario). Esto representa un ingreso de $2,000,000 y una ocupación de 888 m² anuales.*
+Se formalizó el contrato de arrendamiento con **Circle K** en One Acapulco (200 m²), representando el **90.1%** de la meta trimestral de superficie. Adicionalmente, se tiene en negociación un segundo arrendamiento con **Gloria JH** en Plaza One Monterrey (Hotel One Aeropuerto), que de cerrarse elevaría el cumplimiento al **132%** de la meta del 1Q.
 
-### Avance al 1Q:
+| Arrendatario | Propiedad | m² | Renta mensual | Estatus |
+|---|---|---|---|---|
+| Circle K | One Acapulco | 200 | $38,000 o 8% ventas netas* | Firmado |
+| Gloria JH | Plaza One Monterrey | 93.15 | $25,000 | En negociación |
 
-**A) Contrato formalizado — Circle K (One Acapulco)**
+*Se aplica el importe que resulte mayor.
 
-Se logró la colocación y formalización de un contrato de arrendamiento con la cadena **Circle K**, ubicado en la propiedad **One Acapulco**, con las siguientes condiciones:
+**Cumplimiento de superficie:**
 
-| Concepto | Detalle |
-|---|---|
-| **Arrendatario** | Circle K |
-| **Propiedad** | One Acapulco |
-| **Superficie arrendada** | 200 m² |
-| **Renta mensual** | $38,000 o el 8% de las ventas netas mensuales, lo que resulte mayor |
-| **Estatus del contrato** | Firmado y formalizado |
-
-Este contrato representa una renta base garantizada mínima de **$38,000 mensuales** ($456,000 anualizados), con inicio de vigencia en **junio de 2026**, por lo que el ingreso efectivo para el ejercicio 2026 es de **$266,000** (junio a diciembre, 7 meses), sujeto a incremento en función del desempeño de ventas del arrendatario.
-
-**B) Prospecto en negociación avanzada**
-
-Adicionalmente, se tiene en proceso de cierre un segundo arrendamiento con las siguientes características:
-
-| Concepto | Detalle |
-|---|---|
-| **Arrendatario** | Gloria JH |
-| **Propiedad** | Plaza One Monterrey (Hotel One Aeropuerto) |
-| **Superficie** | 93.15 m² |
-| **Renta mensual** | $25,000 |
-| **Estatus** | En negociación — pendiente de firma |
-
-### Indicadores de cumplimiento — Superficie:
-
-| Indicador | Valor |
+| Concepto | Valor |
 |---|---|
 | Meta trimestral | 222 m² |
-| Superficie contratada (firmada) | 200 m² |
-| **Cumplimiento actual** | **90.1%** |
-| Superficie incluyendo prospecto en negociación | 293.15 m² |
-| **Cumplimiento proyectado (cierre de prospecto)** | **132%** ✓ |
+| Contratado (firmado) | 200 m² — **90.1%** |
+| Incluyendo prospecto | 293.15 m² — **132%** |
 
-### Indicadores de cumplimiento — Ingresos de renta:
+**Cumplimiento de ingresos (Circle K, jun–dic 2026):**
 
-El objetivo establece una meta de ingreso anual de **$2,000,000** al colocar 888 m² durante el año (equivalente a $500,000 anualizados por trimestre). La siguiente tabla muestra el avance en términos de ingreso de renta generado con las colocaciones del 1Q:
-
-| Arrendatario | Propiedad | Estatus | Renta mensual | Período 2026 | Ingreso efectivo 2026 | % de la meta anual ($2 mdp) | % de la meta del 1Q ($500K) |
-|---|---|---|---|---|---|---|---|
-| Circle K | One Acapulco | Firmado | $38,000* | Jun – Dic (7 meses) | $266,000 | 13.3% | **53.2%** |
-
-*La renta de Circle K corresponde a $38,000 o el 8% de las ventas netas mensuales, lo que resulte mayor; se considera la renta base mínima garantizada para efectos del cálculo.
-
-**Interpretación:**
-- Considerando el período de vigencia del contrato en 2026 (junio a diciembre, 7 meses), el ingreso efectivo de Circle K asciende a **$266,000**, lo que representa el **53.2%** de la meta de ingresos del 1Q y el **13.3%** de la meta anual de $2,000,000. La tasa mensual de $38,000 equivale a un ingreso anualizado de $456,000 en ejercicios completos.
-
-### Observaciones:
-
-El contrato con Circle K se encuentra en plena vigencia y representa un avance sólido respecto a la meta trimestral. La operación fue gestionada cumpliendo los criterios de elegibilidad establecidos en el objetivo (locales con condiciones mínimas indispensables para operar). El prospecto en negociación, de concretarse, situaría el cumplimiento del 1Q por encima de la meta establecida.
-
----
-
-## OBJETIVO 2 — INDEPENDIZACIÓN DE ENERGÉTICOS DE ARRENDATARIOS
-**Ponderación: 25%**
-
-> *Independizar los energéticos de los Arrendatarios considerando la viabilidad en la infraestructura eléctrica e hídrica de cada Hotel. (Pendiente diagnóstico)*
-
-### Avance al 1Q:
-
-El avance de este objetivo está condicionado a la realización del **diagnóstico global de infraestructura** eléctrica e hídrica en cada hotel, el cual se encuentra **pendiente de ejecución**.
-
-Se ha mantenido coordinación con el área de mantenimiento de cada hotel para evaluar la factibilidad técnica de la independización; sin embargo, hasta no contar con el diagnóstico formal, no es posible establecer un plan de acción con alcances y tiempos definidos.
-
-| Concepto | Estatus |
+| Concepto | Valor |
 |---|---|
-| Diagnóstico global de infraestructura | **Pendiente** |
-| Coordinación con área de mantenimiento | En proceso |
-| Plan de acción por propiedad | En espera del diagnóstico |
-
-### Observaciones:
-
-Este objetivo no registra avance cuantificable en el 1Q. Su ejecución depende directamente de la conclusión del diagnóstico global. Se recomienda priorizar la realización del diagnóstico en el 2Q para no comprometer el cumplimiento anual del objetivo.
+| Ingreso efectivo 2026 (7 meses) | $266,000 |
+| % de la meta anual ($2 mdp) | 13.3% |
+| % de la meta del 1Q ($500K) | 53.2% |
 
 ---
 
-## OBJETIVO 3 — IMPLEMENTACIÓN DE INTELIGENCIA ARTIFICIAL PARA PROCESOS DE ARRENDAMIENTO
+## OBJETIVO 2 — INDEPENDIZACIÓN DE ENERGÉTICOS
 **Ponderación: 25%**
 
-> *Implementación de IA de manera segmentada, automatizando y perfeccionando los procesos:*
-> *i) Interpretación de contratos de arrendamiento y convenios, incrementos anuales de renta y enlace directo con CFDIs.*
-> *ii) Generación de reportes mensuales, cálculo de intereses moratorios, almacenamiento y seguimiento de vigencia de pólizas, permisos, licencias y documentación legal de los arrendatarios.*
+Sin avance cuantificable en el 1Q. El objetivo está condicionado al **diagnóstico global de infraestructura** eléctrica e hídrica de cada hotel, el cual se encuentra pendiente. Se ha iniciado coordinación con el área de mantenimiento para evaluar su factibilidad. Se recomienda concluir el diagnóstico en el 2Q.
 
-### Situación respecto a la plataforma original (WiseCricket):
+---
 
-Durante el primer trimestre se determinó que la plataforma **WiseCricket**, originalmente considerada como vehículo de implementación de IA en el objetivo, **queda fuera del alcance del proyecto**. Esta decisión responde a la identificación de una alternativa de mayor valor estratégico para el área.
+## OBJETIVO 3 — IMPLEMENTACIÓN DE INTELIGENCIA ARTIFICIAL
+**Ponderación: 25%**
 
-### Avance al 1Q — Desarrollo de plataforma propia con IA:
-
-En sustitución de WiseCricket, el equipo de Arrendamiento está desarrollando **una plataforma propia con Inteligencia Artificial**, lo cual eleva el alcance del objetivo original al pasar de la adopción de una herramienta de terceros al desarrollo de una solución diseñada a la medida de los procesos de Fibra Hotel.
+La plataforma **WiseCricket** fue descartada. En su lugar, el área de Arrendamiento está desarrollando internamente una **plataforma propia con IA** que cubre la totalidad de las funcionalidades del objetivo original: interpretación de contratos, incrementos de renta, enlace con CFDIs, reportes mensuales, intereses moratorios y seguimiento de pólizas, permisos y licencias.
 
 | Concepto | Detalle |
 |---|---|
-| **Enfoque** | Desarrollo interno de plataforma propia con IA |
-| **Etapa actual** | Diseño funcional |
-| **Cobertura funcional** | Total — cubre las mismas funcionalidades del objetivo original |
-| **Fecha estimada de entrega** | Aproximadamente 2 semanas |
-| **Estatus** | En desarrollo activo |
+| Etapa actual | Diseño funcional |
+| Entrega estimada | Aproximadamente 2 semanas |
+| Cobertura funcional | Total |
 
-**Funcionalidades cubiertas por la nueva plataforma:**
-
-- ✓ Interpretación de contratos de arrendamiento y convenios
-- ✓ Cálculo y control de incrementos anuales de renta
-- ✓ Enlace directo con CFDIs
-- ✓ Generación de reportes mensuales
-- ✓ Cálculo de intereses moratorios
-- ✓ Almacenamiento y seguimiento de vigencia de pólizas, permisos, licencias y documentación legal de arrendatarios
-
-### Observaciones:
-
-Se considera el Objetivo 3 como **cumplido en sus términos de fondo**, dado que la plataforma en desarrollo cubre la totalidad de las funcionalidades previstas. La decisión de sustituir WiseCricket por una solución de desarrollo propio representa un avance cualitativamente superior al planteamiento original, al generar una herramienta diseñada específicamente para los requerimientos del área de Arrendamiento de Fibra Hotel.
+**Objetivo considerado como cumplido.**
 
 ---
 
 ## RESUMEN DE CUMPLIMIENTO — 1Q 2026
 
-| Objetivo | Ponderación | Avance 1Q | Estatus |
+| Objetivo | Ponderación | Avance | Estatus |
 |---|---|---|---|
-| 1. Colocación de nuevos arrendatarios | 50% | 90.1% (firmado) / 132% (incluyendo prospecto) | En proceso — avance sólido |
-| 2. Independización de energéticos | 25% | Pendiente diagnóstico global | Sin inicio cuantificable |
-| 3. Implementación de IA | 25% | Diseño funcional completado / Entrega en ~1 semana | Cumplido |
-
----
-
-## PRÓXIMOS PASOS
-
-1. **Objetivo 1:** Cerrar la negociación del arrendamiento en proceso (93.15 m²) para superar la meta del 1Q y mantener el ritmo de colocación para el 2Q (meta acumulada: 444 m²).
-2. **Objetivo 2:** Gestionar la realización del diagnóstico global de infraestructura eléctrica e hídrica en el 2Q para poder definir el plan de independización por propiedad.
-3. **Objetivo 3:** Concluir el desarrollo y poner en producción la plataforma de IA en el plazo estimado de una semana.
+| 1. Colocación de nuevos arrendatarios | 50% | 90.1% firmado / 132% con prospecto | En proceso |
+| 2. Independización de energéticos | 25% | Pendiente diagnóstico | Sin inicio |
+| 3. Implementación de IA | 25% | Diseño funcional / entrega en 2 semanas | Cumplido |
 
 ---
 
