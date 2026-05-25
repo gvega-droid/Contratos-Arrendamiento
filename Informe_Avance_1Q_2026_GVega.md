@@ -126,7 +126,7 @@ En sustitución de WiseCricket, el equipo de Arrendamiento está desarrollando *
 | **Enfoque** | Desarrollo interno de plataforma propia con IA |
 | **Etapa actual** | Diseño funcional |
 | **Cobertura funcional** | Total — cubre las mismas funcionalidades del objetivo original |
-| **Fecha estimada de entrega** | Aproximadamente 1 semana |
+| **Fecha estimada de entrega** | Aproximadamente 2 semanas |
 | **Estatus** | En desarrollo activo |
 
 **Funcionalidades cubiertas por la nueva plataforma:**
