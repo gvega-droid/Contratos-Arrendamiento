@@ -8,7 +8,7 @@
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{
-      --att:#009FDB;--zeliks:#FF6B35;--mxt:#8B2FC9;--intelli:#00897B;
+      --att:#009FDB;--nuviax:#FF6B35;--mxt:#8B2FC9;--intelli:#00897B;
       --megacable:#C0392B;--mtp:#1565C0;--capsa:#2E7D32;
       --navy:#0D1B3E;--gold:#F0A500;--danger:#E53E3E;
       --ift:#2563EB;--pc:#D97706;--const:#7C3AED;--uso:#0D9488;
@@ -242,6 +242,49 @@
     .docs-note{background:rgba(37,99,235,.1);border:1px solid rgba(37,99,235,.3);border-radius:12px;padding:12px 16px;margin-bottom:20px;font-size:12px;color:rgba(255,255,255,.65);line-height:1.6}
     .docs-note strong{color:#93C5FD}
 
+    /* CONTRATOS TAB */
+    .ctab-panel{padding:0 32px 48px}
+    .ctab-note{background:rgba(240,165,0,.08);border:1px solid rgba(240,165,0,.25);border-radius:12px;padding:12px 16px;margin-bottom:24px;font-size:12px;color:rgba(255,255,255,.65);line-height:1.6}
+    .ctab-note strong{color:var(--gold)}
+    .ctab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+    .ctab-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:16px;overflow:hidden}
+    .ctab-card-hdr{display:flex;align-items:center;gap:10px;padding:13px 16px;border-bottom:1px solid rgba(255,255,255,.07)}
+    .ctab-num{background:rgba(240,165,0,.2);border:1px solid rgba(240,165,0,.4);color:var(--gold);font-size:11px;font-weight:800;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .ctab-hotel{font-size:13px;font-weight:700;color:#fff}
+    .ctab-op{font-size:11px;color:rgba(255,255,255,.45);margin-top:1px}
+    .ctab-body{padding:13px 16px}
+    .ctab-row{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;align-items:center}
+    .ctab-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:rgba(255,255,255,.4);width:90px;flex-shrink:0}
+    .ctab-val{font-size:11.5px;color:rgba(255,255,255,.75);flex:1}
+    .ctab-actions{display:flex;gap:7px;margin-top:10px;flex-wrap:wrap}
+    .ctab-status-ok{font-size:10px;font-weight:700;color:#86EFAC;background:rgba(22,163,74,.2);border:1px solid rgba(22,163,74,.35);padding:2px 8px;border-radius:50px}
+    .ctab-status-miss{font-size:10px;font-weight:700;color:rgba(255,255,255,.4);background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);padding:2px 8px;border-radius:50px}
+    /* CONCILIACIÓN TAB */
+    .conc-panel{padding:0 32px 48px}
+    .conc-section{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:16px;padding:18px 20px;margin-bottom:20px}
+    .conc-section-title{font-size:12px;font-weight:800;color:var(--gold);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+    .conc-drop{border:2px dashed rgba(255,255,255,.2);border-radius:12px;padding:24px;text-align:center;cursor:pointer;transition:border-color .2s;position:relative}
+    .conc-drop:hover{border-color:var(--gold)}
+    .conc-drop input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer}
+    .conc-drop-lbl{font-size:12px;color:rgba(255,255,255,.45);line-height:1.6}
+    .conc-drop-lbl strong{color:var(--gold);display:block;font-size:13px;margin-bottom:4px}
+    .conc-file-ok{background:rgba(22,163,74,.15);border:1px solid rgba(22,163,74,.35);border-radius:10px;padding:10px 14px;font-size:12px;color:#86EFAC;margin-top:10px;display:none}
+    .conc-btn{background:var(--gold);border:none;color:#0D1B3E;font-family:'Inter',sans-serif;font-size:13px;font-weight:800;padding:10px 24px;border-radius:10px;cursor:pointer;transition:opacity .15s;margin-top:8px}
+    .conc-btn:hover{opacity:.88}
+    .conc-btn:disabled{opacity:.35;cursor:not-allowed}
+    .conc-btn-sec{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.8);font-family:'Inter',sans-serif;font-size:12px;font-weight:600;padding:8px 18px;border-radius:9px;cursor:pointer}
+    .conc-result-wrap{overflow-x:auto;border-radius:12px;border:1px solid rgba(255,255,255,.1);margin-top:14px}
+    .conc-table{width:100%;border-collapse:collapse;min-width:900px}
+    .conc-table th{padding:11px 12px;font-size:9px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:rgba(255,255,255,.6);background:#0D1B3E;border-bottom:2px solid rgba(240,165,0,.3);text-align:left;white-space:nowrap}
+    .conc-table td{padding:10px 12px;font-size:11.5px;color:rgba(255,255,255,.82);border-bottom:1px solid rgba(255,255,255,.05)}
+    .conc-table tr:hover td{background:rgba(255,255,255,.03)}
+    .match-exact{color:#86EFAC;font-weight:700}
+    .match-approx{color:#FCD34D;font-weight:600}
+    .match-none{color:rgba(255,150,150,.7);font-style:italic}
+    .conc-note{font-size:11px;color:rgba(255,255,255,.38);margin-top:6px;line-height:1.5}
+    .conc-col-map{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-top:12px}
+    .conc-col-map select{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:8px;color:#fff;font-size:12px;font-family:'Inter',sans-serif;padding:7px 10px;outline:none;width:100%}
+    .conc-col-map label{font-size:10px;font-weight:700;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.8px;display:block;margin-bottom:4px}
     /* FOOTER */
     .footer{text-align:center;padding:0 24px 36px;font-size:11px;color:rgba(255,255,255,.27);line-height:1.8}
     .footer strong{color:rgba(255,255,255,.45)}
@@ -250,6 +293,7 @@
       .table-wrap{margin:0 10px 28px}
     }
   </style>
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
 </head>
 <body>
 
@@ -268,7 +312,7 @@
 
 <div class="legend">
   <div class="legend-item"><div class="legend-dot" style="background:var(--att)"></div>AT&amp;T</div>
-  <div class="legend-item"><div class="legend-dot" style="background:var(--zeliks)"></div>ZELIKS</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--nuviax)"></div>NUVIAX</div>
   <div class="legend-item"><div class="legend-dot" style="background:var(--mxt)"></div>MXT Capital</div>
   <div class="legend-item"><div class="legend-dot" style="background:var(--intelli)"></div>Intelli Site</div>
   <div class="legend-item"><div class="legend-dot" style="background:var(--megacable)"></div>Megacable</div>
@@ -285,6 +329,14 @@
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
     Alertas de Vencimiento <span class="abadge">6</span>
   </button>
+  <button class="tab-btn" onclick="switchTab('contratos',this)">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5.586a1 1 0 0 1 .707.293l5.414 5.414a1 1 0 0 1 .293.707V19a2 2 0 0 1-2 2z"/></svg>
+    Contratos
+  </button>
+  <button class="tab-btn" onclick="switchTab('conciliacion',this)">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+    Conciliación
+  </button>
   <button class="tab-btn" onclick="switchTab('energeticos',this)">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
     Energéticos
@@ -295,7 +347,7 @@
   </button>
 </div>
 
-<!-- ═══════════ PANEL CONTRATOS ═══════════ -->
+<!-- ═══════════ PANEL TABLA ═══════════ -->
 <div class="tab-panel active" id="panel-tabla">
   <!-- INPC bar -->
   <div class="inpc-bar">
@@ -339,11 +391,10 @@
           <th onclick="sortTable(4)">PLAZO<span class="si">⇅</span></th>
           <th onclick="sortTable(5)">RENTA ORIGINAL<span class="si">⇅</span></th>
           <th>RENTA CONTRACTUAL<br/><span style="font-size:9px;font-weight:400;text-transform:none;letter-spacing:0;color:rgba(163,230,53,.6)">actualizada INPC</span></th>
-          <th>COSTO M²<br/><span style="font-size:9px;font-weight:400;text-transform:none;letter-spacing:0;color:rgba(196,181,253,.6)">renta/m² actual</span></th>
           <th>RENTA EFECTIVA<br/><span style="font-size:9px;font-weight:400;text-transform:none;letter-spacing:0;color:rgba(252,211,77,.6)">facturada mayo-26</span></th>
-          <th>MANTENIMIENTO<br/><span style="font-size:9px;font-weight:400;text-transform:none;letter-spacing:0;color:rgba(110,231,183,.6)">pago + importe</span></th>
-          <th onclick="sortTable(10)">MES INCREMENTO<span class="si">⇅</span></th>
-          <th onclick="sortTable(11)">PENALIZACIÓN<span class="si">⇅</span></th>
+          <th>COSTO M²<br/><span style="font-size:9px;font-weight:400;text-transform:none;letter-spacing:0;color:rgba(196,181,253,.6)">renta/m² actual</span></th>
+          <th onclick="sortTable(9)">MES INCREMENTO<span class="si">⇅</span></th>
+          <th onclick="sortTable(10)">PENALIZACIÓN<span class="si">⇅</span></th>
           <th>ESTATUS COBRANZA<br/><span style="font-size:9px;font-weight:400;text-transform:none;letter-spacing:0;color:rgba(252,165,165,.6)">al 15-may-2026</span></th>
           <th>PERMISOS Y LICENCIAS<br/><span style="font-size:9px;font-weight:400;text-transform:none;letter-spacing:0;color:rgba(255,255,255,.4)">(obligación del arrendatario)</span></th>
         </tr></thead>
@@ -363,12 +414,12 @@
 
 <tr>
   <td>2</td>
-  <td class="op-stripe" style="border-left-color:var(--zeliks)"><span class="op-pill" style="background:var(--zeliks)">ZELIKS</span><br/><span class="op-name">ZELIKS S.A.P.I. de C.V.</span></td>
+  <td class="op-stripe" style="border-left-color:var(--nuviax)"><span class="op-pill" style="background:var(--nuviax)">NUVIAX</span><br/><span class="op-name">NUVIAX S.A. de C.V.</span></td>
   <td><div class="hotel-name">One Guadalajara</div><div class="hotel-city">Tlaquepaque, Jalisco</div></td>
-  <td>Azotea <b>46 m²</b><br/><span style="font-size:10.5px;color:rgba(255,255,255,.48)">Tlaquepaque, Jal.</span></td>
-  <td><div class="plazo-years">10 años forz.</div><div class="plazo-dates">01-jul-2019 → 01-jul-2029</div></td>
-  <td><div class="renta-amount">$18,000/mes</div><div class="renta-note">+ IVA</div></td>
-  <td><div class="incr-month">Julio</div><div class="incr-note">Anual INPC</div></td>
+  <td>Azotea <b>46 m²</b><br/><span style="font-size:10.5px;color:rgba(255,255,255,.48)">Tlaquepaque, Jal. (1GDTA)</span></td>
+  <td><div class="plazo-years">10 años forz.</div><div class="plazo-dates">01-ene-2025 → 01-ene-2035</div></td>
+  <td><div class="renta-amount">$22,276/mes</div><div class="renta-note">+ IVA (base ene-2025)</div></td>
+  <td><div class="incr-month">Enero</div><div class="incr-note">Anual INPC</div></td>
   <td class="penal-text">Rentas faltantes</td>
   <td><div class="pbadges"><span class="pb pb-ift">IFT</span><span class="pb pb-const">CONST</span><span class="pb pb-uso">USO</span><span class="pb pb-pc">PC</span></div><div style="font-size:10px;color:rgba(255,255,255,.38);margin-top:5px">Municipio Tlaquepaque<br/>Ley PC Jalisco</div></td>
 </tr>
@@ -665,6 +716,71 @@
   </div>
 </div>
 
+<!-- ═══════════ PANEL CONTRATOS ═══════════ -->
+<div class="tab-panel" id="panel-contratos">
+  <div class="ctab-panel">
+    <div class="ctab-note">
+      <strong>Repositorio de Contratos:</strong> Cargue aquí los documentos de contrato originales para cada arrendatario. Los archivos se almacenan localmente en este navegador. Use <strong>Exportar JSON</strong> para respaldar o transferir entre equipos.
+    </div>
+    <div style="display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap;align-items:center">
+      <button class="btn-upload" onclick="exportContratos()" style="padding:7px 16px">⬇ Exportar JSON</button>
+      <label class="btn-upload" style="padding:7px 16px;cursor:pointer">⬆ Importar JSON<input type="file" accept=".json" onchange="importContratos(event)" style="display:none"></label>
+    </div>
+    <div class="ctab-grid" id="contratosGrid"></div>
+  </div>
+</div>
+
+<!-- ═══════════ PANEL CONCILIACIÓN ═══════════ -->
+<div class="tab-panel" id="panel-conciliacion">
+  <div class="conc-panel">
+    <div class="conc-section">
+      <div class="conc-section-title">📂 Paso 1 — Cargar archivos</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;flex-wrap:wrap">
+        <div>
+          <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.55);margin-bottom:8px;text-transform:uppercase;letter-spacing:.8px">Estado de cuenta bancario (Excel/CSV)</div>
+          <div class="conc-drop" id="bankDrop">
+            <input type="file" accept=".xlsx,.xls,.csv" onchange="loadBankFile(event)"/>
+            <div class="conc-drop-lbl"><strong>📊 Arrastrar o seleccionar</strong>Archivo Excel o CSV del banco<br/><span style="font-size:10px;opacity:.6">.xlsx · .xls · .csv</span></div>
+          </div>
+          <div class="conc-file-ok" id="bankFileOk">✓ Archivo bancario cargado</div>
+          <div style="margin-top:10px;font-size:11px;color:rgba(255,255,255,.45)">Mapear columnas del archivo bancario:</div>
+          <div class="conc-col-map" id="bankColMap"></div>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.55);margin-bottom:8px;text-transform:uppercase;letter-spacing:.8px">Facturación cartera (Excel FIHO)</div>
+          <div class="conc-drop" id="billDrop">
+            <input type="file" accept=".xlsx,.xls" onchange="loadBillFile(event)"/>
+            <div class="conc-drop-lbl"><strong>📋 Arrastrar o seleccionar</strong>Archivo FACTURACION_CARTERA Excel<br/><span style="font-size:10px;opacity:.6">.xlsx · .xls</span></div>
+          </div>
+          <div class="conc-file-ok" id="billFileOk">✓ Archivo de facturación cargado</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="conc-section">
+      <div class="conc-section-title">⚙️ Paso 2 — Conciliar</div>
+      <button class="conc-btn" id="btnConciliar" onclick="runConciliacion()" disabled>⚡ Ejecutar Conciliación</button>
+      <div class="conc-note">El sistema busca coincidencias por importe exacto entre depósitos bancarios y facturas. Los importes aproximados (±0.10%) también se marcan.</div>
+    </div>
+
+    <div class="conc-section" id="concResultSection" style="display:none">
+      <div class="conc-section-title">📊 Resultado de Conciliación</div>
+      <div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap;align-items:center">
+        <div id="concSummary" style="font-size:12px;color:rgba(255,255,255,.6)"></div>
+        <button class="conc-btn-sec" onclick="exportConciliacion()" style="margin-left:auto">⬇ Exportar Excel</button>
+      </div>
+      <div class="conc-result-wrap">
+        <table class="conc-table">
+          <thead><tr>
+            <th>#</th><th>ARRENDATARIO / DESCRIPCIÓN BANCO</th><th>FECHA DEPÓSITO</th><th>IMPORTE BANCO</th><th>FOLIO FACTURA</th><th>CONCEPTO FACTURA</th><th>IMPORTE FACTURA</th><th>ESTADO</th>
+          </tr></thead>
+          <tbody id="concTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ═══════════ PANEL ENERGÉTICOS ═══════════ -->
 <div class="tab-panel" id="panel-energeticos">
   <div class="ener-panel">
@@ -698,7 +814,7 @@
         <select id="filterOp" onchange="renderDocs()">
           <option value="">Todos los operadores</option>
           <option value="AT&T">AT&amp;T</option>
-          <option value="ZELIKS">ZELIKS</option>
+          <option value="NUVIAX">NUVIAX</option>
           <option value="MXT Capital">MXT Capital</option>
           <option value="Intelli Site">Intelli Site</option>
           <option value="Megacable">Megacable</option>
@@ -731,7 +847,7 @@ const PERMISOS_DB = [
     {id:'1c',tipo:'uso',   nombre:'Licencia de Uso de Suelo (telecom)',           base:'Regl. de Zonificación Municipio Nuevo Laredo',         freq:'unica',    obligado:'Arrendatario'},
     {id:'1d',tipo:'pc',    nombre:'Dictamen de Protección Civil',                 base:'Ley de Protección Civil del Estado de Tamaulipas',     freq:'anual',    obligado:'Arrendatario'},
   ]},
-  {cid:2, op:'ZELIKS', hotel:'One Guadalajara', ciudad:'Tlaquepaque, Jal.', permisos:[
+  {cid:2, op:'NUVIAX', hotel:'One Guadalajara', ciudad:'Tlaquepaque, Jal.', permisos:[
     {id:'2a',tipo:'ift',   nombre:'Concesión / Autorización IFT',                base:'LFTR Art. 66-72',                                      freq:'variable', obligado:'Arrendatario'},
     {id:'2b',tipo:'const', nombre:'Licencia de Construcción de Antena/Torre',    base:'Reglamento de Construcción Municipio Tlaquepaque',     freq:'unica',    obligado:'Arrendatario'},
     {id:'2c',tipo:'uso',   nombre:'Licencia de Uso de Suelo (telecom)',           base:'Regl. de Desarrollo Urbano Tlaquepaque',               freq:'unica',    obligado:'Arrendatario'},
@@ -1022,6 +1138,7 @@ function switchTab(id,btn){
   btn.classList.add('active');
   if(id==='docs') renderDocs();
   if(id==='energeticos') renderEnergeticos();
+  if(id==='contratos') renderContratos();
 }
 
 /* ── SEARCH ── */
@@ -1097,7 +1214,7 @@ function buildInpcEditor(){
 // freqType: 'mensual'|'anual'|'variable'|'nodata'|'vencido'
 const RENTA_DATA = {
   1:  {base:51142.99,  start:'2023-10-25', mes:10, tipo:'mensual',  label:'',                                                                    m2:88.20},
-  2:  {base:18000,     start:'2019-07-01', mes:7,  tipo:'mensual',  label:'',                                                                    m2:46},
+  2:  {base:22276,     start:'2025-01-01', mes:1,  tipo:'mensual',  label:'',                                                                    m2:46},
   3:  {base:20000,     start:'2017-12-01', mes:12, tipo:'mensual',  label:'',                                                                    m2:55},
   4:  {base:20000,     start:'2017-08-02', mes:8,  tipo:'mensual',  label:'',                                                                    m2:101.82},
   5:  {base:22000,     start:'2019-09-01', mes:9,  tipo:'mensual',  label:'',                                                                    m2:9.68},
@@ -1119,7 +1236,7 @@ const RENTA_DATA = {
 // tipo: 'mensual'|'anual'|'nodata'
 const RENTA_EFECTIVA = {
   1:  {importe:55496.39,  tipo:'mensual', fuente:'AT&T FINVL mayo-26'},
-  2:  {importe:null,      tipo:'nodata',  fuente:'Sin facturación identificada en 2026'},
+  2:  {importe:23058.43,  tipo:'mensual', fuente:'NUVIAX 1GDTA mayo-26'},
   3:  {importe:27444,     tipo:'mensual', fuente:'MXT FIMOA mayo-26'},
   4:  {importe:26001.18,  tipo:'mensual', fuente:'MXT QROQA mayo-26'},
   5:  {importe:27395.43,  tipo:'mensual', fuente:'Intelli FAHE mayo-26'},
@@ -1137,19 +1254,13 @@ const RENTA_EFECTIVA = {
   17: {importe:454168.92, tipo:'anual',   fuente:'CAPSA CRPUE feb-25/ene-26'},
 };
 
-// Mantenimiento: contratos que pagan cuota de mantenimiento (además de la renta)
-// base: importe base del mantenimiento, start/mes: igual que renta para INPC
-const MANTENIMIENTO_DATA = {
-  5: {paga:true, base:3500, start:'2019-09-01', mes:9, nota:'Reembolso electricidad/mant. según contrato'},
-};
-
 // Estatus de cobranza al 15-may-2026 (extraído de pestaña CARTERA)
 // status: 'corriente'|'vencido'|'anual_liquidado'|'nodata'
 const COBRANZA_DATA = {
   1:  {status:'corriente',        monto:0,        detalle:'',                                  cliente:'AT&T COMUNICACIONES DIGITALES'},
-  2:  {status:'nodata',           monto:null,     detalle:'Sin facturación activa',             cliente:'ZELIKS'},
-  3:  {status:'vencido',          monto:3744.90,  detalle:'31-60 días (saldo combinado ctos. 3 y 4)', cliente:'MXT CAPITAL PARTNERS'},
-  4:  {status:'vencido',          monto:3744.90,  detalle:'31-60 días (saldo combinado ctos. 3 y 4)', cliente:'MXT CAPITAL PARTNERS'},
+  2:  {status:'corriente',        monto:0,        detalle:'',                                  cliente:'NUVIAX'},
+  3:  {status:'vencido',          monto:3744.90,  detalle:'Folio 16197 · MXT Complemento incr. Juriquilla ago-25/oct-25', cliente:'MXT CAPITAL PARTNERS'},
+  4:  {status:'vencido',          monto:3744.90,  detalle:'Folio 16197 · MXT Complemento incr. Juriquilla ago-25/oct-25', cliente:'MXT CAPITAL PARTNERS'},
   5:  {status:'corriente',        monto:0,        detalle:'',                                  cliente:'INTELLI SITE SOLUTIONS'},
   6:  {status:'corriente',        monto:0,        detalle:'',                                  cliente:'INTELLI SITE SOLUTIONS'},
   7:  {status:'anual_liquidado',  monto:0,        detalle:'Pago anual abr-25/mar-26 liquidado',cliente:'MEGACABLE'},
@@ -1179,13 +1290,12 @@ const TODAY = new Date('2026-05-22');
 const FMT_MXN = new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN',maximumFractionDigits:2});
 
 function calcRentaActual(base, startStr, incrMonth, rates){
-  // Returns {renta, increments, nextDate}
   const start = new Date(startStr);
   let renta = base;
   let count = 0;
+  let lastIncrDate = null;
+  let lastIncrRate = null;
 
-  // First increment: first anniversary when incrMonth == start month,
-  // otherwise first occurrence of incrMonth after start
   let d = new Date(start);
   d.setDate(1);
   d.setMonth(incrMonth - 1);
@@ -1196,11 +1306,15 @@ function calcRentaActual(base, startStr, incrMonth, rates){
     const rate = rates[yr] ?? rates[yr-1] ?? 4.0;
     renta *= (1 + rate/100);
     count++;
+    lastIncrDate = new Date(d);
+    lastIncrRate = rate;
     d.setFullYear(d.getFullYear() + 1);
   }
-  // next increment date
   const nextLabel = `${d.toLocaleString('es-MX',{month:'long'})}-${d.getFullYear()}`;
-  return {renta, count, nextLabel};
+  const lastLabel = lastIncrDate
+    ? `${lastIncrDate.toLocaleString('es-MX',{month:'long'})}-${lastIncrDate.getFullYear()}`
+    : null;
+  return {renta, count, nextLabel, lastLabel, lastIncrRate};
 }
 
 function buildRentaActualColumn(){
@@ -1215,40 +1329,37 @@ function buildRentaActualColumn(){
     let rentaCalc = null;
     let html = '';
     if(cd.tipo === 'vencido'){
-      const {renta, count} = calcRentaActual(cd.base, cd.start, cd.mes, rates);
+      const {renta, count, lastLabel, lastIncrRate} = calcRentaActual(cd.base, cd.start, cd.mes, rates);
       rentaCalc = renta;
       html = `<span class="ra-vencido">⚠ VENCIDO</span>
-              <div class="ra-orig">${FMT_MXN.format(cd.base)}/año orig.</div>
-              <div style="font-size:10px;color:rgba(255,255,255,.35)">Últ. calculado: ${FMT_MXN.format(renta)}/año</div>`;
+              <div style="font-size:10px;color:rgba(255,255,255,.35)">Últ. calculado: ${FMT_MXN.format(renta)}/año</div>
+              ${lastLabel ? `<div class="ra-incr">Últ. incr: ${lastLabel} (+${lastIncrRate}%)</div>` : ''}`;
     } else if(cd.tipo === 'nodata'){
       html = `<span class="ra-nodata">${cd.label}</span>`;
     } else if(cd.tipo === 'variable'){
-      const {renta, count, nextLabel} = calcRentaActual(cd.base, cd.start, cd.mes, rates);
+      const {renta, count, nextLabel, lastLabel, lastIncrRate} = calcRentaActual(cd.base, cd.start, cd.mes, rates);
       rentaCalc = renta;
       const renta2 = renta * 2.5;
       html = `<span class="ra-variable">Variable</span>
-              <div style="font-size:10.5px;color:#FCD34D;margin-top:2px">Base ind. (1-2 op.): ${FMT_MXN.format(renta)}/mes</div>
-              <div style="font-size:10.5px;color:#FCD34D">Base ind. (3+ op.): ${FMT_MXN.format(renta2)}/mes</div>
-              <div class="ra-next">+${count} incr. | Próx: ${nextLabel}</div>`;
+              <div style="font-size:10.5px;color:#FCD34D;margin-top:2px">(1-2 op.): ${FMT_MXN.format(renta)}/mes</div>
+              <div style="font-size:10.5px;color:#FCD34D">(3+ op.): ${FMT_MXN.format(renta2)}/mes</div>
+              ${lastLabel ? `<div class="ra-incr">Últ. incr: ${lastLabel} (+${lastIncrRate}%)</div>` : ''}
+              <div class="ra-next">Próx: ${nextLabel}</div>`;
     } else {
-      const {renta, count, nextLabel} = calcRentaActual(cd.base, cd.start, cd.mes, rates);
+      const {renta, count, nextLabel, lastLabel, lastIncrRate} = calcRentaActual(cd.base, cd.start, cd.mes, rates);
       rentaCalc = renta;
       const unit = cd.tipo === 'anual' ? '/año' : '/mes';
       html = `<div class="ra-amount">${FMT_MXN.format(renta)}${unit}</div>
-              ${cd.base !== renta ? `<div class="ra-orig">${FMT_MXN.format(cd.base)}${unit} orig.</div>` : ''}
-              <div class="ra-incr">+${count} incr. INPC</div>
+              ${lastLabel ? `<div class="ra-incr">Últ. incr: ${lastLabel} (+${lastIncrRate}%)</div>` : ''}
               ${cd.label ? `<div style="font-size:10px;color:rgba(255,255,255,.42);margin-top:2px">${cd.label}</div>` : ''}
               <div class="ra-next">Próx. incr.: ${nextLabel}</div>`;
     }
     insertOrUpdateCell(row,'ra-td',6,html);
-
-    // ── COSTO M² ──
-    buildCostoM2Cell(row, rowNum, cd, rentaCalc, rates);
-    // ── RENTA EFECTIVA ──
+    // ── RENTA EFECTIVA (col 7) ──
     buildRentaEfectivaCell(row, rowNum);
-    // ── MANTENIMIENTO ──
-    buildMantenimientoCell(row, rowNum, rates);
-    // ── ESTATUS COBRANZA (before last cell = PERMISOS) ──
+    // ── COSTO M² (col 8) ──
+    buildCostoM2Cell(row, rowNum, cd, rentaCalc, rates);
+    // ── ESTATUS COBRANZA (before last = PERMISOS) ──
     buildCobranzaCell(row, rowNum);
   });
 }
@@ -1259,13 +1370,12 @@ function buildCostoM2Cell(row, rowNum, cd, rentaCalc, rates){
   if(!m2 || !rentaCalc || cd.tipo==='nodata' || cd.tipo==='vencido'){
     html = `<span class="m2-nodata">—</span>`;
   } else {
-    // For annual contracts, convert to monthly first
     const rentaMes = cd.tipo==='anual' ? rentaCalc/12 : rentaCalc;
     const costoM2 = rentaMes / m2;
-    html = `<div class="m2-amount">${FMT_MXN.format(costoM2)}/m²/mes</div>
-            <div class="m2-note">${m2} m² · renta contractual</div>`;
+    html = `<div class="m2-amount">${FMT_MXN.format(costoM2)}/m²</div>
+            <div class="m2-note">${FMT_MXN.format(rentaMes)}/mes ÷ ${m2} m²</div>`;
   }
-  insertOrUpdateCell(row,'m2-td',7,html);
+  insertOrUpdateCell(row,'m2-td',8,html);
 }
 
 function buildRentaEfectivaCell(row, rowNum){
@@ -1282,23 +1392,7 @@ function buildRentaEfectivaCell(row, rowNum){
     html = `<div class="re-amount">${FMT_MXN.format(re.importe)}/mes</div>
             <div class="re-note">${re.fuente}</div>`;
   }
-  insertOrUpdateCell(row,'re-td',8,html);
-}
-
-function buildMantenimientoCell(row, rowNum, rates){
-  const md = MANTENIMIENTO_DATA[rowNum];
-  let html = '';
-  if(!md || !md.paga){
-    html = `<span class="mant-no">No aplica</span>`;
-  } else {
-    const {renta:mantActual, count, nextLabel} = calcRentaActual(md.base, md.start, md.mes, rates);
-    html = `<div class="mant-si">✓ Sí paga</div>
-            <div class="mant-amount">${FMT_MXN.format(mantActual)}/mes</div>
-            <div class="mant-note">+${count} incr. INPC · base ${FMT_MXN.format(md.base)}</div>
-            <div class="mant-note">Próx. incr.: ${nextLabel}</div>
-            <div class="mant-note" style="margin-top:3px;font-style:italic;opacity:.7">${md.nota}</div>`;
-  }
-  insertOrUpdateCell(row,'mant-td',9,html);
+  insertOrUpdateCell(row,'re-td',7,html);
 }
 
 function buildCobranzaCell(row, rowNum){
@@ -1351,7 +1445,7 @@ function renderEnergeticos(){
   // Build full list of 17 contracts, marking which ones have energéticos
   const ALL_CONTRACTS = [
     {cid:1,  op:'AT&T',        hotel:'Fiesta Inn Nuevo Laredo',    ciudad:'Nuevo Laredo, Tamps.'},
-    {cid:2,  op:'ZELIKS',      hotel:'One Guadalajara',            ciudad:'Tlaquepaque, Jal.'},
+    {cid:2,  op:'NUVIAX',      hotel:'One Guadalajara',            ciudad:'Tlaquepaque, Jal.'},
     {cid:3,  op:'MXT Capital', hotel:'Hotel Real Inn Morelia',     ciudad:'Morelia, Mich.'},
     {cid:4,  op:'MXT Capital', hotel:'AC Marriott Juriquilla',     ciudad:'Juriquilla, Qro.'},
     {cid:5,  op:'Intelli Site',hotel:'Fiesta Inn Hermosillo',      ciudad:'Hermosillo, Son.'},
@@ -1371,7 +1465,7 @@ function renderEnergeticos(){
   const energMap = {};
   ENERGETICOS_DATA.forEach(e=>{ energMap[e.cid]=e; });
 
-  const OP_COLORS = {'AT&T':'var(--att)','ZELIKS':'var(--zeliks)','MXT Capital':'var(--mxt)','Intelli Site':'var(--intelli)','Megacable':'var(--megacable)','MTP':'var(--mtp)','CAPSA':'var(--capsa)'};
+  const OP_COLORS = {'AT&T':'var(--att)','NUVIAX':'var(--nuviax)','MXT Capital':'var(--mxt)','Intelli Site':'var(--intelli)','Megacable':'var(--megacable)','MTP':'var(--mtp)','CAPSA':'var(--capsa)'};
 
   tbody.innerHTML = ALL_CONTRACTS.map(c=>{
     const e = energMap[c.cid];
@@ -1385,6 +1479,320 @@ function renderEnergeticos(){
       <td><span class="ener-nota">${e ? e.nota : '—'}</span></td>
     </tr>`;
   }).join('');
+}
+
+/* ── CONTRATOS TAB ── */
+const CONTRATOS_DB = [
+  {cid:1,  op:'AT&T',        hotel:'Fiesta Inn Nuevo Laredo',     vigencia:'25-oct-2029'},
+  {cid:2,  op:'NUVIAX',      hotel:'One Guadalajara',             vigencia:'01-ene-2035'},
+  {cid:3,  op:'MXT Capital', hotel:'Hotel Real Inn Morelia',      vigencia:'01-dic-2027'},
+  {cid:4,  op:'MXT Capital', hotel:'AC Marriott Juriquilla',      vigencia:'02-ago-2027'},
+  {cid:5,  op:'Intelli Site',hotel:'Fiesta Inn Hermosillo',       vigencia:'01-sep-2029'},
+  {cid:6,  op:'Intelli Site',hotel:'Fiesta Inn Chihuahua',        vigencia:'01-sep-2029'},
+  {cid:7,  op:'Megacable',   hotel:'Hotel One Mty. Aeropuerto',   vigencia:'01-abr-2025 (VENCIDO)'},
+  {cid:8,  op:'Megacable',   hotel:'Fiesta Inn Periférico Sur',   vigencia:'01-ene-2020 (forz. vencido)'},
+  {cid:9,  op:'MTP',         hotel:'Live Aqua San Miguel',        vigencia:'31-jul-2029'},
+  {cid:10, op:'MTP',         hotel:'Fiesta Inn Perinorte',        vigencia:'5+5 años (desde feb-2025)'},
+  {cid:11, op:'CAPSA',       hotel:'Fiesta Inn Oaxaca',           vigencia:'31-jul-2028'},
+  {cid:12, op:'CAPSA',       hotel:'Fiesta Inn Guadalajara',      vigencia:'31-ene-2028'},
+  {cid:13, op:'CAPSA',       hotel:'FA Condesa Cancún (anual)',   vigencia:'31-oct-2035'},
+  {cid:14, op:'CAPSA',       hotel:'FA Condesa Cancún (mensual)', vigencia:'15-ago-2029'},
+  {cid:15, op:'CAPSA',       hotel:'Fiesta Inn Durango',          vigencia:'12-feb-2030'},
+  {cid:16, op:'CAPSA',       hotel:'Fiesta Inn Cuautitlán',       vigencia:'01-ago-2029'},
+  {cid:17, op:'CAPSA',       hotel:'Camino Real Puebla',          vigencia:'01-feb-2029'},
+];
+const OP_COLORS_MAP = {'AT&T':'var(--att)','NUVIAX':'var(--nuviax)','MXT Capital':'var(--mxt)','Intelli Site':'var(--intelli)','Megacable':'var(--megacable)','MTP':'var(--mtp)','CAPSA':'var(--capsa)'};
+
+function loadContratos(){return JSON.parse(localStorage.getItem('fiho_contratos')||'{}')}
+function saveContratos(d){localStorage.setItem('fiho_contratos',JSON.stringify(d))}
+
+function renderContratos(){
+  const data = loadContratos();
+  const grid = document.getElementById('contratosGrid');
+  if(!grid) return;
+  grid.innerHTML = CONTRATOS_DB.map(c=>{
+    const d = data[c.cid] || {};
+    const color = OP_COLORS_MAP[c.op]||'#888';
+    return `<div class="ctab-card">
+      <div class="ctab-card-hdr">
+        <div class="ctab-num">${c.cid}</div>
+        <div>
+          <div class="ctab-hotel">${c.hotel}</div>
+          <div class="ctab-op"><span style="display:inline-block;background:${color};color:#fff;font-size:9px;font-weight:700;padding:1px 7px;border-radius:50px;margin-right:5px">${c.op}</span>Venc: ${c.vigencia}</div>
+        </div>
+        <div style="margin-left:auto">${d.uploaded ? `<span class="ctab-status-ok">✓ Cargado</span>` : `<span class="ctab-status-miss">Pendiente</span>`}</div>
+      </div>
+      <div class="ctab-body">
+        ${d.uploaded ? `
+          <div class="ctab-row"><span class="ctab-lbl">Archivo:</span><span class="ctab-val">📄 ${d.filename||'—'}</span></div>
+          <div class="ctab-row"><span class="ctab-lbl">Cargado:</span><span class="ctab-val">${d.uploadDate||'—'}</span></div>
+          <div class="ctab-row"><span class="ctab-lbl">Vigencia doc:</span>
+            <input type="date" style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:7px;color:#fff;font-size:11px;font-family:Inter,sans-serif;padding:4px 8px;outline:none" value="${d.expiry||''}" onchange="setContratoExpiry(${c.cid},this.value)"/>
+          </div>
+          <div class="ctab-row"><span class="ctab-lbl">Notas:</span>
+            <input type="text" placeholder="Notas opcionales…" style="flex:1;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:7px;color:#fff;font-size:11px;font-family:Inter,sans-serif;padding:4px 8px;outline:none" value="${d.notes||''}" onchange="setContratoNotes(${c.cid},this.value)"/>
+          </div>
+        ` : `<div style="font-size:11px;color:rgba(255,255,255,.3);margin-bottom:10px">No se ha cargado el contrato digitalizado.</div>`}
+        <div class="ctab-actions">
+          <label class="btn-upload" style="padding:5px 12px;font-size:10.5px;cursor:pointer">
+            ${d.uploaded ? '↺ Actualizar' : '⬆ Cargar contrato'}
+            <input type="file" accept=".pdf,.jpg,.jpeg,.png" style="display:none" onchange="uploadContrato(${c.cid},this)">
+          </label>
+          ${d.uploaded ? `<button class="btn-view" onclick="viewContrato(${c.cid})" style="font-size:10.5px;padding:5px 12px">👁 Ver</button>` : ''}
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function uploadContrato(cid, input){
+  if(!input.files[0]) return;
+  const f = input.files[0];
+  const reader = new FileReader();
+  reader.onload = e => {
+    const data = loadContratos();
+    data[cid] = {...(data[cid]||{}), uploaded:true, filename:f.name, uploadDate:new Date().toLocaleDateString('es-MX'), fileData:e.target.result};
+    saveContratos(data);
+    renderContratos();
+  };
+  reader.readAsDataURL(f);
+}
+
+function viewContrato(cid){
+  const d = loadContratos()[cid];
+  if(!d||!d.fileData) return;
+  const win = window.open();
+  if(d.fileData.startsWith('data:application/pdf')){
+    win.document.write(`<iframe src="${d.fileData}" style="width:100%;height:100vh;border:none"></iframe>`);
+  } else {
+    win.document.write(`<img src="${d.fileData}" style="max-width:100%;display:block;margin:auto">`);
+  }
+}
+
+function setContratoExpiry(cid, val){
+  const data = loadContratos();
+  data[cid] = {...(data[cid]||{}), expiry:val};
+  saveContratos(data);
+}
+
+function setContratoNotes(cid, val){
+  const data = loadContratos();
+  data[cid] = {...(data[cid]||{}), notes:val};
+  saveContratos(data);
+}
+
+function exportContratos(){
+  const a = document.createElement('a');
+  a.href = 'data:application/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(loadContratos(),null,2));
+  a.download = 'fiho_contratos_' + new Date().toISOString().slice(0,10) + '.json';
+  a.click();
+}
+
+function importContratos(e){
+  const f = e.target.files[0];
+  if(!f) return;
+  const r = new FileReader();
+  r.onload = ev => { try{ saveContratos(JSON.parse(ev.target.result)); renderContratos(); alert('Importado.'); } catch{ alert('Error.'); }};
+  r.readAsText(f);
+}
+
+/* ── CONCILIACIÓN TAB ── */
+let bankData = null;   // parsed bank rows
+let billData = null;   // parsed invoice rows
+let bankHeaders = [];
+
+function loadBankFile(e){
+  const f = e.target.files[0];
+  if(!f) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    try {
+      let rows = [];
+      if(f.name.toLowerCase().endsWith('.csv')){
+        const text = ev.target.result;
+        rows = text.split('\n').map(l=>l.split(',').map(c=>c.replace(/^"|"$/g,'').trim()));
+      } else {
+        const wb = XLSX.read(ev.target.result, {type:'array'});
+        const ws = wb.Sheets[wb.SheetNames[0]];
+        rows = XLSX.utils.sheet_to_json(ws, {header:1, raw:false});
+      }
+      bankHeaders = rows[0] || [];
+      bankData = rows.slice(1).filter(r=>r.some(c=>c));
+      document.getElementById('bankFileOk').textContent = `✓ Cargado: ${f.name} (${bankData.length} filas)`;
+      document.getElementById('bankFileOk').style.display = 'block';
+      buildBankColMap();
+      checkConcReady();
+    } catch(err){ alert('Error al leer el archivo: ' + err.message); }
+  };
+  if(f.name.toLowerCase().endsWith('.csv')) reader.readAsText(f,'UTF-8');
+  else reader.readAsArrayBuffer(f);
+}
+
+function loadBillFile(e){
+  const f = e.target.files[0];
+  if(!f) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    try {
+      const wb = XLSX.read(ev.target.result, {type:'array'});
+      // Try SOPORTE FACTURAS sheet
+      const sheetName = wb.SheetNames.find(s=>s.toUpperCase().includes('SOPORTE')||s.toUpperCase().includes('FACTURA')) || wb.SheetNames[0];
+      const ws = wb.Sheets[sheetName];
+      const rows = XLSX.utils.sheet_to_json(ws, {header:1, raw:false, defval:''});
+      // Find header row (contains 'FACTURA' or 'FOLIO')
+      let hdrIdx = 0;
+      for(let i=0;i<Math.min(15,rows.length);i++){
+        if(rows[i].some(c=>String(c).toUpperCase().includes('FACTURA')||String(c).toUpperCase().includes('FOLIO')||String(c).toUpperCase().includes('SUBTOTAL'))){
+          hdrIdx = i; break;
+        }
+      }
+      const headers = rows[hdrIdx];
+      billData = rows.slice(hdrIdx+1)
+        .filter(r=>r[1] && String(r[1]).trim())
+        .map(r=>{
+          const obj = {};
+          headers.forEach((h,i)=>{ obj[String(h).trim()] = r[i]; });
+          return obj;
+        });
+      document.getElementById('billFileOk').textContent = `✓ Cargado: ${f.name} (hoja: ${sheetName}, ${billData.length} facturas)`;
+      document.getElementById('billFileOk').style.display = 'block';
+      checkConcReady();
+    } catch(err){ alert('Error al leer el archivo: ' + err.message); }
+  };
+  reader.readAsArrayBuffer(f);
+}
+
+function buildBankColMap(){
+  const div = document.getElementById('bankColMap');
+  const opts = bankHeaders.map((h,i)=>`<option value="${i}">${h||'Col '+(i+1)}</option>`).join('');
+  const noOpt = '<option value="-1">— No aplica —</option>';
+  div.innerHTML = `
+    <div><label>Fecha depósito</label><select id="colFecha">${noOpt}${opts}</select></div>
+    <div><label>Descripción / referencia</label><select id="colDesc">${noOpt}${opts}</select></div>
+    <div><label>Importe (depósito)</label><select id="colImporte">${noOpt}${opts}</select></div>
+  `;
+  // Auto-detect columns
+  bankHeaders.forEach((h,i)=>{
+    const hn = String(h).toUpperCase();
+    if(/FECHA|DATE/i.test(hn)) document.getElementById('colFecha').value=i;
+    else if(/DESC|CONCEPTO|REF|DETALLE/i.test(hn)) document.getElementById('colDesc').value=i;
+    else if(/ABONO|DEP|CRED|IMPORTE|MONTO|AMOUNT/i.test(hn)) document.getElementById('colImporte').value=i;
+  });
+}
+
+function checkConcReady(){
+  document.getElementById('btnConciliar').disabled = !(bankData && billData);
+}
+
+function parseMoney(v){
+  if(v===null||v===undefined||v==='') return null;
+  const n = parseFloat(String(v).replace(/[$,\s]/g,''));
+  return isNaN(n) ? null : n;
+}
+
+function runConciliacion(){
+  const colFecha = parseInt(document.getElementById('colFecha')?.value ?? -1);
+  const colDesc = parseInt(document.getElementById('colDesc')?.value ?? -1);
+  const colImporte = parseInt(document.getElementById('colImporte')?.value ?? -1);
+
+  // Build invoice lookup by amount
+  const invoices = billData.map(row=>{
+    // Try to find amount and folio
+    const keys = Object.keys(row);
+    const folioKey = keys.find(k=>/FACTURA|FOLIO/i.test(k)) || '';
+    const clientKey = keys.find(k=>/CLIENTE|NOMBRE/i.test(k)) || '';
+    const descKey = keys.find(k=>/DESC/i.test(k)) || '';
+    const totalKey = keys.find(k=>/^TOTAL$/i.test(k)) || keys.find(k=>/TOTAL/i.test(k)) || '';
+    const subKey = keys.find(k=>/SUBTOTAL/i.test(k)) || '';
+    const importe = parseMoney(row[totalKey]) || parseMoney(row[subKey]);
+    return {
+      folio: row[folioKey] || '—',
+      cliente: row[clientKey] || '—',
+      descripcion: row[descKey] || '—',
+      importe,
+      _raw: row
+    };
+  }).filter(i=>i.importe);
+
+  // Build match lookup
+  const invByAmount = {};
+  invoices.forEach(inv=>{
+    const key = inv.importe.toFixed(2);
+    if(!invByAmount[key]) invByAmount[key] = [];
+    invByAmount[key].push(inv);
+  });
+
+  const results = [];
+  bankData.forEach((row, idx)=>{
+    const fecha = colFecha>=0 ? (row[colFecha]||'—') : '—';
+    const desc = colDesc>=0 ? (row[colDesc]||'—') : '—';
+    const importe = colImporte>=0 ? parseMoney(row[colImporte]) : null;
+    if(!importe) return;
+
+    let match = null;
+    let matchType = 'none';
+
+    // Exact match
+    const exactKey = importe.toFixed(2);
+    if(invByAmount[exactKey]){
+      match = invByAmount[exactKey][0];
+      matchType = 'exact';
+    } else {
+      // Approximate match ±0.1%
+      for(const [k,invList] of Object.entries(invByAmount)){
+        const diff = Math.abs(parseFloat(k) - importe) / importe;
+        if(diff <= 0.001){ match = invList[0]; matchType = 'approx'; break; }
+      }
+    }
+
+    results.push({idx:idx+1, fecha, desc, importe, match, matchType});
+  });
+
+  const exact = results.filter(r=>r.matchType==='exact').length;
+  const approx = results.filter(r=>r.matchType==='approx').length;
+  const none = results.filter(r=>r.matchType==='none').length;
+  document.getElementById('concSummary').innerHTML =
+    `<span style="color:#86EFAC">✓ Exactos: ${exact}</span> &nbsp;
+     <span style="color:#FCD34D">≈ Aproximados: ${approx}</span> &nbsp;
+     <span style="color:rgba(255,150,150,.8)">✗ Sin coincidencia: ${none}</span> &nbsp;
+     Total depósitos: ${results.length}`;
+
+  const FMT = new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN'});
+  document.getElementById('concTableBody').innerHTML = results.map(r=>{
+    const cls = r.matchType==='exact' ? 'match-exact' : r.matchType==='approx' ? 'match-approx' : 'match-none';
+    const estado = r.matchType==='exact' ? '✓ Exacto' : r.matchType==='approx' ? '≈ Aprox.' : '✗ Sin coincidencia';
+    return `<tr>
+      <td style="text-align:center;color:var(--gold);font-weight:700">${r.idx}</td>
+      <td>${String(r.desc).slice(0,60)}</td>
+      <td>${r.fecha}</td>
+      <td style="font-weight:700">${FMT.format(r.importe)}</td>
+      <td class="${cls}">${r.match ? r.match.folio : '—'}</td>
+      <td style="max-width:200px;font-size:10.5px">${r.match ? String(r.match.descripcion).slice(0,80) : '—'}</td>
+      <td>${r.match ? FMT.format(r.match.importe) : '—'}</td>
+      <td class="${cls}">${estado}</td>
+    </tr>`;
+  }).join('');
+
+  window._concResults = results;
+  document.getElementById('concResultSection').style.display = 'block';
+}
+
+function exportConciliacion(){
+  if(!window._concResults) return;
+  const FMT = new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN'});
+  const rows = [['#','ARRENDATARIO / DESCRIPCIÓN BANCO','FECHA DEPÓSITO','IMPORTE BANCO','FOLIO FACTURA','CONCEPTO FACTURA','IMPORTE FACTURA','ESTADO']];
+  window._concResults.forEach(r=>{
+    rows.push([
+      r.idx, r.desc, r.fecha,
+      r.importe, r.match ? r.match.folio : '',
+      r.match ? r.match.descripcion : '', r.match ? r.match.importe : '',
+      r.matchType==='exact' ? 'Exacto' : r.matchType==='approx' ? 'Aproximado' : 'Sin coincidencia'
+    ]);
+  });
+  const wb = XLSX.utils.book_new();
+  const ws = XLSX.utils.aoa_to_sheet(rows);
+  XLSX.utils.book_append_sheet(wb, ws, 'Conciliación');
+  XLSX.writeFile(wb, 'Conciliacion_FIHO_' + new Date().toISOString().slice(0,10) + '.xlsx');
 }
 
 // Init on load
