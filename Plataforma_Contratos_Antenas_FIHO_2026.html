@@ -142,6 +142,28 @@
     .cob-vencido-monto{font-weight:700;font-size:12px;color:#FCA5A5}
     .cob-vencido-mes{font-size:10px;color:rgba(252,165,165,.7);margin-top:2px}
     .cob-nodata{font-size:10.5px;color:rgba(255,255,255,.28);font-style:italic}
+    /* FACTURACIÓN TAB */
+    .fact-panel{padding:0 32px 48px}
+    .fact-top{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+    .fact-month-sel{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:10px 16px}
+    .fact-month-sel label{font-size:11px;font-weight:700;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:.8px}
+    .fact-month-sel select{background:transparent;border:none;color:#fff;font-size:13px;font-weight:700;outline:none;cursor:pointer}
+    .fact-month-sel select option{background:#1a3560;color:#fff}
+    .fact-alert-5{background:rgba(240,165,0,.15);border:1px solid rgba(240,165,0,.45);border-radius:10px;padding:10px 16px;font-size:12px;font-weight:600;color:var(--gold);display:none}
+    .fact-btn{background:linear-gradient(135deg,#22c55e,#16a34a);border:none;border-radius:10px;color:#fff;font-size:13px;font-weight:700;padding:10px 22px;cursor:pointer;display:flex;align-items:center;gap:8px}
+    .fact-btn:hover{opacity:.9}
+    .fact-table-wrap{border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.1);box-shadow:0 12px 40px rgba(0,0,0,.35);overflow-x:auto}
+    .fact-table{width:100%;border-collapse:collapse;font-size:11.5px;min-width:900px}
+    .fact-table thead tr{background:linear-gradient(135deg,#0D1B3E 0%,#163260 100%)}
+    .fact-table thead th{padding:10px 12px;text-align:left;font-size:10px;font-weight:700;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(255,255,255,.1)}
+    .fact-table tbody td{padding:9px 12px;border-bottom:1px solid rgba(255,255,255,.06);color:#fff;vertical-align:top}
+    .fact-table tbody tr:hover{background:rgba(255,255,255,.04)}
+    .fact-table .fact-total-row td{background:rgba(240,165,0,.12);border-top:2px solid rgba(240,165,0,.4);font-weight:700;color:var(--gold)}
+    .fact-precio{font-weight:700;color:#A3E635;font-size:12px}
+    .fact-total{font-weight:700;color:#FCD34D;font-size:12px}
+    .fact-cliente{font-size:10.5px;color:rgba(255,255,255,.7)}
+    .fact-desc{font-size:11px;color:#fff}
+    .fact-note{background:rgba(99,102,241,.1);border:1px solid rgba(99,102,241,.25);border-radius:8px;padding:10px 14px;font-size:11px;color:rgba(255,255,255,.6);margin-bottom:16px;line-height:1.6}
     /* ENERGÉTICOS TAB */
     .ener-panel{padding:0 32px 48px}
     .ener-intro{background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.25);border-radius:12px;padding:12px 16px;margin-bottom:24px;font-size:12px;color:rgba(255,255,255,.65);line-height:1.6}
@@ -341,6 +363,10 @@
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
     Energéticos
   </button>
+  <button class="tab-btn" onclick="switchTab('facturacion',this)">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    Facturación
+  </button>
   <button class="tab-btn" onclick="switchTab('docs',this)">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
     Permisos y Documentación
@@ -524,9 +550,9 @@
   <td>11</td>
   <td class="op-stripe" style="border-left-color:var(--capsa)"><span class="op-pill" style="background:var(--capsa)">CAPSA</span><br/><span class="op-name">Canalizaciones y Accesos Profesionales<br/><span style="font-size:10px;color:rgba(255,255,255,.38)">(convenio mod.)</span></span></td>
   <td><div class="hotel-name">Fiesta Inn Oaxaca</div><div class="hotel-city">Oaxaca de Juárez, Oaxaca</div></td>
-  <td>Azotea <b>29.55 m²</b><br/><span style="font-size:10.5px;color:rgba(255,255,255,.48)">Av. Universidad 140</span></td>
-  <td><div class="plazo-years">Extendido 5 años forz.</div><div class="plazo-dates">Hasta 31-jul-2028</div></td>
-  <td><span class="na">No espec. en convenio</span></td>
+  <td>Azotea <b>29.55 m²</b><br/><span style="font-size:10.5px;color:rgba(255,255,255,.48)">Av. Universidad No. 140, Oaxaca, Oax. (FIOAX)</span></td>
+  <td><div class="plazo-years">5 años forz.</div><div class="plazo-dates">01-ago-2018 → 31-jul-2028</div><div style="font-size:10px;color:rgba(240,165,0,.7);margin-top:2px">Convenio prorrogado nov-2022</div></td>
+  <td><div class="renta-amount">$316,287.86/año</div><div class="renta-note">+ IVA (base ago-2018)</div></td>
   <td><span class="na">No espec. en convenio</span></td>
   <td><span class="na">No espec. en convenio</span></td>
   <td><div class="pbadges"><span class="pb pb-ift">IFT</span><span class="pb pb-inah">INAH</span><span class="pb pb-const">CONST</span><span class="pb pb-pc">PC</span></div><div style="font-size:10px;color:rgba(255,255,255,.38);margin-top:5px">Zona Monumentos Históricos Oaxaca<br/>INAH obligatorio · Ley PC Oaxaca</div></td>
@@ -536,9 +562,9 @@
   <td>12</td>
   <td class="op-stripe" style="border-left-color:var(--capsa)"><span class="op-pill" style="background:var(--capsa)">CAPSA</span><br/><span class="op-name">Canalizaciones y Accesos Profesionales<br/><span style="font-size:10px;color:rgba(255,255,255,.38)">(convenio mod.)</span></span></td>
   <td><div class="hotel-name">Fiesta Inn Guadalajara</div><div class="hotel-city">Guadalajara, Jalisco</div></td>
-  <td>Azotea<br/><span style="font-size:10.5px;color:rgba(255,255,255,.48)">Av. Mariano Otero 1550</span></td>
-  <td><div class="plazo-years">Extendido 5 años forz.</div><div class="plazo-dates">Hasta 31-ene-2028</div></td>
-  <td><span class="na">No espec. en convenio</span></td>
+  <td>Azotea<br/><span style="font-size:10.5px;color:rgba(255,255,255,.48)">Av. Mariano Otero 1550, Gdl., Jal. (FIGDL)</span></td>
+  <td><div class="plazo-years">5 años forz.</div><div class="plazo-dates">01-feb-2018 → 31-ene-2028</div><div style="font-size:10px;color:rgba(240,165,0,.7);margin-top:2px">Convenio prorrogado nov-2022</div></td>
+  <td><div class="renta-amount">$26,686.87/mes</div><div class="renta-note">+ IVA (base feb-2018)</div></td>
   <td><span class="na">No espec. en convenio</span></td>
   <td><span class="na">No espec. en convenio</span></td>
   <td><div class="pbadges"><span class="pb pb-ift">IFT</span><span class="pb pb-const">CONST</span><span class="pb pb-uso">USO</span><span class="pb pb-pc">PC</span></div><div style="font-size:10px;color:rgba(255,255,255,.38);margin-top:5px">Regl. Sitios Telecom. Guadalajara<br/>Ley PC Jalisco</div></td>
@@ -777,6 +803,42 @@
           <tbody id="concTableBody"></tbody>
         </table>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PANEL FACTURACIÓN ═══════════ -->
+<div class="tab-panel" id="panel-facturacion">
+  <div class="fact-panel">
+    <div class="fact-note">
+      <strong>Solicitud de Facturación Mensual.</strong> Genera el archivo de solicitud para el sistema Memoline. Los importes se actualizan automáticamente conforme a los incrementos INPC de cada contrato. Genera el archivo el <strong>día 5 de cada mes</strong>.
+    </div>
+    <div class="fact-top">
+      <div class="fact-month-sel">
+        <label>Mes de facturación:</label>
+        <select id="factMes" onchange="renderFacturacion()">
+          <option value="1">ENERO</option><option value="2">FEBRERO</option><option value="3">MARZO</option>
+          <option value="4">ABRIL</option><option value="5">MAYO</option><option value="6">JUNIO</option>
+          <option value="7">JULIO</option><option value="8">AGOSTO</option><option value="9">SEPTIEMBRE</option>
+          <option value="10">OCTUBRE</option><option value="11">NOVIEMBRE</option><option value="12">DICIEMBRE</option>
+        </select>
+        <select id="factAnio" onchange="renderFacturacion()">
+          <option value="2026">2026</option><option value="2027">2027</option><option value="2028">2028</option>
+        </select>
+      </div>
+      <div class="fact-alert-5" id="factAlert5">⏰ Hoy es día 5 — fecha de generación de solicitud de facturación</div>
+      <button class="fact-btn" onclick="generateBillingExcel()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Descargar Excel (Memoline)
+      </button>
+    </div>
+    <div class="fact-table-wrap">
+      <table class="fact-table" id="factTable">
+        <thead><tr>
+          <th>#</th><th>CLIENTE</th><th>DESCRIPCIÓN</th><th>CANT.</th><th>PRECIO UNIT.</th><th>TOTAL C/IVA</th><th>CORREO</th>
+        </tr></thead>
+        <tbody id="factTableBody"></tbody>
+      </table>
     </div>
   </div>
 </div>
@@ -1139,6 +1201,7 @@ function switchTab(id,btn){
   if(id==='docs') renderDocs();
   if(id==='energeticos') renderEnergeticos();
   if(id==='contratos') renderContratos();
+  if(id==='facturacion') { renderFacturacion(); initFacturacionSelects(); }
 }
 
 /* ── SEARCH ── */
@@ -1223,8 +1286,8 @@ const RENTA_DATA = {
   8:  {base:300000,    start:'2015-01-01', mes:1,  tipo:'anual',    label:'50% Arrendador · 50% Posadas (plazo forz. vencido ene-2020)',         m2:31.27},
   9:  {base:5000,      start:'2019-07-31', mes:7,  tipo:'variable', label:'$5,000–$12,500/mes según operadores activos (INPC actualiza la base)',m2:null},
   10: {base:39556.26,  start:'2025-02-01', mes:2,  tipo:'mensual',  label:'',                                                                    m2:16},
-  11: {base:null,      start:null,         mes:null,tipo:'nodata',   label:'No especificado en convenio',                                        m2:29.55},
-  12: {base:null,      start:null,         mes:null,tipo:'nodata',   label:'No especificado en convenio',                                        m2:null},
+  11: {base:316287.86,  start:'2018-08-01', mes:8,  tipo:'anual',   label:'Pago anual. Carrier: Telcel',                                        m2:29.55},
+  12: {base:26686.87,   start:'2018-02-01', mes:2,  tipo:'mensual', label:'Convenio pago anual consolidado. FIGDL',                             m2:null},
   13: {base:347557.98, start:'2025-11-01', mes:9,  tipo:'anual',    label:'primer incr. sep-2026',                                              m2:26},
   14: {base:20000,     start:'2019-08-15', mes:8,  tipo:'mensual',  label:'',                                                                    m2:null},
   15: {base:378048.58, start:'2025-02-12', mes:9,  tipo:'anual',    label:'desde convenio feb-2025',                                            m2:30},
@@ -1245,7 +1308,7 @@ const RENTA_EFECTIVA = {
   8:  {importe:473383.13, tipo:'anual',   fuente:'Megacable FISUR ene-25/dic-25'},
   9:  {importe:6788.68,   tipo:'mensual', fuente:'MTP AQSM mayo-26 (1-2 operadores)'},
   10: {importe:40965.63,  tipo:'mensual', fuente:'MTP FIPER mayo-26'},
-  11: {importe:null,      tipo:'nodata',  fuente:'Sin facturación identificada en 2026'},
+  11: {importe:null,      tipo:'nodata',  fuente:'Pago anual — sin facturación mensual en 2026'},
   12: {importe:431989.52, tipo:'anual',   fuente:'CAPSA FIGDL feb-25/ene-26'},
   13: {importe:347557.98, tipo:'anual',   fuente:'CAPSA FACCG nov-25/oct-26 (primer año)'},
   14: {importe:25002.09,  tipo:'mensual', fuente:'CAPSA FACCG mayo-26'},
@@ -1267,7 +1330,7 @@ const COBRANZA_DATA = {
   8:  {status:'anual_liquidado',  monto:0,        detalle:'Pago anual ene-25/dic-25 liquidado',cliente:'MEGACABLE'},
   9:  {status:'corriente',        monto:0,        detalle:'',                                  cliente:'MEXICO TOWER PARTNERS'},
   10: {status:'corriente',        monto:0,        detalle:'',                                  cliente:'MEXICO TOWER PARTNERS'},
-  11: {status:'nodata',           monto:null,     detalle:'Sin facturación identificada',       cliente:'CAPSA'},
+  11: {status:'nodata',           monto:null,     detalle:'Pago anual — verificar estado de facturación',cliente:'CAPSA'},
   12: {status:'anual_liquidado',  monto:0,        detalle:'Pago anual feb-25/ene-26 liquidado',cliente:'CAPSA'},
   13: {status:'corriente',        monto:0,        detalle:'',                                  cliente:'CAPSA'},
   14: {status:'corriente',        monto:0,        detalle:'',                                  cliente:'CAPSA'},
@@ -1372,8 +1435,7 @@ function buildCostoM2Cell(row, rowNum, cd, rentaCalc, rates){
   } else {
     const rentaMes = cd.tipo==='anual' ? rentaCalc/12 : rentaCalc;
     const costoM2 = rentaMes / m2;
-    html = `<div class="m2-amount">${FMT_MXN.format(costoM2)}/m²</div>
-            <div class="m2-note">${FMT_MXN.format(rentaMes)}/mes ÷ ${m2} m²</div>`;
+    html = `<div class="m2-amount">${FMT_MXN.format(costoM2)}/m²</div>`;
   }
   insertOrUpdateCell(row,'m2-td',8,html);
 }
@@ -1438,6 +1500,205 @@ function insertOrUpdateCell(row, cls, targetIdx, html){
   cell.innerHTML = html;
 }
 
+/* ── FACTURACIÓN TAB ── */
+// Datos de facturación mensual — estructura fija del archivo Memoline FFID_Arch_Ene22_03
+// precio: null = tomar de calcRentaActual(RENTA_DATA), número = fijo/no indexado
+const BILLING_LINES = [
+  {ou:'FIB_OU_FFID',divisa:'MXN',tipo:'FFID_FAC',cia:'2300',cod:'CNM9801',
+   cliente:'ATyT COMUNICACIONES DIGITALES S DE RL DE CV',uso_cfdi:'',clave_prod:'',clave_unidad:'',clase:'',cambio:1,linea:1,
+   desc_pre:'CRPUE RENTA ESPACIO PARA ANTENA',precio:33245.44,impuesto:'GRF IVAGR',
+   cta_pred:'',cta_cxc:'',cta_ing:'#REF!',
+   email:'ah797v@att.com;vi164u@att.com;fibracontabilidad@posadas.com',rentaDataId:null},
+  {ou:'FIB_OU_FFID',divisa:'MXN',tipo:'FFID_FAC',cia:'2300',cod:'CNM9801',
+   cliente:'ATyT COMUNICACIONES DIGITALES S DE RL DE CV',uso_cfdi:'',clave_prod:'',clave_unidad:'',clase:'',cambio:1,linea:1,
+   desc_pre:'CRPUE REEMBOLSO MTTO ESPACIO PARA ANTENA DE ACUERDO A CONTRATO DE ARRENDAMIENTO',precio:8311.35,impuesto:'GRF IVAGR',
+   cta_pred:'',cta_cxc:'',cta_ing:'2300.0803.4501.401691.000.0000.2520.2226',
+   email:'ah797v@att.com;vi164u@att.com;fibracontabilidad@posadas.com',rentaDataId:null},
+  {ou:'FIB_OU_FFID',divisa:'MXN',tipo:'FFID_FAC',cia:'2300',cod:'CNM9801',
+   cliente:'ATyT COMUNICACIONES DIGITALES S DE RL DE CV',uso_cfdi:'',clave_prod:'',clave_unidad:'',clase:'',cambio:1,linea:1,
+   desc_pre:'FINVL RENTA ESPACIO PARA ANTENA',precio:null,impuesto:'GRF IVAGR',
+   cta_pred:'260124121007',cta_cxc:'',cta_ing:'2300.0803.4501.401691.000.0000.2303.0000',
+   email:'ah797v@att.com;vi164u@att.com;fibracontabilidad@posadas.com',rentaDataId:1},
+  {ou:'FIB_OU_FFID',divisa:'MXN',tipo:'FFID_FAC',cia:'2300',cod:'MCI1109',
+   cliente:'MEXICO TOWER PARTNERS SAPI DE CV',uso_cfdi:'G03',clave_prod:'80131500',clave_unidad:'E48',clase:'',cambio:1,linea:1,
+   desc_pre:'FIPER RENTA ESPACIO PARA ANTENA',precio:null,impuesto:'GRF IVAGR',
+   cta_pred:'',cta_cxc:'',cta_ing:'#REF!',
+   email:'arrendamientos@mtpsites.com;fibracontabilidad@posadas.com;facturacion@mtpsites.com',rentaDataId:10},
+  {ou:'FIB_OU_FFID',divisa:'MXN',tipo:'FFID_FAC',cia:'2300',cod:'MCI1109',
+   cliente:'MEXICO TOWER PARTNERS SAPI DE CV',uso_cfdi:'G03',clave_prod:'80131500',clave_unidad:'E48',clase:'',cambio:1,linea:1,
+   desc_pre:'AQSM RENTA ESPACIO PARA ANTENA',precio:null,impuesto:'GRF IVAGR',
+   cta_pred:'',cta_cxc:'',cta_ing:'2300.0803.4501.401691.000.0000.2362.0000',
+   email:'arrendamientos@mtpsites.com;fibracontabilidad@posadas.com;facturacion@mtpsites.com',rentaDataId:9},
+  {ou:'FIB_OU_FFID',divisa:'MXN',tipo:'FFID_FAC',cia:'2300',cod:'CNM9801',
+   cliente:'AT&T COMUNICACIONES DIGITALES S DE RL DE CV',uso_cfdi:'',clave_prod:'',clave_unidad:'',clase:'',cambio:1,linea:1,
+   desc_pre:'FICHI RENTA ESPACIO PARA ANTENA (CMS:148440)',precio:36440.58,impuesto:'GRF IVAGR',
+   cta_pred:'',cta_cxc:'',cta_ing:'#REF!',
+   email:'jb460v@att.com;fibracontabilidad@posadas.com;rm-mx.fin.facturacionelectronica@mx.att.com',rentaDataId:null},
+  {ou:'FIB_OU_FFID',divisa:'MXN',tipo:'FFID_FAC',cia:'2300',cod:'MCP1508',
+   cliente:'MXT CAPITAL PARTNERS SAPI DE CV',uso_cfdi:'',clave_prod:'',clave_unidad:'',clase:'',cambio:1,linea:1,
+   desc_pre:'MXT QROQA BUSINESS PARK RENTA ESPACIO PARA ANTENA SITIO QUERETARO',precio:null,impuesto:'GRF IVAGR',
+   cta_pred:'',cta_cxc:'',cta_ing:'#REF!',
+   email:'thalia.martinez@mxtowers.com;aristoteles.hernandez@mxtowers.com;finanzas@mxtowers.com;elisa.martinez@mxtowers.com',rentaDataId:4},
+  {ou:'FIB_OU_FFID',divisa:'MXN',tipo:'FFID_FAC',cia:'2300',cod:'MCP1508',
+   cliente:'MXT CAPITAL PARTNERS SAPI DE CV',uso_cfdi:'',clave_prod:'',clave_unidad:'',clase:'',cambio:1,linea:1,
+   desc_pre:'MXT FIMOA PASEO ALTOSANO RENTA ESPACIO PARA ANTENA SITIO MORELIA',precio:null,impuesto:'GRF IVAGR',
+   cta_pred:'',cta_cxc:'',cta_ing:'#REF!',
+   email:'thalia.martinez@mxtowers.com;aristoteles.hernandez@mxtowers.com;finanzas@mxtowers.com;elisa.martinez@mxtowers.com',rentaDataId:3},
+  {ou:'FIB_OU_FFID',divisa:'MXN',tipo:'FFID_FAC',cia:'2300',cod:'TTE1802',
+   cliente:'TXM TERRENOS S DE RL DE CV',uso_cfdi:'',clave_prod:'',clave_unidad:'',clase:'',cambio:1,linea:1,
+   desc_pre:'TXM FIPER LA PRESITA RENTA ESPACIO PARA ANTENA DEL SITIO FIESTA INN PERINORTE UBICADO EN CARR. MEX-QRO KM 32.5',precio:23252,impuesto:'GRF IVAGR',
+   cta_pred:'',cta_cxc:'',cta_ing:'#REF!',
+   email:'thalia.martinez@mxtowers.com;aristoteles.hernandez@mxtowers.com;finanzas@mxtowers.com;elisa.martinez@mxtowers.com',rentaDataId:null},
+  {ou:'FIB_OU_FFID',divisa:'MXN',tipo:'FFID_FAC',cia:'2300',cod:'TTE1802',
+   cliente:'TXM TERRENOS S DE RL DE CV',uso_cfdi:'',clave_prod:'',clave_unidad:'',clase:'',cambio:1,linea:1,
+   desc_pre:'TXM 1TOAP RENTA ESPACIO PARA ANTENA DEL SITIO TOLUCA 2 AEROPUERTO UBICADO EN TOL. EDO. DE MEXICO',precio:37860.76,impuesto:'GRF IVAGR',
+   cta_pred:'',cta_cxc:'',cta_ing:'#REF!',
+   email:'thalia.martinez@mxtowers.com;aristoteles.hernandez@mxtowers.com;finanzas@mxtowers.com;elisa.martinez@mxtowers.com',rentaDataId:null},
+  {ou:'FIB_OU_FFID',divisa:'MXN',tipo:'FFID_FAC',cia:'2300',cod:'NUV1604',
+   cliente:'NUVIAX SA DE CV',uso_cfdi:'',clave_prod:'',clave_unidad:'',clase:'',cambio:1,linea:1,
+   desc_pre:'1GDTA RENTA ESPACIO PARA ANTENA',precio:null,impuesto:'GRF IVAGR',
+   cta_pred:'',cta_cxc:'',cta_ing:'#REF!',
+   email:'Lrodriguez@vialux.com.mx;renteros@vialux.com.mx;renteros@enexa.com.mx',rentaDataId:2},
+  {ou:'FIB_OU_FFID',divisa:'MXN',tipo:'FFID_FAC',cia:'2300',cod:'CAP0005',
+   cliente:'CANALIZACIONES Y ACCESOS PROFESIONALES S DE RL DE CV',uso_cfdi:'',clave_prod:'',clave_unidad:'',clase:'',cambio:1,linea:1,
+   desc_pre:'FACCG RENTA ESPACIO PARA ANTENA',precio:null,impuesto:'GRF IVAGR',
+   cta_pred:'',cta_cxc:'',cta_ing:'#REF!',
+   email:'facturacion@canalizaciones.com;rreyes@mtpsites.com',rentaDataId:14},
+  {ou:'FIB_OU_FFID',divisa:'MXN',tipo:'FFID_FAC',cia:'2300',cod:'CUS071070',
+   cliente:'INTELLI SITE SOLUTIONS SAPI DE CV',uso_cfdi:'',clave_prod:'',clave_unidad:'',clase:'',cambio:1,linea:1,
+   desc_pre:'FICHI RENTA ESPACIO PARA ANTENA',precio:null,impuesto:'GRF IVAGR',
+   cta_pred:'',cta_cxc:'',cta_ing:'#REF!',
+   email:'cuentasporpagar@intellisite.com.mx;artemio.hernandez@intellisite.com.mx;catalina.hernandez@intellisite.com.mx',rentaDataId:6},
+  {ou:'FIB_OU_FFID',divisa:'MXN',tipo:'FFID_FAC',cia:'2300',cod:'CUS071070',
+   cliente:'INTELLI SITE SOLUTIONS SAPI DE CV',uso_cfdi:'',clave_prod:'',clave_unidad:'',clase:'',cambio:1,linea:1,
+   desc_pre:'FAHE RENTA ESPACIO PARA ANTENA',precio:null,impuesto:'GRF IVAGR',
+   cta_pred:'',cta_cxc:'',cta_ing:'#REF!',
+   email:'cuentasporpagar@intellisite.com.mx;artemio.hernandez@intellisite.com.mx;catalina.hernandez@intellisite.com.mx',rentaDataId:5},
+  {ou:'FIB_OU_FFID',divisa:'MXN',tipo:'FFID_FAC',cia:'2300',cod:'CUS071070',
+   cliente:'INTELLI SITE SOLUTIONS SAPI DE CV',uso_cfdi:'',clave_prod:'',clave_unidad:'',clase:'',cambio:1,linea:1,
+   desc_pre:'FAHE REEMBOLSO DE SERVICIOS DE RECUPERACION ELECTRICIDAD MATTO. DE ACUERDO AL CONTRATO DE ARRENDAMIENTO ESPACIO PARA ANTENA',precio:3500,impuesto:'GRF IVAGR',
+   cta_pred:'',cta_cxc:'',cta_ing:'#REF!',
+   email:'cuentasporpagar@intellisite.com.mx;artemio.hernandez@intellisite.com.mx;catalina.hernandez@intellisite.com.mx',rentaDataId:null},
+  {ou:'FIB_OU_FFID',divisa:'MXN',tipo:'FFID_FAC',cia:'2300',cod:'OSM1501',
+   cliente:'OPERADORA DE SITES MEXICANOS SA DE CV',uso_cfdi:'',clave_prod:'',clave_unidad:'',clase:'',cambio:1,linea:1,
+   desc_pre:'FAHG RENTA ESPACIO PARA ANTENA',precio:24795.84,impuesto:'GRF IVAGR',
+   cta_pred:'160302701007010',cta_cxc:'',cta_ing:'2300.0803.4501.401691.000.0000.2357.0000',
+   email:'j.ortiz@telesites.com.mx;e.landin@telesites.com.mx',rentaDataId:null},
+];
+
+const MESES_ES = ['ENERO','FEBRERO','MARZO','ABRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','DICIEMBRE'];
+
+function getBillingPrice(line){
+  if(line.precio !== null) return line.precio;
+  if(!line.rentaDataId) return 0;
+  const cd = RENTA_DATA[line.rentaDataId];
+  if(!cd || cd.tipo==='nodata') return 0;
+  const rates = getInpcRates();
+  const {renta} = calcRentaActual(cd.base, cd.start, cd.mes, rates);
+  return cd.tipo==='anual' ? renta/12 : renta;
+}
+
+function renderFacturacion(){
+  const mes = parseInt(document.getElementById('factMes')?.value || new Date().getMonth()+1);
+  const anio = parseInt(document.getElementById('factAnio')?.value || new Date().getFullYear());
+  const mesLabel = MESES_ES[mes-1] + '-' + String(anio).slice(2);
+  const FMT = new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN',maximumFractionDigits:2});
+
+  // Alert if today is 5th
+  const today = new Date();
+  const alert5 = document.getElementById('factAlert5');
+  if(alert5) alert5.style.display = today.getDate()===5 ? 'block' : 'none';
+
+  const tbody = document.getElementById('factTableBody');
+  if(!tbody) return;
+
+  let totalPrecio = 0;
+  let totalIva = 0;
+
+  tbody.innerHTML = BILLING_LINES.map((line, i)=>{
+    const precio = getBillingPrice(line);
+    const total = precio * 1.16;
+    totalPrecio += precio;
+    totalIva += total;
+    const desc = line.desc_pre + ' ' + mesLabel;
+    const emailShort = line.email.split(';')[0];
+    return `<tr>
+      <td style="text-align:center;color:var(--gold);font-weight:700">${i+1}</td>
+      <td><div class="fact-cliente" style="font-weight:600">${line.cod}</div><div class="fact-cliente">${line.cliente}</div></td>
+      <td class="fact-desc">${desc}</td>
+      <td style="text-align:center">1</td>
+      <td class="fact-precio">${FMT.format(precio)}</td>
+      <td class="fact-total">${FMT.format(total)}</td>
+      <td style="font-size:9.5px;color:rgba(255,255,255,.45);max-width:160px;word-break:break-all">${emailShort}…</td>
+    </tr>`;
+  }).join('') + `<tr class="fact-total-row">
+    <td colspan="4" style="text-align:right;font-size:11px;color:rgba(255,255,255,.7)">TOTAL</td>
+    <td class="fact-precio">${FMT.format(totalPrecio)}</td>
+    <td class="fact-total">${FMT.format(totalIva)}</td>
+    <td></td>
+  </tr>`;
+}
+
+function generateBillingExcel(){
+  const mes = parseInt(document.getElementById('factMes')?.value || new Date().getMonth()+1);
+  const anio = parseInt(document.getElementById('factAnio')?.value || new Date().getFullYear());
+  const mesLabel = MESES_ES[mes-1] + '-' + String(anio).slice(2);
+  const FMT_NUM = (v) => Math.round(v*100)/100;
+
+  const header1 = ['Unidad','Divisa','Tipo','Número','Número','Nombre del','Uso CFDI','Clave de Producto o Servicio','Clave Unidad','Clase','Tipo','Nro','Descripción','Cantidad','Precio','Margen','Código','Total','Cuenta','Cuenta Contable','Cuenta Contable','CorreoElectrónico'];
+  const header2 = ['Operativa','','Transacción','CIA','Cliente','Cliente','','','Clave Unidad','T.C.','Cambio','Línea','','','Unitario','','Impuesto','','Predial','Cuentas a Cobrar','Ingresos','Alterno'];
+
+  const rows = [
+    Array(22).fill(''),
+    ['SOLICITUD DE FACTURAS Y NOTAS DE CREDITO', ...Array(21).fill('')],
+    Array(22).fill(''),
+    ['AREA QUE SOLICITA:','','Arrendamientos Fibra Hotel', ...Array(19).fill('')],
+    ['NOMBRE: ','','Gerardo Vega Quinto ', ...Array(19).fill('')],
+    [...Array(21).fill(''), 'FFID_Arch_Ene22_03'],
+    header1,
+    header2,
+  ];
+
+  let totalPrecio = 0;
+  let totalIva = 0;
+
+  BILLING_LINES.forEach(line=>{
+    const precio = FMT_NUM(getBillingPrice(line));
+    const total = FMT_NUM(precio * 1.16);
+    totalPrecio += precio;
+    totalIva += total;
+    const desc = line.desc_pre + ' ' + mesLabel;
+    rows.push([
+      line.ou, line.divisa, line.tipo, line.cia, line.cod, line.cliente,
+      line.uso_cfdi, line.clave_prod, line.clave_unidad, line.clase,
+      line.cambio, line.linea, desc, 1, precio, line.margen||'',
+      line.impuesto, total, line.cta_pred, line.cta_cxc, line.cta_ing, line.email
+    ]);
+  });
+
+  rows.push(Array(22).fill(''));
+  rows.push(Array(22).fill(''));
+  rows.push([...Array(14).fill(''), FMT_NUM(totalPrecio), 0, '', FMT_NUM(totalIva), ...Array(4).fill('')]);
+
+  const wb = XLSX.utils.book_new();
+  const ws = XLSX.utils.aoa_to_sheet(rows);
+  // Set column widths
+  ws['!cols'] = [12,6,10,6,10,40,8,12,10,6,6,4,70,6,14,6,10,14,20,20,20,50].map(w=>({wch:w}));
+  XLSX.utils.book_append_sheet(wb, ws, 'OF-MEMOLINE FAC');
+  XLSX.writeFile(wb, `AVISOS_FACTURACION_ANTENAS_${MESES_ES[mes-1]}${anio}.xlsx`);
+}
+
+function initFacturacionSelects(){
+  const today = new Date();
+  const selMes = document.getElementById('factMes');
+  const selAnio = document.getElementById('factAnio');
+  if(selMes && !selMes._init){
+    selMes.value = today.getMonth()+1;
+    selAnio.value = today.getFullYear();
+    selMes._init = true;
+  }
+}
+
 /* ── ENERGÉTICOS TAB ── */
 function renderEnergeticos(){
   const tbody = document.getElementById('energTableBody');
@@ -1483,23 +1744,23 @@ function renderEnergeticos(){
 
 /* ── CONTRATOS TAB ── */
 const CONTRATOS_DB = [
-  {cid:1,  op:'AT&T',        hotel:'Fiesta Inn Nuevo Laredo',     vigencia:'25-oct-2029'},
-  {cid:2,  op:'NUVIAX',      hotel:'One Guadalajara',             vigencia:'01-ene-2035'},
-  {cid:3,  op:'MXT Capital', hotel:'Hotel Real Inn Morelia',      vigencia:'01-dic-2027'},
-  {cid:4,  op:'MXT Capital', hotel:'AC Marriott Juriquilla',      vigencia:'02-ago-2027'},
-  {cid:5,  op:'Intelli Site',hotel:'Fiesta Inn Hermosillo',       vigencia:'01-sep-2029'},
-  {cid:6,  op:'Intelli Site',hotel:'Fiesta Inn Chihuahua',        vigencia:'01-sep-2029'},
-  {cid:7,  op:'Megacable',   hotel:'Hotel One Mty. Aeropuerto',   vigencia:'01-abr-2025 (VENCIDO)'},
-  {cid:8,  op:'Megacable',   hotel:'Fiesta Inn Periférico Sur',   vigencia:'01-ene-2020 (forz. vencido)'},
-  {cid:9,  op:'MTP',         hotel:'Live Aqua San Miguel',        vigencia:'31-jul-2029'},
-  {cid:10, op:'MTP',         hotel:'Fiesta Inn Perinorte',        vigencia:'5+5 años (desde feb-2025)'},
-  {cid:11, op:'CAPSA',       hotel:'Fiesta Inn Oaxaca',           vigencia:'31-jul-2028'},
-  {cid:12, op:'CAPSA',       hotel:'Fiesta Inn Guadalajara',      vigencia:'31-ene-2028'},
-  {cid:13, op:'CAPSA',       hotel:'FA Condesa Cancún (anual)',   vigencia:'31-oct-2035'},
-  {cid:14, op:'CAPSA',       hotel:'FA Condesa Cancún (mensual)', vigencia:'15-ago-2029'},
-  {cid:15, op:'CAPSA',       hotel:'Fiesta Inn Durango',          vigencia:'12-feb-2030'},
-  {cid:16, op:'CAPSA',       hotel:'Fiesta Inn Cuautitlán',       vigencia:'01-ago-2029'},
-  {cid:17, op:'CAPSA',       hotel:'Camino Real Puebla',          vigencia:'01-feb-2029'},
+  {cid:1,  op:'AT&T',        hotel:'Fiesta Inn Nuevo Laredo',        vigencia:'25-oct-2029',   driveUrl:'https://drive.google.com/drive/folders/1vCgzZaGIGJwxkxauFxhF8QUxRRkXIPqe'},
+  {cid:2,  op:'NUVIAX',      hotel:'One Guadalajara',                vigencia:'01-ene-2035',   driveUrl:'https://drive.google.com/drive/folders/1CKTqU699W2nvo-dz7qvQ-j0oPNSX0x9l'},
+  {cid:3,  op:'MXT Capital', hotel:'Hotel Real Inn Morelia',         vigencia:'01-dic-2027',   driveUrl:'https://drive.google.com/drive/folders/1nCzhPsN9_lD6RiI7WJD6Ru6CYaOyqhDN'},
+  {cid:4,  op:'MXT Capital', hotel:'AC Marriott Juriquilla',         vigencia:'02-ago-2027',   driveUrl:'https://drive.google.com/drive/folders/16Ia9nk7s6N8kGLgv1KNGiQOhDtJt80-F'},
+  {cid:5,  op:'Intelli Site',hotel:'Fiesta Inn Hermosillo',          vigencia:'01-sep-2029',   driveUrl:'https://drive.google.com/drive/folders/1PocDqswHQcH7rrkNPGzpEtDixO0eGhIr'},
+  {cid:6,  op:'Intelli Site',hotel:'Fiesta Inn Chihuahua',           vigencia:'01-sep-2029',   driveUrl:'https://drive.google.com/drive/folders/1LRv4448lAbgH8L9Z_wg7BB9BJDB39TOD'},
+  {cid:7,  op:'Megacable',   hotel:'Hotel One Mty. Aeropuerto',      vigencia:'01-abr-2025 (VENCIDO)', driveUrl:'https://drive.google.com/drive/folders/1C-yhgC66fvccg0hIpi9lOk2ezsiLLAdE'},
+  {cid:8,  op:'Megacable',   hotel:'Fiesta Inn Periférico Sur',      vigencia:'01-ene-2020 (forz. vencido)', driveUrl:'https://drive.google.com/drive/folders/1wDr1uHrkAfVfQJn8jBf2zWcOsHbDIbcq'},
+  {cid:9,  op:'MTP',         hotel:'Live Aqua San Miguel',           vigencia:'31-jul-2029',   driveUrl:'https://drive.google.com/drive/folders/1qUu1ezIn0une5mWuBc27x2YUHbuF7xA5'},
+  {cid:10, op:'MTP',         hotel:'Fiesta Inn Perinorte',           vigencia:'5+5 años (desde feb-2025)', driveUrl:'https://drive.google.com/drive/folders/1Ii9XmlpFExLjy6lcOIRmJ-CUyrZxMl6m'},
+  {cid:11, op:'CAPSA',       hotel:'Fiesta Inn Oaxaca',              vigencia:'31-jul-2028',   driveUrl:'https://drive.google.com/drive/folders/1rYxO9xphN1O_Ybnrx2k2gT9adRil-Kmh'},
+  {cid:12, op:'CAPSA',       hotel:'Fiesta Inn Guadalajara',         vigencia:'31-ene-2028',   driveUrl:'https://drive.google.com/drive/folders/1q1_s92lEhUFLcLJhhr375xH3U8L2PXK5'},
+  {cid:13, op:'CAPSA',       hotel:'FA Condesa Cancún (anual)',      vigencia:'31-oct-2035',   driveUrl:'https://drive.google.com/drive/folders/1a8RLyVwdqZq-bmSI3VRiVl06BNg2z6vH'},
+  {cid:14, op:'CAPSA',       hotel:'FA Condesa Cancún (mensual)',    vigencia:'15-ago-2029',   driveUrl:'https://drive.google.com/drive/folders/1o43My6j_s3v2lHdMCNBXnIq5LlkiHWCS'},
+  {cid:15, op:'CAPSA',       hotel:'Fiesta Inn Durango',             vigencia:'12-feb-2030',   driveUrl:'https://drive.google.com/drive/folders/1WfIGJuBFAHuOKs7783pbcoY0ciiCPeUB'},
+  {cid:16, op:'CAPSA',       hotel:'Fiesta Inn Cuautitlán',          vigencia:'01-ago-2029',   driveUrl:'https://drive.google.com/drive/folders/1HWZAnSgr4z9s1YNw-y2oC72tH8fx80bc'},
+  {cid:17, op:'CAPSA',       hotel:'Camino Real Puebla',             vigencia:'01-feb-2029',   driveUrl:'https://drive.google.com/drive/folders/1JLku-fxJtYvKdgT4bXCpvIHoQl1lR1Zd'},
 ];
 const OP_COLORS_MAP = {'AT&T':'var(--att)','NUVIAX':'var(--nuviax)','MXT Capital':'var(--mxt)','Intelli Site':'var(--intelli)','Megacable':'var(--megacable)','MTP':'var(--mtp)','CAPSA':'var(--capsa)'};
 
@@ -1539,6 +1800,7 @@ function renderContratos(){
             <input type="file" accept=".pdf,.jpg,.jpeg,.png" style="display:none" onchange="uploadContrato(${c.cid},this)">
           </label>
           ${d.uploaded ? `<button class="btn-view" onclick="viewContrato(${c.cid})" style="font-size:10.5px;padding:5px 12px">👁 Ver</button>` : ''}
+          ${c.driveUrl ? `<a href="${c.driveUrl}" target="_blank" class="btn-view" style="font-size:10.5px;padding:5px 12px;text-decoration:none;display:inline-flex;align-items:center;gap:4px">☁ Drive</a>` : ''}
         </div>
       </div>
     </div>`;
