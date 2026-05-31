@@ -164,6 +164,41 @@
     .fact-cliente{font-size:10.5px;color:rgba(255,255,255,.7)}
     .fact-desc{font-size:11px;color:#fff}
     .fact-note{background:rgba(99,102,241,.1);border:1px solid rgba(99,102,241,.25);border-radius:8px;padding:10px 14px;font-size:11px;color:rgba(255,255,255,.6);margin-bottom:16px;line-height:1.6}
+    /* RENTA EFECTIVA — OBSERVACIONES */
+    .re-obs-label{font-size:9px;font-weight:700;color:rgba(255,255,255,.32);text-transform:uppercase;letter-spacing:.8px;margin-top:7px;display:block}
+    .re-obs-input{width:100%;margin-top:3px;padding:4px 7px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.13);border-radius:6px;color:rgba(255,255,255,.7);font-size:10px;font-family:'Inter',sans-serif;resize:vertical;min-height:34px;outline:none;transition:border-color .2s;line-height:1.5}
+    .re-obs-input:focus{border-color:var(--gold)}
+    /* REVISIÓN ANEXOS EEFF */
+    .eeff-panel{padding:0 32px 48px}
+    .eeff-header{background:rgba(99,102,241,.08);border:1px solid rgba(99,102,241,.2);border-radius:12px;padding:14px 18px;margin-bottom:20px}
+    .eeff-title{font-size:14px;font-weight:800;color:#fff;margin-bottom:4px}
+    .eeff-subtitle{font-size:11px;color:rgba(255,255,255,.5);line-height:1.5}
+    .eeff-controls{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:22px}
+    .eeff-month-sel{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:10px 16px}
+    .eeff-month-sel label{font-size:11px;font-weight:700;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:.8px}
+    .eeff-month-sel select{background:transparent;border:none;color:#fff;font-size:13px;font-weight:700;outline:none;cursor:pointer}
+    .eeff-month-sel select option{background:#1a3560;color:#fff}
+    .eeff-file-info{font-size:11.5px;color:rgba(255,255,255,.5)}
+    .eeff-section{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.09);border-radius:16px;padding:18px 20px;margin-bottom:20px}
+    .eeff-section-title{font-size:12px;font-weight:800;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+    .eeff-table-wrap{border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.1);overflow-x:auto}
+    .eeff-table{width:100%;border-collapse:collapse;font-size:11px;min-width:960px}
+    .eeff-table thead tr{background:linear-gradient(135deg,#0D1B3E 0%,#163260 100%)}
+    .eeff-table th{padding:9px 12px;font-size:9px;font-weight:700;letter-spacing:1.1px;text-transform:uppercase;color:rgba(255,255,255,.6);border-bottom:2px solid rgba(240,165,0,.25);text-align:left;white-space:nowrap}
+    .eeff-table td{padding:8px 12px;border-bottom:1px solid rgba(255,255,255,.05);color:rgba(255,255,255,.82);vertical-align:middle}
+    .eeff-table tr:hover td{background:rgba(255,255,255,.025)}
+    .eeff-status-badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;padding:2px 9px;border-radius:50px}
+    .eeff-sb-ok{background:rgba(22,163,74,.2);color:#86EFAC;border:1px solid rgba(22,163,74,.35)}
+    .eeff-sb-diff{background:rgba(217,119,6,.2);color:#FCD34D;border:1px solid rgba(217,119,6,.35)}
+    .eeff-sb-miss{background:rgba(220,38,38,.2);color:#FCA5A5;border:1px solid rgba(220,38,38,.35)}
+    .eeff-sb-prov{background:rgba(37,99,235,.2);color:#93C5FD;border:1px solid rgba(37,99,235,.35)}
+    .eeff-sb-zero{background:rgba(100,116,139,.2);color:rgba(255,255,255,.45);border:1px solid rgba(100,116,139,.3)}
+    .eeff-summary{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+    .eeff-sum-card{background:rgba(0,0,0,.25);border-radius:10px;padding:10px 16px;text-align:center;min-width:90px}
+    .eeff-sum-n{font-size:22px;font-weight:800;line-height:1}
+    .eeff-sum-l{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:rgba(255,255,255,.4);margin-top:3px}
+    .eeff-no-data{font-size:12px;color:rgba(255,255,255,.35);padding:20px;text-align:center}
+    .eeff-diff-val{color:#FCD34D;font-size:10px;display:block;margin-top:2px}
     /* ENERGÉTICOS TAB */
     .ener-panel{padding:0 32px 48px}
     .ener-intro{background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.25);border-radius:12px;padding:12px 16px;margin-bottom:24px;font-size:12px;color:rgba(255,255,255,.65);line-height:1.6}
@@ -366,6 +401,10 @@
   <button class="tab-btn" onclick="switchTab('facturacion',this)">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
     Facturación
+  </button>
+  <button class="tab-btn" onclick="switchTab('eeff',this)">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+    Revisión Anexos EEFF
   </button>
   <button class="tab-btn" onclick="switchTab('docs',this)">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
@@ -843,6 +882,53 @@
   </div>
 </div>
 
+<!-- ═══════════ PANEL REVISIÓN ANEXOS EEFF ═══════════ -->
+<div class="tab-panel" id="panel-eeff">
+  <div class="eeff-panel">
+    <div class="eeff-header">
+      <div class="eeff-title">Revisión Mensual de Anexos EEFF — 2.1.10 Ingresos / 2.1.17 Gastos</div>
+      <div class="eeff-subtitle">Valida que los ingresos (2.1.10) y gastos (2.1.17) de arrendamiento en los estados financieros coincidan con lo facturado en el mes. Detecta diferencias antes del VoBo a Contabilidad. Las líneas de <strong style="color:#93C5FD">Provisión</strong> son recurrentes y esperadas.</div>
+    </div>
+    <div class="eeff-controls">
+      <label class="btn-upload" style="padding:9px 18px;cursor:pointer;display:inline-flex;align-items:center;gap:7px">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17,8 12,3 7,8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        Cargar Anexos EEFF (.xlsx)
+        <input type="file" accept=".xlsx,.xls" onchange="loadEEFFAnexo(event)" style="display:none">
+      </label>
+      <div class="eeff-month-sel">
+        <label>Mes de revisión:</label>
+        <select id="eeffMes" onchange="renderEEFF()">
+          <option value="1">ENE</option><option value="2">FEB</option><option value="3">MAR</option>
+          <option value="4">ABR</option><option value="5" selected>MAY</option><option value="6">JUN</option>
+          <option value="7">JUL</option><option value="8">AGO</option><option value="9">SEP</option>
+          <option value="10">OCT</option><option value="11">NOV</option><option value="12">DIC</option>
+        </select>
+        <select id="eeffAnio" onchange="renderEEFF()">
+          <option value="2026" selected>2026</option><option value="2027">2027</option>
+        </select>
+      </div>
+      <div class="eeff-file-info" id="eeffFileInfo">Sin archivo cargado — carga el Excel de Anexos EEFF</div>
+    </div>
+    <div id="eeffResults" style="display:none">
+      <div class="eeff-section">
+        <div class="eeff-section-title">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+          Anexo 2.1.10 — Ingresos por Arrendamiento (Antenas)
+        </div>
+        <div id="eeff2110Content"></div>
+        <div class="eeff-summary" id="eeff2110Summary"></div>
+      </div>
+      <div class="eeff-section">
+        <div class="eeff-section-title">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M16 2H8a2 2 0 00-2 2v16a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2z"/><line x1="12" y1="6" x2="12" y2="12"/><circle cx="12" cy="16" r="1" fill="currentColor"/></svg>
+          Anexo 2.1.17 — Gasto por Arrendamiento
+        </div>
+        <div id="eeff2117Content"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ═══════════ PANEL ENERGÉTICOS ═══════════ -->
 <div class="tab-panel" id="panel-energeticos">
   <div class="ener-panel">
@@ -1202,6 +1288,7 @@ function switchTab(id,btn){
   if(id==='energeticos') renderEnergeticos();
   if(id==='contratos') renderContratos();
   if(id==='facturacion') { renderFacturacion(); initFacturacionSelects(); }
+  if(id==='eeff') renderEEFF();
 }
 
 /* ── SEARCH ── */
@@ -1440,8 +1527,12 @@ function buildCostoM2Cell(row, rowNum, cd, rentaCalc, rates){
   insertOrUpdateCell(row,'m2-td',8,html);
 }
 
+function getReObs(){ return JSON.parse(localStorage.getItem('fiho_re_obs')||'{}'); }
+function setReObs(n,v){ const d=getReObs(); if(v) d[n]=v; else delete d[n]; localStorage.setItem('fiho_re_obs',JSON.stringify(d)); }
+
 function buildRentaEfectivaCell(row, rowNum){
   const re = RENTA_EFECTIVA[rowNum];
+  const obs = (getReObs()[rowNum]||'').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   let html = '';
   if(!re || re.tipo==='nodata'){
     html = `<span class="re-nodata">Sin datos de facturación</span>`;
@@ -1454,6 +1545,7 @@ function buildRentaEfectivaCell(row, rowNum){
     html = `<div class="re-amount">${FMT_MXN.format(re.importe)}/mes</div>
             <div class="re-note">${re.fuente}</div>`;
   }
+  html += `<span class="re-obs-label">Observaciones</span><textarea class="re-obs-input" onchange="setReObs(${rowNum},this.value)" placeholder="Notas o comentarios…">${obs}</textarea>`;
   insertOrUpdateCell(row,'re-td',7,html);
 }
 
@@ -1682,6 +1774,17 @@ function generateBillingExcel(){
 
   const wb = XLSX.utils.book_new();
   const ws = XLSX.utils.aoa_to_sheet(rows);
+  // Apply #,##0.00 (estilo millares) to precio (col 14) and total (col 17) cells
+  const NUMFMT = '#,##0.00';
+  const DATA_START = 8; // rows 0-7 are title/headers
+  for(let ri = DATA_START; ri < DATA_START + BILLING_LINES.length; ri++){
+    const pRef = XLSX.utils.encode_cell({r:ri, c:14});
+    const tRef = XLSX.utils.encode_cell({r:ri, c:17});
+    if(ws[pRef] && ws[pRef].t==='n') ws[pRef].z = NUMFMT;
+    if(ws[tRef] && ws[tRef].t==='n') ws[tRef].z = NUMFMT;
+  }
+  const totRow = DATA_START + BILLING_LINES.length + 2;
+  [14,17].forEach(c=>{ const ref=XLSX.utils.encode_cell({r:totRow,c}); if(ws[ref]&&ws[ref].t==='n') ws[ref].z=NUMFMT; });
   // Set column widths
   ws['!cols'] = [12,6,10,6,10,40,8,12,10,6,6,4,70,6,14,6,10,14,20,20,20,50].map(w=>({wch:w}));
   XLSX.utils.book_append_sheet(wb, ws, 'OF-MEMOLINE FAC');
@@ -2055,6 +2158,278 @@ function exportConciliacion(){
   const ws = XLSX.utils.aoa_to_sheet(rows);
   XLSX.utils.book_append_sheet(wb, ws, 'Conciliación');
   XLSX.writeFile(wb, 'Conciliacion_FIHO_' + new Date().toISOString().slice(0,10) + '.xlsx');
+}
+
+/* ══════════════════════════════════════════
+   REVISIÓN ANEXOS EEFF — 2.1.10 / 2.1.17
+   ══════════════════════════════════════════ */
+let EEFF_DATA = null;
+const MESES_ANEX_LBL = ['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'];
+const FMT_EEFF = new Intl.NumberFormat('es-MX',{minimumFractionDigits:2,maximumFractionDigits:2});
+
+function loadEEFFAnexo(event){
+  const file = event.target.files[0];
+  if(!file) return;
+  const infoEl = document.getElementById('eeffFileInfo');
+  infoEl.textContent = 'Leyendo archivo…';
+  const reader = new FileReader();
+  reader.onload = function(e){
+    try{
+      const wb = XLSX.read(new Uint8Array(e.target.result), {type:'array'});
+      const raw2110 = wb.Sheets['2.1.10'] ? XLSX.utils.sheet_to_json(wb.Sheets['2.1.10'],{header:1,defval:''}) : null;
+      const raw2117 = wb.Sheets['2.1.17'] ? XLSX.utils.sheet_to_json(wb.Sheets['2.1.17'],{header:1,defval:''}) : null;
+      if(!raw2110){
+        infoEl.innerHTML = '<span style="color:#FCA5A5">⚠ No se encontró la hoja "2.1.10" en el archivo</span>';
+        return;
+      }
+      EEFF_DATA = {raw2110, raw2117, filename: file.name};
+      infoEl.innerHTML = `<span style="color:#86EFAC">✓ ${file.name}</span>`;
+      document.getElementById('eeffResults').style.display = '';
+      renderEEFF();
+    }catch(err){
+      infoEl.innerHTML = `<span style="color:#FCA5A5">Error al leer: ${err.message}</span>`;
+    }
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+function eeffFindHeaderRow(data){
+  // Find the row containing month headers like ENE-26, FEB-26, etc.
+  for(let i=0; i<Math.min(data.length,15); i++){
+    const row=data[i];
+    for(let j=0; j<row.length; j++){
+      if(/^(ENE|FEB|MAR|ABR|MAY|JUN|JUL|AGO|SEP|OCT|NOV|DIC)-\d{2}$/.test(String(row[j]||'').trim().toUpperCase())) return i;
+    }
+  }
+  return 6;
+}
+
+function eeffGetMonthCol(headerRow, mes, anio){
+  const lbl = MESES_ANEX_LBL[mes-1]+'-'+String(anio).slice(2);
+  for(let i=0; i<headerRow.length; i++){
+    if(String(headerRow[i]||'').trim().toUpperCase()===lbl) return i;
+  }
+  return -1;
+}
+
+function eeffFindAntenaSection(data, startRow){
+  for(let i=startRow; i<data.length; i++){
+    const row=data[i];
+    for(let j=0; j<row.length; j++){
+      const v=String(row[j]||'').trim().toUpperCase();
+      if(v==='ESPACIO PARA ANTENAS'||v==='ANTENAS'||(v.includes('ANTENAS')&&v.length<30&&!v.includes('DESCRIPCION'))) return i;
+    }
+  }
+  return -1;
+}
+
+const EEFF_SECTION_ENDS=['ESTACIONAMIENTO','LOCALES','TOTAL ARRENDAMIENTO','CUARTOS','CASAS CLUB','TERRENOS','OFICINAS','BODEGAS','SUBTOTAL'];
+
+function eeffExtractAntenaRows(data, sectionStart, monthCol){
+  const rows=[];
+  for(let i=sectionStart+1; i<data.length; i++){
+    const row=data[i];
+    const c0=String(row[0]||'').trim();
+    const c5=String(row[5]||'').trim();
+    // Stop at next section
+    if(!c0&&c5){
+      const v=c5.toUpperCase();
+      if(EEFF_SECTION_ENDS.some(s=>v===s||v.startsWith(s+' '))) break;
+    }
+    if(!c0&&!c5&&!(row[4]&&String(row[4]).trim())) continue; // skip fully empty
+    const rawVal = monthCol>=0 ? row[monthCol] : '';
+    const importe = typeof rawVal==='number' ? rawVal : parseFloat(String(rawVal||'').replace(/,/g,''))||0;
+    rows.push({
+      cuenta:c0, cia:String(row[1]||'').trim(), siglas:String(row[2]||'').trim(),
+      sucursal:String(row[3]||'').trim(), cliente:String(row[4]||'').trim(),
+      descripcion:c5, origen:String(row[6]||'').trim().toUpperCase(), importe
+    });
+  }
+  return rows;
+}
+
+function eeffMatchBillingLine(annexRow){
+  const siglas=annexRow.siglas.toUpperCase();
+  const cuenta=annexRow.cuenta.toLowerCase();
+  const cli=(annexRow.cliente||'').toLowerCase();
+  for(const bl of BILLING_LINES){
+    // Match by account code
+    if(bl.cta_ing&&bl.cta_ing!=='#REF!'&&bl.cta_ing.toLowerCase()===cuenta) return bl;
+    // Match by leading siglas in desc_pre (e.g., "FINVL RENTA..." → siglas "FINVL")
+    const descUpper=bl.desc_pre.toUpperCase();
+    const fw=descUpper.split(' ')[0];
+    if(siglas&&siglas.length>=4&&(fw===siglas||descUpper.startsWith(siglas+' '))) return bl;
+    // Client name keyword match (≥2 significant words)
+    if(cli.length>3){
+      const blCli=bl.cliente.toLowerCase();
+      const words=cli.split(/\s+/).filter(w=>w.length>3);
+      if(words.filter(w=>blCli.includes(w)).length>=2) return bl;
+    }
+  }
+  return null;
+}
+
+function render2110(annexRows, mes, anio){
+  const mesLabel=MESES_ANEX_LBL[mes-1]+'-'+String(anio).slice(2);
+  const content=document.getElementById('eeff2110Content');
+  const summEl=document.getElementById('eeff2110Summary');
+
+  if(!annexRows.length){
+    content.innerHTML=`<div class="eeff-no-data">No se encontró la sección "ESPACIO PARA ANTENAS" en la hoja 2.1.10.<br/>Verifique que el archivo sea el correcto y que la sección de antenas exista.</div>`;
+    summEl.innerHTML=''; return;
+  }
+
+  const blMatched=new Set();
+  let cntOk=0,cntDiff=0,cntProv=0,cntZero=0;
+
+  const tableRows=annexRows.map(r=>{
+    const isProv=r.origen==='PROVISION';
+    if(isProv) cntProv++;
+    let statusHtml='',diffHtml='';
+    if(isProv){
+      statusHtml=`<span class="eeff-status-badge eeff-sb-prov">~ Provisión</span>`;
+    } else if(r.importe===0){
+      cntZero++;
+      statusHtml=`<span class="eeff-status-badge eeff-sb-zero">Sin mov.</span>`;
+    } else {
+      const bl=eeffMatchBillingLine(r);
+      if(bl){
+        blMatched.add(bl.desc_pre);
+        const bp=getBillingPrice(bl);
+        const pct=bp>0?Math.abs(r.importe-bp)/bp:1;
+        if(pct<=0.005){
+          statusHtml=`<span class="eeff-status-badge eeff-sb-ok">✓ OK</span>`;
+          cntOk++;
+        } else {
+          const sign=r.importe>bp?'+':'-';
+          statusHtml=`<span class="eeff-status-badge eeff-sb-diff">⚠ Diferencia</span>`;
+          diffHtml=`<span class="eeff-diff-val">${sign}${FMT_EEFF.format(Math.abs(r.importe-bp))} (facturado: ${FMT_EEFF.format(bp)})</span>`;
+          cntDiff++;
+        }
+      } else {
+        statusHtml=`<span class="eeff-status-badge eeff-sb-zero">Sin coincidencia</span>`;
+      }
+    }
+    const amtColor=isProv?'color:#93C5FD;font-weight:600':r.importe===0?'color:rgba(255,255,255,.3)':'color:#86EFAC;font-weight:700';
+    return `<tr>
+      <td style="font-size:9.5px;color:rgba(255,255,255,.4);max-width:140px;word-break:break-all;line-height:1.3">${r.cuenta||'—'}</td>
+      <td style="font-size:10.5px;font-weight:700;color:#93C5FD">${r.siglas||r.cia||'—'}</td>
+      <td style="font-size:11px">${r.cliente||r.sucursal||'—'}</td>
+      <td style="font-size:10.5px;max-width:180px;line-height:1.4">${r.descripcion}</td>
+      <td><span style="font-size:9px;padding:1px 7px;border-radius:50px;${isProv?'background:rgba(37,99,235,.2);color:#93C5FD':'background:rgba(22,163,74,.12);color:#86EFAC'}">${r.origen||'—'}</span></td>
+      <td style="${amtColor};font-size:12px;text-align:right">${r.importe!==0?FMT_EEFF.format(r.importe):'<span style="color:rgba(255,255,255,.22)">—</span>'}</td>
+      <td>${statusHtml}${diffHtml}</td>
+    </tr>`;
+  }).join('');
+
+  // Billing lines not found in annex
+  let cntMiss=0;
+  const missingRows=BILLING_LINES.filter(bl=>!blMatched.has(bl.desc_pre)).map(bl=>{
+    cntMiss++;
+    const bp=getBillingPrice(bl);
+    return `<tr style="background:rgba(220,38,38,.03)">
+      <td style="font-size:9.5px;color:rgba(255,255,255,.3)">${bl.cta_ing!=='#REF!'?bl.cta_ing:'—'}</td>
+      <td style="font-size:10.5px;color:#FCA5A5;font-weight:700">${bl.desc_pre.split(' ')[0]}</td>
+      <td style="font-size:11px;color:rgba(255,255,255,.6)">${bl.cliente}</td>
+      <td style="font-size:10.5px;color:rgba(255,255,255,.5)">${bl.desc_pre}</td>
+      <td>—</td>
+      <td style="color:#A3E635;font-weight:700;font-size:12px;text-align:right">${FMT_EEFF.format(bp)}</td>
+      <td><span class="eeff-status-badge eeff-sb-miss">✗ No en anexo</span></td>
+    </tr>`;
+  }).join('');
+
+  content.innerHTML=`
+    <div style="font-size:11px;color:rgba(255,255,255,.45);margin-bottom:10px">
+      Mes revisado: <strong style="color:var(--gold)">${mesLabel}</strong> &nbsp;|&nbsp; Registros en anexo: <strong>${annexRows.length}</strong>
+    </div>
+    <div class="eeff-table-wrap">
+      <table class="eeff-table">
+        <thead><tr>
+          <th>Cuenta Contable</th><th>Siglas</th><th>Cliente / Sucursal</th>
+          <th>Descripción</th><th>Origen</th><th style="text-align:right">${mesLabel} (EEFF)</th><th>Estatus vs Facturación</th>
+        </tr></thead>
+        <tbody>${tableRows}${missingRows}</tbody>
+      </table>
+    </div>`;
+
+  summEl.innerHTML=`
+    <div class="eeff-sum-card" style="border:1px solid rgba(22,163,74,.3)"><div class="eeff-sum-n" style="color:#86EFAC">${cntOk}</div><div class="eeff-sum-l">Coinciden ✓</div></div>
+    <div class="eeff-sum-card" style="border:1px solid rgba(217,119,6,.3)"><div class="eeff-sum-n" style="color:#FCD34D">${cntDiff}</div><div class="eeff-sum-l">Diferencia ⚠</div></div>
+    <div class="eeff-sum-card" style="border:1px solid rgba(37,99,235,.3)"><div class="eeff-sum-n" style="color:#93C5FD">${cntProv}</div><div class="eeff-sum-l">Provisiones ~</div></div>
+    <div class="eeff-sum-card" style="border:1px solid rgba(220,38,38,.3)"><div class="eeff-sum-n" style="color:#FCA5A5">${cntMiss}</div><div class="eeff-sum-l">No en anexo ✗</div></div>`;
+}
+
+function render2117(allRows2117, mes, anio){
+  const mesLabel=MESES_ANEX_LBL[mes-1]+'-'+String(anio).slice(2);
+  const content=document.getElementById('eeff2117Content');
+  const active=allRows2117.filter(r=>r.importe!==0||r.origen==='PROVISION');
+  const zeros=allRows2117.filter(r=>r.importe===0&&r.origen!=='PROVISION');
+  if(!allRows2117.length){
+    content.innerHTML=`<div class="eeff-no-data">No se encontraron registros en la hoja 2.1.17.</div>`;
+    return;
+  }
+  const buildRow=r=>{
+    const isProv=r.origen==='PROVISION';
+    const amtColor=isProv?'color:#93C5FD;font-weight:600':'color:#FCA5A5;font-weight:700';
+    return `<tr>
+      <td style="font-size:9.5px;color:rgba(255,255,255,.4);max-width:140px;word-break:break-all;line-height:1.3">${r.cuenta||'—'}</td>
+      <td style="font-size:10.5px;font-weight:700;color:#93C5FD">${r.siglas||r.cia||'—'}</td>
+      <td style="font-size:11px">${r.cliente||r.sucursal||'—'}</td>
+      <td style="font-size:10.5px;max-width:200px;line-height:1.4">${r.descripcion}</td>
+      <td><span style="font-size:9px;padding:1px 7px;border-radius:50px;${isProv?'background:rgba(37,99,235,.2);color:#93C5FD':'background:rgba(220,38,38,.12);color:#FCA5A5'}">${r.origen||'—'}</span></td>
+      <td style="${amtColor};font-size:12px;text-align:right">${r.importe!==0?FMT_EEFF.format(r.importe):'<span style="color:rgba(255,255,255,.22)">—</span>'}</td>
+    </tr>`;
+  };
+  content.innerHTML=`
+    <div style="font-size:11px;color:rgba(255,255,255,.45);margin-bottom:10px">
+      Mes revisado: <strong style="color:var(--gold)">${mesLabel}</strong> &nbsp;|&nbsp;
+      Con movimiento: <strong>${active.length}</strong> &nbsp;|&nbsp;
+      Sin movimiento: <strong>${zeros.length}</strong> &nbsp;|&nbsp;
+      Provisiones: <strong>${allRows2117.filter(r=>r.origen==='PROVISION').length}</strong>
+    </div>
+    <div class="eeff-table-wrap">
+      <table class="eeff-table">
+        <thead><tr>
+          <th>Cuenta Contable</th><th>Siglas</th><th>Proveedor / Sucursal</th>
+          <th>Descripción</th><th>Origen</th><th style="text-align:right">${mesLabel} (EEFF)</th>
+        </tr></thead>
+        <tbody>${active.map(buildRow).join('')}${zeros.length?`<tr><td colspan="6" style="text-align:center;font-size:10px;color:rgba(255,255,255,.25);padding:9px">+ ${zeros.length} línea(s) sin movimiento en ${mesLabel}</td></tr>`:''}</tbody>
+      </table>
+    </div>`;
+}
+
+function renderEEFF(){
+  if(!EEFF_DATA) return;
+  const mes=parseInt(document.getElementById('eeffMes')?.value||5);
+  const anio=parseInt(document.getElementById('eeffAnio')?.value||2026);
+
+  // 2.1.10
+  const hdr2110=eeffFindHeaderRow(EEFF_DATA.raw2110);
+  const mCol2110=eeffGetMonthCol(EEFF_DATA.raw2110[hdr2110]||[], mes, anio);
+  const sec2110=eeffFindAntenaSection(EEFF_DATA.raw2110, hdr2110);
+  const antenaRows=sec2110>=0 ? eeffExtractAntenaRows(EEFF_DATA.raw2110, sec2110, mCol2110) : [];
+  render2110(antenaRows, mes, anio);
+
+  // 2.1.17
+  if(EEFF_DATA.raw2117){
+    const hdr2117=eeffFindHeaderRow(EEFF_DATA.raw2117);
+    const mCol2117=eeffGetMonthCol(EEFF_DATA.raw2117[hdr2117]||[], mes, anio);
+    const rows2117=[];
+    for(let i=hdr2117+1; i<EEFF_DATA.raw2117.length; i++){
+      const row=EEFF_DATA.raw2117[i];
+      const c0=String(row[0]||'').trim();
+      const c5=String(row[5]||'').trim();
+      if(!c0&&!c5) continue;
+      const rawV=mCol2117>=0?row[mCol2117]:'';
+      const imp=typeof rawV==='number'?rawV:parseFloat(String(rawV||'').replace(/,/g,''))||0;
+      rows2117.push({cuenta:c0,cia:String(row[1]||'').trim(),siglas:String(row[2]||'').trim(),
+        sucursal:String(row[3]||'').trim(),cliente:String(row[4]||'').trim(),
+        descripcion:c5,origen:String(row[6]||'').trim().toUpperCase(),importe:imp});
+    }
+    render2117(rows2117, mes, anio);
+  } else {
+    document.getElementById('eeff2117Content').innerHTML='<div class="eeff-no-data">La hoja 2.1.17 no se encontró en el archivo cargado.</div>';
+  }
 }
 
 // Init on load
