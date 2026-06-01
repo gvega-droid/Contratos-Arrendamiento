@@ -3326,14 +3326,12 @@ function cobBuildCard(tenant,idx){
   const invRows=tenant.invoices.map(inv=>{
     const dv=inv.daysPastDue;
     const dc=dv>60?'#ef4444':dv>30?'#f97316':dv>15?'#f59e0b':'#3b82f6';
-    const dLabel=`${dv}d desde emisión`;
     return `<tr>
       <td><span style="font-family:monospace;color:#93c5fd;font-size:10px">${inv.folio||'—'}</span></td>
       <td>${inv.fecha||'—'}</td>
-      <td>${inv.fechaVenc||'—'}</td>
+      <td><span class="cob-days-chip" style="background:${dc}22;color:${dc}">${dv}d</span></td>
       <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${inv.concepto||''}">${inv.concepto||'Renta / Arrendamiento'}</td>
       <td style="text-align:right;font-weight:700;color:#f59e0b">${FMT.format(inv.importe)}</td>
-      <td><span class="cob-days-chip" style="background:${dc}22;color:${dc}">${dLabel}</span></td>
     </tr>`;
   }).join('');
   const tn=encodeURIComponent(tenant.name);
@@ -3363,7 +3361,7 @@ function cobBuildCard(tenant,idx){
     </div>
     <div class="cob-card-body" id="cobCardBody${idx}" style="display:block">
       <table class="cob-inv-table">
-        <thead><tr><th>Folio</th><th>Emisión</th><th>Vencimiento</th><th>Concepto</th><th style="text-align:right">Importe</th><th>Estado</th></tr></thead>
+        <thead><tr><th>Folio</th><th>Emisión</th><th>Días Vencidos</th><th>Concepto</th><th style="text-align:right">Importe</th></tr></thead>
         <tbody>${invRows}</tbody>
       </table>
       <div class="cob-actions">${actionBtns}</div>
