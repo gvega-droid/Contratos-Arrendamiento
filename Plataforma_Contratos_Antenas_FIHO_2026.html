@@ -3219,13 +3219,14 @@ function cobParseCartera(data){
     if(!tenantCanon){dbgTenant++;continue;}
     const importe=PARSE_NUM(row[colImporte]);
     if(importe<=0){dbgImporte++;continue;}
-    const diasRaw=colDiasVenci>=0?row[colDiasVenci]:0;
-    const diasNum=typeof diasRaw==='number'?Math.ceil(diasRaw):PARSE_NUM(String(diasRaw||'0'));
-    const daysPastDue=Math.max(0,diasNum);
-    const fecha=colFecha>=0?FMT_DATE(row[colFecha]):'';
+    // Días desde la fecha de emisión de la factura hasta hoy
+    const fechaRaw=colFecha>=0?row[colFecha]:null;
+    const fechaObj=fechaRaw instanceof Date?fechaRaw:(fechaRaw?new Date(fechaRaw):null);
+    const daysPastDue=fechaObj&&!isNaN(fechaObj)?Math.max(0,Math.ceil((TODAY-fechaObj)/(1000*60*60*24))):0;
+    const fecha=fechaObj&&!isNaN(fechaObj)?fechaObj.toLocaleDateString('es-MX'):(fechaRaw?String(fechaRaw):'');
     const concepto=colDesc>=0?String(row[colDesc]||'').trim():'';
     invoices.push({arrendatario:tenantCanon,folio,fecha,fechaVenc:'',
-      concepto,importe,hotel:'',daysPastDue,diasVenci:diasNum});
+      concepto,importe,hotel:'',daysPastDue,diasVenci:daysPastDue});
   }
 
   // ── 6. Diagnostic alert if still empty ───────────────────────────────────
@@ -3259,7 +3260,6 @@ function cobGroupByTenant(invoices){
 }
 
 function cobRiskLevel(maxDays){
-  if(maxDays===0) return {level:0,label:'Al corriente',color:'#22c55e',bg:'#14532d'};
   if(maxDays<=15) return {level:1,label:'Recordatorio',color:'#3b82f6',bg:'#1e3a5f'};
   if(maxDays<=30) return {level:2,label:'Aviso Formal',color:'#f59e0b',bg:'#422006'};
   if(maxDays<=60) return {level:3,label:'Req. Legal',color:'#f87171',bg:'#7c1d1d'};
@@ -3282,16 +3282,15 @@ function renderCobranza(){
   }
   const {invoices,grouped,loadedAt}=COB_DATA;
   const FMT=new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN',maximumFractionDigits:2});
-  const b={tc:0,tb15:0,tb30:0,tb60:0,tb60p:0};
+  const b={tb15:0,tb30:0,tb60:0,tb60p:0};
   for(const inv of invoices){
-    if(inv.daysPastDue===0) b.tc+=inv.importe;
-    else if(inv.daysPastDue<=15) b.tb15+=inv.importe;
+    if(inv.daysPastDue<=15) b.tb15+=inv.importe;
     else if(inv.daysPastDue<=30) b.tb30+=inv.importe;
     else if(inv.daysPastDue<=60) b.tb60+=inv.importe;
     else b.tb60p+=inv.importe;
   }
   const totalVencido=b.tb15+b.tb30+b.tb60+b.tb60p;
-  const totalGlobal=b.tc+totalVencido;
+  const totalGlobal=totalVencido;
   const statsEl=document.getElementById('cobStats');
   statsEl.style.display='grid';
   statsEl.innerHTML=`
@@ -3303,7 +3302,6 @@ function renderCobranza(){
   `;
   const agingEl=document.getElementById('cobAging');agingEl.style.display='block';
   const buckets=[
-    {label:'Al corriente',amt:b.tc,color:'#22c55e'},
     {label:'1-15 días',amt:b.tb15,color:'#3b82f6'},
     {label:'16-30 días',amt:b.tb30,color:'#f59e0b'},
     {label:'31-60 días',amt:b.tb60,color:'#f97316'},
@@ -3326,9 +3324,9 @@ function cobBuildCard(tenant,idx){
   const logs=cobGetLogs(tenant.name);
   const logsHtml=logs.length?`<div class="cob-log-panel"><div class="cob-log-title">Bitácora de gestión</div><div class="cob-log-list">${logs.slice(-4).map(l=>`<div class="cob-log-item"><span>${l.action}</span><span style="flex-shrink:0">${l.ts}</span></div>`).join('')}</div></div>`:'';
   const invRows=tenant.invoices.map(inv=>{
-    const dv=inv.diasVenci!=null?inv.diasVenci:inv.daysPastDue;
-    const dc=dv>60?'#ef4444':dv>30?'#f97316':dv>15?'#f59e0b':dv>0?'#3b82f6':dv===0?'#facc15':'#22c55e';
-    const dLabel=dv<0?`${-dv}d para vencer`:dv===0?'Vence hoy':`${dv}d vencida`;
+    const dv=inv.daysPastDue;
+    const dc=dv>60?'#ef4444':dv>30?'#f97316':dv>15?'#f59e0b':'#3b82f6';
+    const dLabel=`${dv}d desde emisión`;
     return `<tr>
       <td><span style="font-family:monospace;color:#93c5fd;font-size:10px">${inv.folio||'—'}</span></td>
       <td>${inv.fecha||'—'}</td>
@@ -3401,7 +3399,7 @@ function cobOpenEmail(tenantNameEnc,level){
   const deadlineDays=[null,5,3,2,1][level]||3;
   const deadline=cobGetPayDeadline(deadlineDays);
   const totalStr=FMT.format(tenant.total);
-  const invList=tenant.invoices.map(inv=>`  • Folio ${inv.folio||'S/N'} | Fecha: ${inv.fecha||'—'} | Vto: ${inv.fechaVenc||'—'} | ${FMT.format(inv.importe)} | ${inv.daysPastDue>0?`${inv.daysPastDue}d vencida`:'Al corriente'}`).join('\n');
+  const invList=tenant.invoices.map(inv=>`  • Folio ${inv.folio||'S/N'} | Emisión: ${inv.fecha||'—'} | ${FMT.format(inv.importe)} | ${inv.daysPastDue}d desde emisión`).join('\n');
   const templates={
     1:{
       subject:`Recordatorio de Pago — Facturas Pendientes | ${tenant.name}`,
