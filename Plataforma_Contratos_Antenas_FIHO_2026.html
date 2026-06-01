@@ -421,6 +421,86 @@
       .hero,.stats,.legend,.tabs-bar,.toolbar,.alert-panel,.docs-panel,.perm-legend{padding-left:14px;padding-right:14px}
       .table-wrap{margin:0 10px 28px}
     }
+/* ── COBRANZA ── */
+.cob-panel{padding:24px}
+.cob-hero{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff}
+.cob-hero h2{font-size:22px;font-weight:800;margin:0 0 8px}
+.cob-hero p{font-size:12px;color:#94a3b8;margin:0}
+.cob-upload-zone{border:2px dashed #334155;border-radius:12px;padding:32px;text-align:center;cursor:pointer;transition:all .2s;background:#0f172a;margin-bottom:24px}
+.cob-upload-zone:hover,.cob-upload-zone.drag{border-color:#f59e0b;background:rgba(245,158,11,.05)}
+.cob-upload-icon{font-size:40px;margin-bottom:12px}
+.cob-upload-title{font-size:15px;font-weight:700;color:#e2e8f0;margin-bottom:4px}
+.cob-upload-sub{font-size:11px;color:#64748b}
+.cob-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:24px}
+.cob-stat{background:#0f172a;border:1px solid #1e293b;border-radius:10px;padding:14px;text-align:center}
+.cob-stat-n{font-size:20px;font-weight:800}
+.cob-stat-l{font-size:10px;color:#64748b;margin-top:2px;text-transform:uppercase;letter-spacing:.05em}
+.cob-aging{background:#0f172a;border:1px solid #1e293b;border-radius:12px;padding:18px 20px;margin-bottom:24px}
+.cob-aging-title{font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px}
+.cob-aging-bar{display:flex;border-radius:8px;overflow:hidden;height:12px;gap:2px}
+.cob-aging-seg{transition:width .5s}
+.cob-aging-legend{display:flex;gap:16px;margin-top:10px;flex-wrap:wrap}
+.cob-aging-li{display:flex;align-items:center;gap:5px;font-size:10px;color:#94a3b8}
+.cob-aging-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.cob-cards{display:flex;flex-direction:column;gap:16px;margin-bottom:32px}
+.cob-card{background:#0f172a;border:1px solid #1e293b;border-radius:14px;overflow:hidden}
+.cob-card-header{display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid #1e293b;cursor:pointer}
+.cob-card-logo{width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;flex-shrink:0;color:#fff}
+.cob-card-info{flex:1;min-width:0}
+.cob-card-name{font-size:13px;font-weight:700;color:#e2e8f0}
+.cob-card-meta{font-size:10px;color:#64748b;margin-top:2px}
+.cob-risk-badge{padding:4px 10px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:.05em;white-space:nowrap}
+.cob-card-total{font-size:18px;font-weight:800;color:#f59e0b;text-align:right}
+.cob-card-total-l{font-size:9px;color:#64748b}
+.cob-card-body{padding:16px 20px}
+.cob-inv-table{width:100%;border-collapse:collapse;font-size:11px;margin-bottom:14px}
+.cob-inv-table th{text-align:left;padding:5px 8px;background:#1e293b;color:#64748b;font-weight:600;text-transform:uppercase;letter-spacing:.04em;font-size:9px}
+.cob-inv-table td{padding:6px 8px;border-bottom:1px solid #1e293b;color:#cbd5e1;vertical-align:middle}
+.cob-inv-table tr:last-child td{border-bottom:none}
+.cob-days-chip{display:inline-block;padding:2px 7px;border-radius:10px;font-size:9px;font-weight:700}
+.cob-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.cob-btn{padding:7px 14px;border-radius:8px;font-size:11px;font-weight:700;border:none;cursor:pointer;display:flex;align-items:center;gap:5px;transition:all .15s}
+.cob-btn:hover{transform:translateY(-1px);opacity:.9}
+.cob-btn-r1{background:#1e3a5f;color:#93c5fd}
+.cob-btn-r2{background:#422006;color:#fbbf24}
+.cob-btn-r3{background:#7c1d1d;color:#fca5a5}
+.cob-btn-r4{background:#1a0000;color:#f87171;border:1px solid #7f1d1d}
+.cob-btn-wa{background:#1a2e1a;color:#4ade80}
+.cob-log-panel{background:#111827;border-radius:8px;padding:10px 14px;margin-top:10px}
+.cob-log-title{font-size:9px;color:#475569;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+.cob-log-list{display:flex;flex-direction:column;gap:3px}
+.cob-log-item{font-size:10px;color:#64748b;padding:3px 6px;background:#0f172a;border-radius:5px;display:flex;justify-content:space-between;gap:8px}
+.cob-risk-meter{display:flex;align-items:center;gap:8px;margin-top:5px}
+.cob-risk-bar{flex:1;height:3px;background:#1e293b;border-radius:2px;overflow:hidden}
+.cob-risk-fill{height:100%;border-radius:2px}
+.cob-ideas{background:linear-gradient(135deg,#0d1117,#1a1a2e);border:1px solid #1e3a5f;border-radius:16px;padding:24px}
+.cob-ideas-title{font-size:14px;font-weight:800;color:#93c5fd;margin-bottom:18px;display:flex;align-items:center;gap:8px}
+.cob-ideas-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.cob-idea-card{background:#0f172a;border:1px solid #1e3a5f;border-radius:12px;padding:16px}
+.cob-idea-icon{font-size:24px;margin-bottom:8px}
+.cob-idea-name{font-size:12px;font-weight:700;color:#e2e8f0;margin-bottom:6px}
+.cob-idea-desc{font-size:11px;color:#64748b;line-height:1.5}
+.cob-spei-box{background:#1e293b;border-radius:8px;padding:10px 12px;font-size:10px;color:#94a3b8;font-family:monospace;margin-top:8px}
+.cob-spei-row{display:flex;justify-content:space-between;padding:2px 0;gap:8px}
+.cob-spei-key{color:#64748b;flex-shrink:0}
+.cob-spei-val{color:#e2e8f0;text-align:right}
+.cob-copy-btn{background:#1e3a5f;color:#93c5fd;border:none;border-radius:6px;padding:6px 10px;font-size:10px;cursor:pointer;margin-top:8px;width:100%;font-weight:700}
+.cob-copy-btn:hover{opacity:.85}
+.cob-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:9000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .2s}
+.cob-modal-overlay.open{opacity:1;pointer-events:all}
+.cob-modal{background:#0f172a;border:1px solid #1e293b;border-radius:16px;width:min(680px,95vw);max-height:90vh;overflow-y:auto;padding:28px;position:relative}
+.cob-modal-title{font-size:16px;font-weight:800;color:#e2e8f0;margin-bottom:4px}
+.cob-modal-sub{font-size:11px;color:#64748b;margin-bottom:16px;line-height:1.5}
+.cob-email-preview{background:#050a14;border:1px solid #1e293b;border-radius:8px;padding:16px;font-size:11px;color:#94a3b8;font-family:monospace;white-space:pre-wrap;max-height:420px;overflow-y:auto;line-height:1.55}
+.cob-modal-actions{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.cob-btn-send{background:#1e3a5f;color:#93c5fd;border:none;border-radius:8px;padding:9px 18px;font-size:12px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.cob-btn-copy2{background:#1e293b;color:#94a3b8;border:none;border-radius:8px;padding:9px 18px;font-size:12px;font-weight:700;cursor:pointer}
+.cob-modal-close{position:absolute;top:16px;right:16px;background:none;border:none;color:#64748b;font-size:18px;cursor:pointer;line-height:1}
+.cob-empty{text-align:center;padding:60px 20px;color:#334155}
+.cob-empty-icon{font-size:48px;margin-bottom:16px}
+.cob-progress-wrap{margin-top:16px}
+.cob-progress-bar{height:4px;background:#1e293b;border-radius:2px;overflow:hidden}
+.cob-progress-fill{height:100%;background:linear-gradient(90deg,#3b82f6,#06b6d4);width:0;transition:width .3s}
   </style>
   <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
 </head>
@@ -481,6 +561,10 @@
   <button class="tab-btn" onclick="switchTab('alertas-renta',this)">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
     Alerta de Incremento Renta
+  </button>
+  <button class="tab-btn" onclick="switchTab('cobranza',this)">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+    Cobranza
   </button>
   <button class="tab-btn" onclick="switchTab('docs',this)">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
@@ -1041,6 +1125,127 @@
   </div>
 </div>
 
+<!-- ═══════════ PANEL COBRANZA ═══════════ -->
+<div class="tab-panel" id="panel-cobranza">
+  <div class="cob-panel">
+    <div class="cob-hero">
+      <h2>💼 Cobranza y Cartera Vencida</h2>
+      <p>Carga el archivo "Facturación Cartera y Edo Cta" para identificar arrendatarios morosos, días de atraso, importes y generar comunicaciones formales de cobro con escalamiento progresivo.</p>
+    </div>
+    <div class="cob-upload-zone" id="cobDropZone" onclick="document.getElementById('cobFileInput').click()" ondragover="cobDrag(event)" ondragleave="cobDragEnd(event)" ondrop="cobDrop(event)">
+      <div class="cob-upload-icon">📊</div>
+      <div class="cob-upload-title">Arrastra el Excel de Cartera aquí o haz clic para seleccionar</div>
+      <div class="cob-upload-sub">Archivo: <em>Facturación Cartera y Edo Cta.xlsx</em> — Hoja: CARTERA</div>
+      <div class="cob-progress-wrap" id="cobProgress" style="display:none">
+        <div class="cob-progress-bar"><div class="cob-progress-fill" id="cobProgressFill"></div></div>
+        <div style="font-size:10px;color:#64748b;text-align:center;margin-top:6px" id="cobProgressLabel">Cargando...</div>
+      </div>
+    </div>
+    <input type="file" id="cobFileInput" accept=".xlsx,.xls" style="display:none" onchange="loadCarteraExcel(event)">
+    <div class="cob-stats" id="cobStats" style="display:none"></div>
+    <div class="cob-aging" id="cobAging" style="display:none">
+      <div class="cob-aging-title">📊 Antigüedad de Cartera Vencida</div>
+      <div class="cob-aging-bar" id="cobAgingBar"></div>
+      <div class="cob-aging-legend" id="cobAgingLegend"></div>
+    </div>
+    <div class="cob-cards" id="cobCards"></div>
+    <div class="cob-ideas">
+      <div class="cob-ideas-title">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 1 4 12.74V17H8v-2.26A7 7 0 0 1 12 2z"/></svg>
+        Ideas Innovadoras para Acelerar el Cobro
+      </div>
+      <div class="cob-ideas-grid">
+        <div class="cob-idea-card">
+          <div class="cob-idea-icon">⚡</div>
+          <div class="cob-idea-name">Datos SPEI — Transferencia Inmediata</div>
+          <div class="cob-idea-desc">Incluye en cada correo los datos bancarios listos para copiar. Reduce la fricción: el arrendatario no tiene que preguntar adónde transferir.</div>
+          <div class="cob-idea-action">
+            <div class="cob-spei-box">
+              <div class="cob-spei-row"><span class="cob-spei-key">Banco:</span><span class="cob-spei-val">HSBC</span></div>
+              <div class="cob-spei-row"><span class="cob-spei-key">CLABE:</span><span class="cob-spei-val">021180040103697321</span></div>
+              <div class="cob-spei-row"><span class="cob-spei-key">Beneficiario:</span><span class="cob-spei-val">FIBRA HOTELERA MEXICANA</span></div>
+              <div class="cob-spei-row"><span class="cob-spei-key">RFC:</span><span class="cob-spei-val">FHM131009SY3</span></div>
+            </div>
+            <button class="cob-copy-btn" onclick="cobCopySpei()">📋 Copiar datos SPEI</button>
+          </div>
+        </div>
+        <div class="cob-idea-card">
+          <div class="cob-idea-icon">📈</div>
+          <div class="cob-idea-name">Score de Riesgo Dinámico</div>
+          <div class="cob-idea-desc">Cada arrendatario recibe un puntaje = importe × días de atraso. Prioriza acciones: a mayor score, mayor urgencia de contacto y escalamiento legal.</div>
+          <div class="cob-idea-desc" style="margin-top:6px;color:#f59e0b">Los arrendatarios se ordenan automáticamente de mayor a menor riesgo al cargar el archivo.</div>
+        </div>
+        <div class="cob-idea-card">
+          <div class="cob-idea-icon">📅</div>
+          <div class="cob-idea-name">Convenio de Pago Express</div>
+          <div class="cob-idea-desc">Genera en un clic una plantilla de convenio de pago en parcialidades. Formaliza el compromiso del deudor y reduce la resistencia al cobro.</div>
+          <div class="cob-idea-action" style="margin-top:10px">
+            <button class="cob-copy-btn" onclick="cobConvenioTemplate()">📄 Copiar plantilla convenio</button>
+          </div>
+        </div>
+        <div class="cob-idea-card">
+          <div class="cob-idea-icon">📱</div>
+          <div class="cob-idea-name">Mensaje WhatsApp Formal</div>
+          <div class="cob-idea-desc">Complementa el correo con un mensaje WhatsApp corto y contundente. El canal informal genera respuesta más rápida en el 60% de los casos.</div>
+          <div class="cob-idea-desc" style="margin-top:6px;color:#94a3b8">Selecciona un arrendatario y usa el botón 📱 en su tarjeta para generar el texto listo para enviar.</div>
+        </div>
+        <div class="cob-idea-card">
+          <div class="cob-idea-icon">📋</div>
+          <div class="cob-idea-name">Bitácora de Gestión</div>
+          <div class="cob-idea-desc">Registra cada acción de cobro: quién contactó, cuándo, qué nivel de escala se aplicó. Documenta el historial en caso de proceder por vía legal.</div>
+          <div class="cob-idea-desc" style="margin-top:6px;color:#94a3b8">Cada tarjeta lleva su propia bitácora. Los registros persisten en el navegador automáticamente.</div>
+        </div>
+        <div class="cob-idea-card">
+          <div class="cob-idea-icon">🔔</div>
+          <div class="cob-idea-name">Escalamiento por Nivel</div>
+          <div class="cob-idea-desc">4 niveles de comunicación según días de atraso: Recordatorio (1–15d) → Aviso Formal (16–30d) → Requerimiento Legal (31–60d) → Última Advertencia (+60d).</div>
+          <div class="cob-idea-desc" style="margin-top:6px;color:#94a3b8">Tono y términos legales se intensifican progresivamente. Cada tarjeta muestra el nivel recomendado.</div>
+        </div>
+        <div class="cob-idea-card">
+          <div class="cob-idea-icon">⚖️</div>
+          <div class="cob-idea-name">Cláusula de Intereses Moratorios</div>
+          <div class="cob-idea-desc">Los correos de nivel 3 y 4 mencionan explícitamente intereses moratorios (TIIE + 10 pp), generando urgencia legal y económica real.</div>
+          <div class="cob-idea-desc" style="margin-top:6px;color:#f87171">Mencionar intereses moratorios incrementa la tasa de pago hasta en 35% según estudios de cobranza.</div>
+        </div>
+        <div class="cob-idea-card">
+          <div class="cob-idea-icon">🗓️</div>
+          <div class="cob-idea-name">Fecha Límite Concreta</div>
+          <div class="cob-idea-desc">Cada comunicación incluye una fecha límite de pago calculada automáticamente (1–5 días hábiles según nivel). Las fechas concretas generan mayor cumplimiento que las peticiones abiertas.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Email modal -->
+  <div class="cob-modal-overlay" id="cobModal" onclick="cobModalOut(event)">
+    <div class="cob-modal">
+      <button class="cob-modal-close" onclick="document.getElementById('cobModal').classList.remove('open')">✕</button>
+      <div class="cob-modal-title" id="cobModalTitle">Borrador de Requerimiento</div>
+      <div class="cob-modal-sub" id="cobModalSub"></div>
+      <div class="cob-email-preview" id="cobEmailPreview"></div>
+      <div class="cob-modal-actions">
+        <a class="cob-btn-send" id="cobMailtoLink" href="#" target="_blank">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+          Abrir en mi correo
+        </a>
+        <button class="cob-btn-copy2" onclick="cobCopyEmail()">📋 Copiar borrador</button>
+      </div>
+      <div style="font-size:10px;color:#475569;margin-top:12px">⚠ Adjunta manualmente las facturas del apartado "Soporte Facturas" del archivo Excel antes de enviar.</div>
+    </div>
+  </div>
+  <!-- WhatsApp modal -->
+  <div class="cob-modal-overlay" id="cobWaModal" onclick="cobWaModalOut(event)">
+    <div class="cob-modal">
+      <button class="cob-modal-close" onclick="document.getElementById('cobWaModal').classList.remove('open')">✕</button>
+      <div class="cob-modal-title">📱 Mensaje WhatsApp</div>
+      <div class="cob-modal-sub" id="cobWaModalSub"></div>
+      <div class="cob-email-preview" id="cobWaPreview" style="max-height:220px"></div>
+      <div class="cob-modal-actions">
+        <button class="cob-btn-send" onclick="cobCopyWa()">📋 Copiar mensaje</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ═══════════ PANEL ENERGÉTICOS ═══════════ -->
 <div class="tab-panel" id="panel-energeticos">
   <div class="ener-panel">
@@ -1402,6 +1607,7 @@ function switchTab(id,btn){
   if(id==='facturacion') { renderFacturacion(); initFacturacionSelects(); }
   if(id==='eeff') renderEEFF();
   if(id==='alertas-renta') renderAlertaRenta();
+  if(id==='cobranza') renderCobranza();
 }
 
 /* ── SEARCH ── */
@@ -2349,7 +2555,8 @@ function getNextIncr(cid, rates){
   const daysUntil=Math.ceil((d-TODAY)/(1000*60*60*24));
   const yr=d.getFullYear();
   const rate=rates[yr]??rates[yr-1]??4.0;
-  const {renta:curRenta}=calcRentaActual(cd.base,cd.start,cd.mes,rates);
+  const re=RENTA_EFECTIVA[cid];
+  const curRenta=(re&&re.importe!=null)?re.importe:calcRentaActual(cd.base,cd.start,cd.mes,rates).renta;
   const curMes=cd.tipo==='anual'?curRenta/12:curRenta;
   const newRenta=curRenta*(1+rate/100);
   const newMes=cd.tipo==='anual'?newRenta/12:newRenta;
@@ -2533,33 +2740,17 @@ function airtOpenEmail(cid){
   const rentaActual=FMT2.format(incr.tipo==='anual'?incr.curRenta:incr.curMes);
   const rentaNueva=FMT2.format(incr.tipo==='anual'?incr.newRenta:incr.newMes);
   const diferencia=FMT2.format(incr.tipo==='anual'?incr.newRenta-incr.curRenta:incr.newMes-incr.curMes);
-  const baseStr=FMT2.format(cd.base);
-
-  const histLines=incr.history.map(h=>`  ${(h.fecha).padEnd(16)}| INPC ${h.rate.toFixed(2).padStart(5)}% | ${FMT2.format(h.prev).padEnd(16)} → ${FMT2.format(h.nueva)}`).join('\n');
-  const nextLine=`  ${incrMesAno.padEnd(16)}| INPC ${incr.incrRate.toFixed(2).padStart(5)}% (est.) | ${FMT2.format(incr.tipo==='anual'?incr.curRenta:incr.curMes).padEnd(16)} → ${rentaNueva}`;
 
   const subject=`Ajuste de Renta ${incrMesAno} — ${c.hotel} | Contrato de Arrendamiento FIHO`;
   const body=`Estimado(a) equipo de ${contact.cliente},
 
-Por medio del presente, nos permitimos comunicarle que de conformidad con la cláusula de incremento establecida en el Contrato de Arrendamiento vigente, celebrado entre FIBRA HOTELERA MEXICANA — Fideicomiso F/1596 (FIHO) y ${contact.cliente}, corresponde efectuar el ajuste anual de renta de conformidad con la variación acumulada del Índice Nacional de Precios al Consumidor (INPC), publicado por el Instituto Nacional de Estadística y Geografía (INEGI).
-
-A continuación se detalla el cálculo del ajuste correspondiente:
+Por medio del presente, nos permitimos comunicarle que de conformidad con la cláusula de incremento establecida en el Contrato de Arrendamiento vigente, celebrado entre FIBRA HOTELERA MEXICANA — Fideicomiso F/1596 (FIHO) y ${contact.cliente}, corresponde efectuar el ajuste anual de renta de conformidad con la variación del Índice Nacional de Precios al Consumidor (INPC), publicado por el Instituto Nacional de Estadística y Geografía (INEGI).
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-DETALLE DEL INCREMENTO DE RENTA
+DETALLE DEL INCREMENTO
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Inmueble        : ${c.hotel}
 Mes de ajuste   : ${incrMesAno}
-Renta base orig.: ${baseStr}
-
-HISTORIAL DE INCREMENTOS INPC APLICADOS:
-${histLines}
-
-PRÓXIMO AJUSTE — ${incrMesAno}:
-${nextLine}
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-RESUMEN DEL AJUSTE
 Renta vigente   : ${rentaActual} ${tipoLabel}
 Factor INPC ${incr.incrYear} : ${incr.incrRate.toFixed(2)}% (fuente: INEGI)
 Nueva renta     : ${rentaNueva} ${tipoLabel}
@@ -2873,6 +3064,391 @@ function renderEEFF(){
   } else {
     document.getElementById('eeff2117Content').innerHTML='<div class="eeff-no-data">La hoja 2.1.17 no se encontró en el archivo cargado.</div>';
   }
+}
+
+/* ════════════════════════════════════════
+   COBRANZA
+   ════════════════════════════════════════ */
+let COB_DATA=null;
+const SPEI_DATA={banco:'HSBC',clabe:'021180040103697321',beneficiario:'FIBRA HOTELERA MEXICANA',rfc:'FHM131009SY3'};
+
+function cobDrag(e){e.preventDefault();document.getElementById('cobDropZone').classList.add('drag');}
+function cobDragEnd(e){document.getElementById('cobDropZone').classList.remove('drag');}
+function cobDrop(e){
+  e.preventDefault();cobDragEnd(e);
+  const f=e.dataTransfer.files[0];
+  if(f) loadCarteraExcel({target:{files:[f]}});
+}
+
+function cobShowProgress(pct,label){
+  document.getElementById('cobProgress').style.display='block';
+  document.getElementById('cobProgressFill').style.width=pct+'%';
+  document.getElementById('cobProgressLabel').textContent=label;
+}
+function cobHideProgress(){document.getElementById('cobProgress').style.display='none';}
+
+function loadCarteraExcel(event){
+  const file=event.target.files[0];
+  if(!file) return;
+  cobShowProgress(20,'Leyendo archivo...');
+  const reader=new FileReader();
+  reader.onload=function(e){
+    cobShowProgress(60,'Procesando hojas...');
+    try{
+      const wb=XLSX.read(e.target.result,{type:'binary',cellDates:true});
+      const carteraName=wb.SheetNames.find(n=>/cartera/i.test(n))||wb.SheetNames[0];
+      if(!carteraName){alert('No se encontró la hoja CARTERA en el archivo.');cobHideProgress();return;}
+      const data=XLSX.utils.sheet_to_json(wb.Sheets[carteraName],{header:1,defval:''});
+      cobShowProgress(80,'Analizando cartera...');
+      const invoices=cobParseCartera(data);
+      if(!invoices.length){alert('No se encontraron facturas con importe válido en la hoja CARTERA.');cobHideProgress();return;}
+      const grouped=cobGroupByTenant(invoices);
+      COB_DATA={invoices,grouped,fileName:file.name,loadedAt:new Date().toLocaleString('es-MX')};
+      cobShowProgress(100,'¡Listo!');
+      setTimeout(()=>{cobHideProgress();renderCobranza();},400);
+    }catch(err){
+      console.error(err);
+      alert('Error al leer el archivo: '+err.message);
+      cobHideProgress();
+    }
+  };
+  reader.readAsBinaryString(file);
+}
+
+function cobFindCol(header,patterns){
+  for(let i=0;i<header.length;i++){
+    const cell=String(header[i]).trim().toUpperCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+    if(patterns.some(p=>cell.includes(p.toUpperCase().normalize('NFD').replace(/[̀-ͯ]/g,'')))) return i;
+  }
+  return -1;
+}
+
+function cobParseCartera(data){
+  let headerIdx=-1;
+  for(let i=0;i<Math.min(data.length,20);i++){
+    const txt=data[i].join(' ').toUpperCase();
+    if(txt.includes('ARRENDATARIO')||txt.includes('CLIENTE')||txt.includes('FOLIO')||txt.includes('RFC')||txt.includes('RAZON')){
+      headerIdx=i;break;
+    }
+  }
+  if(headerIdx<0) headerIdx=0;
+  const header=data[headerIdx];
+  const cols={
+    arrendatario:cobFindCol(header,['ARRENDATARIO','CLIENTE','RAZON SOCIAL','RAZON','NOMBRE']),
+    folio:       cobFindCol(header,['FOLIO','UUID','FACTURA','CFDI','SERIE','NO. FACTURA']),
+    fecha:       cobFindCol(header,['FECHA FACTURA','FECHA FAC','FECHA DOC','EMISION','FECHA EMI']),
+    fechaVenc:   cobFindCol(header,['VENCIMIENTO','VENCE','FECHA VENC','FEC VENC','F. VENC']),
+    concepto:    cobFindCol(header,['CONCEPTO','DESCRIPCION','SERVICIO']),
+    importe:     cobFindCol(header,['IMPORTE','MONTO','TOTAL','SALDO','ADEUDO','PENDIENTE']),
+    hotel:       cobFindCol(header,['HOTEL','INMUEBLE','PROPIEDAD','SITIO','UBICACION']),
+  };
+  const FMT_DATE=v=>{
+    if(!v) return '';
+    if(v instanceof Date) return v.toLocaleDateString('es-MX');
+    const d=new Date(v);
+    return isNaN(d)?String(v):d.toLocaleDateString('es-MX');
+  };
+  const FMT_DATE_OBJ=v=>{
+    if(!v) return null;
+    if(v instanceof Date) return v;
+    const d=new Date(v);
+    return isNaN(d)?null:d;
+  };
+  const PARSE_NUM=v=>{
+    if(typeof v==='number') return v;
+    const n=parseFloat(String(v).replace(/[^0-9.\-]/g,''));
+    return isNaN(n)?0:n;
+  };
+  const invoices=[];
+  for(let i=headerIdx+1;i<data.length;i++){
+    const row=data[i];
+    if(!row||row.every(c=>!c)) continue;
+    const arr=cols.arrendatario>=0?String(row[cols.arrendatario]||'').trim():'';
+    if(!arr||arr.length<2) continue;
+    const importe=cols.importe>=0?PARSE_NUM(row[cols.importe]):0;
+    if(importe<=0) continue;
+    const folio=cols.folio>=0?String(row[cols.folio]||'').trim():'';
+    const fecha=cols.fecha>=0?FMT_DATE(row[cols.fecha]):'';
+    const fechaVencStr=cols.fechaVenc>=0?FMT_DATE(row[cols.fechaVenc]):'';
+    const fechaVencObj=cols.fechaVenc>=0?FMT_DATE_OBJ(row[cols.fechaVenc]):null;
+    const concepto=cols.concepto>=0?String(row[cols.concepto]||'').trim():'';
+    const hotel=cols.hotel>=0?String(row[cols.hotel]||'').trim():'';
+    let daysPastDue=0;
+    if(fechaVencObj) daysPastDue=Math.max(0,Math.ceil((TODAY-fechaVencObj)/(1000*60*60*24)));
+    invoices.push({arrendatario:arr,folio,fecha,fechaVenc:fechaVencStr,concepto,importe,hotel,daysPastDue});
+  }
+  return invoices;
+}
+
+function cobGroupByTenant(invoices){
+  const map={};
+  for(const inv of invoices){
+    const k=inv.arrendatario;
+    if(!map[k]) map[k]={name:k,invoices:[],total:0,maxDays:0};
+    map[k].invoices.push(inv);
+    map[k].total+=inv.importe;
+    if(inv.daysPastDue>map[k].maxDays) map[k].maxDays=inv.daysPastDue;
+  }
+  return Object.values(map).sort((a,b)=>(b.total*b.maxDays)-(a.total*a.maxDays));
+}
+
+function cobRiskLevel(maxDays){
+  if(maxDays===0) return {level:0,label:'Al corriente',color:'#22c55e',bg:'#14532d'};
+  if(maxDays<=15) return {level:1,label:'Recordatorio',color:'#3b82f6',bg:'#1e3a5f'};
+  if(maxDays<=30) return {level:2,label:'Aviso Formal',color:'#f59e0b',bg:'#422006'};
+  if(maxDays<=60) return {level:3,label:'Req. Legal',color:'#f87171',bg:'#7c1d1d'};
+  return {level:4,label:'Últ. Advertencia',color:'#fca5a5',bg:'#1a0000'};
+}
+
+function cobRiskScore(t){return Math.round(t.total*t.maxDays/1000);}
+
+function cobGetPayDeadline(days){
+  const d=new Date(TODAY);d.setDate(d.getDate()+days);
+  return d.toLocaleDateString('es-MX',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+}
+
+function renderCobranza(){
+  if(!COB_DATA){
+    document.getElementById('cobCards').innerHTML=`<div class="cob-empty"><div class="cob-empty-icon">📁</div><div style="color:#64748b;font-size:13px">Carga el archivo Excel de Cartera para visualizar los arrendatarios morosos</div></div>`;
+    document.getElementById('cobStats').style.display='none';
+    document.getElementById('cobAging').style.display='none';
+    return;
+  }
+  const {invoices,grouped,loadedAt}=COB_DATA;
+  const FMT=new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN',maximumFractionDigits:2});
+  const b={tc:0,tb15:0,tb30:0,tb60:0,tb60p:0};
+  for(const inv of invoices){
+    if(inv.daysPastDue===0) b.tc+=inv.importe;
+    else if(inv.daysPastDue<=15) b.tb15+=inv.importe;
+    else if(inv.daysPastDue<=30) b.tb30+=inv.importe;
+    else if(inv.daysPastDue<=60) b.tb60+=inv.importe;
+    else b.tb60p+=inv.importe;
+  }
+  const totalVencido=b.tb15+b.tb30+b.tb60+b.tb60p;
+  const totalGlobal=b.tc+totalVencido;
+  const statsEl=document.getElementById('cobStats');
+  statsEl.style.display='grid';
+  statsEl.innerHTML=`
+    <div class="cob-stat"><div class="cob-stat-n" style="color:#e2e8f0">${grouped.length}</div><div class="cob-stat-l">Arrendatarios</div></div>
+    <div class="cob-stat"><div class="cob-stat-n" style="color:#e2e8f0">${invoices.length}</div><div class="cob-stat-l">Facturas</div></div>
+    <div class="cob-stat"><div class="cob-stat-n" style="color:#f59e0b;font-size:14px">${FMT.format(totalVencido)}</div><div class="cob-stat-l">Cartera vencida</div></div>
+    <div class="cob-stat"><div class="cob-stat-n" style="color:#f87171">${invoices.filter(i=>i.daysPastDue>30).length}</div><div class="cob-stat-l">Facturas críticas >30d</div></div>
+    <div class="cob-stat"><div class="cob-stat-n" style="color:#64748b;font-size:12px">${loadedAt.split(' ')[0]||''}</div><div class="cob-stat-l">Actualizado</div></div>
+  `;
+  const agingEl=document.getElementById('cobAging');agingEl.style.display='block';
+  const buckets=[
+    {label:'Al corriente',amt:b.tc,color:'#22c55e'},
+    {label:'1-15 días',amt:b.tb15,color:'#3b82f6'},
+    {label:'16-30 días',amt:b.tb30,color:'#f59e0b'},
+    {label:'31-60 días',amt:b.tb60,color:'#f97316'},
+    {label:'+60 días',amt:b.tb60p,color:'#ef4444'},
+  ];
+  document.getElementById('cobAgingBar').innerHTML=buckets.map(bk=>`<div class="cob-aging-seg" style="width:${totalGlobal>0?Math.max(1,Math.round(bk.amt/totalGlobal*100)):0}%;background:${bk.color}"></div>`).join('');
+  document.getElementById('cobAgingLegend').innerHTML=buckets.map(bk=>`<div class="cob-aging-li"><div class="cob-aging-dot" style="background:${bk.color}"></div>${bk.label}: ${FMT.format(bk.amt)}</div>`).join('');
+  document.getElementById('cobCards').innerHTML=grouped.map((t,i)=>cobBuildCard(t,i)).join('');
+}
+
+function cobBuildCard(tenant,idx){
+  const FMT=new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN',maximumFractionDigits:2});
+  const risk=cobRiskLevel(tenant.maxDays);
+  const score=cobRiskScore(tenant);
+  const maxScore=COB_DATA.grouped.length>0?cobRiskScore(COB_DATA.grouped[0]):1;
+  const scorePct=maxScore>0?Math.round(score/maxScore*100):0;
+  const initials=tenant.name.split(/\s+/).map(w=>w[0]||'').join('').slice(0,2).toUpperCase();
+  const logoColors=['#1565C0','#2E7D32','#6A1B9A','#AD1457','#E65100','#00695C','#4527A0','#BF360C'];
+  const logoCol=logoColors[idx%logoColors.length];
+  const logs=cobGetLogs(tenant.name);
+  const logsHtml=logs.length?`<div class="cob-log-panel"><div class="cob-log-title">Bitácora de gestión</div><div class="cob-log-list">${logs.slice(-4).map(l=>`<div class="cob-log-item"><span>${l.action}</span><span style="flex-shrink:0">${l.ts}</span></div>`).join('')}</div></div>`:'';
+  const invRows=tenant.invoices.map(inv=>{
+    const dc=inv.daysPastDue>60?'#ef4444':inv.daysPastDue>30?'#f97316':inv.daysPastDue>15?'#f59e0b':inv.daysPastDue>0?'#3b82f6':'#22c55e';
+    const dLabel=inv.daysPastDue===0?'Al corriente':`${inv.daysPastDue}d vencida`;
+    return `<tr>
+      <td><span style="font-family:monospace;color:#93c5fd;font-size:10px">${inv.folio||'—'}</span></td>
+      <td>${inv.fecha||'—'}</td>
+      <td>${inv.fechaVenc||'—'}</td>
+      <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${inv.concepto||''}">${inv.concepto||'Renta / Arrendamiento'}</td>
+      <td style="text-align:right;font-weight:700;color:#f59e0b">${FMT.format(inv.importe)}</td>
+      <td><span class="cob-days-chip" style="background:${dc}22;color:${dc}">${dLabel}</span></td>
+    </tr>`;
+  }).join('');
+  const tn=encodeURIComponent(tenant.name);
+  const actionBtns=tenant.maxDays===0
+    ?`<button class="cob-btn cob-btn-r1" onclick="cobOpenEmail('${tn}',1)">✉️ Recordatorio</button>`
+    :`<button class="cob-btn cob-btn-r1" onclick="cobOpenEmail('${tn}',1)">✉️ Recordatorio</button>
+      <button class="cob-btn cob-btn-r2" onclick="cobOpenEmail('${tn}',2)">📨 Aviso Formal</button>
+      <button class="cob-btn cob-btn-r3" onclick="cobOpenEmail('${tn}',3)">⚖️ Req. Legal</button>
+      <button class="cob-btn cob-btn-r4" onclick="cobOpenEmail('${tn}',4)">🚨 Últ. Advertencia</button>
+      <button class="cob-btn cob-btn-wa" onclick="cobOpenWa('${tn}')">📱 WhatsApp</button>`;
+  return `<div class="cob-card">
+    <div class="cob-card-header" onclick="cobToggleCard(${idx})">
+      <div class="cob-card-logo" style="background:${logoCol}">${initials}</div>
+      <div class="cob-card-info">
+        <div class="cob-card-name">${tenant.name}</div>
+        <div class="cob-card-meta">${tenant.invoices.length} factura${tenant.invoices.length!==1?'s':''} · máx. ${tenant.maxDays}d vencidas</div>
+        <div class="cob-risk-meter">
+          <div class="cob-risk-bar"><div class="cob-risk-fill" style="width:${scorePct}%;background:${risk.color}"></div></div>
+          <span style="font-size:9px;color:${risk.color};flex-shrink:0">${score} pts</span>
+        </div>
+      </div>
+      <span class="cob-risk-badge" style="background:${risk.bg};color:${risk.color}">${risk.label}</span>
+      <div style="text-align:right;flex-shrink:0;padding-left:8px">
+        <div class="cob-card-total">${FMT.format(tenant.total)}</div>
+        <div class="cob-card-total-l">total adeudado</div>
+      </div>
+    </div>
+    <div class="cob-card-body" id="cobCardBody${idx}" style="display:block">
+      <table class="cob-inv-table">
+        <thead><tr><th>Folio</th><th>Emisión</th><th>Vencimiento</th><th>Concepto</th><th style="text-align:right">Importe</th><th>Estado</th></tr></thead>
+        <tbody>${invRows}</tbody>
+      </table>
+      <div class="cob-actions">${actionBtns}</div>
+      ${logsHtml}
+    </div>
+  </div>`;
+}
+
+function cobToggleCard(idx){
+  const b=document.getElementById('cobCardBody'+idx);
+  if(b) b.style.display=b.style.display==='none'?'block':'none';
+}
+
+function cobGetLogs(name){
+  try{return JSON.parse(localStorage.getItem('fiho_cob_'+name.slice(0,30).replace(/\s+/g,'_'))||'[]');}
+  catch(e){return[];}
+}
+function cobSaveLog(name,action){
+  try{
+    const k='fiho_cob_'+name.slice(0,30).replace(/\s+/g,'_');
+    const logs=cobGetLogs(name);
+    logs.push({action,ts:new Date().toLocaleString('es-MX')});
+    localStorage.setItem(k,JSON.stringify(logs.slice(-20)));
+  }catch(e){}
+}
+
+function cobOpenEmail(tenantNameEnc,level){
+  const tenantName=decodeURIComponent(tenantNameEnc);
+  const tenant=COB_DATA&&COB_DATA.grouped.find(t=>t.name===tenantName);
+  if(!tenant) return;
+  const FMT=new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN',maximumFractionDigits:2});
+  const today=TODAY.toLocaleDateString('es-MX',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  const deadlineDays=[null,5,3,2,1][level]||3;
+  const deadline=cobGetPayDeadline(deadlineDays);
+  const totalStr=FMT.format(tenant.total);
+  const invList=tenant.invoices.map(inv=>`  • Folio ${inv.folio||'S/N'} | Fecha: ${inv.fecha||'—'} | Vto: ${inv.fechaVenc||'—'} | ${FMT.format(inv.importe)} | ${inv.daysPastDue>0?`${inv.daysPastDue}d vencida`:'Al corriente'}`).join('\n');
+  const templates={
+    1:{
+      subject:`Recordatorio de Pago — Facturas Pendientes | ${tenant.name}`,
+      nivel:'Nivel 1 — Recordatorio',
+      saludo:`Estimado(a) equipo de ${tenant.name}`,
+      intro:`Nos permitimos enviarle el presente recordatorio de pago con relación a las facturas pendientes emitidas por FIBRA HOTELERA MEXICANA — Fideicomiso F/1596 (FIHO), correspondientes al concepto de arrendamiento de espacios en inmuebles del portafolio FIHO.`,
+      cuerpo:`A la fecha de la presente comunicación (${today}), se tienen registradas facturas con saldo pendiente de liquidar por un importe total de ${totalStr}, cuyo vencimiento ha operado sin haberse recibido el pago correspondiente.`,
+      closing:`Agradecemos su pronta atención y les solicitamos efectuar el pago a más tardar el ${deadline}, a fin de mantener la relación contractual en orden. Si ya realizó el pago, le rogamos hacernos llegar el comprobante de transferencia.`
+    },
+    2:{
+      subject:`Aviso Formal de Adeudo — Facturas Vencidas | ${tenant.name}`,
+      nivel:'Nivel 2 — Aviso Formal',
+      saludo:`Estimado(a) equipo de ${tenant.name}`,
+      intro:`Por medio del presente aviso formal, FIBRA HOTELERA MEXICANA — Fideicomiso F/1596 (FIHO), en su carácter de arrendador, hace de su conocimiento que existen facturas vencidas y no liquidadas correspondientes al contrato de arrendamiento vigente.`,
+      cuerpo:`Al día ${today}, el saldo total en mora asciende a ${totalStr}. Dicho importe incluye las facturas que se detallan a continuación, cuyo vencimiento ha transcurrido sin recibirse pago ni comunicación alguna. En cumplimiento de la cláusula de pago del contrato respectivo, el arrendatario se obliga a cubrir la renta puntualmente en las fechas convenidas.`,
+      closing:`Por lo anterior, se le requiere de manera formal efectuar el pago total de los adeudos a más tardar el ${deadline}. La falta de pago dentro del plazo indicado podrá derivar en la aplicación de los intereses moratorios pactados en contrato y en la adopción de las medidas adicionales previstas en el mismo instrumento.`
+    },
+    3:{
+      subject:`REQUERIMIENTO DE PAGO — Facturas Vencidas | ${tenant.name} | FIHO F/1596`,
+      nivel:'Nivel 3 — Requerimiento Legal',
+      saludo:`Estimado(a) equipo de ${tenant.name}`,
+      intro:`FIBRA HOTELERA MEXICANA — Fideicomiso F/1596 (FIHO), por conducto de la Gerencia de Arrendamientos, hace formal REQUERIMIENTO DE PAGO respecto de las facturas vencidas y no liquidadas que se detallan más adelante, derivadas del Contrato de Arrendamiento celebrado entre las partes.`,
+      cuerpo:`Al día de hoy, ${today}, el saldo total en mora asciende a la cantidad de ${totalStr}. Dicho importe se encuentra vencido y no ha sido liquidado a pesar de los avisos previos. Con fundamento en las cláusulas del contrato de arrendamiento vigente, se hace constar que la mora en el pago de rentas genera intereses moratorios a la tasa pactada (equivalente a la TIIE + 10 puntos porcentuales, publicada por el Banco de México), mismos que corren a partir de la fecha de vencimiento de cada factura.`,
+      closing:`Se REQUIERE FORMALMENTE efectuar el pago total del adeudo señalado, incluyendo los intereses moratorios generados, a más tardar el ${deadline}. El incumplimiento dará lugar al inicio de las acciones legales procedentes, incluyendo la rescisión del contrato y la reclamación de daños y perjuicios causados a FIHO.`
+    },
+    4:{
+      subject:`ÚLTIMA ADVERTENCIA — Acción Legal Inminente | ${tenant.name} | FIHO F/1596`,
+      nivel:'Nivel 4 — Última Advertencia',
+      saludo:`Estimado(a) equipo de ${tenant.name}`,
+      intro:`FIBRA HOTELERA MEXICANA — Fideicomiso F/1596 (FIHO), por conducto de la Gerencia de Arrendamientos y con fundamento en el Contrato de Arrendamiento vigente, dirige a ustedes la ÚLTIMA COMUNICACIÓN EXTRAJUDICIAL con carácter de requerimiento previo al inicio de las acciones legales correspondientes.`,
+      cuerpo:`No obstante los requerimientos previos formulados por esta Gerencia, al día ${today} permanece sin liquidar el adeudo total de ${totalStr}, más los intereses moratorios acumulados. La persistencia del incumplimiento contractual obliga a FIHO a informar que, vencido el plazo concedido, se procederá sin mayor aviso a: (i) demandar la rescisión del contrato de arrendamiento; (ii) reclamar el pago de rentas vencidas, intereses moratorios y daños; y (iii) reportar el adeudo ante el Buró de Crédito en los términos de la legislación aplicable.`,
+      closing:`Se concede un ÚLTIMO PLAZO IMPRORROGABLE hasta el ${deadline}. Vencida dicha fecha sin que se acredite el pago íntegro del adeudo, esta comunicación servirá como constancia del agotamiento de la vía extrajudicial y se iniciará de inmediato el procedimiento legal ante los tribunales competentes.`
+    }
+  };
+  const t=templates[level]||templates[1];
+  const body=`${t.saludo},
+
+${t.intro}
+
+${t.cuerpo}
+
+FACTURAS RELACIONADAS:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+${invList}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+TOTAL ADEUDADO: ${totalStr}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+DATOS PARA PAGO ELECTRÓNICO (SPEI):
+  Banco          : ${SPEI_DATA.banco}
+  CLABE          : ${SPEI_DATA.clabe}
+  Beneficiario   : ${SPEI_DATA.beneficiario}
+  RFC            : ${SPEI_DATA.rfc}
+  Concepto SPEI  : Renta Arrendamiento ${tenant.name}
+
+${t.closing}
+
+Atentamente,
+
+Gerardo Vega Quinto
+Gerencia de Arrendamientos
+FIBRA HOTELERA MEXICANA — Fideicomiso F/1596 (FIHO)
+gvega@fibrahotel.com`;
+
+  document.getElementById('cobModalTitle').textContent=`${t.nivel} — ${tenant.name}`;
+  document.getElementById('cobModalSub').innerHTML=`<strong>Total adeudado:</strong> ${FMT.format(tenant.total)} &nbsp;·&nbsp; <strong>Facturas:</strong> ${tenant.invoices.length} &nbsp;·&nbsp; <strong>Plazo límite:</strong> ${deadline}`;
+  document.getElementById('cobEmailPreview').textContent=`ASUNTO: ${t.subject}\n\n${body}`;
+  document.getElementById('cobMailtoLink').href=`mailto:?subject=${encodeURIComponent(t.subject)}&body=${encodeURIComponent(body)}`;
+  window._cobDraft={text:`ASUNTO: ${t.subject}\n\n${body}`};
+  document.getElementById('cobModal').classList.add('open');
+  cobSaveLog(tenant.name,`Correo "${t.nivel}" generado`);
+}
+
+function cobOpenWa(tenantNameEnc){
+  const tenantName=decodeURIComponent(tenantNameEnc);
+  const tenant=COB_DATA&&COB_DATA.grouped.find(t=>t.name===tenantName);
+  if(!tenant) return;
+  const FMT=new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN',maximumFractionDigits:2});
+  const msg=`Hola, buenos días.\n\nLe escribo de parte de *FIBRA HOTELERA MEXICANA (FIHO)* — Gerencia de Arrendamientos.\n\nTenemos registradas facturas pendientes de pago por un total de *${FMT.format(tenant.total)}*, con una antigüedad máxima de *${tenant.maxDays} días*.\n\nSolicitamos amablemente confirmar la fecha estimada de pago o, en su caso, enviarnos el comprobante si ya realizó la transferencia.\n\nDatos SPEI:\n• Banco: ${SPEI_DATA.banco}\n• CLABE: ${SPEI_DATA.clabe}\n• Beneficiario: ${SPEI_DATA.beneficiario}\n\nQuedo en espera de su respuesta.\n\nGerardo Vega Quinto — FIHO\ngvega@fibrahotel.com`;
+  document.getElementById('cobWaModalSub').textContent=`Para: ${tenant.name}`;
+  document.getElementById('cobWaPreview').textContent=msg;
+  window._cobWaDraft=msg;
+  document.getElementById('cobWaModal').classList.add('open');
+  cobSaveLog(tenant.name,'Mensaje WhatsApp generado');
+}
+
+function cobModalOut(e){if(e.target===document.getElementById('cobModal')) document.getElementById('cobModal').classList.remove('open');}
+function cobWaModalOut(e){if(e.target===document.getElementById('cobWaModal')) document.getElementById('cobWaModal').classList.remove('open');}
+
+function cobCopyEmail(){
+  if(!window._cobDraft) return;
+  navigator.clipboard.writeText(window._cobDraft.text).then(()=>{
+    const btn=document.querySelector('#cobModal .cob-btn-copy2');
+    if(btn){const t=btn.textContent;btn.textContent='✅ Copiado';setTimeout(()=>btn.textContent=t,2000);}
+  }).catch(()=>{});
+}
+function cobCopyWa(){
+  if(!window._cobWaDraft) return;
+  navigator.clipboard.writeText(window._cobWaDraft).then(()=>{
+    const btn=document.querySelector('#cobWaModal .cob-btn-send');
+    if(btn){const t=btn.textContent;btn.textContent='✅ Copiado';setTimeout(()=>btn.textContent=t,2000);}
+  }).catch(()=>{});
+}
+function cobCopySpei(){
+  const txt=`Banco: ${SPEI_DATA.banco}\nCLABE: ${SPEI_DATA.clabe}\nBeneficiario: ${SPEI_DATA.beneficiario}\nRFC: ${SPEI_DATA.rfc}`;
+  navigator.clipboard.writeText(txt).then(()=>{
+    const btns=document.querySelectorAll('.cob-copy-btn');
+    btns.forEach(b=>{if(b.textContent.includes('SPEI')){b.textContent='✅ Copiado';setTimeout(()=>b.textContent='📋 Copiar datos SPEI',2000);}});
+  }).catch(()=>{});
+}
+function cobConvenioTemplate(){
+  const hoy=new Date(TODAY).toLocaleDateString('es-MX',{year:'numeric',month:'long',day:'numeric'});
+  const txt=`CONVENIO DE PAGO EN PARCIALIDADES\n\nCiudad de México, a ${hoy}\n\nEntre FIBRA HOTELERA MEXICANA — Fideicomiso F/1596 (FIHO), en adelante "EL ARRENDADOR", y __________________________, en adelante "EL ARRENDATARIO", se celebra el presente convenio:\n\nPRIMERA.- El Arrendatario reconoce adeudar al Arrendador la cantidad de $__________ (________ pesos M.N.), por concepto de rentas vencidas correspondientes al inmueble ubicado en __________________________.\n\nSEGUNDA.- Las partes convienen en que dicho adeudo será cubierto en ___ parcialidades:\n  1ª parcialidad: $__________ — pagadera el __ de __________ de 2026\n  2ª parcialidad: $__________ — pagadera el __ de __________ de 2026\n  3ª parcialidad: $__________ — pagadera el __ de __________ de 2026\n\nTERCERA.- El incumplimiento de cualquier parcialidad hará exigible la totalidad del adeudo pendiente, más los intereses moratorios correspondientes a la tasa pactada en el contrato de arrendamiento.\n\nCUARTA.- El pago deberá realizarse mediante transferencia electrónica SPEI a:\n  Banco: ${SPEI_DATA.banco}\n  CLABE: ${SPEI_DATA.clabe}\n  Beneficiario: ${SPEI_DATA.beneficiario}\n  RFC: ${SPEI_DATA.rfc}\n\nQUINTA.- El presente convenio no implica novación del contrato de arrendamiento original ni renuncia a ninguno de los derechos del Arrendador.\n\n\nEL ARRENDADOR                        EL ARRENDATARIO\nFIBRA HOTELERA MEXICANA              __________________________\nFideicomiso F/1596                   Nombre:\nGerardo Vega Quinto                  Cargo:\nGerencia de Arrendamientos           Firma:\nFirma:`;
+  navigator.clipboard.writeText(txt).then(()=>alert('Plantilla de convenio copiada al portapapeles.\nPégala en Word o tu editor de texto para personalizar los importes y fechas.')).catch(()=>{});
 }
 
 // Init on load
