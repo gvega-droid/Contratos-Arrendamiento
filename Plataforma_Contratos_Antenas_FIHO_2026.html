@@ -1440,7 +1440,7 @@ function setDoc(pid,data){const d=loadDocs();d[pid]=data;saveDocs(d)}
 function statusFor(doc){
   if(!doc||!doc.uploaded) return 'pending';
   if(!doc.expiry) return 'ok';
-  const exp=new Date(doc.expiry), now=new Date('2026-05-22');
+  const exp=new Date(doc.expiry), now=new Date();
   const diff=(exp-now)/(1000*60*60*24);
   if(diff<0) return 'expired';
   if(diff<90) return 'warn';
@@ -1778,7 +1778,7 @@ const ENERGETICOS_DATA = [
   {cid:16, op:'CAPSA',         hotel:'Fiesta Inn Cuautitlán',    ciudad:'Cuautitlán Izcalli, Edo. Méx.',paga:true,importe:9381.64,nota:'FICUA reembolso energéticos abr-26 (variable mensual)'},
 ];
 
-const TODAY = new Date('2026-05-22');
+const TODAY = new Date();
 const FMT_MXN = new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN',maximumFractionDigits:2});
 
 function calcRentaActual(base, startStr, incrMonth, rates){
