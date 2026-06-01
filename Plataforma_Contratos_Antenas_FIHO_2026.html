@@ -3084,9 +3084,9 @@ const COB_KNOWN_TENANTS=[
 ];
 
 function cobNormalizeTenant(raw){
-  const up=raw.toUpperCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+  const up=raw.toUpperCase().trim();
   for(const t of COB_KNOWN_TENANTS){
-    if(t.keywords.some(k=>up.includes(k))) return t.canon;
+    if(t.keywords.some(k=>up.includes(k.toUpperCase()))) return t.canon;
   }
   return null;
 }
@@ -3143,69 +3143,96 @@ function cobFindCol(header,patterns){
 }
 
 function cobParseCartera(data){
-  // Locate header row: look for the row containing 'DIAS VENCI' or 'IMPORTE PENDIENTE'
+  // ── 1. Locate header row ──────────────────────────────────────────────────
   let headerIdx=-1;
   for(let i=0;i<Math.min(data.length,20);i++){
-    const txt=data[i].map(v=>String(v||'')).join(' ').toUpperCase()
-      .normalize('NFD').replace(/[̀-ͯ]/g,'');
-    if(txt.includes('DIAS VENCI')||txt.includes('IMPORTE PENDIENTE')||txt.includes('NUM. FACTURA')){
+    const row=data[i]||[];
+    const joined=row.map(v=>String(v||'').trim().toUpperCase()).join('|');
+    if(joined.includes('CLIENTE')&&(joined.includes('IMPORTE')||joined.includes('FACTURA'))){
       headerIdx=i;break;
     }
   }
-  if(headerIdx<0) headerIdx=6; // fallback: fila 7 (índice 6) del archivo real
-  const header=data[headerIdx];
+  if(headerIdx<0) headerIdx=6;
 
-  // Map columns using patterns — order matters: more specific first
-  const cols={
-    cliente:    cobFindCol(header,['CLIENTE','ARRENDATARIO','NOMBRE']),
-    // folio: col E = índice 4 absoluto (NÚM. FACTURA)
-    fecha:      cobFindCol(header,['FECHA FACT','FECHA FACTURA','FECHA DOC','FECHA']),
-    diasVenci:  cobFindCol(header,['DIAS VENCI','DIAS VEN']),
-    importe:    cobFindCol(header,['IMPORTE PENDIENTE','PENDIENTE']),
-    descripcion:cobFindCol(header,['INSIST','DESCRIPCION','CONCEPTO']),
+  // ── 2. Map columns by plain text (no accent regex) ───────────────────────
+  const header=(data[headerIdx]||[]).map(v=>String(v||'').trim().toUpperCase());
+  const findIdx=(...kwds)=>{
+    for(let i=0;i<header.length;i++){
+      for(const kw of kwds){if(header[i].includes(kw.toUpperCase())) return i;}
+    }
+    return -1;
   };
+  const colCliente   =findIdx('CLIENTE','ARRENDATARIO');
+  const colFecha     =findIdx('FECHA FACT','FECHA FACTURA');
+  const colDiasVenci =findIdx('DIAS VENCI','DIAS VEN');
+  const colPendiente =findIdx('IMPORTE PENDIENTE');
+  const colImporteOr =findIdx('IMPORTE OR');
+  const colImporte   =colPendiente>=0?colPendiente:colImporteOr;
+  const colDesc      =findIdx('INSIST','DESCRIPCION','CONCEPTO');
 
+  // ── 3. Auto-detect folio column offset ────────────────────────────────────
+  // If SheetJS includes the empty col A, folio (col E) is at index 4.
+  // If col A is trimmed, folio (col E) is at index 3.
+  const hasEmptyColA=header.length>0&&header[0]==='';
+  const colFolio=hasEmptyColA?4:3;
+
+  // ── 4. Validate critical columns found ───────────────────────────────────
+  if(colCliente<0||colImporte<0){
+    const preview=header.slice(0,15).join(' | ');
+    alert(`Error: no se detectaron las columnas esperadas en la hoja CARTERA.\n\nColumnas encontradas (primeras 15):\n${preview}\n\nCol CLIENTE: idx ${colCliente}\nCol IMPORTE: idx ${colImporte}\nCol DIAS VENCI: idx ${colDiasVenci}\n\nComparte este mensaje para continuar diagnosticando.`);
+    return [];
+  }
+
+  // ── 5. Parse rows ─────────────────────────────────────────────────────────
+  const PARSE_NUM=v=>{
+    if(typeof v==='number') return v;
+    const n=parseFloat(String(v).replace(/[^0-9.\-]/g,''));
+    return isNaN(n)?0:n;
+  };
   const FMT_DATE=v=>{
     if(!v) return '';
     if(v instanceof Date) return v.toLocaleDateString('es-MX');
     const d=new Date(v);
     return isNaN(d)?String(v):d.toLocaleDateString('es-MX');
   };
-  const PARSE_NUM=v=>{
-    if(typeof v==='number') return v;
-    const n=parseFloat(String(v).replace(/[^0-9.\-]/g,''));
-    return isNaN(n)?0:n;
-  };
 
   const invoices=[];
+  let dbgFolio=0,dbgTenant=0,dbgImporte=0;
+
   for(let i=headerIdx+1;i<data.length;i++){
     const row=data[i];
     if(!row||row.every(c=>!c)) continue;
-
-    // Skip subtotal / blank rows: folio (col E = index 4) must be non-empty
-    const folio=String(row[4]||'').trim();
-    if(!folio) continue;
-
-    // Tenant must match a known FIHO antenna operator
-    const rawCliente=cols.cliente>=0?String(row[cols.cliente]||'').trim():'';
+    const folio=String(row[colFolio]||'').trim();
+    if(!folio){dbgFolio++;continue;}
+    const rawCliente=String(row[colCliente]||'').trim();
     if(!rawCliente||rawCliente.length<2) continue;
     const tenantCanon=cobNormalizeTenant(rawCliente);
-    if(!tenantCanon) continue;
-
-    // Amount: importe pendiente, skip credits (≤0)
-    const importe=cols.importe>=0?PARSE_NUM(row[cols.importe]):0;
-    if(importe<=0) continue;
-
-    // Days: column DIAS VENCI — negative = not yet due, positive = overdue
-    const diasRaw=cols.diasVenci>=0?row[cols.diasVenci]:0;
+    if(!tenantCanon){dbgTenant++;continue;}
+    const importe=PARSE_NUM(row[colImporte]);
+    if(importe<=0){dbgImporte++;continue;}
+    const diasRaw=colDiasVenci>=0?row[colDiasVenci]:0;
     const diasNum=typeof diasRaw==='number'?Math.ceil(diasRaw):PARSE_NUM(String(diasRaw||'0'));
     const daysPastDue=Math.max(0,diasNum);
-
-    const fecha=cols.fecha>=0?FMT_DATE(row[cols.fecha]):'';
-    const concepto=cols.descripcion>=0?String(row[cols.descripcion]||'').trim():'';
-
+    const fecha=colFecha>=0?FMT_DATE(row[colFecha]):'';
+    const concepto=colDesc>=0?String(row[colDesc]||'').trim():'';
     invoices.push({arrendatario:tenantCanon,folio,fecha,fechaVenc:'',
       concepto,importe,hotel:'',daysPastDue,diasVenci:diasNum});
+  }
+
+  // ── 6. Diagnostic alert if still empty ───────────────────────────────────
+  if(!invoices.length){
+    alert(`No se encontraron facturas de arrendatarios de antenas FIHO.\n\n` +
+      `Diagnóstico:\n` +
+      `• Hoja CARTERA: ${data.length} filas\n` +
+      `• Encabezado en fila ${headerIdx+1}\n` +
+      `• Col CLIENTE [${colCliente}]: "${header[colCliente]||'?'}"\n` +
+      `• Col IMPORTE [${colImporte}]: "${header[colImporte]||'?'}"\n` +
+      `• Col DIAS VENCI [${colDiasVenci}]: "${header[colDiasVenci]||'?'}"\n` +
+      `• Col FOLIO [${colFolio}]: "${header[colFolio]||'?'}"\n` +
+      `• Filas sin folio saltadas: ${dbgFolio}\n` +
+      `• Filas sin match arrendatario FIHO: ${dbgTenant}\n` +
+      `• Filas con importe ≤ 0: ${dbgImporte}\n\n` +
+      `Comparte este mensaje para diagnosticar.`);
   }
   return invoices;
 }
