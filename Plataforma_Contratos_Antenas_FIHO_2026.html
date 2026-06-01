@@ -342,6 +342,78 @@
     .conc-col-map{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-top:12px}
     .conc-col-map select{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:8px;color:#fff;font-size:12px;font-family:'Inter',sans-serif;padding:7px 10px;outline:none;width:100%}
     .conc-col-map label{font-size:10px;font-weight:700;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.8px;display:block;margin-bottom:4px}
+    /* ALERTA DE INCREMENTO RENTA */
+    .airt-panel{padding:0 32px 48px}
+    .airt-hero{background:linear-gradient(135deg,rgba(240,165,0,.12) 0%,rgba(99,102,241,.08) 100%);border:1px solid rgba(240,165,0,.2);border-radius:16px;padding:20px 24px;margin-bottom:24px}
+    .airt-hero h2{font-size:18px;font-weight:800;color:#fff;margin-bottom:4px}
+    .airt-hero p{font-size:11.5px;color:rgba(255,255,255,.5);line-height:1.6}
+    .airt-stats{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+    .airt-stat{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:14px 22px;text-align:center;flex:1;min-width:100px}
+    .airt-stat-n{font-size:28px;font-weight:900;line-height:1}
+    .airt-stat-l{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:rgba(255,255,255,.4);margin-top:4px}
+    .airt-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+    .airt-filter-btn{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:9px;color:rgba(255,255,255,.6);font-family:'Inter',sans-serif;font-size:11.5px;font-weight:600;padding:7px 15px;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:5px}
+    .airt-filter-btn:hover{background:rgba(255,255,255,.12);color:#fff}
+    .airt-filter-btn.active{background:var(--gold);border-color:var(--gold);color:#0D1B3E}
+    .airt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px}
+    .airt-card{border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03);transition:transform .15s,box-shadow .15s}
+    .airt-card:hover{transform:translateY(-2px);box-shadow:0 16px 48px rgba(0,0,0,.45)}
+    .airt-card-accent{height:4px;width:100%}
+    .airt-card-body{padding:16px}
+    .airt-card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:12px}
+    .airt-card-hotel{font-size:13px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:3px}
+    .airt-card-op{font-size:10.5px;color:rgba(255,255,255,.45);margin-top:1px}
+    .airt-countdown{text-align:center;flex-shrink:0;background:rgba(0,0,0,.25);border-radius:12px;padding:10px 14px;border:1px solid rgba(255,255,255,.08);min-width:72px}
+    .airt-countdown-n{font-size:26px;font-weight:900;line-height:1}
+    .airt-countdown-l{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.9px;color:rgba(255,255,255,.4)}
+    .airt-countdown-mes{font-size:10px;font-weight:700;text-transform:uppercase;margin-top:3px}
+    .airt-renta-cmp{display:flex;align-items:center;gap:10px;background:rgba(0,0,0,.2);border-radius:10px;padding:10px 14px;margin-bottom:10px}
+    .airt-renta-item{text-align:center;flex:1}
+    .airt-renta-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:rgba(255,255,255,.38);margin-bottom:3px}
+    .airt-renta-val{font-size:13px;font-weight:800}
+    .airt-renta-sub{font-size:9px;color:rgba(255,255,255,.3);margin-top:1px}
+    .airt-renta-arrow{font-size:20px;color:var(--gold);flex-shrink:0}
+    .airt-incr-badge{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:700;padding:4px 12px;border-radius:50px;background:rgba(240,165,0,.12);border:1px solid rgba(240,165,0,.3);color:var(--gold);margin-bottom:11px;flex-wrap:wrap}
+    .airt-card-actions{display:flex;gap:8px;flex-wrap:wrap}
+    .airt-btn-calc{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);color:rgba(255,255,255,.72);font-family:'Inter',sans-serif;font-size:11px;font-weight:600;padding:6px 13px;border-radius:8px;cursor:pointer;transition:all .15s}
+    .airt-btn-calc:hover{background:rgba(255,255,255,.14)}
+    .airt-btn-mail{background:linear-gradient(135deg,#3B82F6,#1D4ED8);border:none;color:#fff;font-family:'Inter',sans-serif;font-size:11px;font-weight:700;padding:6px 13px;border-radius:8px;cursor:pointer;display:flex;align-items:center;gap:5px;transition:opacity .15s}
+    .airt-btn-mail:hover{opacity:.88}
+    .airt-calc-panel{display:none;border-top:1px solid rgba(255,255,255,.08);margin-top:12px;padding-top:12px}
+    .airt-calc-panel.open{display:block}
+    .airt-calc-title{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.38);margin-bottom:8px}
+    .airt-calc-table{width:100%;border-collapse:collapse;font-size:10.5px}
+    .airt-calc-table th{text-align:left;color:rgba(255,255,255,.38);font-size:8.5px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;padding:3px 7px;border-bottom:1px solid rgba(255,255,255,.07)}
+    .airt-calc-table td{padding:4px 7px;color:rgba(255,255,255,.72);border-bottom:1px solid rgba(255,255,255,.04)}
+    .airt-calc-table tr.next-row td{color:#A3E635;font-weight:700;border-top:1px solid rgba(163,230,53,.25);font-size:11px}
+    .airt-calc-next{background:rgba(240,165,0,.08);border:1px solid rgba(240,165,0,.2);border-radius:8px;padding:8px 12px;margin-top:8px;font-size:11px;color:rgba(255,255,255,.65);line-height:1.6}
+    .airt-calc-next strong{color:var(--gold)}
+    .airt-special-msg{font-size:11px;color:rgba(255,255,255,.38);padding:10px 0;font-style:italic}
+    /* urgency accent colors */
+    .urgente .airt-card-accent{background:linear-gradient(90deg,#E53E3E,#FC8181)}
+    .urgente .airt-countdown-n,.urgente .airt-countdown-mes{color:#FC8181}
+    .proximo .airt-card-accent{background:linear-gradient(90deg,#C05621,#F6AD55)}
+    .proximo .airt-countdown-n,.proximo .airt-countdown-mes{color:#F6AD55}
+    .programado .airt-card-accent{background:linear-gradient(90deg,#B7791F,#FAF089)}
+    .programado .airt-countdown-n,.programado .airt-countdown-mes{color:#FAF089}
+    .tranquilo .airt-card-accent{background:linear-gradient(90deg,#2B6CB0,#63B3ED)}
+    .tranquilo .airt-countdown-n,.tranquilo .airt-countdown-mes{color:#63B3ED}
+    .especial .airt-card-accent{background:linear-gradient(90deg,#4A5568,#A0AEC0)}
+    /* email modal */
+    .airt-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);z-index:2000;display:none;align-items:center;justify-content:center;padding:20px}
+    .airt-modal-overlay.open{display:flex}
+    .airt-modal{background:linear-gradient(160deg,#0D1B3E 0%,#1a3560 100%);border:1px solid rgba(255,255,255,.18);border-radius:20px;padding:28px;max-width:700px;width:100%;max-height:88vh;overflow-y:auto;position:relative;box-shadow:0 32px 80px rgba(0,0,0,.6)}
+    .airt-modal-close{position:absolute;top:16px;right:16px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.7);width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:15px;font-family:'Inter',sans-serif;display:flex;align-items:center;justify-content:center;transition:background .15s}
+    .airt-modal-close:hover{background:rgba(255,255,255,.2)}
+    .airt-modal-title{font-size:17px;font-weight:800;color:#fff;margin-bottom:3px;padding-right:40px}
+    .airt-modal-sub{font-size:11px;color:rgba(255,255,255,.45);margin-bottom:18px;line-height:1.5}
+    .airt-email-preview{background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:18px 20px;font-size:10.5px;color:rgba(255,255,255,.78);line-height:1.9;white-space:pre-wrap;font-family:'Courier New',monospace;margin-bottom:16px;max-height:340px;overflow-y:auto}
+    .airt-modal-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .airt-btn-send{background:linear-gradient(135deg,#22c55e,#16a34a);border:none;color:#fff;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;padding:11px 24px;border-radius:10px;cursor:pointer;display:flex;align-items:center;gap:7px;text-decoration:none;transition:opacity .15s}
+    .airt-btn-send:hover{opacity:.88}
+    .airt-btn-copy{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.8);font-family:'Inter',sans-serif;font-size:12px;font-weight:600;padding:10px 18px;border-radius:10px;cursor:pointer;transition:all .15s}
+    .airt-btn-copy:hover{background:rgba(255,255,255,.14)}
+    .airt-modal-warn{font-size:10.5px;color:rgba(255,165,0,.75);background:rgba(255,165,0,.07);border:1px solid rgba(255,165,0,.18);border-radius:8px;padding:9px 13px;margin-top:12px;line-height:1.6}
     /* FOOTER */
     .footer{text-align:center;padding:0 24px 36px;font-size:11px;color:rgba(255,255,255,.27);line-height:1.8}
     .footer strong{color:rgba(255,255,255,.45)}
@@ -405,6 +477,10 @@
   <button class="tab-btn" onclick="switchTab('eeff',this)">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
     Revisión Anexos EEFF
+  </button>
+  <button class="tab-btn" onclick="switchTab('alertas-renta',this)">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+    Alerta de Incremento Renta
   </button>
   <button class="tab-btn" onclick="switchTab('docs',this)">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
@@ -929,6 +1005,42 @@
   </div>
 </div>
 
+<!-- ═══════════ PANEL ALERTA DE INCREMENTO RENTA ═══════════ -->
+<div class="tab-panel" id="panel-alertas-renta">
+  <div class="airt-panel">
+    <div class="airt-hero">
+      <h2>🔔 Alerta de Incremento de Renta</h2>
+      <p>Monitoreo de próximos ajustes anuales INPC por contrato · Cálculo con historial acumulado · Correo formal listo para enviar · Todas las cifras provienen de los contratos originales.</p>
+    </div>
+    <div class="airt-stats" id="airtStats"></div>
+    <div class="airt-filters">
+      <button class="airt-filter-btn active" onclick="filterAlerta('todos',this)">📋 Todos</button>
+      <button class="airt-filter-btn" onclick="filterAlerta('urgente',this)"><span style="color:#FC8181">●</span> Urgente ≤ 30d</button>
+      <button class="airt-filter-btn" onclick="filterAlerta('proximo',this)"><span style="color:#F6AD55">●</span> Próximo 31–90d</button>
+      <button class="airt-filter-btn" onclick="filterAlerta('programado',this)"><span style="color:#FAF089">●</span> Programado &gt; 90d</button>
+      <button class="airt-filter-btn" onclick="filterAlerta('especial',this)"><span style="color:#A0AEC0">●</span> Sin incremento INPC</button>
+    </div>
+    <div class="airt-grid" id="airtGrid"></div>
+  </div>
+  <!-- Email modal -->
+  <div class="airt-modal-overlay" id="airtModal" onclick="airtModalClickOut(event)">
+    <div class="airt-modal">
+      <button class="airt-modal-close" onclick="document.getElementById('airtModal').classList.remove('open')">✕</button>
+      <div class="airt-modal-title" id="airtModalTitle">Borrador de Correo</div>
+      <div class="airt-modal-sub" id="airtModalSub"></div>
+      <div class="airt-email-preview" id="airtEmailPreview"></div>
+      <div class="airt-modal-actions">
+        <a class="airt-btn-send" id="airtMailtoLink" href="#" target="_blank">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+          Abrir en mi correo
+        </a>
+        <button class="airt-btn-copy" onclick="airtCopyDraft()">📋 Copiar borrador</button>
+      </div>
+      <div class="airt-modal-warn">⚠ Revisa el cálculo y el borrador antes de continuar. Al hacer clic en "Abrir en mi correo" se abrirá Outlook o tu cliente configurado con el borrador prellenado. Confirma los datos antes de enviar.</div>
+    </div>
+  </div>
+</div>
+
 <!-- ═══════════ PANEL ENERGÉTICOS ═══════════ -->
 <div class="tab-panel" id="panel-energeticos">
   <div class="ener-panel">
@@ -1289,6 +1401,7 @@ function switchTab(id,btn){
   if(id==='contratos') renderContratos();
   if(id==='facturacion') { renderFacturacion(); initFacturacionSelects(); }
   if(id==='eeff') renderEEFF();
+  if(id==='alertas-renta') renderAlertaRenta();
 }
 
 /* ── SEARCH ── */
@@ -1402,6 +1515,28 @@ const RENTA_EFECTIVA = {
   15: {importe:378048.58, tipo:'anual',   fuente:'CAPSA FIDUR (importe convenio feb-25)'},
   16: {importe:399850,    tipo:'anual',   fuente:'CAPSA FICUA (est. post-incr. ago-25)'},
   17: {importe:454168.92, tipo:'anual',   fuente:'CAPSA CRPUE feb-25/ene-26'},
+};
+
+// Notas pre-redactadas que explican las variaciones entre renta contractual y renta efectiva.
+// Argumento fundado, claro y sin connotación negativa para cada arrendatario.
+const RENTA_EFECTIVA_NOTAS = {
+  1:  'Variación de $40.63 (0.07%) por redondeo en la aplicación acumulada de los factores INPC: oct-2024 (4.72%) y oct-2025 (3.70%) sobre la base contractual de $51,142.99.',
+  2:  'Primer incremento INPC ene-2026 (3.50%) aplicado sobre base contractual de $22,276.00. Diferencia de $2.77 por redondeo en el factor acumulado.',
+  3:  'La renta efectiva refleja el importe previo al ajuste INPC dic-2025 (3.70%). El incremento se encuentra en proceso de notificación formal al arrendatario.',
+  4:  'Diferencia correspondiente al complemento INPC ago-2025 (3.70%) en proceso de cobro (Folio 16197). La renta contractual incluye dicho ajuste pendiente de formalización.',
+  5:  'Incremento INPC sep-2025 (3.70%) en proceso de notificación al arrendatario. La renta efectiva refleja el importe previo al último ajuste anual.',
+  6:  'Incremento INPC sep-2025 (3.70%) en proceso de notificación al arrendatario. La renta efectiva refleja el importe previo al último ajuste anual.',
+  7:  'Contrato con plazo forzoso vencido (abr-2025); la anualidad 2024–2025 fue liquidada en su totalidad. Pendiente de renovación o prórroga contractual.',
+  8:  'Contrato de pago anual (ene-25/dic-25). La renta efectiva es el importe anual convenido, el cual incluye los incrementos INPC acumulados desde 2015. Sin discrepancia.',
+  9:  'Importe variable en función del número de carriers activos en el sitio (1 a 2 operadores). La base contractual de $5,000 por posición activa se actualiza con INPC anual.',
+  10: 'Variación de $24.90 por redondeo en la aplicación del primer incremento INPC feb-2026 (3.50%) sobre la base contractual de $39,556.26.',
+  11: 'Convenio de pago anual directo CAPSA/Telcel; la estructura no genera factura mensual independiente. El importe anual se verifica directamente con el arrendatario.',
+  12: 'Convenio de pago anual consolidado CAPSA-FIGDL (feb-25/ene-26). El importe efectivo refleja el acuerdo bilateral negociado vigente para el período.',
+  13: 'Primer año de contrato (nov-2025 a oct-2026); renta en período base sin incremento INPC aún aplicado. Primer ajuste INPC programado para sep-2026.',
+  14: 'Incremento INPC ago-2025 (3.70%) en proceso de notificación al arrendatario. La renta efectiva refleja el importe previo al último ajuste anual.',
+  15: 'Convenio base vigente desde feb-2025 ($378,048.58 anuales). Primer ajuste INPC programado para sep-2026 de acuerdo con la cláusula de incremento.',
+  16: 'Variación de $9.94 por redondeo en la aplicación del incremento INPC ago-2025 (3.70%) sobre la base contractual de $385,583.66.',
+  17: 'Incremento INPC feb-2025 (3.70%) aplicado sobre base contractual de $437,668.81. El ajuste feb-2026 (estimado 3.50%) se encuentra en proceso de notificación formal al arrendatario.',
 };
 
 // Estatus de cobranza al 15-may-2026 (extraído de pestaña CARTERA)
@@ -1532,7 +1667,10 @@ function setReObs(n,v){ const d=getReObs(); if(v) d[n]=v; else delete d[n]; loca
 
 function buildRentaEfectivaCell(row, rowNum){
   const re = RENTA_EFECTIVA[rowNum];
-  const obs = (getReObs()[rowNum]||'').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const savedObs = getReObs()[rowNum];
+  // If user has saved a note use it; otherwise show the pre-written default
+  const rawObs = savedObs !== undefined ? savedObs : (RENTA_EFECTIVA_NOTAS[rowNum] || '');
+  const obs = rawObs.replace(/</g,'&lt;').replace(/>/g,'&gt;');
   let html = '';
   if(!re || re.tipo==='nodata'){
     html = `<span class="re-nodata">Sin datos de facturación</span>`;
@@ -2158,6 +2296,311 @@ function exportConciliacion(){
   const ws = XLSX.utils.aoa_to_sheet(rows);
   XLSX.utils.book_append_sheet(wb, ws, 'Conciliación');
   XLSX.writeFile(wb, 'Conciliacion_FIHO_' + new Date().toISOString().slice(0,10) + '.xlsx');
+}
+
+/* ══════════════════════════════════════════
+   ALERTA DE INCREMENTO RENTA
+   ══════════════════════════════════════════ */
+const AIRT_OP_EMAIL = {
+  'AT&T':        'ah797v@att.com;vi164u@att.com;fibracontabilidad@posadas.com',
+  'NUVIAX':      'Lrodriguez@vialux.com.mx;renteros@enexa.com.mx;fibracontabilidad@posadas.com',
+  'MXT Capital': 'thalia.martinez@mxtowers.com;finanzas@mxtowers.com;fibracontabilidad@posadas.com',
+  'Intelli Site':'cuentasporpagar@intellisite.com.mx;artemio.hernandez@intellisite.com.mx;fibracontabilidad@posadas.com',
+  'Megacable':   'arrendamientos@megacable.com.mx;fibracontabilidad@posadas.com',
+  'MTP':         'arrendamientos@mtpsites.com;facturacion@mtpsites.com;fibracontabilidad@posadas.com',
+  'CAPSA':       'facturacion@canalizaciones.com;rreyes@mtpsites.com;fibracontabilidad@posadas.com',
+};
+
+function airtGetContact(cid){
+  // Prefer email from BILLING_LINES (rentaDataId match)
+  const bl = BILLING_LINES.find(b=>b.rentaDataId===cid);
+  if(bl) return {email:bl.email, cliente:bl.cliente};
+  const c = CONTRATOS_DB[cid-1];
+  return {email: AIRT_OP_EMAIL[c?.op]||'', cliente: c?.op||'Arrendatario'};
+}
+
+function buildIncrHistory(base, startStr, incrMonth, rates){
+  const history=[];
+  let d=new Date(startStr);
+  d.setDate(1); d.setMonth(incrMonth-1);
+  if(d<=new Date(startStr)) d.setFullYear(d.getFullYear()+1);
+  let r=base;
+  while(d<=TODAY){
+    const yr=d.getFullYear();
+    const rate=rates[yr]??rates[yr-1]??4.0;
+    const prev=r;
+    r*=(1+rate/100);
+    const mesN=MESES_ES[incrMonth-1];
+    history.push({fecha:`${mesN.charAt(0)+mesN.slice(1).toLowerCase()} ${yr}`, rate, prev, nueva:r});
+    d.setFullYear(d.getFullYear()+1);
+  }
+  return history;
+}
+
+function getNextIncr(cid, rates){
+  const cd=RENTA_DATA[cid];
+  if(!cd) return null;
+  if(cd.tipo==='vencido')  return {tipo:'vencido',  daysUntil:null};
+  if(cd.tipo==='variable') return {tipo:'variable', daysUntil:null};
+  let d=new Date(cd.start);
+  d.setDate(1); d.setMonth(cd.mes-1);
+  if(d<=new Date(cd.start)) d.setFullYear(d.getFullYear()+1);
+  while(d<=TODAY) d.setFullYear(d.getFullYear()+1);
+  const daysUntil=Math.ceil((d-TODAY)/(1000*60*60*24));
+  const yr=d.getFullYear();
+  const rate=rates[yr]??rates[yr-1]??4.0;
+  const {renta:curRenta}=calcRentaActual(cd.base,cd.start,cd.mes,rates);
+  const curMes=cd.tipo==='anual'?curRenta/12:curRenta;
+  const newRenta=curRenta*(1+rate/100);
+  const newMes=cd.tipo==='anual'?newRenta/12:newRenta;
+  const history=buildIncrHistory(cd.base,cd.start,cd.mes,rates);
+  return {tipo:cd.tipo, daysUntil, incrementDate:d, incrYear:yr, incrRate:rate,
+    curRenta, curMes, newRenta, newMes, history, mesNombre:MESES_ES[cd.mes-1]};
+}
+
+function airtUrgClass(daysUntil,tipo){
+  if(!daysUntil||tipo==='vencido'||tipo==='variable') return 'especial';
+  if(daysUntil<=30) return 'urgente';
+  if(daysUntil<=90) return 'proximo';
+  if(daysUntil<=365) return 'programado';
+  return 'tranquilo';
+}
+function airtUrgLabel(urg){
+  return {urgente:{t:'● URGENTE',c:'#FC8181'}, proximo:{t:'● PRÓXIMO',c:'#F6AD55'},
+    programado:{t:'● PROGRAMADO',c:'#FAF089'}, tranquilo:{t:'● TRANQUILO',c:'#63B3ED'},
+    especial:{t:'● ESPECIAL',c:'#A0AEC0'}}[urg]||{t:'',c:'#888'};
+}
+
+function buildAlertCard(c, incr, urgClass){
+  const OP_C={'AT&T':'#009FDB','NUVIAX':'#FF6B35','MXT Capital':'#8B2FC9','Intelli Site':'#00897B','Megacable':'#C0392B','MTP':'#1565C0','CAPSA':'#2E7D32'};
+  const col=OP_C[c.op]||'#555';
+  const FMT=new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN',maximumFractionDigits:0});
+  const FMT2=new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN',maximumFractionDigits:2});
+  const ul=airtUrgLabel(urgClass);
+
+  let cdHtml,rentaCmp,incrBadge='',calcBtn='',mailBtn='',histHtml='';
+
+  if(!incr||incr.tipo==='vencido'){
+    cdHtml=`<div class="airt-countdown-n" style="color:#FCA5A5;font-size:11px;font-weight:800">VENCIDO</div><div class="airt-countdown-l">sin renovación</div>`;
+    rentaCmp=`<div class="airt-special-msg">Contrato con plazo forzoso vencido — pendiente renovación o prórroga</div>`;
+  } else if(incr.tipo==='variable'){
+    cdHtml=`<div class="airt-countdown-n" style="color:#93C5FD;font-size:11px;font-weight:800">VARIABLE</div><div class="airt-countdown-l">por carrier</div>`;
+    rentaCmp=`<div class="airt-special-msg">Importe variable según número de operadores activos en el sitio</div>`;
+  } else {
+    const tipoSuf=incr.tipo==='anual'?'/año':'/mes';
+    const incMes=`${incr.mesNombre.slice(0,3)}-${incr.incrYear}`;
+    cdHtml=`<div class="airt-countdown-n">${incr.daysUntil}</div><div class="airt-countdown-l">días</div><div class="airt-countdown-mes">${incMes}</div>`;
+    rentaCmp=`<div class="airt-renta-cmp">
+      <div class="airt-renta-item">
+        <div class="airt-renta-lbl">Renta actual</div>
+        <div class="airt-renta-val" style="color:rgba(255,255,255,.85)">${FMT.format(incr.tipo==='anual'?incr.curRenta:incr.curMes)}</div>
+        <div class="airt-renta-sub">${tipoSuf}</div>
+      </div>
+      <div class="airt-renta-arrow">→</div>
+      <div class="airt-renta-item">
+        <div class="airt-renta-lbl">Nueva renta</div>
+        <div class="airt-renta-val" style="color:#A3E635">${FMT.format(incr.tipo==='anual'?incr.newRenta:incr.newMes)}</div>
+        <div class="airt-renta-sub">${tipoSuf}</div>
+      </div>
+    </div>`;
+    const difVal=incr.tipo==='anual'?incr.newRenta-incr.curRenta:incr.newMes-incr.curMes;
+    incrBadge=`<div class="airt-incr-badge">↑ +${incr.incrRate.toFixed(2)}% INPC ${incr.incrYear} &nbsp;·&nbsp; +${FMT2.format(difVal)}${tipoSuf} &nbsp;·&nbsp; ${incMes}</div>`;
+
+    if(incr.history&&incr.history.length>0){
+      calcBtn=`<button class="airt-btn-calc" onclick="airtToggleCalc(${c.cid})">📊 Ver cálculo</button>`;
+      const histRows=incr.history.map(h=>`<tr>
+        <td>${h.fecha}</td><td>${h.rate.toFixed(2)}%</td>
+        <td>${FMT2.format(h.prev)}</td><td>${FMT2.format(h.nueva)}</td>
+      </tr>`).join('');
+      const nextVal=incr.tipo==='anual'?incr.newRenta:incr.newMes;
+      histHtml=`<div class="airt-calc-panel" id="airt-calc-${c.cid}">
+        <div class="airt-calc-title">Historial de incrementos INPC acumulados (base: ${FMT2.format(RENTA_DATA[c.cid].base)})</div>
+        <table class="airt-calc-table">
+          <thead><tr><th>Mes/Año</th><th>INPC %</th><th>Renta anterior</th><th>Renta resultante</th></tr></thead>
+          <tbody>${histRows}
+          <tr class="next-row">
+            <td>${incMes} (próximo)</td><td>${incr.incrRate.toFixed(2)}%*</td>
+            <td>${FMT2.format(incr.tipo==='anual'?incr.curRenta:incr.curMes)}</td>
+            <td>${FMT2.format(nextVal)}</td>
+          </tr></tbody>
+        </table>
+        <div class="airt-calc-next">
+          <strong>Próximo ajuste:</strong> ${incr.mesNombre} ${incr.incrYear} &nbsp;|&nbsp;
+          INPC ${incr.incrYear}: <strong>${incr.incrRate.toFixed(2)}%</strong> (estimado INEGI) &nbsp;|&nbsp;
+          Nueva renta: <strong>${FMT2.format(nextVal)}${tipoSuf}</strong><br/>
+          *Tasa estimada — se actualiza automáticamente al editar las tasas INPC en la barra superior.
+        </div>
+      </div>`;
+    }
+    mailBtn=`<button class="airt-btn-mail" onclick="airtOpenEmail(${c.cid})">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+      Preparar correo
+    </button>`;
+  }
+
+  return `<div class="airt-card ${urgClass}" data-urgencia="${urgClass}" id="airt-card-${c.cid}">
+    <div class="airt-card-accent"></div>
+    <div class="airt-card-body">
+      <div class="airt-card-head">
+        <div>
+          <span style="display:inline-block;background:${col};color:#fff;font-size:9px;font-weight:800;padding:2px 9px;border-radius:50px;margin-bottom:6px">${c.op}</span>
+          <div class="airt-card-hotel">${c.hotel}</div>
+          <div class="airt-card-op">Venc: ${c.vigencia}</div>
+          <span style="display:inline-flex;align-items:center;font-size:9.5px;font-weight:700;padding:2px 9px;border-radius:50px;background:rgba(0,0,0,.25);color:${ul.c};border:1px solid ${ul.c}33;margin-top:5px">${ul.t}</span>
+        </div>
+        <div class="airt-countdown">${cdHtml}</div>
+      </div>
+      ${rentaCmp}${incrBadge}
+      <div class="airt-card-actions">${calcBtn}${mailBtn}</div>
+      ${histHtml}
+    </div>
+  </div>`;
+}
+
+function renderAlertaRenta(){
+  const ratesAIRT=getInpcRates();
+  const grid=document.getElementById('airtGrid');
+  const statsEl=document.getElementById('airtStats');
+  if(!grid||!statsEl) return;
+
+  const contracts=CONTRATOS_DB.map(c=>{
+    const incr=getNextIncr(c.cid,ratesAIRT);
+    const urgClass=airtUrgClass(incr?.daysUntil,incr?.tipo);
+    return {c,incr,urgClass};
+  }).sort((a,b)=>{
+    const da=a.incr?.daysUntil??9999;
+    const db=b.incr?.daysUntil??9999;
+    return da-db;
+  });
+
+  const cnt30=contracts.filter(x=>x.incr?.daysUntil>0&&x.incr.daysUntil<=30).length;
+  const cnt90=contracts.filter(x=>x.incr?.daysUntil>30&&x.incr.daysUntil<=90).length;
+  const next=contracts.find(x=>x.incr?.daysUntil>0);
+  const sinIncr=contracts.filter(x=>!x.incr?.daysUntil).length;
+
+  statsEl.innerHTML=`
+    <div class="airt-stat" style="border-color:rgba(220,38,38,.4)">
+      <div class="airt-stat-n" style="color:#FC8181">${cnt30}</div>
+      <div class="airt-stat-l">Urgentes ≤ 30d</div>
+    </div>
+    <div class="airt-stat" style="border-color:rgba(192,87,33,.4)">
+      <div class="airt-stat-n" style="color:#F6AD55">${cnt90}</div>
+      <div class="airt-stat-l">Próximos 31–90d</div>
+    </div>
+    <div class="airt-stat" style="border-color:rgba(240,165,0,.3)">
+      <div class="airt-stat-n" style="color:var(--gold)">${next?.incr?.daysUntil??'—'}</div>
+      <div class="airt-stat-l">Días al siguiente</div>
+    </div>
+    <div class="airt-stat">
+      <div class="airt-stat-n" style="color:rgba(255,255,255,.6)">${17-sinIncr}</div>
+      <div class="airt-stat-l">Con incremento INPC</div>
+    </div>`;
+
+  grid.innerHTML=contracts.map(({c,incr,urgClass})=>buildAlertCard(c,incr,urgClass)).join('');
+  window._airtContracts=contracts;
+}
+
+function airtToggleCalc(cid){
+  const p=document.getElementById(`airt-calc-${cid}`);
+  if(p) p.classList.toggle('open');
+}
+
+function filterAlerta(filter,btn){
+  document.querySelectorAll('.airt-filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.airt-card').forEach(card=>{
+    const u=card.dataset.urgencia;
+    let show=true;
+    if(filter==='urgente')    show=u==='urgente';
+    else if(filter==='proximo')  show=u==='proximo';
+    else if(filter==='programado') show=u==='programado'||u==='tranquilo';
+    else if(filter==='especial') show=u==='especial';
+    card.style.display=show?'':'none';
+  });
+}
+
+function airtOpenEmail(cid){
+  const rates=getInpcRates();
+  const incr=getNextIncr(cid,rates);
+  const c=CONTRATOS_DB[cid-1];
+  const cd=RENTA_DATA[cid];
+  const contact=airtGetContact(cid);
+  const FMT2=new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN',maximumFractionDigits:2});
+  if(!incr||!incr.daysUntil) return;
+
+  const tipoLabel=incr.tipo==='anual'?'anuales':'mensuales';
+  const incrMesAno=`${incr.mesNombre} ${incr.incrYear}`;
+  const rentaActual=FMT2.format(incr.tipo==='anual'?incr.curRenta:incr.curMes);
+  const rentaNueva=FMT2.format(incr.tipo==='anual'?incr.newRenta:incr.newMes);
+  const diferencia=FMT2.format(incr.tipo==='anual'?incr.newRenta-incr.curRenta:incr.newMes-incr.curMes);
+  const baseStr=FMT2.format(cd.base);
+
+  const histLines=incr.history.map(h=>`  ${(h.fecha).padEnd(16)}| INPC ${h.rate.toFixed(2).padStart(5)}% | ${FMT2.format(h.prev).padEnd(16)} → ${FMT2.format(h.nueva)}`).join('\n');
+  const nextLine=`  ${incrMesAno.padEnd(16)}| INPC ${incr.incrRate.toFixed(2).padStart(5)}% (est.) | ${FMT2.format(incr.tipo==='anual'?incr.curRenta:incr.curMes).padEnd(16)} → ${rentaNueva}`;
+
+  const subject=`Ajuste de Renta ${incrMesAno} — ${c.hotel} | Contrato de Arrendamiento FIHO`;
+  const body=`Estimado(a) equipo de ${contact.cliente},
+
+Por medio del presente, nos permitimos comunicarle que de conformidad con la cláusula de incremento establecida en el Contrato de Arrendamiento vigente, celebrado entre FIBRA HOTELERA MEXICANA — Fideicomiso F/1596 (FIHO) y ${contact.cliente}, corresponde efectuar el ajuste anual de renta de conformidad con la variación acumulada del Índice Nacional de Precios al Consumidor (INPC), publicado por el Instituto Nacional de Estadística y Geografía (INEGI).
+
+A continuación se detalla el cálculo del ajuste correspondiente:
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+DETALLE DEL INCREMENTO DE RENTA
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Inmueble        : ${c.hotel}
+Mes de ajuste   : ${incrMesAno}
+Renta base orig.: ${baseStr}
+
+HISTORIAL DE INCREMENTOS INPC APLICADOS:
+${histLines}
+
+PRÓXIMO AJUSTE — ${incrMesAno}:
+${nextLine}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+RESUMEN DEL AJUSTE
+Renta vigente   : ${rentaActual} ${tipoLabel}
+Factor INPC ${incr.incrYear} : ${incr.incrRate.toFixed(2)}% (fuente: INEGI)
+Nueva renta     : ${rentaNueva} ${tipoLabel}
+Incremento      : +${diferencia} ${tipoLabel}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+En espera de sus comentarios y confirmación a la brevedad, para estar en condiciones de emitir el comprobante fiscal digital correspondiente por el nuevo importe a partir de ${incrMesAno}.
+
+Quedo a sus órdenes para cualquier aclaración al respecto.
+
+Atentamente,
+
+Gerardo Vega Quinto
+Gerencia de Arrendamientos
+FIBRA HOTELERA MEXICANA — Fideicomiso F/1596 (FIHO)
+gvega@fibrahotel.com`;
+
+  document.getElementById('airtModalTitle').textContent=`Borrador — ${c.hotel}`;
+  document.getElementById('airtModalSub').innerHTML=`<strong>Para:</strong> ${contact.email}<br/><strong>Asunto:</strong> ${subject}`;
+  document.getElementById('airtEmailPreview').textContent=`PARA: ${contact.email}\nASUNTO: ${subject}\n\n${body}`;
+  const mailto=`mailto:${encodeURIComponent(contact.email)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  document.getElementById('airtMailtoLink').href=mailto;
+  window._airtDraft=`PARA: ${contact.email}\nASUNTO: ${subject}\n\n${body}`;
+  document.getElementById('airtModal').classList.add('open');
+}
+
+function airtModalClickOut(e){
+  if(e.target===document.getElementById('airtModal')) document.getElementById('airtModal').classList.remove('open');
+}
+
+function airtCopyDraft(){
+  if(!window._airtDraft) return;
+  const btn=document.querySelector('.airt-btn-copy');
+  navigator.clipboard.writeText(window._airtDraft).then(()=>{
+    btn.textContent='✓ Copiado'; setTimeout(()=>{btn.textContent='📋 Copiar borrador';},2000);
+  }).catch(()=>{
+    const ta=document.createElement('textarea');
+    ta.value=window._airtDraft; document.body.appendChild(ta); ta.select();
+    document.execCommand('copy'); document.body.removeChild(ta);
+    btn.textContent='✓ Copiado'; setTimeout(()=>{btn.textContent='📋 Copiar borrador';},2000);
+  });
 }
 
 /* ══════════════════════════════════════════
