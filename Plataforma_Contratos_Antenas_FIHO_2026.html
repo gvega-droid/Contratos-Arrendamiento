@@ -3079,7 +3079,7 @@ const COB_KNOWN_TENANTS=[
   {canon:'MXT Capital', keywords:['MXT','MXTOWERS','MX TOWERS','MX TOWER']},
   {canon:'Intelli Site',keywords:['INTELLI']},
   {canon:'Megacable',   keywords:['MEGACABLE','MEGA CABLE']},
-  {canon:'MTP',         keywords:['MTP']},
+  {canon:'MTP',         keywords:['MTP','MEXICO TOWER','TOWER PARTNERS']},
   {canon:'CAPSA',       keywords:['CAPSA','CANALIZACIONES']},
 ];
 
@@ -3143,69 +3143,69 @@ function cobFindCol(header,patterns){
 }
 
 function cobParseCartera(data){
-  // Find header row
+  // Locate header row: look for the row containing 'DIAS VENCI' or 'IMPORTE PENDIENTE'
   let headerIdx=-1;
   for(let i=0;i<Math.min(data.length,20);i++){
-    const txt=data[i].join(' ').toUpperCase();
-    if(txt.includes('ARRENDATARIO')||txt.includes('CLIENTE')||txt.includes('FOLIO')||txt.includes('RFC')||txt.includes('RAZON')){
+    const txt=data[i].map(v=>String(v||'')).join(' ').toUpperCase()
+      .normalize('NFD').replace(/[̀-ͯ]/g,'');
+    if(txt.includes('DIAS VENCI')||txt.includes('IMPORTE PENDIENTE')||txt.includes('NUM. FACTURA')){
       headerIdx=i;break;
     }
   }
-  if(headerIdx<0) headerIdx=0;
+  if(headerIdx<0) headerIdx=6; // fallback: fila 7 (índice 6) del archivo real
   const header=data[headerIdx];
+
+  // Map columns using patterns — order matters: more specific first
   const cols={
-    arrendatario:cobFindCol(header,['ARRENDATARIO','CLIENTE','RAZON SOCIAL','RAZON','NOMBRE']),
-    // Folio always in column E (index 4) per layout del archivo
-    fecha:       cobFindCol(header,['FECHA FACTURA','FECHA FAC','FECHA DOC','EMISION','FECHA EMI','FECHA']),
-    fechaVenc:   cobFindCol(header,['VENCIMIENTO','VENCE','FECHA VENC','FEC VENC','F. VENC']),
-    concepto:    cobFindCol(header,['CONCEPTO','DESCRIPCION','SERVICIO']),
-    importe:     cobFindCol(header,['IMPORTE','MONTO','TOTAL','SALDO','ADEUDO','PENDIENTE']),
-    hotel:       cobFindCol(header,['HOTEL','INMUEBLE','PROPIEDAD','SITIO','UBICACION']),
+    cliente:    cobFindCol(header,['CLIENTE','ARRENDATARIO','NOMBRE']),
+    // folio: col E = índice 4 absoluto (NÚM. FACTURA)
+    fecha:      cobFindCol(header,['FECHA FACT','FECHA FACTURA','FECHA DOC','FECHA']),
+    diasVenci:  cobFindCol(header,['DIAS VENCI','DIAS VEN']),
+    importe:    cobFindCol(header,['IMPORTE PENDIENTE','PENDIENTE']),
+    descripcion:cobFindCol(header,['INSIST','DESCRIPCION','CONCEPTO']),
   };
+
   const FMT_DATE=v=>{
     if(!v) return '';
     if(v instanceof Date) return v.toLocaleDateString('es-MX');
     const d=new Date(v);
     return isNaN(d)?String(v):d.toLocaleDateString('es-MX');
   };
-  const FMT_DATE_OBJ=v=>{
-    if(!v) return null;
-    if(v instanceof Date) return v;
-    const d=new Date(v);
-    return isNaN(d)?null:d;
-  };
   const PARSE_NUM=v=>{
     if(typeof v==='number') return v;
     const n=parseFloat(String(v).replace(/[^0-9.\-]/g,''));
     return isNaN(n)?0:n;
   };
+
   const invoices=[];
   for(let i=headerIdx+1;i<data.length;i++){
     const row=data[i];
     if(!row||row.every(c=>!c)) continue;
-    // Arrendatario → normalize to known FIHO tenant
-    const rawArr=cols.arrendatario>=0?String(row[cols.arrendatario]||'').trim():'';
-    if(!rawArr||rawArr.length<2) continue;
-    const tenantCanon=cobNormalizeTenant(rawArr);
-    if(!tenantCanon) continue; // solo arrendatarios FIHO
+
+    // Skip subtotal / blank rows: folio (col E = index 4) must be non-empty
+    const folio=String(row[4]||'').trim();
+    if(!folio) continue;
+
+    // Tenant must match a known FIHO antenna operator
+    const rawCliente=cols.cliente>=0?String(row[cols.cliente]||'').trim():'';
+    if(!rawCliente||rawCliente.length<2) continue;
+    const tenantCanon=cobNormalizeTenant(rawCliente);
+    if(!tenantCanon) continue;
+
+    // Amount: importe pendiente, skip credits (≤0)
     const importe=cols.importe>=0?PARSE_NUM(row[cols.importe]):0;
     if(importe<=0) continue;
-    // Folio: siempre columna E (índice 4 absoluto en la hoja)
-    const folio=String(row[4]||'').trim();
+
+    // Days: column DIAS VENCI — negative = not yet due, positive = overdue
+    const diasRaw=cols.diasVenci>=0?row[cols.diasVenci]:0;
+    const diasNum=typeof diasRaw==='number'?Math.ceil(diasRaw):PARSE_NUM(String(diasRaw||'0'));
+    const daysPastDue=Math.max(0,diasNum);
+
     const fecha=cols.fecha>=0?FMT_DATE(row[cols.fecha]):'';
-    const fechaRawObj=cols.fecha>=0?FMT_DATE_OBJ(row[cols.fecha]):null;
-    const fechaVencStr=cols.fechaVenc>=0?FMT_DATE(row[cols.fechaVenc]):'';
-    let fechaVencObj=cols.fechaVenc>=0?FMT_DATE_OBJ(row[cols.fechaVenc]):null;
-    // Fallback vencimiento: si no hay fecha explícita, usar el día 20 del mes de emisión
-    if(!fechaVencObj&&fechaRawObj){
-      fechaVencObj=new Date(fechaRawObj.getFullYear(),fechaRawObj.getMonth(),20);
-    }
-    const concepto=cols.concepto>=0?String(row[cols.concepto]||'').trim():'';
-    const hotel=cols.hotel>=0?String(row[cols.hotel]||'').trim():'';
-    let daysPastDue=0;
-    if(fechaVencObj) daysPastDue=Math.max(0,Math.ceil((TODAY-fechaVencObj)/(1000*60*60*24)));
-    const fechaVencDisplay=fechaVencStr||(fechaVencObj?fechaVencObj.toLocaleDateString('es-MX'):'');
-    invoices.push({arrendatario:tenantCanon,folio,fecha,fechaVenc:fechaVencDisplay,concepto,importe,hotel,daysPastDue});
+    const concepto=cols.descripcion>=0?String(row[cols.descripcion]||'').trim():'';
+
+    invoices.push({arrendatario:tenantCanon,folio,fecha,fechaVenc:'',
+      concepto,importe,hotel:'',daysPastDue,diasVenci:diasNum});
   }
   return invoices;
 }
@@ -3290,8 +3290,9 @@ function cobBuildCard(tenant,idx){
   const logs=cobGetLogs(tenant.name);
   const logsHtml=logs.length?`<div class="cob-log-panel"><div class="cob-log-title">Bitácora de gestión</div><div class="cob-log-list">${logs.slice(-4).map(l=>`<div class="cob-log-item"><span>${l.action}</span><span style="flex-shrink:0">${l.ts}</span></div>`).join('')}</div></div>`:'';
   const invRows=tenant.invoices.map(inv=>{
-    const dc=inv.daysPastDue>60?'#ef4444':inv.daysPastDue>30?'#f97316':inv.daysPastDue>15?'#f59e0b':inv.daysPastDue>0?'#3b82f6':'#22c55e';
-    const dLabel=inv.daysPastDue===0?'Al corriente':`${inv.daysPastDue}d vencida`;
+    const dv=inv.diasVenci!=null?inv.diasVenci:inv.daysPastDue;
+    const dc=dv>60?'#ef4444':dv>30?'#f97316':dv>15?'#f59e0b':dv>0?'#3b82f6':dv===0?'#facc15':'#22c55e';
+    const dLabel=dv<0?`${-dv}d para vencer`:dv===0?'Vence hoy':`${dv}d vencida`;
     return `<tr>
       <td><span style="font-family:monospace;color:#93c5fd;font-size:10px">${inv.folio||'—'}</span></td>
       <td>${inv.fecha||'—'}</td>
