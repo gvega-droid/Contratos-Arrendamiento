@@ -3157,8 +3157,17 @@ function cobParseCartera(data){
   // ── 2. Map columns by plain text (no accent regex) ───────────────────────
   const header=(data[headerIdx]||[]).map(v=>String(v||'').trim().toUpperCase());
   const findIdx=(...kwds)=>{
-    for(let i=0;i<header.length;i++){
-      for(const kw of kwds){if(header[i].includes(kw.toUpperCase())) return i;}
+    // Pass 1: exact match (evita que "NÚM. CLIENTE" coincida con "CLIENTE")
+    for(const kw of kwds){
+      const k=kw.toUpperCase();
+      const i=header.indexOf(k);
+      if(i>=0) return i;
+    }
+    // Pass 2: partial match fallback
+    for(const kw of kwds){
+      for(let i=0;i<header.length;i++){
+        if(header[i].includes(kw.toUpperCase())) return i;
+      }
     }
     return -1;
   };
