@@ -1161,10 +1161,11 @@
           <div class="cob-idea-desc">Incluye en cada correo los datos bancarios listos para copiar. Reduce la fricción: el arrendatario no tiene que preguntar adónde transferir.</div>
           <div class="cob-idea-action">
             <div class="cob-spei-box">
-              <div class="cob-spei-row"><span class="cob-spei-key">Banco:</span><span class="cob-spei-val">HSBC</span></div>
-              <div class="cob-spei-row"><span class="cob-spei-key">CLABE:</span><span class="cob-spei-val">021180040103697321</span></div>
-              <div class="cob-spei-row"><span class="cob-spei-key">Beneficiario:</span><span class="cob-spei-val">FIBRA HOTELERA MEXICANA</span></div>
-              <div class="cob-spei-row"><span class="cob-spei-key">RFC:</span><span class="cob-spei-val">FHM131009SY3</span></div>
+              <div class="cob-spei-row"><span class="cob-spei-key">Banco:</span><span class="cob-spei-val">BBVA</span></div>
+              <div class="cob-spei-row"><span class="cob-spei-key">Cuenta:</span><span class="cob-spei-val">0191885413</span></div>
+              <div class="cob-spei-row"><span class="cob-spei-key">CLABE:</span><span class="cob-spei-val">012420001918854135</span></div>
+              <div class="cob-spei-row"><span class="cob-spei-key">Beneficiario:</span><span class="cob-spei-val">FIDEICOMISO F/1596</span></div>
+              <div class="cob-spei-row"><span class="cob-spei-key">RFC:</span><span class="cob-spei-val">FFX121005C6A</span></div>
             </div>
             <button class="cob-copy-btn" onclick="cobCopySpei()">📋 Copiar datos SPEI</button>
           </div>
@@ -3070,7 +3071,25 @@ function renderEEFF(){
    COBRANZA
    ════════════════════════════════════════ */
 let COB_DATA=null;
-const SPEI_DATA={banco:'HSBC',clabe:'021180040103697321',beneficiario:'FIBRA HOTELERA MEXICANA',rfc:'FHM131009SY3'};
+const SPEI_DATA={banco:'BBVA',clabe:'012420001918854135',cuenta:'0191885413',beneficiario:'FIDEICOMISO F/1596',rfc:'FFX121005C6A'};
+
+const COB_KNOWN_TENANTS=[
+  {canon:'AT&T',        keywords:['AT&T','AT T','ATT']},
+  {canon:'NUVIAX',      keywords:['NUVIAX','VIALUX','ENEXA']},
+  {canon:'MXT Capital', keywords:['MXT','MXTOWERS','MX TOWERS','MX TOWER']},
+  {canon:'Intelli Site',keywords:['INTELLI']},
+  {canon:'Megacable',   keywords:['MEGACABLE','MEGA CABLE']},
+  {canon:'MTP',         keywords:['MTP']},
+  {canon:'CAPSA',       keywords:['CAPSA','CANALIZACIONES']},
+];
+
+function cobNormalizeTenant(raw){
+  const up=raw.toUpperCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+  for(const t of COB_KNOWN_TENANTS){
+    if(t.keywords.some(k=>up.includes(k))) return t.canon;
+  }
+  return null;
+}
 
 function cobDrag(e){e.preventDefault();document.getElementById('cobDropZone').classList.add('drag');}
 function cobDragEnd(e){document.getElementById('cobDropZone').classList.remove('drag');}
@@ -3124,6 +3143,7 @@ function cobFindCol(header,patterns){
 }
 
 function cobParseCartera(data){
+  // Find header row
   let headerIdx=-1;
   for(let i=0;i<Math.min(data.length,20);i++){
     const txt=data[i].join(' ').toUpperCase();
@@ -3135,8 +3155,8 @@ function cobParseCartera(data){
   const header=data[headerIdx];
   const cols={
     arrendatario:cobFindCol(header,['ARRENDATARIO','CLIENTE','RAZON SOCIAL','RAZON','NOMBRE']),
-    folio:       cobFindCol(header,['FOLIO','UUID','FACTURA','CFDI','SERIE','NO. FACTURA']),
-    fecha:       cobFindCol(header,['FECHA FACTURA','FECHA FAC','FECHA DOC','EMISION','FECHA EMI']),
+    // Folio always in column E (index 4) per layout del archivo
+    fecha:       cobFindCol(header,['FECHA FACTURA','FECHA FAC','FECHA DOC','EMISION','FECHA EMI','FECHA']),
     fechaVenc:   cobFindCol(header,['VENCIMIENTO','VENCE','FECHA VENC','FEC VENC','F. VENC']),
     concepto:    cobFindCol(header,['CONCEPTO','DESCRIPCION','SERVICIO']),
     importe:     cobFindCol(header,['IMPORTE','MONTO','TOTAL','SALDO','ADEUDO','PENDIENTE']),
@@ -3163,19 +3183,29 @@ function cobParseCartera(data){
   for(let i=headerIdx+1;i<data.length;i++){
     const row=data[i];
     if(!row||row.every(c=>!c)) continue;
-    const arr=cols.arrendatario>=0?String(row[cols.arrendatario]||'').trim():'';
-    if(!arr||arr.length<2) continue;
+    // Arrendatario → normalize to known FIHO tenant
+    const rawArr=cols.arrendatario>=0?String(row[cols.arrendatario]||'').trim():'';
+    if(!rawArr||rawArr.length<2) continue;
+    const tenantCanon=cobNormalizeTenant(rawArr);
+    if(!tenantCanon) continue; // solo arrendatarios FIHO
     const importe=cols.importe>=0?PARSE_NUM(row[cols.importe]):0;
     if(importe<=0) continue;
-    const folio=cols.folio>=0?String(row[cols.folio]||'').trim():'';
+    // Folio: siempre columna E (índice 4 absoluto en la hoja)
+    const folio=String(row[4]||'').trim();
     const fecha=cols.fecha>=0?FMT_DATE(row[cols.fecha]):'';
+    const fechaRawObj=cols.fecha>=0?FMT_DATE_OBJ(row[cols.fecha]):null;
     const fechaVencStr=cols.fechaVenc>=0?FMT_DATE(row[cols.fechaVenc]):'';
-    const fechaVencObj=cols.fechaVenc>=0?FMT_DATE_OBJ(row[cols.fechaVenc]):null;
+    let fechaVencObj=cols.fechaVenc>=0?FMT_DATE_OBJ(row[cols.fechaVenc]):null;
+    // Fallback vencimiento: si no hay fecha explícita, usar el día 20 del mes de emisión
+    if(!fechaVencObj&&fechaRawObj){
+      fechaVencObj=new Date(fechaRawObj.getFullYear(),fechaRawObj.getMonth(),20);
+    }
     const concepto=cols.concepto>=0?String(row[cols.concepto]||'').trim():'';
     const hotel=cols.hotel>=0?String(row[cols.hotel]||'').trim():'';
     let daysPastDue=0;
     if(fechaVencObj) daysPastDue=Math.max(0,Math.ceil((TODAY-fechaVencObj)/(1000*60*60*24)));
-    invoices.push({arrendatario:arr,folio,fecha,fechaVenc:fechaVencStr,concepto,importe,hotel,daysPastDue});
+    const fechaVencDisplay=fechaVencStr||(fechaVencObj?fechaVencObj.toLocaleDateString('es-MX'):'');
+    invoices.push({arrendatario:tenantCanon,folio,fecha,fechaVenc:fechaVencDisplay,concepto,importe,hotel,daysPastDue});
   }
   return invoices;
 }
@@ -3385,6 +3415,7 @@ TOTAL ADEUDADO: ${totalStr}
 
 DATOS PARA PAGO ELECTRÓNICO (SPEI):
   Banco          : ${SPEI_DATA.banco}
+  No. Cuenta     : ${SPEI_DATA.cuenta}
   CLABE          : ${SPEI_DATA.clabe}
   Beneficiario   : ${SPEI_DATA.beneficiario}
   RFC            : ${SPEI_DATA.rfc}
@@ -3413,7 +3444,7 @@ function cobOpenWa(tenantNameEnc){
   const tenant=COB_DATA&&COB_DATA.grouped.find(t=>t.name===tenantName);
   if(!tenant) return;
   const FMT=new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN',maximumFractionDigits:2});
-  const msg=`Hola, buenos días.\n\nLe escribo de parte de *FIBRA HOTELERA MEXICANA (FIHO)* — Gerencia de Arrendamientos.\n\nTenemos registradas facturas pendientes de pago por un total de *${FMT.format(tenant.total)}*, con una antigüedad máxima de *${tenant.maxDays} días*.\n\nSolicitamos amablemente confirmar la fecha estimada de pago o, en su caso, enviarnos el comprobante si ya realizó la transferencia.\n\nDatos SPEI:\n• Banco: ${SPEI_DATA.banco}\n• CLABE: ${SPEI_DATA.clabe}\n• Beneficiario: ${SPEI_DATA.beneficiario}\n\nQuedo en espera de su respuesta.\n\nGerardo Vega Quinto — FIHO\ngvega@fibrahotel.com`;
+  const msg=`Hola, buenos días.\n\nLe escribo de parte de *FIBRA HOTELERA MEXICANA (FIHO)* — Gerencia de Arrendamientos.\n\nTenemos registradas facturas pendientes de pago por un total de *${FMT.format(tenant.total)}*, con una antigüedad máxima de *${tenant.maxDays} días*.\n\nSolicitamos amablemente confirmar la fecha estimada de pago o, en su caso, enviarnos el comprobante si ya realizó la transferencia.\n\nDatos SPEI:\n• Banco: ${SPEI_DATA.banco}\n• Cuenta: ${SPEI_DATA.cuenta}\n• CLABE: ${SPEI_DATA.clabe}\n• Beneficiario: ${SPEI_DATA.beneficiario}\n\nQuedo en espera de su respuesta.\n\nGerardo Vega Quinto — FIHO\ngvega@fibrahotel.com`;
   document.getElementById('cobWaModalSub').textContent=`Para: ${tenant.name}`;
   document.getElementById('cobWaPreview').textContent=msg;
   window._cobWaDraft=msg;
@@ -3439,7 +3470,7 @@ function cobCopyWa(){
   }).catch(()=>{});
 }
 function cobCopySpei(){
-  const txt=`Banco: ${SPEI_DATA.banco}\nCLABE: ${SPEI_DATA.clabe}\nBeneficiario: ${SPEI_DATA.beneficiario}\nRFC: ${SPEI_DATA.rfc}`;
+  const txt=`Banco: ${SPEI_DATA.banco}\nCuenta: ${SPEI_DATA.cuenta}\nCLABE: ${SPEI_DATA.clabe}\nBeneficiario: ${SPEI_DATA.beneficiario}\nRFC: ${SPEI_DATA.rfc}`;
   navigator.clipboard.writeText(txt).then(()=>{
     const btns=document.querySelectorAll('.cob-copy-btn');
     btns.forEach(b=>{if(b.textContent.includes('SPEI')){b.textContent='✅ Copiado';setTimeout(()=>b.textContent='📋 Copiar datos SPEI',2000);}});
@@ -3447,7 +3478,7 @@ function cobCopySpei(){
 }
 function cobConvenioTemplate(){
   const hoy=new Date(TODAY).toLocaleDateString('es-MX',{year:'numeric',month:'long',day:'numeric'});
-  const txt=`CONVENIO DE PAGO EN PARCIALIDADES\n\nCiudad de México, a ${hoy}\n\nEntre FIBRA HOTELERA MEXICANA — Fideicomiso F/1596 (FIHO), en adelante "EL ARRENDADOR", y __________________________, en adelante "EL ARRENDATARIO", se celebra el presente convenio:\n\nPRIMERA.- El Arrendatario reconoce adeudar al Arrendador la cantidad de $__________ (________ pesos M.N.), por concepto de rentas vencidas correspondientes al inmueble ubicado en __________________________.\n\nSEGUNDA.- Las partes convienen en que dicho adeudo será cubierto en ___ parcialidades:\n  1ª parcialidad: $__________ — pagadera el __ de __________ de 2026\n  2ª parcialidad: $__________ — pagadera el __ de __________ de 2026\n  3ª parcialidad: $__________ — pagadera el __ de __________ de 2026\n\nTERCERA.- El incumplimiento de cualquier parcialidad hará exigible la totalidad del adeudo pendiente, más los intereses moratorios correspondientes a la tasa pactada en el contrato de arrendamiento.\n\nCUARTA.- El pago deberá realizarse mediante transferencia electrónica SPEI a:\n  Banco: ${SPEI_DATA.banco}\n  CLABE: ${SPEI_DATA.clabe}\n  Beneficiario: ${SPEI_DATA.beneficiario}\n  RFC: ${SPEI_DATA.rfc}\n\nQUINTA.- El presente convenio no implica novación del contrato de arrendamiento original ni renuncia a ninguno de los derechos del Arrendador.\n\n\nEL ARRENDADOR                        EL ARRENDATARIO\nFIBRA HOTELERA MEXICANA              __________________________\nFideicomiso F/1596                   Nombre:\nGerardo Vega Quinto                  Cargo:\nGerencia de Arrendamientos           Firma:\nFirma:`;
+  const txt=`CONVENIO DE PAGO EN PARCIALIDADES\n\nCiudad de México, a ${hoy}\n\nEntre FIBRA HOTELERA MEXICANA — Fideicomiso F/1596 (FIHO), en adelante "EL ARRENDADOR", y __________________________, en adelante "EL ARRENDATARIO", se celebra el presente convenio:\n\nPRIMERA.- El Arrendatario reconoce adeudar al Arrendador la cantidad de $__________ (________ pesos M.N.), por concepto de rentas vencidas correspondientes al inmueble ubicado en __________________________.\n\nSEGUNDA.- Las partes convienen en que dicho adeudo será cubierto en ___ parcialidades:\n  1ª parcialidad: $__________ — pagadera el __ de __________ de 2026\n  2ª parcialidad: $__________ — pagadera el __ de __________ de 2026\n  3ª parcialidad: $__________ — pagadera el __ de __________ de 2026\n\nTERCERA.- El incumplimiento de cualquier parcialidad hará exigible la totalidad del adeudo pendiente, más los intereses moratorios correspondientes a la tasa pactada en el contrato de arrendamiento.\n\nCUARTA.- El pago deberá realizarse mediante transferencia electrónica SPEI a:\n  Banco: ${SPEI_DATA.banco}\n  Cuenta: ${SPEI_DATA.cuenta}\n  CLABE: ${SPEI_DATA.clabe}\n  Beneficiario: ${SPEI_DATA.beneficiario}\n  RFC: ${SPEI_DATA.rfc}\n\nQUINTA.- El presente convenio no implica novación del contrato de arrendamiento original ni renuncia a ninguno de los derechos del Arrendador.\n\n\nEL ARRENDADOR                        EL ARRENDATARIO\nFIBRA HOTELERA MEXICANA              __________________________\nFideicomiso F/1596                   Nombre:\nGerardo Vega Quinto                  Cargo:\nGerencia de Arrendamientos           Firma:\nFirma:`;
   navigator.clipboard.writeText(txt).then(()=>alert('Plantilla de convenio copiada al portapapeles.\nPégala en Word o tu editor de texto para personalizar los importes y fechas.')).catch(()=>{});
 }
 
