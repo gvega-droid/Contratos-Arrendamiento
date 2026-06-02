@@ -2694,7 +2694,7 @@ function buildAlertCard(c, incr, urgClass){
         <div class="airt-renta-sub">${tipoSuf}</div>
       </div>
     </div>`;
-    incrBadge=`<div class="airt-incr-badge" style="opacity:.8">↑ +${incr.incrRate.toFixed(2)}% · ${incr.refLabel} · +${FMT2.format(difVal)}${tipoSuf} &nbsp;<span style="color:#FCA5A5;font-size:9px">· cálculo referencial (contrato vencido)</span></div>`;
+    incrBadge=`<div class="airt-incr-badge" style="opacity:.8">↑ +${incr.incrRate.toFixed(3)}% · ${incr.refLabel} · +${FMT2.format(difVal)}${tipoSuf} &nbsp;<span style="color:#FCA5A5;font-size:9px">· cálculo referencial (contrato vencido)</span></div>`;
     mailBtn=`<button class="airt-btn-mail" onclick="airtOpenEmail(${c.cid})">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
       Preparar correo
@@ -2724,7 +2724,7 @@ function buildAlertCard(c, incr, urgClass){
     </div>`;
     const difVal=incr.tipo==='anual'?incr.newRenta-incr.curRenta:incr.newMes-incr.curMes;
     const estMark=incr.inpcExact?'':'<span style="opacity:.6;font-size:9px"> (ref. estimada)</span>';
-    incrBadge=`<div class="airt-incr-badge">↑ +${incr.incrRate.toFixed(2)}% · ${incr.refLabel??'INPC '+incr.incrYear}${estMark} &nbsp;·&nbsp; +${FMT2.format(difVal)}${tipoSuf} &nbsp;·&nbsp; ${incMes}</div>`;
+    incrBadge=`<div class="airt-incr-badge">↑ +${incr.incrRate.toFixed(3)}% · ${incr.refLabel??'INPC '+incr.incrYear}${estMark} &nbsp;·&nbsp; +${FMT2.format(difVal)}${tipoSuf} &nbsp;·&nbsp; ${incMes}</div>`;
 
     if(incr.history&&incr.history.length>0){
       calcBtn=`<button class="airt-btn-calc" onclick="airtToggleCalc(${c.cid})">📊 Ver cálculo</button>`;
@@ -2744,7 +2744,7 @@ function buildAlertCard(c, incr, urgClass){
         </table>
         <div class="airt-calc-next">
           <strong>Próximo ajuste estimado:</strong> ${incr.mesNombre} ${incr.incrYear} &nbsp;|&nbsp;
-          Factor: <strong>+${incr.incrRate.toFixed(2)}%</strong> &nbsp;|&nbsp;
+          Factor: <strong>+${incr.incrRate.toFixed(3)}%</strong> &nbsp;|&nbsp;
           Nueva renta: <strong>${FMT2.format(nextVal)}${tipoSuf}</strong><br/>
           <span style="font-size:10px;opacity:.7">Ref. INPC: ${refNote}</span>
         </div>
@@ -2866,7 +2866,7 @@ PROPUESTA DE ACTUALIZACIÓN DE RENTA
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Inmueble         : ${c.hotel}
 Renta vigente    : ${rentaActual} ${tipoLabel}
-Factor INPC      : +${incr.incrRate.toFixed(2)}% (${refFactor})
+Factor INPC      : +${incr.incrRate.toFixed(3)}% (${refFactor})
 Renta actualizada: ${rentaNueva} ${tipoLabel}
 Incremento       : +${diferencia} ${tipoLabel}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -2894,7 +2894,7 @@ DETALLE DEL INCREMENTO
 Inmueble        : ${c.hotel}
 Mes de ajuste   : ${incrMesAno}
 Renta vigente   : ${rentaActual} ${tipoLabel}
-Factor INPC     : ${incr.incrRate.toFixed(2)}% (${refFactor})
+Factor INPC     : ${incr.incrRate.toFixed(3)}% (${refFactor})
 Nueva renta     : ${rentaNueva} ${tipoLabel}
 Incremento      : +${diferencia} ${tipoLabel}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
