@@ -1636,32 +1636,68 @@ function sortTable(col){
    RENTA ACTUAL — MOTOR DE CÁLCULO INPC
    ════════════════════════════════════════════ */
 
-// Tasas INPC oficiales INEGI (variación anual dic-dic)
-// 2025: dic-25/dic-24 (3.70%). 2026: referencia mar-26/mar-25 según cláusula contractual (4.58%)
+// Tasas INPC oficiales INEGI (variación anual — fallback cuando no hay índice mensual)
+// 2025: dic-25/dic-24 = 3.69%. 2026: ref. mar-26/mar-25 = 4.58%
 const INPC_DEFAULT = {
   2017:6.77, 2018:4.83, 2019:2.83, 2020:3.15,
   2021:7.36, 2022:7.82, 2023:4.66, 2024:4.72,
   2025:3.70, 2026:4.58
 };
 
-// Índices INPC mensuales INEGI (base oct-2018=100)
-// Cláusula contractual: factor = INPC[mes(M-1), año N] / INPC[mes(M-1), año N-1]
-// donde M = mes de incremento del contrato (mes anterior al inicio del nuevo período)
+// ──────────────────────────────────────────────────────────────
+// Índices INPC mensuales INEGI — base 2a quincena jul-2018 = 100
+// Fuente: boletines quincenales INEGI / DOF
+// Cláusula contractual: factor = INPC[refMes, año N] / INPC[refMes, año N-1]
+//   donde refMes = mes de incremento − 1  (mismo mes, años consecutivos)
+// ──────────────────────────────────────────────────────────────
 const INPC_MONTHLY_IDX = {
-  '2025-03': 139.161,  // INEGI marzo 2025
-  '2026-03': 145.544,  // INEGI marzo 2026
+  '2024-12': 137.949,  // (137.921+137.977)/2
+  '2025-01': 138.343,  // INEGI oficial ene-25
+  '2025-02': 138.726,
+  '2025-03': 139.161,  // confirmado contrato Megacable
+  '2025-04': 139.620,
+  '2025-05': 140.012,
+  '2025-06': 140.406,  // (140.292+140.519)/2
+  '2025-07': 140.781,  // (140.731+140.830)/2
+  '2025-08': 140.867,  // (140.800+140.934)/2
+  '2025-09': 141.197,  // (141.181+141.212)/2
+  '2025-10': 141.709,  // (141.608+141.809)/2
+  '2025-11': 142.645,  // (142.470+142.819)/2
+  '2025-12': 143.042,
+  '2026-01': 143.588,  // (143.466+143.711)/2
+  '2026-02': 144.308,  // (144.064+144.551)/2
+  '2026-03': 145.544,  // (145.446+145.643)/2 — confirmado
+  '2026-04': 145.831,
+  '2026-05': 145.622,  // 1a quincena may-26 (último publicado)
 };
 
-// Devuelve la tasa % calculada desde índices mensuales reales cuando existe,
-// o null si no hay datos (fallback al rate anual global)
+// Calcula la tasa INPC para un mes de referencia dado.
+// Retorna {rate, k1, k2, v1, v2, isExact} o null (fallback a tasa anual).
+// Cuando el mes del año N no está publicado, usa el ÚLTIMO índice disponible
+// como referencia informativa (mes inmediato anterior publicado por INEGI).
 function getInpcMonthlyRate(refMes, year){
   const pad = m => String(m).padStart(2,'0');
   const k1 = `${year-1}-${pad(refMes)}`;
   const k2 = `${year}-${pad(refMes)}`;
-  if(INPC_MONTHLY_IDX[k1]!=null && INPC_MONTHLY_IDX[k2]!=null){
-    return (INPC_MONTHLY_IDX[k2]/INPC_MONTHLY_IDX[k1]-1)*100;
+  const v1 = INPC_MONTHLY_IDX[k1];
+  const v2 = INPC_MONTHLY_IDX[k2];
+  if(v1!=null && v2!=null)
+    return {rate:(v2/v1-1)*100, k1, k2, v1, v2, isExact:true};
+  if(v1!=null){
+    // Mes exacto no publicado aún — usa el índice más reciente disponible
+    const lastKey = Object.keys(INPC_MONTHLY_IDX).filter(k=>k>k1).sort().pop();
+    if(lastKey){
+      const vLast = INPC_MONTHLY_IDX[lastKey];
+      return {rate:(vLast/v1-1)*100, k1, k2:lastKey, v1, v2:vLast, isExact:false};
+    }
   }
-  return null;
+  return null; // sin datos — usar tasa anual global
+}
+
+// Convierte clave 'YYYY-MM' a etiqueta legible 'Mmm-AAAA'
+function fmtInpcKey(k){
+  const [y, m] = k.split('-');
+  return `${MESES_ES[parseInt(m)-1].slice(0,3)}-${y}`;
 }
 
 function getInpcRates(){
@@ -2571,23 +2607,24 @@ function getNextIncr(cid, rates){
   // Mes de referencia INPC: mes anterior al inicio del período (cláusula "primer y duodécimo mes")
   const refMes = cd.mes>1 ? cd.mes-1 : 12;
 
+  const _buildRefLabel = md =>
+    md ? `INPC ${fmtInpcKey(md.k2)}/${fmtInpcKey(md.k1)}${md.isExact?' (INEGI)':' (ref. ant. INEGI)'}` : null;
+
   if(cd.tipo==='vencido'){
     const re=RENTA_EFECTIVA[cid];
     if(re&&re.importe!=null){
       const yr=TODAY.getFullYear();
-      const monthlyRate=getInpcMonthlyRate(refMes, yr);
-      const rate=monthlyRate!=null?monthlyRate:(rates[yr]??rates[yr-1]??4.0);
-      const isMonthly=monthlyRate!=null;
-      const refLabel=isMonthly
-        ? `INPC ${MESES_ES[refMes-1].slice(0,3)}-${yr}/${MESES_ES[refMes-1].slice(0,3)}-${yr-1} (INEGI)`
-        : `INPC ${yr} (estimado)`;
+      const md=getInpcMonthlyRate(refMes, yr);
+      const rate=md ? md.rate : (rates[yr]??rates[yr-1]??4.0);
+      const refLabel=_buildRefLabel(md) ?? `INPC ${yr} (estimado)`;
       const curRenta=re.importe;
       const tipoRenta=re.tipo||'anual';
       const curMes=(tipoRenta==='anual')?curRenta/12:curRenta;
       const newRenta=curRenta*(1+rate/100);
       const newMes=(tipoRenta==='anual')?newRenta/12:newRenta;
       return {tipo:'vencido', daysUntil:null, incrYear:yr, incrRate:rate,
-        curRenta, curMes, newRenta, newMes, isVencidoCalc:true, tipoRenta, refLabel};
+        curRenta, curMes, newRenta, newMes, isVencidoCalc:true, tipoRenta, refLabel,
+        inpcExact: md?.isExact??false};
     }
     return {tipo:'vencido', daysUntil:null};
   }
@@ -2599,11 +2636,9 @@ function getNextIncr(cid, rates){
   while(d<=TODAY) d.setFullYear(d.getFullYear()+1);
   const daysUntil=Math.ceil((d-TODAY)/(1000*60*60*24));
   const yr=d.getFullYear();
-  const monthlyRate=getInpcMonthlyRate(refMes, yr);
-  const rate=monthlyRate!=null?monthlyRate:(rates[yr]??rates[yr-1]??4.0);
-  const refLabel=monthlyRate!=null
-    ? `INPC ${MESES_ES[refMes-1].slice(0,3)}-${yr}/${MESES_ES[refMes-1].slice(0,3)}-${yr-1} (INEGI)`
-    : `INPC ${yr}`;
+  const md=getInpcMonthlyRate(refMes, yr);
+  const rate=md ? md.rate : (rates[yr]??rates[yr-1]??4.0);
+  const refLabel=_buildRefLabel(md) ?? `INPC ${yr} (estimado)`;
   const re=RENTA_EFECTIVA[cid];
   const curRenta=(re&&re.importe!=null)?re.importe:calcRentaActual(cd.base,cd.start,cd.mes,rates).renta;
   const curMes=cd.tipo==='anual'?curRenta/12:curRenta;
@@ -2611,7 +2646,8 @@ function getNextIncr(cid, rates){
   const newMes=cd.tipo==='anual'?newRenta/12:newRenta;
   const history=buildIncrHistory(cd.base,cd.start,cd.mes,rates);
   return {tipo:cd.tipo, daysUntil, incrementDate:d, incrYear:yr, incrRate:rate,
-    curRenta, curMes, newRenta, newMes, history, mesNombre:MESES_ES[cd.mes-1], refLabel};
+    curRenta, curMes, newRenta, newMes, history, mesNombre:MESES_ES[cd.mes-1], refLabel,
+    inpcExact: md?.isExact??false};
 }
 
 function airtUrgClass(daysUntil,tipo){
@@ -2682,7 +2718,8 @@ function buildAlertCard(c, incr, urgClass){
       </div>
     </div>`;
     const difVal=incr.tipo==='anual'?incr.newRenta-incr.curRenta:incr.newMes-incr.curMes;
-    incrBadge=`<div class="airt-incr-badge">↑ +${incr.incrRate.toFixed(2)}% · ${incr.refLabel??'INPC '+incr.incrYear} &nbsp;·&nbsp; +${FMT2.format(difVal)}${tipoSuf} &nbsp;·&nbsp; ${incMes}</div>`;
+    const estMark=incr.inpcExact?'':'<span style="opacity:.6;font-size:9px"> (ref. estimada)</span>';
+    incrBadge=`<div class="airt-incr-badge">↑ +${incr.incrRate.toFixed(2)}% · ${incr.refLabel??'INPC '+incr.incrYear}${estMark} &nbsp;·&nbsp; +${FMT2.format(difVal)}${tipoSuf} &nbsp;·&nbsp; ${incMes}</div>`;
 
     if(incr.history&&incr.history.length>0){
       calcBtn=`<button class="airt-btn-calc" onclick="airtToggleCalc(${c.cid})">📊 Ver cálculo</button>`;
