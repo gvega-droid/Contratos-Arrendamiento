@@ -1637,12 +1637,32 @@ function sortTable(col){
    ════════════════════════════════════════════ */
 
 // Tasas INPC oficiales INEGI (variación anual dic-dic)
-// 2025 y 2026: estimaciones — actualizar con dato oficial
+// 2025: dic-25/dic-24 (3.70%). 2026: referencia mar-26/mar-25 según cláusula contractual (4.58%)
 const INPC_DEFAULT = {
   2017:6.77, 2018:4.83, 2019:2.83, 2020:3.15,
   2021:7.36, 2022:7.82, 2023:4.66, 2024:4.72,
-  2025:3.70, 2026:3.50
+  2025:3.70, 2026:4.58
 };
+
+// Índices INPC mensuales INEGI (base oct-2018=100)
+// Cláusula contractual: factor = INPC[mes(M-1), año N] / INPC[mes(M-1), año N-1]
+// donde M = mes de incremento del contrato (mes anterior al inicio del nuevo período)
+const INPC_MONTHLY_IDX = {
+  '2025-03': 139.161,  // INEGI marzo 2025
+  '2026-03': 145.544,  // INEGI marzo 2026
+};
+
+// Devuelve la tasa % calculada desde índices mensuales reales cuando existe,
+// o null si no hay datos (fallback al rate anual global)
+function getInpcMonthlyRate(refMes, year){
+  const pad = m => String(m).padStart(2,'0');
+  const k1 = `${year-1}-${pad(refMes)}`;
+  const k2 = `${year}-${pad(refMes)}`;
+  if(INPC_MONTHLY_IDX[k1]!=null && INPC_MONTHLY_IDX[k2]!=null){
+    return (INPC_MONTHLY_IDX[k2]/INPC_MONTHLY_IDX[k1]-1)*100;
+  }
+  return null;
+}
 
 function getInpcRates(){
   const saved = localStorage.getItem('fiho_inpc');
@@ -1728,22 +1748,22 @@ const RENTA_EFECTIVA = {
 // Argumento fundado, claro y sin connotación negativa para cada arrendatario.
 const RENTA_EFECTIVA_NOTAS = {
   1:  'Variación de $40.63 (0.07%) por redondeo en la aplicación acumulada de los factores INPC: oct-2024 (4.72%) y oct-2025 (3.70%) sobre la base contractual de $51,142.99.',
-  2:  'Primer incremento INPC ene-2026 (3.50%) aplicado sobre base contractual de $22,276.00. Diferencia de $2.77 por redondeo en el factor acumulado.',
+  2:  'Primer incremento INPC ene-2026 (4.58%, referencia dic-25/dic-24 conforme cláusula) aplicado sobre base contractual de $22,276.00. Diferencia de $2.77 por redondeo en el factor acumulado.',
   3:  'La renta efectiva refleja el importe previo al ajuste INPC dic-2025 (3.70%). El incremento se encuentra en proceso de notificación formal al arrendatario.',
   4:  'Diferencia correspondiente al complemento INPC ago-2025 (3.70%) en proceso de cobro (Folio 16197). La renta contractual incluye dicho ajuste pendiente de formalización.',
   5:  'Incremento INPC sep-2025 (3.70%) en proceso de notificación al arrendatario. La renta efectiva refleja el importe previo al último ajuste anual.',
   6:  'Incremento INPC sep-2025 (3.70%) en proceso de notificación al arrendatario. La renta efectiva refleja el importe previo al último ajuste anual.',
-  7:  'Contrato con plazo forzoso vencido (abr-2025); la anualidad 2024–2025 fue liquidada en su totalidad. Pendiente de renovación o prórroga contractual.',
+  7:  'Contrato vencido (abr-2025). Renta de referencia: $474,767.76 × 1.0458 (INPC mar-26/mar-25: 145.544/139.161 = 4.58%) = $496,512.12 anuales. Cálculo conforme a cláusula contractual (índices primer y duodécimo mes del año transcurrido). Pendiente formalización de renovación.',
   8:  'Contrato de pago anual (ene-25/dic-25). La renta efectiva es el importe anual convenido, el cual incluye los incrementos INPC acumulados desde 2015. Sin discrepancia.',
   9:  'Importe variable en función del número de carriers activos en el sitio (1 a 2 operadores). La base contractual de $5,000 por posición activa se actualiza con INPC anual.',
-  10: 'Variación de $24.90 por redondeo en la aplicación del primer incremento INPC feb-2026 (3.50%) sobre la base contractual de $39,556.26.',
+  10: 'Variación de $24.90 por redondeo en la aplicación del primer incremento INPC feb-2026 (4.58%, referencia ene-26/ene-25 conforme cláusula) sobre la base contractual de $39,556.26.',
   11: 'Convenio de pago anual directo CAPSA/Telcel; la estructura no genera factura mensual independiente. El importe anual se verifica directamente con el arrendatario.',
   12: 'Convenio de pago anual consolidado CAPSA-FIGDL (feb-25/ene-26). El importe efectivo refleja el acuerdo bilateral negociado vigente para el período.',
   13: 'Primer año de contrato (nov-2025 a oct-2026); renta en período base sin incremento INPC aún aplicado. Primer ajuste INPC programado para sep-2026.',
   14: 'Incremento INPC ago-2025 (3.70%) en proceso de notificación al arrendatario. La renta efectiva refleja el importe previo al último ajuste anual.',
   15: 'Convenio base vigente desde feb-2025 ($378,048.58 anuales). Primer ajuste INPC programado para sep-2026 de acuerdo con la cláusula de incremento.',
   16: 'Variación de $9.94 por redondeo en la aplicación del incremento INPC ago-2025 (3.70%) sobre la base contractual de $385,583.66.',
-  17: 'Incremento INPC feb-2025 (3.70%) aplicado sobre base contractual de $437,668.81. El ajuste feb-2026 (estimado 3.50%) se encuentra en proceso de notificación formal al arrendatario.',
+  17: 'Incremento INPC feb-2025 (3.70%) aplicado sobre base contractual de $437,668.81. El ajuste feb-2026 (4.58%, INPC ene-26/ene-25) se encuentra en proceso de notificación formal al arrendatario.',
 };
 
 // Estatus de cobranza al 15-may-2026 (extraído de pestaña CARTERA)
@@ -2547,15 +2567,43 @@ function buildIncrHistory(base, startStr, incrMonth, rates){
 function getNextIncr(cid, rates){
   const cd=RENTA_DATA[cid];
   if(!cd) return null;
-  if(cd.tipo==='vencido')  return {tipo:'vencido',  daysUntil:null};
+
+  // Mes de referencia INPC: mes anterior al inicio del período (cláusula "primer y duodécimo mes")
+  const refMes = cd.mes>1 ? cd.mes-1 : 12;
+
+  if(cd.tipo==='vencido'){
+    const re=RENTA_EFECTIVA[cid];
+    if(re&&re.importe!=null){
+      const yr=TODAY.getFullYear();
+      const monthlyRate=getInpcMonthlyRate(refMes, yr);
+      const rate=monthlyRate!=null?monthlyRate:(rates[yr]??rates[yr-1]??4.0);
+      const isMonthly=monthlyRate!=null;
+      const refLabel=isMonthly
+        ? `INPC ${MESES_ES[refMes-1].slice(0,3)}-${yr}/${MESES_ES[refMes-1].slice(0,3)}-${yr-1} (INEGI)`
+        : `INPC ${yr} (estimado)`;
+      const curRenta=re.importe;
+      const tipoRenta=re.tipo||'anual';
+      const curMes=(tipoRenta==='anual')?curRenta/12:curRenta;
+      const newRenta=curRenta*(1+rate/100);
+      const newMes=(tipoRenta==='anual')?newRenta/12:newRenta;
+      return {tipo:'vencido', daysUntil:null, incrYear:yr, incrRate:rate,
+        curRenta, curMes, newRenta, newMes, isVencidoCalc:true, tipoRenta, refLabel};
+    }
+    return {tipo:'vencido', daysUntil:null};
+  }
   if(cd.tipo==='variable') return {tipo:'variable', daysUntil:null};
+
   let d=new Date(cd.start);
   d.setDate(1); d.setMonth(cd.mes-1);
   if(d<=new Date(cd.start)) d.setFullYear(d.getFullYear()+1);
   while(d<=TODAY) d.setFullYear(d.getFullYear()+1);
   const daysUntil=Math.ceil((d-TODAY)/(1000*60*60*24));
   const yr=d.getFullYear();
-  const rate=rates[yr]??rates[yr-1]??4.0;
+  const monthlyRate=getInpcMonthlyRate(refMes, yr);
+  const rate=monthlyRate!=null?monthlyRate:(rates[yr]??rates[yr-1]??4.0);
+  const refLabel=monthlyRate!=null
+    ? `INPC ${MESES_ES[refMes-1].slice(0,3)}-${yr}/${MESES_ES[refMes-1].slice(0,3)}-${yr-1} (INEGI)`
+    : `INPC ${yr}`;
   const re=RENTA_EFECTIVA[cid];
   const curRenta=(re&&re.importe!=null)?re.importe:calcRentaActual(cd.base,cd.start,cd.mes,rates).renta;
   const curMes=cd.tipo==='anual'?curRenta/12:curRenta;
@@ -2563,7 +2611,7 @@ function getNextIncr(cid, rates){
   const newMes=cd.tipo==='anual'?newRenta/12:newRenta;
   const history=buildIncrHistory(cd.base,cd.start,cd.mes,rates);
   return {tipo:cd.tipo, daysUntil, incrementDate:d, incrYear:yr, incrRate:rate,
-    curRenta, curMes, newRenta, newMes, history, mesNombre:MESES_ES[cd.mes-1]};
+    curRenta, curMes, newRenta, newMes, history, mesNombre:MESES_ES[cd.mes-1], refLabel};
 }
 
 function airtUrgClass(daysUntil,tipo){
@@ -2588,7 +2636,29 @@ function buildAlertCard(c, incr, urgClass){
 
   let cdHtml,rentaCmp,incrBadge='',calcBtn='',mailBtn='',histHtml='';
 
-  if(!incr||incr.tipo==='vencido'){
+  if(incr?.isVencidoCalc){
+    const tipoSuf=incr.tipoRenta==='anual'?'/año':'/mes';
+    const difVal=incr.tipoRenta==='anual'?incr.newRenta-incr.curRenta:incr.newMes-incr.curMes;
+    cdHtml=`<div class="airt-countdown-n" style="color:#FCA5A5;font-size:10px;font-weight:800">VENCIDO</div><div class="airt-countdown-l">ref. INPC</div>`;
+    rentaCmp=`<div class="airt-renta-cmp">
+      <div class="airt-renta-item">
+        <div class="airt-renta-lbl">Renta efectiva</div>
+        <div class="airt-renta-val" style="color:rgba(255,255,255,.85)">${FMT.format(incr.tipoRenta==='anual'?incr.curRenta:incr.curMes)}</div>
+        <div class="airt-renta-sub">${tipoSuf}</div>
+      </div>
+      <div class="airt-renta-arrow">→</div>
+      <div class="airt-renta-item">
+        <div class="airt-renta-lbl">Renta actualizada</div>
+        <div class="airt-renta-val" style="color:#A3E635">${FMT.format(incr.tipoRenta==='anual'?incr.newRenta:incr.newMes)}</div>
+        <div class="airt-renta-sub">${tipoSuf}</div>
+      </div>
+    </div>`;
+    incrBadge=`<div class="airt-incr-badge" style="opacity:.8">↑ +${incr.incrRate.toFixed(2)}% · ${incr.refLabel} · +${FMT2.format(difVal)}${tipoSuf} &nbsp;<span style="color:#FCA5A5;font-size:9px">· cálculo referencial (contrato vencido)</span></div>`;
+    mailBtn=`<button class="airt-btn-mail" onclick="airtOpenEmail(${c.cid})">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+      Preparar correo
+    </button>`;
+  } else if(!incr||incr.tipo==='vencido'){
     cdHtml=`<div class="airt-countdown-n" style="color:#FCA5A5;font-size:11px;font-weight:800">VENCIDO</div><div class="airt-countdown-l">sin renovación</div>`;
     rentaCmp=`<div class="airt-special-msg">Contrato con plazo forzoso vencido — pendiente renovación o prórroga</div>`;
   } else if(incr.tipo==='variable'){
@@ -2612,7 +2682,7 @@ function buildAlertCard(c, incr, urgClass){
       </div>
     </div>`;
     const difVal=incr.tipo==='anual'?incr.newRenta-incr.curRenta:incr.newMes-incr.curMes;
-    incrBadge=`<div class="airt-incr-badge">↑ +${incr.incrRate.toFixed(2)}% INPC ${incr.incrYear} &nbsp;·&nbsp; +${FMT2.format(difVal)}${tipoSuf} &nbsp;·&nbsp; ${incMes}</div>`;
+    incrBadge=`<div class="airt-incr-badge">↑ +${incr.incrRate.toFixed(2)}% · ${incr.refLabel??'INPC '+incr.incrYear} &nbsp;·&nbsp; +${FMT2.format(difVal)}${tipoSuf} &nbsp;·&nbsp; ${incMes}</div>`;
 
     if(incr.history&&incr.history.length>0){
       calcBtn=`<button class="airt-btn-calc" onclick="airtToggleCalc(${c.cid})">📊 Ver cálculo</button>`;
@@ -2734,16 +2804,47 @@ function airtOpenEmail(cid){
   const cd=RENTA_DATA[cid];
   const contact=airtGetContact(cid);
   const FMT2=new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN',maximumFractionDigits:2});
-  if(!incr||!incr.daysUntil) return;
+  if(!incr||(!incr.daysUntil && !incr.isVencidoCalc)) return;
 
-  const tipoLabel=incr.tipo==='anual'?'anuales':'mensuales';
-  const incrMesAno=`${incr.mesNombre} ${incr.incrYear}`;
-  const rentaActual=FMT2.format(incr.tipo==='anual'?incr.curRenta:incr.curMes);
-  const rentaNueva=FMT2.format(incr.tipo==='anual'?incr.newRenta:incr.newMes);
-  const diferencia=FMT2.format(incr.tipo==='anual'?incr.newRenta-incr.curRenta:incr.newMes-incr.curMes);
+  const tipoRenta=incr.tipoRenta||incr.tipo;
+  const tipoLabel=tipoRenta==='anual'?'anuales':'mensuales';
+  const rentaActual=FMT2.format(tipoRenta==='anual'?incr.curRenta:incr.curMes);
+  const rentaNueva=FMT2.format(tipoRenta==='anual'?incr.newRenta:incr.newMes);
+  const diferencia=FMT2.format(tipoRenta==='anual'?incr.newRenta-incr.curRenta:incr.newMes-incr.curMes);
+  const refFactor=incr.refLabel??`INPC ${incr.incrYear}`;
 
-  const subject=`Ajuste de Renta ${incrMesAno} — ${c.hotel} | Contrato de Arrendamiento FIHO`;
-  const body=`Estimado(a) equipo de ${contact.cliente},
+  let subject, body;
+  if(incr.isVencidoCalc){
+    const incrMesAno=`${incr.incrYear}`;
+    subject=`Propuesta de Incremento y Renovación de Contrato ${incr.incrYear} — ${c.hotel} | FIHO`;
+    body=`Estimado(a) equipo de ${contact.cliente},
+
+Por medio del presente, nos permitimos informarle que el Contrato de Arrendamiento celebrado entre FIBRA HOTELERA MEXICANA — Fideicomiso F/1596 (FIHO) y ${contact.cliente}, correspondiente al inmueble indicado, se encuentra con su plazo forzoso vencido, operando actualmente bajo prórroga. En ese contexto, y de conformidad con la cláusula de incremento establecida en dicho instrumento, procede actualizar el importe de renta aplicando la variación del Índice Nacional de Precios al Consumidor (INPC), publicado por el Instituto Nacional de Estadística y Geografía (INEGI).
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PROPUESTA DE ACTUALIZACIÓN DE RENTA
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Inmueble         : ${c.hotel}
+Renta vigente    : ${rentaActual} ${tipoLabel}
+Factor INPC      : +${incr.incrRate.toFixed(2)}% (${refFactor})
+Renta actualizada: ${rentaNueva} ${tipoLabel}
+Incremento       : +${diferencia} ${tipoLabel}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+En virtud de lo anterior, le solicitamos confirmar su conformidad con el importe actualizado a efecto de proceder a la formalización de la renovación o prórroga contractual, y emitir el comprobante fiscal digital correspondiente por el nuevo importe.
+
+Quedo a sus órdenes para cualquier aclaración al respecto.
+
+Atentamente,
+
+Gerardo Vega Quinto
+Gerencia de Arrendamientos
+FIBRA HOTELERA MEXICANA — Fideicomiso F/1596 (FIHO)
+gvega@fibrahotel.com`;
+  } else {
+    const incrMesAno=`${incr.mesNombre} ${incr.incrYear}`;
+    subject=`Ajuste de Renta ${incrMesAno} — ${c.hotel} | Contrato de Arrendamiento FIHO`;
+    body=`Estimado(a) equipo de ${contact.cliente},
 
 Por medio del presente, nos permitimos comunicarle que de conformidad con la cláusula de incremento establecida en el Contrato de Arrendamiento vigente, celebrado entre FIBRA HOTELERA MEXICANA — Fideicomiso F/1596 (FIHO) y ${contact.cliente}, corresponde efectuar el ajuste anual de renta de conformidad con la variación del Índice Nacional de Precios al Consumidor (INPC), publicado por el Instituto Nacional de Estadística y Geografía (INEGI).
 
@@ -2753,7 +2854,7 @@ DETALLE DEL INCREMENTO
 Inmueble        : ${c.hotel}
 Mes de ajuste   : ${incrMesAno}
 Renta vigente   : ${rentaActual} ${tipoLabel}
-Factor INPC ${incr.incrYear} : ${incr.incrRate.toFixed(2)}% (fuente: INEGI)
+Factor INPC     : ${incr.incrRate.toFixed(2)}% (${refFactor})
 Nueva renta     : ${rentaNueva} ${tipoLabel}
 Incremento      : +${diferencia} ${tipoLabel}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -2768,6 +2869,7 @@ Gerardo Vega Quinto
 Gerencia de Arrendamientos
 FIBRA HOTELERA MEXICANA — Fideicomiso F/1596 (FIHO)
 gvega@fibrahotel.com`;
+  }
 
   document.getElementById('airtModalTitle').textContent=`Borrador — ${c.hotel}`;
   document.getElementById('airtModalSub').innerHTML=`<strong>Para:</strong> ${contact.email}<br/><strong>Asunto:</strong> ${subject}`;
