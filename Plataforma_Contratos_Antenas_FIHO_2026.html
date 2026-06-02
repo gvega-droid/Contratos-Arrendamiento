@@ -1673,25 +1673,30 @@ const INPC_MONTHLY_IDX = {
 
 // Calcula la tasa INPC para un mes de referencia dado.
 // Retorna {rate, k1, k2, v1, v2, isExact} o null (fallback a tasa anual).
-// Cuando el mes del año N no está publicado, usa el ÚLTIMO índice disponible
-// como referencia informativa (mes inmediato anterior publicado por INEGI).
+// Cuando el mes exacto del año N no está publicado:
+//   → compara el ÚLTIMO mes publicado vs ese mismo mes del año anterior
+//   (mes inmediato anterior publicado INEGI — no se inventan meses futuros)
 function getInpcMonthlyRate(refMes, year){
   const pad = m => String(m).padStart(2,'0');
   const k1 = `${year-1}-${pad(refMes)}`;
   const k2 = `${year}-${pad(refMes)}`;
   const v1 = INPC_MONTHLY_IDX[k1];
   const v2 = INPC_MONTHLY_IDX[k2];
+  // Caso exacto: ambos meses de referencia disponibles en INEGI
   if(v1!=null && v2!=null)
     return {rate:(v2/v1-1)*100, k1, k2, v1, v2, isExact:true};
-  if(v1!=null){
-    // Mes exacto no publicado aún — usa el índice más reciente disponible
-    const lastKey = Object.keys(INPC_MONTHLY_IDX).filter(k=>k>k1).sort().pop();
-    if(lastKey){
-      const vLast = INPC_MONTHLY_IDX[lastKey];
-      return {rate:(vLast/v1-1)*100, k1, k2:lastKey, v1, v2:vLast, isExact:false};
-    }
+  // Mes del año N no publicado aún:
+  // usar el último mes publicado vs ese mismo mes del año anterior
+  const lastKey = Object.keys(INPC_MONTHLY_IDX).sort().pop();
+  if(lastKey){
+    const [ly, lm] = lastKey.split('-').map(Number);
+    const lk1 = `${ly-1}-${pad(lm)}`;
+    const vLast = INPC_MONTHLY_IDX[lastKey];
+    const vPrior = INPC_MONTHLY_IDX[lk1];
+    if(vLast!=null && vPrior!=null)
+      return {rate:(vLast/vPrior-1)*100, k1:lk1, k2:lastKey, v1:vPrior, v2:vLast, isExact:false};
   }
-  return null; // sin datos — usar tasa anual global
+  return null;
 }
 
 // Convierte clave 'YYYY-MM' a etiqueta legible 'Mmm-AAAA'
