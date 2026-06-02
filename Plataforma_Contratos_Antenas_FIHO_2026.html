@@ -118,6 +118,23 @@
     .inpc-field input{width:70px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:7px;color:#A3E635;font-size:12px;font-weight:700;font-family:'Inter',sans-serif;padding:4px 8px;outline:none;text-align:right}
     .inpc-field input:focus{border-color:#A3E635}
     .inpc-note{font-size:10px;color:rgba(255,255,255,.3);margin-top:8px;line-height:1.5}
+    .inpc-monthly-sep{border:none;border-top:1px solid rgba(163,230,53,.15);margin:14px 0 10px}
+    .inpc-monthly-title{font-size:12px;font-weight:700;color:#93C5FD;margin-bottom:10px}
+    .inpc-schedule-table{width:100%;border-collapse:collapse;font-size:10px;margin-bottom:12px}
+    .inpc-schedule-table th{color:rgba(255,255,255,.4);font-weight:600;padding:3px 8px;text-align:left;border-bottom:1px solid rgba(255,255,255,.08)}
+    .inpc-schedule-table td{padding:3px 8px;color:rgba(255,255,255,.7);border-bottom:1px solid rgba(255,255,255,.05)}
+    .inpc-schedule-table td.sched-pub{color:#FCD34D;font-family:monospace}
+    .inpc-add-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:rgba(255,255,255,.04);border-radius:8px;padding:8px 12px;margin-bottom:10px}
+    .inpc-add-row label{font-size:10px;color:rgba(255,255,255,.4);font-weight:600;margin-right:2px}
+    .inpc-add-row select,.inpc-add-row input[type=number]{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:6px;color:#fff;font-size:11px;padding:4px 7px;outline:none;font-family:'Inter',sans-serif}
+    .inpc-add-row select:focus,.inpc-add-row input[type=number]:focus{border-color:#93C5FD}
+    .inpc-add-btn{background:rgba(147,197,253,.18);border:1px solid rgba(147,197,253,.35);border-radius:6px;color:#93C5FD;font-size:11px;font-weight:700;padding:4px 12px;cursor:pointer}
+    .inpc-add-btn:hover{background:rgba(147,197,253,.28)}
+    .inpc-monthly-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+    .inpc-m-chip{display:inline-flex;align-items:center;gap:5px;background:rgba(147,197,253,.1);border:1px solid rgba(147,197,253,.25);border-radius:20px;padding:3px 10px;font-size:10px;color:#93C5FD}
+    .inpc-m-chip.exact{background:rgba(163,230,53,.1);border-color:rgba(163,230,53,.3);color:#A3E635}
+    .inpc-m-chip button{background:none;border:none;color:rgba(252,165,165,.6);cursor:pointer;font-size:11px;padding:0;line-height:1}
+    .inpc-m-chip button:hover{color:#FCA5A5}
     /* PERMIT LEGEND */
     .perm-legend{display:flex;flex-wrap:wrap;gap:8px;padding:0 32px 20px}
     .pl-item{display:flex;align-items:center;gap:5px;font-size:11px;color:rgba(255,255,255,.6)}
@@ -586,6 +603,37 @@
     <div class="inpc-grid" id="inpcGrid"></div>
     <div class="inpc-note">Las tasas de 2025 y 2026 son estimaciones. Actualice con los valores oficiales publicados por INEGI en <strong>www.inegi.org.mx</strong>. Los cambios se guardan en este navegador y recalculan las rentas automáticamente.</div>
     <button class="inpc-edit-btn" onclick="saveInpcRates()" style="margin-top:10px">💾 Guardar y recalcular</button>
+    <hr class="inpc-monthly-sep"/>
+    <div class="inpc-monthly-title">📅 Índices INPC mensuales — Calendario de actualización</div>
+    <table class="inpc-schedule-table">
+      <thead><tr><th>Aniversario de incremento</th><th>Índice INPC a consultar</th><th>Publicación aprox.</th><th>Contratos afectados</th></tr></thead>
+      <tbody>
+        <tr><td>Ago-2026</td><td class="sched-pub">Jul-2026</td><td>~10 ago-2026</td><td>#4, #11, #14, #16</td></tr>
+        <tr><td>Sep-2026</td><td class="sched-pub">Ago-2026</td><td>~10 sep-2026</td><td>#5, #6, #13, #15</td></tr>
+        <tr><td>Oct-2026</td><td class="sched-pub">Sep-2026</td><td>~10 oct-2026</td><td>#1</td></tr>
+        <tr><td>Dic-2026</td><td class="sched-pub">Nov-2026</td><td>~10 dic-2026</td><td>#3</td></tr>
+        <tr><td>Ene-2027</td><td class="sched-pub">Dic-2026</td><td>~10 ene-2027</td><td>#2, #8</td></tr>
+        <tr><td>Feb-2027</td><td class="sched-pub">Ene-2027</td><td>~10 feb-2027</td><td>#10, #12, #17</td></tr>
+      </tbody>
+    </table>
+    <div class="inpc-add-row">
+      <label>Mes</label>
+      <select id="inpcAddMes">
+        <option value="1">Enero</option><option value="2">Febrero</option><option value="3">Marzo</option>
+        <option value="4">Abril</option><option value="5">Mayo</option><option value="6">Junio</option>
+        <option value="7">Julio</option><option value="8">Agosto</option><option value="9">Septiembre</option>
+        <option value="10">Octubre</option><option value="11">Noviembre</option><option value="12">Diciembre</option>
+      </select>
+      <label>Año</label>
+      <select id="inpcAddYear">
+        <option value="2025">2025</option><option value="2026" selected>2026</option>
+        <option value="2027">2027</option><option value="2028">2028</option>
+      </select>
+      <label>Índice INPC</label>
+      <input type="number" id="inpcAddVal" step="0.001" min="100" max="300" placeholder="ej: 146.123" style="width:110px"/>
+      <button class="inpc-add-btn" onclick="inpcAddMonthly()">+ Agregar índice</button>
+    </div>
+    <div id="inpcMonthlyList" class="inpc-monthly-list"></div>
   </div>
   <!-- permit badge legend -->
   <div class="perm-legend">
@@ -1677,22 +1725,24 @@ const INPC_MONTHLY_IDX = {
 //   → compara el ÚLTIMO mes publicado vs ese mismo mes del año anterior
 //   (mes inmediato anterior publicado INEGI — no se inventan meses futuros)
 function getInpcMonthlyRate(refMes, year){
+  // Merge hardcoded table + user-added values from localStorage
+  const idx = Object.assign({}, INPC_MONTHLY_IDX, inpcGetMonthly());
   const pad = m => String(m).padStart(2,'0');
   const k1 = `${year-1}-${pad(refMes)}`;
   const k2 = `${year}-${pad(refMes)}`;
-  const v1 = INPC_MONTHLY_IDX[k1];
-  const v2 = INPC_MONTHLY_IDX[k2];
+  const v1 = idx[k1];
+  const v2 = idx[k2];
   // Caso exacto: ambos meses de referencia disponibles en INEGI
   if(v1!=null && v2!=null)
     return {rate:(v2/v1-1)*100, k1, k2, v1, v2, isExact:true};
   // Mes del año N no publicado aún:
   // usar el último mes publicado vs ese mismo mes del año anterior
-  const lastKey = Object.keys(INPC_MONTHLY_IDX).sort().pop();
+  const lastKey = Object.keys(idx).sort().pop();
   if(lastKey){
     const [ly, lm] = lastKey.split('-').map(Number);
     const lk1 = `${ly-1}-${pad(lm)}`;
-    const vLast = INPC_MONTHLY_IDX[lastKey];
-    const vPrior = INPC_MONTHLY_IDX[lk1];
+    const vLast = idx[lastKey];
+    const vPrior = idx[lk1];
     if(vLast!=null && vPrior!=null)
       return {rate:(vLast/vPrior-1)*100, k1:lk1, k2:lastKey, v1:vPrior, v2:vLast, isExact:false};
   }
@@ -1739,6 +1789,46 @@ function buildInpcEditor(){
       <span style="font-size:10px;color:rgba(163,230,53,.6)">%</span>
     </div>`).join('');
   updateInpcSummary();
+}
+
+/* ── Índices INPC mensuales adicionales (localStorage: fiho_inpc_monthly) ── */
+function inpcGetMonthly(){
+  try{ return JSON.parse(localStorage.getItem('fiho_inpc_monthly')||'{}'); }
+  catch(e){ return {}; }
+}
+function inpcSaveMonthly(obj){
+  localStorage.setItem('fiho_inpc_monthly', JSON.stringify(obj));
+}
+function inpcAddMonthly(){
+  const mes = parseInt(document.getElementById('inpcAddMes').value);
+  const yr  = parseInt(document.getElementById('inpcAddYear').value);
+  const val = parseFloat(document.getElementById('inpcAddVal').value);
+  if(!mes || !yr || isNaN(val) || val <= 0){ alert('Ingresa un índice INPC válido.'); return; }
+  const key = `${yr}-${String(mes).padStart(2,'0')}`;
+  const obj = inpcGetMonthly();
+  obj[key] = val;
+  inpcSaveMonthly(obj);
+  document.getElementById('inpcAddVal').value = '';
+  inpcRenderMonthlyList();
+  buildRentaActualColumn();
+}
+function inpcRemoveMonthly(key){
+  const obj = inpcGetMonthly();
+  delete obj[key];
+  inpcSaveMonthly(obj);
+  inpcRenderMonthlyList();
+  buildRentaActualColumn();
+}
+function inpcRenderMonthlyList(){
+  const el = document.getElementById('inpcMonthlyList');
+  if(!el) return;
+  const obj = inpcGetMonthly();
+  const keys = Object.keys(obj).sort();
+  if(!keys.length){
+    el.innerHTML = '<span style="font-size:10px;color:rgba(255,255,255,.25);font-style:italic">Sin índices adicionales guardados. Agrega aquí los nuevos meses publicados por INEGI.</span>';
+    return;
+  }
+  el.innerHTML = keys.map(k=>`<span class="inpc-m-chip exact" title="${k}">${fmtInpcKey(k)}: <strong>${obj[k]}</strong> <button onclick="inpcRemoveMonthly('${k}')" title="Eliminar">×</button></span>`).join('');
 }
 
 // Contract rent data: [base, startYYYY-MM-DD, incrMonth(1-12), freqType, period, m2]
@@ -3660,6 +3750,7 @@ function cobConvenioTemplate(){
 // Init on load
 document.addEventListener('DOMContentLoaded', ()=>{
   buildInpcEditor();
+  inpcRenderMonthlyList();
   buildRentaActualColumn();
   renderEnergeticos();
 });
