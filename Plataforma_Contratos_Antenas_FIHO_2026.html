@@ -2733,22 +2733,20 @@ function buildAlertCard(c, incr, urgClass){
         <td>${FMT2.format(h.prev)}</td><td>${FMT2.format(h.nueva)}</td>
       </tr>`).join('');
       const nextVal=incr.tipo==='anual'?incr.newRenta:incr.newMes;
+      const refNote=incr.inpcExact
+        ? `${incr.refLabel}`
+        : `${incr.refLabel} — pendiente publicación INEGI`;
       histHtml=`<div class="airt-calc-panel" id="airt-calc-${c.cid}">
         <div class="airt-calc-title">Historial de incrementos INPC acumulados (base: ${FMT2.format(RENTA_DATA[c.cid].base)})</div>
         <table class="airt-calc-table">
           <thead><tr><th>Mes/Año</th><th>INPC %</th><th>Renta anterior</th><th>Renta resultante</th></tr></thead>
-          <tbody>${histRows}
-          <tr class="next-row">
-            <td>${incMes} (próximo)</td><td>${incr.incrRate.toFixed(2)}%*</td>
-            <td>${FMT2.format(incr.tipo==='anual'?incr.curRenta:incr.curMes)}</td>
-            <td>${FMT2.format(nextVal)}</td>
-          </tr></tbody>
+          <tbody>${histRows}</tbody>
         </table>
         <div class="airt-calc-next">
-          <strong>Próximo ajuste:</strong> ${incr.mesNombre} ${incr.incrYear} &nbsp;|&nbsp;
-          INPC ${incr.incrYear}: <strong>${incr.incrRate.toFixed(2)}%</strong> (estimado INEGI) &nbsp;|&nbsp;
+          <strong>Próximo ajuste estimado:</strong> ${incr.mesNombre} ${incr.incrYear} &nbsp;|&nbsp;
+          Factor: <strong>+${incr.incrRate.toFixed(2)}%</strong> &nbsp;|&nbsp;
           Nueva renta: <strong>${FMT2.format(nextVal)}${tipoSuf}</strong><br/>
-          *Tasa estimada — se actualiza automáticamente al editar las tasas INPC en la barra superior.
+          <span style="font-size:10px;opacity:.7">Ref. INPC: ${refNote}</span>
         </div>
       </div>`;
     }
