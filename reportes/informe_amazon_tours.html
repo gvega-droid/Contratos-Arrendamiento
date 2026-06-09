@@ -3,703 +3,628 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Informe de Ventas y Renta Variable — Amazon Tours | Fiesta Americana Condesa Cancún</title>
+<title>Informe Renta Variable — Amazon Tours | Fiesta Americana Condesa Cancún</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
-  :root {
-    --azul: #003366;
-    --azul-medio: #0057A8;
-    --azul-claro: #3399CC;
-    --dorado: #C8973A;
-    --dorado-claro: #F0C060;
-    --gris-claro: #F4F6F9;
-    --gris-borde: #DDE3EC;
-    --texto: #1A2535;
-    --blanco: #FFFFFF;
-    --verde: #2E7D32;
-    --rojo: #C62828;
-  }
+:root {
+  --azul:      #003366;
+  --azul-m:    #0057A8;
+  --azul-c:    #3399CC;
+  --dorado:    #B8860B;
+  --dorado-c:  #F0C040;
+  --verde:     #2E7D32;
+  --rojo:      #C62828;
+  --naranja:   #E65100;
+  --gris-bg:   #F2F5F9;
+  --gris-brd:  #DDE3EC;
+  --blanco:    #FFFFFF;
+  --texto:     #1A2535;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--gris-bg); color: var(--texto); }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+/* PORTADA */
+.cover {
+  background: linear-gradient(135deg, #001F4D 0%, var(--azul-m) 55%, #0077BB 100%);
+  color: #fff;
+  padding: 54px 56px 46px;
+  position: relative; overflow: hidden;
+}
+.cover::after {
+  content: '';
+  position: absolute; bottom: -90px; right: -60px;
+  width: 420px; height: 280px;
+  border-radius: 50%;
+  background: rgba(240,192,64,0.10);
+}
+.cover-tag {
+  display: inline-block;
+  background: var(--dorado-c); color: #001F4D;
+  font-size: 10.5px; font-weight: 800; letter-spacing: 2px;
+  text-transform: uppercase; padding: 5px 15px; border-radius: 20px;
+  margin-bottom: 22px;
+}
+.cover h1 { font-size: 2.5rem; font-weight: 800; line-height: 1.15; margin-bottom: 10px; }
+.cover h1 em { color: var(--dorado-c); font-style: normal; }
+.cover-sub { font-size: 0.95rem; opacity: 0.80; max-width: 520px; line-height: 1.65; margin-bottom: 30px; }
+.cover-pills {
+  display: flex; gap: 10px; flex-wrap: wrap;
+  border-top: 1px solid rgba(255,255,255,0.18);
+  padding-top: 22px; margin-top: 6px;
+}
+.cover-pill {
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.20);
+  border-radius: 30px; padding: 6px 16px;
+  font-size: 0.82rem;
+}
+.cover-pill strong { color: var(--dorado-c); display: block; font-size: 0.68rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1px; }
 
-  body {
-    font-family: 'Segoe UI', Arial, sans-serif;
-    background: var(--gris-claro);
-    color: var(--texto);
-  }
+/* WRAPPER */
+.wrap { max-width: 1100px; margin: 0 auto; padding: 38px 28px 60px; }
 
-  /* ── PORTADA ─────────────────────────────────────────── */
-  .cover {
-    background: linear-gradient(135deg, var(--azul) 0%, var(--azul-medio) 60%, var(--azul-claro) 100%);
-    color: var(--blanco);
-    padding: 70px 60px 60px;
-    position: relative;
-    overflow: hidden;
-  }
-  .cover::before {
-    content: '';
-    position: absolute;
-    top: -80px; right: -80px;
-    width: 380px; height: 380px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.06);
-  }
-  .cover::after {
-    content: '';
-    position: absolute;
-    bottom: -120px; left: -60px;
-    width: 500px; height: 300px;
-    border-radius: 50%;
-    background: rgba(200,151,58,0.12);
-  }
-  .cover-badge {
-    display: inline-block;
-    background: var(--dorado);
-    color: var(--azul);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    padding: 6px 16px;
-    border-radius: 20px;
-    margin-bottom: 28px;
-  }
-  .cover h1 {
-    font-size: 2.8rem;
-    font-weight: 800;
-    line-height: 1.15;
-    max-width: 680px;
-    margin-bottom: 14px;
-  }
-  .cover h1 span { color: var(--dorado-claro); }
-  .cover-sub {
-    font-size: 1.1rem;
-    opacity: 0.85;
-    margin-bottom: 36px;
-    max-width: 540px;
-    line-height: 1.6;
-  }
-  .cover-meta {
-    display: flex;
-    gap: 36px;
-    flex-wrap: wrap;
-    font-size: 0.88rem;
-    opacity: 0.75;
-    border-top: 1px solid rgba(255,255,255,0.2);
-    padding-top: 24px;
-    margin-top: 10px;
-  }
-  .cover-meta strong { display: block; color: var(--dorado-claro); font-size: 0.78rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 3px; }
+/* SECCIÓN HEADER */
+.sec-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--azul-m); margin-bottom: 5px; }
+.sec-title { font-size: 1.35rem; font-weight: 700; color: var(--azul); border-bottom: 3px solid var(--dorado); display: inline-block; padding-bottom: 8px; margin-bottom: 22px; }
 
-  /* ── CONTENIDO ───────────────────────────────────────── */
-  .container { max-width: 1200px; margin: 0 auto; padding: 40px 30px 60px; }
+/* ALERTA / NOTA */
+.nota {
+  background: #FFFBEC; border-left: 4px solid var(--dorado);
+  padding: 12px 16px; border-radius: 0 8px 8px 0;
+  font-size: 0.80rem; color: #5A4200; line-height: 1.6; margin-bottom: 30px;
+}
 
-  /* ── SECCIÓN ─────────────────────────────────────────── */
-  .section-title {
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: var(--azul-medio);
-    margin-bottom: 8px;
-  }
-  .section-heading {
-    font-size: 1.55rem;
-    font-weight: 700;
-    color: var(--azul);
-    margin-bottom: 24px;
-    padding-bottom: 12px;
-    border-bottom: 3px solid var(--dorado);
-    display: inline-block;
-  }
+/* KPI GRID */
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px,1fr)); gap: 16px; margin-bottom: 38px; }
+.kpi {
+  background: var(--blanco); border-radius: 12px;
+  padding: 20px 18px; border: 1px solid var(--gris-brd);
+  box-shadow: 0 2px 8px rgba(0,51,102,0.07);
+  position: relative; overflow: hidden;
+}
+.kpi::before { content: ''; position: absolute; top:0; left:0; width:4px; height:100%; border-radius:12px 0 0 12px; }
+.kpi.k-azul::before  { background: var(--azul-m); }
+.kpi.k-oro::before   { background: var(--dorado); }
+.kpi.k-verde::before { background: var(--verde); }
+.kpi.k-rojo::before  { background: var(--rojo); }
+.kpi.k-cyan::before  { background: var(--azul-c); }
+.kpi-lbl { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #7A8899; margin-bottom: 6px; }
+.kpi-val { font-size: 1.75rem; font-weight: 800; color: var(--azul); line-height: 1; }
+.kpi-sub { font-size: 0.76rem; color: #7A8899; margin-top: 5px; }
+.badge { display: inline-block; font-size: 0.72rem; font-weight: 700; padding: 2px 9px; border-radius: 10px; margin-top: 7px; }
+.badge.pos { background: #E8F5E9; color: var(--verde); }
+.badge.neg { background: #FFEBEE; color: var(--rojo); }
+.badge.neu { background: #E3F0FB; color: var(--azul-m); }
+.badge.warn{ background: #FFF3CD; color: #856404; }
 
-  /* ── KPI CARDS ───────────────────────────────────────── */
-  .kpi-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 18px;
-    margin-bottom: 44px;
-  }
-  .kpi-card {
-    background: var(--blanco);
-    border-radius: 14px;
-    padding: 24px 22px;
-    border: 1px solid var(--gris-borde);
-    box-shadow: 0 2px 10px rgba(0,51,102,0.07);
-    position: relative;
-    overflow: hidden;
-  }
-  .kpi-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 5px; height: 100%;
-    border-radius: 14px 0 0 14px;
-  }
-  .kpi-card.azul::before { background: var(--azul-medio); }
-  .kpi-card.dorado::before { background: var(--dorado); }
-  .kpi-card.verde::before { background: var(--verde); }
-  .kpi-card.claro::before { background: var(--azul-claro); }
-  .kpi-label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #6B7B90; margin-bottom: 8px; }
-  .kpi-value { font-size: 1.9rem; font-weight: 800; color: var(--azul); line-height: 1; }
-  .kpi-sub { font-size: 0.8rem; color: #6B7B90; margin-top: 6px; }
-  .kpi-delta { display: inline-block; font-size: 0.78rem; font-weight: 700; padding: 2px 8px; border-radius: 10px; margin-top: 8px; }
-  .kpi-delta.pos { background: #E8F5E9; color: var(--verde); }
-  .kpi-delta.neg { background: #FFEBEE; color: var(--rojo); }
-  .kpi-delta.neu { background: #E3F0FB; color: var(--azul-medio); }
+/* TABLA RESUMEN ANUAL */
+.tcard { background: var(--blanco); border-radius: 14px; padding: 24px 22px; border: 1px solid var(--gris-brd); box-shadow: 0 2px 8px rgba(0,51,102,0.07); margin-bottom: 26px; overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
+thead tr { background: var(--azul); color: #fff; }
+thead th { padding: 11px 14px; text-align: right; font-weight: 600; }
+thead th:first-child { text-align: left; border-radius: 6px 0 0 0; }
+thead th:last-child  { border-radius: 0 6px 0 0; }
+tbody tr { border-bottom: 1px solid var(--gris-brd); }
+tbody tr:hover { background: #EEF5FF; }
+tbody td { padding: 10px 14px; text-align: right; }
+tbody td:first-child { text-align: left; font-weight: 700; color: var(--azul); }
+tfoot tr { background: linear-gradient(90deg,#E5EEF9,#F5EDD5); }
+tfoot td { padding: 11px 14px; text-align: right; font-weight: 700; color: var(--azul); border-top: 2px solid var(--dorado); }
+tfoot td:first-child { text-align: left; }
+.year-best { background: rgba(46,125,50,0.08) !important; }
+.year-low  { background: rgba(198,40,40,0.06) !important; }
+.pct-bar { display: inline-block; height: 8px; border-radius: 4px; margin-left: 6px; vertical-align: middle; }
 
-  /* ── CHART CARDS ─────────────────────────────────────── */
-  .chart-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
-    gap: 26px;
-    margin-bottom: 40px;
-  }
-  .chart-card {
-    background: var(--blanco);
-    border-radius: 16px;
-    padding: 28px 26px 24px;
-    border: 1px solid var(--gris-borde);
-    box-shadow: 0 2px 12px rgba(0,51,102,0.07);
-  }
-  .chart-card.full { grid-column: 1 / -1; }
-  .chart-title {
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--azul);
-    margin-bottom: 4px;
-  }
-  .chart-desc {
-    font-size: 0.8rem;
-    color: #6B7B90;
-    margin-bottom: 22px;
-  }
-  .chart-wrap { position: relative; height: 300px; }
-  .chart-wrap.tall { height: 380px; }
+/* CHART GRID */
+.cgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(460px,1fr)); gap: 22px; margin-bottom: 30px; }
+.ccard { background: var(--blanco); border-radius: 14px; padding: 24px 22px 20px; border: 1px solid var(--gris-brd); box-shadow: 0 2px 8px rgba(0,51,102,0.07); }
+.ccard.full { grid-column: 1/-1; }
+.c-title { font-size: 0.92rem; font-weight: 700; color: var(--azul); margin-bottom: 3px; }
+.c-desc  { font-size: 0.75rem; color: #7A8899; margin-bottom: 18px; }
+.cw { position:relative; height: 290px; }
+.cw.tall { height: 360px; }
 
-  /* ── TABLA ───────────────────────────────────────────── */
-  .table-card {
-    background: var(--blanco);
-    border-radius: 16px;
-    padding: 28px 26px;
-    border: 1px solid var(--gris-borde);
-    box-shadow: 0 2px 12px rgba(0,51,102,0.07);
-    margin-bottom: 26px;
-    overflow-x: auto;
-  }
-  table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-  thead tr { background: var(--azul); color: var(--blanco); }
-  thead th { padding: 12px 14px; text-align: right; font-weight: 600; letter-spacing: 0.3px; }
-  thead th:first-child { text-align: left; border-radius: 8px 0 0 0; }
-  thead th:last-child { border-radius: 0 8px 0 0; }
-  tbody tr { border-bottom: 1px solid var(--gris-borde); transition: background 0.15s; }
-  tbody tr:hover { background: #EFF4FF; }
-  tbody td { padding: 10px 14px; text-align: right; }
-  tbody td:first-child { text-align: left; font-weight: 600; color: var(--azul); }
-  tfoot tr { background: linear-gradient(90deg, #E8F0FD, #F4EFD8); }
-  tfoot td { padding: 12px 14px; font-weight: 700; text-align: right; color: var(--azul); border-top: 2px solid var(--dorado); }
-  tfoot td:first-child { text-align: left; }
-  .badge-parcial { background: #FFF3CD; color: #856404; font-size: 0.7rem; font-weight: 700; padding: 2px 7px; border-radius: 8px; margin-left: 6px; }
-  .badge-sin { background: #FFE0E0; color: #C62828; font-size: 0.7rem; font-weight: 700; padding: 2px 7px; border-radius: 8px; margin-left: 6px; }
+/* DETALLE MENSUAL */
+.det-title { font-size: 0.88rem; font-weight: 700; color: var(--azul); margin-bottom: 14px; }
+.det-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-bottom: 26px; }
 
-  /* ── NOTA ────────────────────────────────────────────── */
-  .nota {
-    background: #FFFBF0;
-    border-left: 4px solid var(--dorado);
-    padding: 14px 18px;
-    border-radius: 0 10px 10px 0;
-    font-size: 0.82rem;
-    color: #5A4500;
-    margin-bottom: 30px;
-    line-height: 1.6;
-  }
-  .nota strong { color: var(--azul); }
+/* SEÑAL CARD */
+.signal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 16px; margin-bottom: 38px; }
+.signal {
+  background: var(--blanco); border-radius: 12px; padding: 20px 18px;
+  border: 1px solid var(--gris-brd); box-shadow: 0 2px 8px rgba(0,51,102,0.07);
+}
+.signal .s-lbl { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #7A8899; margin-bottom: 6px; }
+.signal .s-val { font-size: 1.55rem; font-weight: 800; margin-bottom: 6px; }
+.signal .s-desc { font-size: 0.78rem; color: #5A6878; line-height: 1.55; }
+.pos-txt { color: var(--verde); }
+.neg-txt { color: var(--rojo); }
 
-  /* ── RESUMEN ANUAL PILLS ─────────────────────────────── */
-  .year-pills { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 36px; }
-  .year-pill {
-    background: var(--blanco);
-    border: 2px solid var(--azul-medio);
-    border-radius: 50px;
-    padding: 10px 22px;
-    text-align: center;
-    min-width: 160px;
-  }
-  .year-pill .yp-year { font-size: 0.78rem; font-weight: 700; color: var(--azul-medio); text-transform: uppercase; letter-spacing: 1px; }
-  .year-pill .yp-ventas { font-size: 1.1rem; font-weight: 800; color: var(--azul); }
-  .year-pill .yp-com { font-size: 0.78rem; color: var(--dorado); font-weight: 700; }
+/* MINI-BADGE AÑO */
+.yr-best { color: var(--verde); font-weight: 700; }
+.yr-low  { color: var(--rojo); font-weight: 700; }
+span.ico { margin-right: 3px; }
 
-  /* ── PIE ─────────────────────────────────────────────── */
-  footer {
-    background: var(--azul);
-    color: rgba(255,255,255,0.6);
-    text-align: center;
-    font-size: 0.78rem;
-    padding: 22px;
-    letter-spacing: 0.5px;
-  }
-  footer strong { color: var(--dorado-claro); }
+/* FOOTER */
+footer { background: var(--azul); color: rgba(255,255,255,0.55); text-align: center; font-size: 0.75rem; padding: 20px; letter-spacing: 0.4px; }
+footer strong { color: var(--dorado-c); }
 
-  /* ── RESPONSIVE ──────────────────────────────────────── */
-  @media (max-width: 700px) {
-    .cover { padding: 40px 24px 40px; }
-    .cover h1 { font-size: 1.9rem; }
-    .chart-grid { grid-template-columns: 1fr; }
-    .container { padding: 24px 16px 40px; }
-  }
+@media (max-width: 680px) {
+  .cover { padding: 36px 20px 36px; }
+  .cover h1 { font-size: 1.75rem; }
+  .cgrid, .det-grid { grid-template-columns: 1fr; }
+  .wrap { padding: 22px 14px 40px; }
+}
 </style>
 </head>
 <body>
 
-<!-- ══════════════════════════════════════════════════════
-     PORTADA
-══════════════════════════════════════════════════════ -->
+<!-- ══ PORTADA ═══════════════════════════════════════════════════ -->
 <div class="cover">
-  <div class="cover-badge">📊 Informe de Arrendamiento Comercial</div>
-  <h1>Ventas &amp; <span>Renta Variable</span><br>Amazon Tours</h1>
+  <div class="cover-tag">Informe de Arrendamiento Comercial</div>
+  <h1><em>Amazon Tours</em><br>Ventas &amp; Renta Variable</h1>
   <p class="cover-sub">
-    Análisis de desempeño comercial del arrendatario <strong style="color:#F0C060">Amazon Tours</strong>
-    en el inmueble <strong style="color:#F0C060">Fiesta Americana Condesa Cancún</strong>.
-    Periodos 2021 – 2026 (parcial). Comisión calculada al 15% sobre ventas netas.
+    Análisis de desempeño comercial del arrendatario en <strong style="color:#F0C040">Fiesta Americana Condesa Cancún</strong>.
+    La renta variable equivale al 15% sobre ventas netas (sin IVA), pagada mensualmente a mes vencido.
   </p>
-  <div class="cover-meta">
-    <div><strong>Arrendatario</strong>Amazon Tours</div>
-    <div><strong>Inmueble</strong>Fiesta Americana Condesa Cancún</div>
-    <div><strong>Tipo de renta</strong>Variable — 15% s/ventas netas</div>
-    <div><strong>Moneda</strong>Dólares Americanos (USD)</div>
-    <div><strong>Fecha de emisión</strong>Junio 2026</div>
+  <div class="cover-pills">
+    <div class="cover-pill"><strong>Arrendatario</strong>Amazon Tours</div>
+    <div class="cover-pill"><strong>Propiedad</strong>FACC — Cancún</div>
+    <div class="cover-pill"><strong>Renta variable</strong>15% s/ventas netas</div>
+    <div class="cover-pill"><strong>Moneda</strong>USD</div>
+    <div class="cover-pill"><strong>Periodos</strong>2022 – 2026 (parcial)</div>
+    <div class="cover-pill"><strong>Emisión</strong>Junio 2026</div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════════════════
-     CONTENIDO
-══════════════════════════════════════════════════════ -->
-<div class="container">
+<!-- ══ CONTENIDO ═════════════════════════════════════════════════ -->
+<div class="wrap">
 
-  <!-- NOTA METODOLÓGICA -->
   <div class="nota">
-    <strong>Nota metodológica:</strong>
-    La renta variable corresponde al <strong>15% sobre las ventas sin IVA</strong> (comisión) que Amazon Tours paga mensualmente a mes vencido.
-    Los datos de <strong>2021</strong> corresponden a la denominación "Amazon–FACC" / "BJM–FACC".
-    A partir de <strong>febrero 2024</strong> el contrato continúa bajo la razón "Amazon Tours".
-    El periodo <strong>2025</strong> cubre enero–noviembre (diciembre pendiente de cierre).
-    El periodo <strong>2026</strong> es parcial: enero–mayo.
-    La información se extrae directamente de los archivos de cálculo de renta variable sin alterar los valores originales.
+    Los datos corresponden a los archivos de cálculo de renta variable proporcionados. Hasta 2023 la razón del arrendatario es <strong>BJM / BJM Delivery–FACC</strong>; a partir de febrero 2024 opera como <strong>Amazon Tours</strong>.
+    El periodo 2026 es <strong>parcial</strong> (enero–mayo). Los valores no han sido modificados.
   </div>
 
-  <!-- ── KPIs GLOBALES ─────────────────────────────────── -->
-  <p class="section-title">Resumen ejecutivo</p>
-  <h2 class="section-heading">Indicadores Clave</h2>
+  <!-- ══ KPIs ═══════════════════════════════════════════════════ -->
+  <p class="sec-label">Resumen ejecutivo</p>
+  <h2 class="sec-title">Indicadores Clave · 2022–2026</h2>
 
   <div class="kpi-grid">
-    <div class="kpi-card azul">
-      <div class="kpi-label">Ventas Totales Acumuladas</div>
-      <div class="kpi-value">$2.84M</div>
-      <div class="kpi-sub">USD · 2021–May 2026</div>
-      <span class="kpi-delta neu">Todos los periodos disponibles</span>
+    <div class="kpi k-azul">
+      <div class="kpi-lbl">Ventas Totales Acumuladas</div>
+      <div class="kpi-val">$2.81M</div>
+      <div class="kpi-sub">USD · 2022 – May 2026</div>
+      <span class="badge neu">5 periodos</span>
     </div>
-    <div class="kpi-card dorado">
-      <div class="kpi-label">Renta Variable Acumulada</div>
-      <div class="kpi-value">$342K</div>
-      <div class="kpi-sub">USD · Comisión 15% acumulada</div>
-      <span class="kpi-delta neu">Todos los periodos</span>
+    <div class="kpi k-oro">
+      <div class="kpi-lbl">Renta Variable Acumulada</div>
+      <div class="kpi-val">$364K</div>
+      <div class="kpi-sub">USD · Comisión 15% total</div>
+      <span class="badge neu">$364,037 USD</span>
     </div>
-    <div class="kpi-card verde">
-      <div class="kpi-label">Mejor Año — Ventas</div>
-      <div class="kpi-value">$759K</div>
-      <div class="kpi-sub">2021 — Año completo</div>
-      <span class="kpi-delta pos">↑ Máximo histórico</span>
+    <div class="kpi k-verde">
+      <div class="kpi-lbl">Año Más Alto — Ventas</div>
+      <div class="kpi-val">$887K</div>
+      <div class="kpi-sub">2022 — Año completo</div>
+      <span class="badge pos">↑ Máximo histórico</span>
     </div>
-    <div class="kpi-card claro">
-      <div class="kpi-label">2026 Parcial (5 meses)</div>
-      <div class="kpi-value">$193K</div>
+    <div class="kpi k-rojo">
+      <div class="kpi-lbl">Año Más Bajo — Ventas</div>
+      <div class="kpi-val">$462K</div>
+      <div class="kpi-sub">2025 — Año completo</div>
+      <span class="badge neg">↓ Mínimo histórico</span>
+    </div>
+    <div class="kpi k-cyan">
+      <div class="kpi-lbl">2026 Parcial (5 meses)</div>
+      <div class="kpi-val">$194K</div>
       <div class="kpi-sub">Ene–May 2026</div>
-      <span class="kpi-delta pos">Ritmo positivo vs 2025</span>
+      <span class="badge pos">↑ +30.5% vs ene–may 2025</span>
     </div>
-    <div class="kpi-card azul">
-      <div class="kpi-label">Mejor Mes Histórico</div>
-      <div class="kpi-value">$120K</div>
-      <div class="kpi-sub">Julio 2021</div>
-      <span class="kpi-delta pos">↑ Pico de temporada alta</span>
-    </div>
-    <div class="kpi-card dorado">
-      <div class="kpi-label">Renta Var. — 2023</div>
-      <div class="kpi-value">$97.6K</div>
-      <div class="kpi-sub">Mejor año de comisión completo</div>
-      <span class="kpi-delta pos">↑ Segundo más alto</span>
+    <div class="kpi k-oro">
+      <div class="kpi-lbl">Caída Acumulada 2022→2025</div>
+      <div class="kpi-val">−47.9%</div>
+      <div class="kpi-sub">En ventas anuales</div>
+      <span class="badge neg">↓ Tendencia continua</span>
     </div>
   </div>
 
-  <!-- ── PILLS ANUALES ─────────────────────────────────── -->
-  <div class="year-pills">
-    <div class="year-pill">
-      <div class="yp-year">2021 ✓ completo</div>
-      <div class="yp-ventas">$759,598</div>
-      <div class="yp-com">Comisión: $98,224</div>
-    </div>
-    <div class="year-pill">
-      <div class="yp-year">2023 ✓ completo</div>
-      <div class="yp-ventas">$755,012</div>
-      <div class="yp-com">Comisión: $97,631</div>
-    </div>
-    <div class="year-pill">
-      <div class="yp-year">2024 ✓ completo</div>
-      <div class="yp-ventas">$515,326</div>
-      <div class="yp-com">Comisión: $66,637</div>
-    </div>
-    <div class="year-pill">
-      <div class="yp-year">2025 · Ene–Nov</div>
-      <div class="yp-ventas">$419,296</div>
-      <div class="yp-com">Comisión: $54,219</div>
-    </div>
-    <div class="year-pill">
-      <div class="yp-year">2026 · Ene–May</div>
-      <div class="yp-ventas">$193,626</div>
-      <div class="yp-com">Comisión: $25,038</div>
-    </div>
-  </div>
+  <!-- ══ TABLA RESUMEN ANUAL ═══════════════════════════════════ -->
+  <p class="sec-label">Consolidado por año</p>
+  <h2 class="sec-title">Resumen Anual — Ventas y Renta Variable</h2>
 
-  <!-- ── GRÁFICAS ROW 1 ────────────────────────────────── -->
-  <p class="section-title">Tendencia histórica</p>
-  <h2 class="section-heading">Evolución Anual de Ventas y Renta Variable</h2>
-
-  <div class="chart-grid">
-    <div class="chart-card full">
-      <div class="chart-title">📈 Ventas Anuales vs. Renta Variable (Comisión 15%)</div>
-      <div class="chart-desc">Comparativa anual de ventas brutas y la renta variable generada. Los periodos 2025 y 2026 son parciales.</div>
-      <div class="chart-wrap tall">
-        <canvas id="chartAnual"></canvas>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── GRÁFICAS ROW 2 ────────────────────────────────── -->
-  <div class="chart-grid">
-    <div class="chart-card">
-      <div class="chart-title">🗓️ Ventas Mensuales — 2023 vs 2024 vs 2025</div>
-      <div class="chart-desc">Evolución mensual comparando los tres años con datos más completos.</div>
-      <div class="chart-wrap">
-        <canvas id="chartMensual"></canvas>
-      </div>
-    </div>
-    <div class="chart-card">
-      <div class="chart-title">💰 Renta Variable Mensual — 2023 vs 2024 vs 2025</div>
-      <div class="chart-desc">Comisión 15% mensual generada por Amazon Tours.</div>
-      <div class="chart-wrap">
-        <canvas id="chartComision"></canvas>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── GRÁFICAS ROW 3 ────────────────────────────────── -->
-  <div class="chart-grid">
-    <div class="chart-card">
-      <div class="chart-title">🥧 Participación en Ventas por Año</div>
-      <div class="chart-desc">Distribución proporcional del total de ventas acumuladas por año.</div>
-      <div class="chart-wrap">
-        <canvas id="chartPie"></canvas>
-      </div>
-    </div>
-    <div class="chart-card">
-      <div class="chart-title">📊 Ventas 2026 Parcial — Ritmo Mensual</div>
-      <div class="chart-desc">Avance mes a mes de enero a mayo 2026 con proyección tendencial.</div>
-      <div class="chart-wrap">
-        <canvas id="chart2026"></canvas>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── TABLA MENSUAL ─────────────────────────────────── -->
-  <p class="section-title">Detalle por periodo</p>
-  <h2 class="section-heading">Detalle Mensual — 2023, 2024 y 2025</h2>
-
-  <div class="table-card">
+  <div class="tcard">
     <table>
       <thead>
         <tr>
-          <th>Mes</th>
-          <th>Ventas 2023 (USD)</th>
-          <th>Com. 15% 2023</th>
-          <th>Ventas 2024 (USD)</th>
-          <th>Com. 15% 2024</th>
-          <th>Ventas 2025 (USD)</th>
-          <th>Com. 15% 2025</th>
+          <th>Año</th>
+          <th>Ventas Brutas (USD)</th>
+          <th>Renta Variable 15%</th>
+          <th>Var. vs Año Anterior</th>
+          <th>% del Total</th>
+          <th>Distribución</th>
         </tr>
       </thead>
       <tbody>
-        <tr><td>Enero</td><td>$68,745.69</td><td>$8,889.53</td><td>$55,890.95</td><td>$7,227.28</td><td>$23,979.37</td><td>$3,100.78</td></tr>
-        <tr><td>Febrero</td><td>$58,115.76</td><td>$7,514.97</td><td>$60,257.00</td><td>$7,791.85</td><td>$29,823.47</td><td>$3,856.48</td></tr>
-        <tr><td>Marzo</td><td>$77,452.33</td><td>$10,015.39</td><td>$77,612.78</td><td>$10,036.14</td><td>$34,725.22</td><td>$4,490.33</td></tr>
-        <tr><td>Abril</td><td>$56,397.53</td><td>$7,292.78</td><td>$48,221.15</td><td>$6,235.49</td><td>$31,240.81</td><td>$4,039.76</td></tr>
-        <tr><td>Mayo</td><td>$74,047.23</td><td>$9,575.07</td><td>$47,790.77</td><td>$6,179.84</td><td>$28,610.63</td><td>$3,699.65</td></tr>
-        <tr><td>Junio</td><td>$80,679.95</td><td>$10,432.75</td><td>$30,240.42</td><td>$3,910.40</td><td>$51,759.00</td><td>$6,692.97</td></tr>
-        <tr><td>Julio</td><td>$93,829.72</td><td>$12,133.15</td><td>$45,583.54</td><td>$5,894.42</td><td>$81,356.43</td><td>$10,520.23</td></tr>
-        <tr><td>Agosto</td><td>$59,843.37</td><td>$7,738.37</td><td>$30,884.14</td><td>$3,993.64</td><td>$49,044.18</td><td>$6,341.92</td></tr>
-        <tr><td>Septiembre</td><td>$37,171.60</td><td>$4,806.67</td><td>$19,719.68</td><td>$2,549.96</td><td>$20,462.59</td><td>$2,646.02</td></tr>
-        <tr><td>Octubre</td><td>$28,442.49</td><td>$3,677.91</td><td>$12,207.13</td><td>$1,578.51</td><td>$29,466.77</td><td>$3,810.36</td></tr>
-        <tr><td>Noviembre</td><td>$60,083.34</td><td>$7,769.40</td><td>$23,714.69</td><td>$3,066.55</td><td>$38,827.45</td><td>$5,020.79</td></tr>
-        <tr><td>Diciembre</td><td>$60,202.59</td><td>$7,784.82</td><td>$63,203.78</td><td>$8,172.90</td><td>— <span class="badge-sin">pend.</span></td><td>—</td></tr>
+        <tr class="year-best">
+          <td>2022 <span class="yr-best">↑ MÁXIMO</span></td>
+          <td>$887,376.00</td>
+          <td>$115,030.99</td>
+          <td><span class="badge neu">Base</span></td>
+          <td>31.5%</td>
+          <td><span class="pct-bar" style="width:90px; background:var(--azul-m)"></span></td>
+        </tr>
+        <tr>
+          <td>2023</td>
+          <td>$755,011.60</td>
+          <td>$97,630.81</td>
+          <td><span class="badge neg">−14.9%</span></td>
+          <td>26.8%</td>
+          <td><span class="pct-bar" style="width:76px; background:var(--azul-m)"></span></td>
+        </tr>
+        <tr>
+          <td>2024</td>
+          <td>$515,326.03</td>
+          <td>$66,636.99</td>
+          <td><span class="badge neg">−31.7%</span></td>
+          <td>18.3%</td>
+          <td><span class="pct-bar" style="width:52px; background:var(--dorado)"></span></td>
+        </tr>
+        <tr class="year-low">
+          <td>2025 <span class="yr-low">↓ MÍNIMO</span></td>
+          <td>$461,684.34</td>
+          <td>$59,700.56</td>
+          <td><span class="badge neg">−10.4%</span></td>
+          <td>16.4%</td>
+          <td><span class="pct-bar" style="width:47px; background:var(--rojo)"></span></td>
+        </tr>
+        <tr>
+          <td>2026 <span class="badge warn">Ene–May</span></td>
+          <td>$193,625.56</td>
+          <td>$25,037.79</td>
+          <td><span class="badge pos">+30.5% (vs 5m-25)</span></td>
+          <td>6.9%</td>
+          <td><span class="pct-bar" style="width:20px; background:var(--verde)"></span></td>
+        </tr>
       </tbody>
       <tfoot>
         <tr>
-          <td>TOTAL</td>
-          <td>$755,011.60</td><td>$97,630.81</td>
-          <td>$515,326.03</td><td>$66,636.99</td>
-          <td>$419,295.92 <span class="badge-parcial">11m</span></td><td>$54,219.29</td>
+          <td>TOTAL ACUMULADO</td>
+          <td>$2,813,023.53</td>
+          <td>$364,037.13</td>
+          <td>—</td>
+          <td>100%</td>
+          <td></td>
         </tr>
       </tfoot>
     </table>
   </div>
 
-  <!-- ── TABLA 2021 & 2026 ──────────────────────────────── -->
-  <div style="display:grid; grid-template-columns:1fr 1fr; gap:26px; margin-bottom:26px; flex-wrap:wrap;">
+  <!-- ══ SEÑALES / ANÁLISIS ════════════════════════════════════ -->
+  <p class="sec-label">Análisis</p>
+  <h2 class="sec-title">Tendencias y Observaciones</h2>
 
-    <div class="table-card" style="margin-bottom:0">
-      <div class="chart-title" style="margin-bottom:16px">📋 Detalle Mensual 2021</div>
-      <table>
-        <thead>
-          <tr><th>Mes</th><th>Ventas (USD)</th><th>Com. 15%</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Enero</td><td>$33,290.21</td><td>$4,304.77</td></tr>
-          <tr><td>Febrero</td><td>$28,179.78</td><td>$3,643.94</td></tr>
-          <tr><td>Marzo</td><td>$75,479.82</td><td>$9,760.32</td></tr>
-          <tr><td>Abril</td><td>$44,380.25</td><td>$5,738.83</td></tr>
-          <tr><td>Mayo</td><td>$56,275.16</td><td>$7,276.96</td></tr>
-          <tr><td>Junio</td><td>$84,773.17</td><td>$10,962.05</td></tr>
-          <tr><td>Julio</td><td>$120,029.79</td><td>$15,521.09</td></tr>
-          <tr><td>Agosto</td><td>$59,382.26</td><td>$7,678.74</td></tr>
-          <tr><td>Septiembre</td><td>$45,122.23</td><td>$5,834.77</td></tr>
-          <tr><td>Octubre</td><td>$66,180.59</td><td>$8,557.83</td></tr>
-          <tr><td>Noviembre</td><td>$56,828.60</td><td>$7,348.53</td></tr>
-          <tr><td>Diciembre</td><td>$89,676.48</td><td>$11,596.10</td></tr>
-        </tbody>
-        <tfoot>
-          <tr><td>TOTAL</td><td>$759,598.34</td><td>$98,223.92</td></tr>
-        </tfoot>
-      </table>
+  <div class="signal-grid">
+    <div class="signal">
+      <div class="s-lbl">Tendencia general</div>
+      <div class="s-val neg-txt">Caída sostenida</div>
+      <div class="s-desc">Las ventas cayeron año con año desde 2022 ($887K) hasta 2025 ($462K), acumulando una reducción total del <strong>47.9%</strong> en tres años consecutivos de baja.</div>
     </div>
-
-    <div class="table-card" style="margin-bottom:0">
-      <div class="chart-title" style="margin-bottom:16px">📋 Detalle Mensual 2026 <span class="badge-parcial">parcial</span></div>
-      <table>
-        <thead>
-          <tr><th>Mes</th><th>Ventas (USD)</th><th>Com. 15%</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Enero</td><td>$47,797.07</td><td>$6,180.66</td></tr>
-          <tr><td>Febrero</td><td>$43,599.36</td><td>$5,637.85</td></tr>
-          <tr><td>Marzo</td><td>$51,730.91</td><td>$6,689.34</td></tr>
-          <tr><td>Abril</td><td>$31,762.53</td><td>$4,107.22</td></tr>
-          <tr><td>Mayo</td><td>$18,735.69</td><td>$2,422.72</td></tr>
-          <tr><td>Junio</td><td>— <span class="badge-sin">pend.</span></td><td>—</td></tr>
-          <tr><td>Julio</td><td>— <span class="badge-sin">pend.</span></td><td>—</td></tr>
-          <tr><td>Agosto</td><td>— <span class="badge-sin">pend.</span></td><td>—</td></tr>
-          <tr><td>Septiembre</td><td>— <span class="badge-sin">pend.</span></td><td>—</td></tr>
-          <tr><td>Octubre</td><td>— <span class="badge-sin">pend.</span></td><td>—</td></tr>
-          <tr><td>Noviembre</td><td>— <span class="badge-sin">pend.</span></td><td>—</td></tr>
-          <tr><td>Diciembre</td><td>— <span class="badge-sin">pend.</span></td><td>—</td></tr>
-        </tbody>
-        <tfoot>
-          <tr><td>TOTAL (5m)</td><td>$193,625.56</td><td>$25,037.79</td></tr>
-        </tfoot>
-      </table>
+    <div class="signal">
+      <div class="s-lbl">Señal de recuperación 2026</div>
+      <div class="s-val pos-txt">+30.5%</div>
+      <div class="s-desc">Los primeros 5 meses de 2026 generaron <strong>$193,626 USD</strong> vs $148,380 en los mismos meses de 2025. La señal es positiva pero se requiere continuidad para revertir la tendencia.</div>
     </div>
-
-  </div>
-
-  <!-- ── OBSERVACIONES ─────────────────────────────────── -->
-  <p class="section-title">Análisis</p>
-  <h2 class="section-heading">Observaciones y Tendencias</h2>
-
-  <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:18px; margin-bottom:40px;">
-    <div class="kpi-card azul" style="padding:22px 22px;">
-      <div class="kpi-label">📉 Caída 2024 vs 2023</div>
-      <div style="font-size:1.4rem; font-weight:800; color:#C62828;">−31.7%</div>
-      <div class="kpi-sub" style="margin-top:8px; line-height:1.6;">Las ventas pasaron de <strong>$755K</strong> (2023) a <strong>$515K</strong> (2024), una reducción de $239,685 USD. La comisión cayó de $97,631 a $66,637 (−$30,994 USD).</div>
+    <div class="signal">
+      <div class="s-lbl">Estacionalidad</div>
+      <div class="s-val" style="color:var(--azul-m);">Jul–Ago · Dic</div>
+      <div class="s-desc">El patrón es consistente en todos los años: <strong>julio y agosto</strong> concentran los picos más altos (temporada de verano) y <strong>septiembre–octubre</strong> registran los valles más bajos.</div>
     </div>
-    <div class="kpi-card dorado" style="padding:22px 22px;">
-      <div class="kpi-label">📉 Tendencia 2025</div>
-      <div style="font-size:1.4rem; font-weight:800; color:#C62828;">−18.7% vs 2024</div>
-      <div class="kpi-sub" style="margin-top:8px; line-height:1.6;">Con 11 meses, 2025 acumula <strong>$419K</strong> vs los $515K de 2024 completo. La temporada alta (jul–ago) fue significativamente mejor que 2024 pero no alcanzó niveles 2023.</div>
-    </div>
-    <div class="kpi-card verde" style="padding:22px 22px;">
-      <div class="kpi-label">📈 Señal 2026</div>
-      <div style="font-size:1.4rem; font-weight:800; color:#2E7D32;">+51% ritmo</div>
-      <div class="kpi-sub" style="margin-top:8px; line-height:1.6;">En los primeros 5 meses de 2026 se generaron <strong>$193,626 USD</strong> vs $186,372 en los mismos 5 meses de 2025 (+3.9%). Mejor señal de recuperación.</div>
-    </div>
-    <div class="kpi-card claro" style="padding:22px 22px;">
-      <div class="kpi-label">📅 Estacionalidad</div>
-      <div style="font-size:1.4rem; font-weight:800; color:var(--azul);">Jul–Ago</div>
-      <div class="kpi-sub" style="margin-top:8px; line-height:1.6;">El patrón consistente muestra picos en <strong>julio y agosto</strong> (temporada alta de verano) y valles en <strong>septiembre–octubre</strong>. Diciembre también es un mes fuerte.</div>
+    <div class="signal">
+      <div class="s-lbl">Renta variable acumulada</div>
+      <div class="s-val" style="color:var(--dorado);">$364,037</div>
+      <div class="s-desc">La renta variable total cobrada de 2022 a mayo 2026 asciende a <strong>$364,037 USD</strong>, equivalente al 12.9% sobre ventas brutas totales (15% sobre ventas netas).</div>
     </div>
   </div>
 
-</div><!-- /container -->
+  <!-- ══ GRÁFICA ANUAL ═════════════════════════════════════════ -->
+  <p class="sec-label">Evolución histórica</p>
+  <h2 class="sec-title">Ventas y Renta Variable por Año</h2>
+
+  <div class="cgrid">
+    <div class="ccard full">
+      <div class="c-title">Ventas Anuales vs. Renta Variable (Comisión 15%)</div>
+      <div class="c-desc">Comparativa de ventas brutas anuales y la renta variable correspondiente. 2026 es parcial (5 meses).</div>
+      <div class="cw tall"><canvas id="cAnual"></canvas></div>
+    </div>
+  </div>
+
+  <!-- ══ GRÁFICAS MENSUALES ════════════════════════════════════ -->
+  <div class="cgrid">
+    <div class="ccard">
+      <div class="c-title">Ventas Mensuales por Año</div>
+      <div class="c-desc">Comparativa mensual 2022–2025 + 2026 parcial.</div>
+      <div class="cw"><canvas id="cMensual"></canvas></div>
+    </div>
+    <div class="ccard">
+      <div class="c-title">Renta Variable (Comisión 15%) Mensual</div>
+      <div class="c-desc">Ingreso mensual por renta variable generado.</div>
+      <div class="cw"><canvas id="cComision"></canvas></div>
+    </div>
+  </div>
+
+  <!-- ══ GRÁFICAS PIE + 2026 ═══════════════════════════════════ -->
+  <div class="cgrid">
+    <div class="ccard">
+      <div class="c-title">Participación en Ventas por Año</div>
+      <div class="c-desc">Distribución % del total acumulado 2022–may 2026.</div>
+      <div class="cw"><canvas id="cPie"></canvas></div>
+    </div>
+    <div class="ccard">
+      <div class="c-title">Avance 2026 vs 2025 (Mismos Meses)</div>
+      <div class="c-desc">Comparativa ene–may 2025 vs ene–may 2026.</div>
+      <div class="cw"><canvas id="c2626"></canvas></div>
+    </div>
+  </div>
+
+  <!-- ══ TABLAS DETALLE MENSUAL ════════════════════════════════ -->
+  <p class="sec-label">Detalle por mes</p>
+  <h2 class="sec-title">Ventas y Renta Variable Mensual</h2>
+
+  <!-- 2022 + 2023 -->
+  <div class="det-grid">
+    <div class="tcard" style="margin-bottom:0">
+      <div class="det-title">2022 — Año Completo <span class="yr-best">↑ Máximo histórico</span></div>
+      <table>
+        <thead><tr><th>Mes</th><th>Ventas (USD)</th><th>Com. 15%</th></tr></thead>
+        <tbody>
+          <tr><td>Enero</td><td>$56,317.88</td><td>$7,282.48</td></tr>
+          <tr><td>Febrero</td><td>$63,523.69</td><td>$8,214.27</td></tr>
+          <tr><td>Marzo</td><td>$78,788.10</td><td>$10,188.12</td></tr>
+          <tr><td>Abril</td><td>$63,634.93</td><td>$8,228.65</td></tr>
+          <tr><td>Mayo</td><td>$61,812.95</td><td>$7,993.05</td></tr>
+          <tr><td>Junio</td><td>$101,706.96</td><td>$13,151.76</td></tr>
+          <tr><td>Julio</td><td>$136,587.77</td><td>$17,662.21</td></tr>
+          <tr><td>Agosto</td><td>$103,957.02</td><td>$13,442.72</td></tr>
+          <tr><td>Septiembre</td><td>$58,455.60</td><td>$7,558.91</td></tr>
+          <tr><td>Octubre</td><td>$60,090.56</td><td>$8,054.42</td></tr>
+          <tr><td>Noviembre</td><td>$48,734.79</td><td>$6,301.91</td></tr>
+          <tr><td>Diciembre</td><td>$53,765.75</td><td>$6,952.47</td></tr>
+        </tbody>
+        <tfoot><tr><td>TOTAL</td><td>$887,376.00</td><td>$115,030.99</td></tr></tfoot>
+      </table>
+    </div>
+    <div class="tcard" style="margin-bottom:0">
+      <div class="det-title">2023 — Año Completo</div>
+      <table>
+        <thead><tr><th>Mes</th><th>Ventas (USD)</th><th>Com. 15%</th></tr></thead>
+        <tbody>
+          <tr><td>Enero</td><td>$68,745.69</td><td>$8,889.53</td></tr>
+          <tr><td>Febrero</td><td>$58,115.76</td><td>$7,514.97</td></tr>
+          <tr><td>Marzo</td><td>$77,452.33</td><td>$10,015.39</td></tr>
+          <tr><td>Abril</td><td>$56,397.53</td><td>$7,292.78</td></tr>
+          <tr><td>Mayo</td><td>$74,047.23</td><td>$9,575.07</td></tr>
+          <tr><td>Junio</td><td>$80,679.95</td><td>$10,432.75</td></tr>
+          <tr><td>Julio</td><td>$93,829.72</td><td>$12,133.15</td></tr>
+          <tr><td>Agosto</td><td>$59,843.37</td><td>$7,738.37</td></tr>
+          <tr><td>Septiembre</td><td>$37,171.60</td><td>$4,806.67</td></tr>
+          <tr><td>Octubre</td><td>$28,442.49</td><td>$3,677.91</td></tr>
+          <tr><td>Noviembre</td><td>$60,083.34</td><td>$7,769.40</td></tr>
+          <tr><td>Diciembre</td><td>$60,202.59</td><td>$7,784.82</td></tr>
+        </tbody>
+        <tfoot><tr><td>TOTAL</td><td>$755,011.60</td><td>$97,630.81</td></tr></tfoot>
+      </table>
+    </div>
+  </div>
+
+  <!-- 2024 + 2025 -->
+  <div class="det-grid" style="margin-top:22px">
+    <div class="tcard" style="margin-bottom:0">
+      <div class="det-title">2024 — Año Completo</div>
+      <table>
+        <thead><tr><th>Mes</th><th>Ventas (USD)</th><th>Com. 15%</th></tr></thead>
+        <tbody>
+          <tr><td>Enero</td><td>$55,890.95</td><td>$7,227.28</td></tr>
+          <tr><td>Febrero</td><td>$60,257.00</td><td>$7,791.85</td></tr>
+          <tr><td>Marzo</td><td>$77,612.78</td><td>$10,036.14</td></tr>
+          <tr><td>Abril</td><td>$48,221.15</td><td>$6,235.49</td></tr>
+          <tr><td>Mayo</td><td>$47,790.77</td><td>$6,179.84</td></tr>
+          <tr><td>Junio</td><td>$30,240.42</td><td>$3,910.40</td></tr>
+          <tr><td>Julio</td><td>$45,583.54</td><td>$5,894.42</td></tr>
+          <tr><td>Agosto</td><td>$30,884.14</td><td>$3,993.64</td></tr>
+          <tr><td>Septiembre</td><td>$19,719.68</td><td>$2,549.96</td></tr>
+          <tr><td>Octubre</td><td>$12,207.13</td><td>$1,578.51</td></tr>
+          <tr><td>Noviembre</td><td>$23,714.69</td><td>$3,066.55</td></tr>
+          <tr><td>Diciembre</td><td>$63,203.78</td><td>$8,172.90</td></tr>
+        </tbody>
+        <tfoot><tr><td>TOTAL</td><td>$515,326.03</td><td>$66,636.99</td></tr></tfoot>
+      </table>
+    </div>
+    <div class="tcard" style="margin-bottom:0">
+      <div class="det-title">2025 — Año Completo <span class="yr-low">↓ Mínimo histórico</span></div>
+      <table>
+        <thead><tr><th>Mes</th><th>Ventas (USD)</th><th>Com. 15%</th></tr></thead>
+        <tbody>
+          <tr><td>Enero</td><td>$23,979.37</td><td>$3,100.78</td></tr>
+          <tr><td>Febrero</td><td>$29,823.47</td><td>$3,856.48</td></tr>
+          <tr><td>Marzo</td><td>$34,725.22</td><td>$4,490.33</td></tr>
+          <tr><td>Abril</td><td>$31,240.81</td><td>$4,039.76</td></tr>
+          <tr><td>Mayo</td><td>$28,610.63</td><td>$3,699.65</td></tr>
+          <tr><td>Junio</td><td>$51,759.00</td><td>$6,692.97</td></tr>
+          <tr><td>Julio</td><td>$81,356.43</td><td>$10,520.23</td></tr>
+          <tr><td>Agosto</td><td>$49,044.18</td><td>$6,341.92</td></tr>
+          <tr><td>Septiembre</td><td>$20,462.59</td><td>$2,646.02</td></tr>
+          <tr><td>Octubre</td><td>$29,466.77</td><td>$3,810.36</td></tr>
+          <tr><td>Noviembre</td><td>$38,827.45</td><td>$5,020.79</td></tr>
+          <tr><td>Diciembre</td><td>$42,388.42</td><td>$5,481.26</td></tr>
+        </tbody>
+        <tfoot><tr><td>TOTAL</td><td>$461,684.34</td><td>$59,700.56</td></tr></tfoot>
+      </table>
+    </div>
+  </div>
+
+  <!-- 2026 parcial -->
+  <div class="tcard" style="margin-top:22px; max-width:480px">
+    <div class="det-title">2026 — Parcial (Enero–Mayo) <span class="badge pos">+30.5% vs 2025</span></div>
+    <table>
+      <thead><tr><th>Mes</th><th>Ventas (USD)</th><th>Com. 15%</th></tr></thead>
+      <tbody>
+        <tr><td>Enero</td><td>$47,797.07</td><td>$6,180.66</td></tr>
+        <tr><td>Febrero</td><td>$43,599.36</td><td>$5,637.85</td></tr>
+        <tr><td>Marzo</td><td>$51,730.91</td><td>$6,689.34</td></tr>
+        <tr><td>Abril</td><td>$31,762.53</td><td>$4,107.22</td></tr>
+        <tr><td>Mayo</td><td>$18,735.69</td><td>$2,422.72</td></tr>
+      </tbody>
+      <tfoot><tr><td>TOTAL (5m)</td><td>$193,625.56</td><td>$25,037.79</td></tr></tfoot>
+    </table>
+  </div>
+
+</div><!-- /wrap -->
 
 <footer>
-  <strong>Fiesta Americana Condesa Cancún</strong> · Informe de Arrendamiento Comercial · Amazon Tours ·
-  Elaborado con base en archivos de Cálculo de Renta Variable proporcionados · Junio 2026
+  <strong>Fiesta Americana Condesa Cancún</strong> · Arrendatario: Amazon Tours ·
+  Informe elaborado con base en archivos de cálculo de renta variable originales · Junio 2026
 </footer>
 
-<!-- ══════════════════════════════════════════════════════
-     SCRIPTS — CHART.JS
-══════════════════════════════════════════════════════ -->
+<!-- ══ CHARTS ══════════════════════════════════════════════════ -->
 <script>
-const MESES = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
-const AZUL     = '#003366';
-const AZUL_M   = '#0057A8';
-const AZUL_C   = '#3399CC';
-const DORADO   = '#C8973A';
-const VERDE    = '#2E7D32';
-const ROJO     = '#C62828';
-const NARANJA  = '#E65100';
+const MES = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
 
-// ── 1. GRÁFICA ANUAL (barras agrupadas + línea comisión) ──────────────────
-new Chart(document.getElementById('chartAnual'), {
+const AZUL  = '#0057A8';
+const AZUL2 = '#003366';
+const ORO   = '#B8860B';
+const VERDE = '#2E7D32';
+const ROJO  = '#C62828';
+const CYAN  = '#3399CC';
+const NARAN = '#E65100';
+
+// Datos
+const v22 = [56317.88,63523.69,78788.10,63634.93,61812.95,101706.96,136587.77,103957.02,58455.60,60090.56,48734.79,53765.75];
+const v23 = [68745.69,58115.76,77452.33,56397.53,74047.23,80679.95,93829.72,59843.37,37171.60,28442.49,60083.34,60202.59];
+const v24 = [55890.95,60257.00,77612.78,48221.15,47790.77,30240.42,45583.54,30884.14,19719.68,12207.13,23714.69,63203.78];
+const v25 = [23979.37,29823.47,34725.22,31240.81,28610.63,51759.00,81356.43,49044.18,20462.59,29466.77,38827.45,42388.42];
+const v26 = [47797.07,43599.36,51730.91,31762.53,18735.69,null,null,null,null,null,null,null];
+
+const c22 = [7282.48,8214.27,10188.12,8228.65,7993.05,13151.76,17662.21,13442.72,7558.91,8054.42,6301.91,6952.47];
+const c23 = [8889.53,7514.97,10015.39,7292.78,9575.07,10432.75,12133.15,7738.37,4806.67,3677.91,7769.40,7784.82];
+const c24 = [7227.28,7791.85,10036.14,6235.49,6179.84,3910.40,5894.42,3993.64,2549.96,1578.51,3066.55,8172.90];
+const c25 = [3100.78,3856.48,4490.33,4039.76,3699.65,6692.97,10520.23,6341.92,2646.02,3810.36,5020.79,5481.26];
+const c26 = [6180.66,5637.85,6689.34,4107.22,2422.72,null,null,null,null,null,null,null];
+
+const fmt = v => '$' + (v/1000).toFixed(0) + 'K';
+const fmtFull = v => v != null ? `$${v.toLocaleString('es-MX',{minimumFractionDigits:0})}` : '—';
+
+// ── 1. ANUAL ─────────────────────────────────────────────────────
+new Chart(document.getElementById('cAnual'), {
   type: 'bar',
   data: {
-    labels: ['2021', '2023', '2024', '2025 (11m)', '2026 (5m)'],
+    labels: ['2022', '2023', '2024', '2025', '2026 (5m)'],
     datasets: [
       {
         label: 'Ventas (USD)',
-        data: [759598.34, 755011.60, 515326.03, 419295.92, 193625.56],
+        data: [887376, 755011.60, 515326.03, 461684.34, 193625.56],
         backgroundColor: [
-          'rgba(0,87,168,0.85)',
-          'rgba(0,87,168,0.85)',
-          'rgba(200,151,58,0.85)',
-          'rgba(51,153,204,0.85)',
-          'rgba(46,125,50,0.85)'
+          'rgba(0,87,168,0.82)',   // 2022
+          'rgba(0,87,168,0.70)',   // 2023
+          'rgba(184,134,11,0.82)', // 2024
+          'rgba(198,40,40,0.80)',  // 2025 bajo
+          'rgba(46,125,50,0.82)'   // 2026 recupera
         ],
-        borderRadius: 6,
+        borderRadius: 7,
         yAxisID: 'y'
       },
       {
         label: 'Renta Variable 15% (USD)',
-        data: [98223.92, 97630.81, 66636.99, 54219.29, 25037.79],
+        data: [115030.99, 97630.81, 66636.99, 59700.56, 25037.79],
         type: 'line',
-        borderColor: DORADO,
-        backgroundColor: 'rgba(200,151,58,0.12)',
-        pointBackgroundColor: DORADO,
-        pointRadius: 6,
-        pointHoverRadius: 8,
-        borderWidth: 3,
-        tension: 0.35,
-        fill: true,
+        borderColor: ORO,
+        backgroundColor: 'rgba(184,134,11,0.10)',
+        pointBackgroundColor: ORO,
+        pointRadius: 7, pointHoverRadius: 9,
+        borderWidth: 3, tension: 0.30, fill: true,
         yAxisID: 'y2'
       }
     ]
   },
   options: {
-    responsive: true,
-    maintainAspectRatio: false,
+    responsive: true, maintainAspectRatio: false,
     interaction: { mode: 'index' },
     plugins: {
-      legend: { position: 'top', labels: { font: { size: 12 }, usePointStyle: true } },
-      tooltip: {
-        callbacks: {
-          label: ctx => ` ${ctx.dataset.label}: $${ctx.parsed.y.toLocaleString('es-MX', {minimumFractionDigits:0})}`
-        }
-      }
+      legend: { position: 'top', labels: { font:{size:12}, usePointStyle:true } },
+      tooltip: { callbacks: { label: ctx => ` ${ctx.dataset.label}: ${fmtFull(ctx.parsed.y)}` } }
     },
     scales: {
-      y: {
-        type: 'linear', position: 'left',
-        ticks: { callback: v => '$' + (v/1000).toFixed(0) + 'K' },
-        grid: { color: '#EEF1F6' },
-        title: { display: true, text: 'Ventas (USD)' }
-      },
-      y2: {
-        type: 'linear', position: 'right',
-        ticks: { callback: v => '$' + (v/1000).toFixed(0) + 'K' },
-        grid: { drawOnChartArea: false },
-        title: { display: true, text: 'Comisión 15% (USD)' }
-      }
+      y:  { ticks:{callback:fmt}, grid:{color:'#EEF1F6'}, title:{display:true,text:'Ventas (USD)'} },
+      y2: { position:'right', ticks:{callback:fmt}, grid:{drawOnChartArea:false}, title:{display:true,text:'Comisión (USD)'} }
     }
   }
 });
 
-// ── 2. VENTAS MENSUALES 2023 vs 2024 vs 2025 ─────────────────────────────
-const ventas2023 = [68745.69,58115.76,77452.33,56397.53,74047.23,80679.95,93829.72,59843.37,37171.60,28442.49,60083.34,60202.59];
-const ventas2024 = [55890.95,60257.00,77612.78,48221.15,47790.77,30240.42,45583.54,30884.14,19719.68,12207.13,23714.69,63203.78];
-const ventas2025 = [23979.37,29823.47,34725.22,31240.81,28610.63,51759.00,81356.43,49044.18,20462.59,29466.77,38827.45,null];
-
-new Chart(document.getElementById('chartMensual'), {
+// ── 2. VENTAS MENSUALES ──────────────────────────────────────────
+new Chart(document.getElementById('cMensual'), {
   type: 'line',
   data: {
-    labels: MESES,
+    labels: MES,
     datasets: [
-      { label: '2023', data: ventas2023, borderColor: AZUL_M, backgroundColor: 'rgba(0,87,168,0.05)', pointRadius: 4, borderWidth: 2.5, tension: 0.35, fill: false },
-      { label: '2024', data: ventas2024, borderColor: DORADO, backgroundColor: 'rgba(200,151,58,0.05)', pointRadius: 4, borderWidth: 2.5, tension: 0.35, fill: false },
-      { label: '2025', data: ventas2025, borderColor: VERDE, backgroundColor: 'rgba(46,125,50,0.08)', pointRadius: 4, borderWidth: 2.5, tension: 0.35, fill: false }
+      { label: '2022', data: v22, borderColor: AZUL,  pointRadius:3, borderWidth:2.5, tension:0.3, fill:false },
+      { label: '2023', data: v23, borderColor: CYAN,  pointRadius:3, borderWidth:2.5, tension:0.3, fill:false },
+      { label: '2024', data: v24, borderColor: ORO,   pointRadius:3, borderWidth:2.5, tension:0.3, fill:false },
+      { label: '2025', data: v25, borderColor: ROJO,  pointRadius:3, borderWidth:2.5, tension:0.3, fill:false },
+      { label: '2026', data: v26, borderColor: VERDE, pointRadius:4, borderWidth:2.5, tension:0.3, fill:false, borderDash:[5,4] }
     ]
   },
   options: {
-    responsive: true,
-    maintainAspectRatio: false,
+    responsive:true, maintainAspectRatio:false,
     plugins: {
-      legend: { position: 'top', labels: { usePointStyle: true, font: { size: 11 } } },
-      tooltip: { callbacks: { label: ctx => ` ${ctx.dataset.label}: $${(ctx.parsed.y||0).toLocaleString('es-MX',{minimumFractionDigits:0})}` } }
+      legend: { position:'top', labels:{ usePointStyle:true, font:{size:11} } },
+      tooltip: { callbacks:{ label: ctx => ` ${ctx.dataset.label}: ${fmtFull(ctx.parsed.y)}` } }
     },
-    scales: {
-      y: { ticks: { callback: v => '$'+(v/1000).toFixed(0)+'K' }, grid: { color: '#EEF1F6' } }
-    }
+    scales: { y: { ticks:{callback:fmt}, grid:{color:'#EEF1F6'} } }
   }
 });
 
-// ── 3. COMISIÓN MENSUAL 2023 vs 2024 vs 2025 ─────────────────────────────
-const com2023 = [8889.53,7514.97,10015.39,7292.78,9575.07,10432.75,12133.15,7738.37,4806.67,3677.91,7769.40,7784.82];
-const com2024 = [7227.28,7791.85,10036.14,6235.49,6179.84,3910.40,5894.42,3993.64,2549.96,1578.51,3066.55,8172.90];
-const com2025 = [3100.78,3856.48,4490.33,4039.76,3699.65,6692.97,10520.23,6341.92,2646.02,3810.36,5020.79,null];
-
-new Chart(document.getElementById('chartComision'), {
+// ── 3. COMISIÓN MENSUAL ──────────────────────────────────────────
+new Chart(document.getElementById('cComision'), {
   type: 'bar',
   data: {
-    labels: MESES,
+    labels: MES,
     datasets: [
-      { label: '2023', data: com2023, backgroundColor: 'rgba(0,87,168,0.75)', borderRadius: 4 },
-      { label: '2024', data: com2024, backgroundColor: 'rgba(200,151,58,0.75)', borderRadius: 4 },
-      { label: '2025', data: com2025, backgroundColor: 'rgba(46,125,50,0.75)', borderRadius: 4 }
+      { label: '2022', data: c22, backgroundColor: 'rgba(0,87,168,0.75)',    borderRadius:3 },
+      { label: '2023', data: c23, backgroundColor: 'rgba(51,153,204,0.75)',  borderRadius:3 },
+      { label: '2024', data: c24, backgroundColor: 'rgba(184,134,11,0.75)', borderRadius:3 },
+      { label: '2025', data: c25, backgroundColor: 'rgba(198,40,40,0.70)',  borderRadius:3 },
+      { label: '2026', data: c26, backgroundColor: 'rgba(46,125,50,0.75)',   borderRadius:3 }
     ]
   },
   options: {
-    responsive: true,
-    maintainAspectRatio: false,
+    responsive:true, maintainAspectRatio:false,
     plugins: {
-      legend: { position: 'top', labels: { usePointStyle: true, font: { size: 11 } } },
-      tooltip: { callbacks: { label: ctx => ` ${ctx.dataset.label}: $${(ctx.parsed.y||0).toLocaleString('es-MX',{minimumFractionDigits:0})}` } }
+      legend: { position:'top', labels:{ usePointStyle:true, font:{size:11} } },
+      tooltip: { callbacks:{ label: ctx => ` ${ctx.dataset.label}: ${fmtFull(ctx.parsed.y)}` } }
     },
-    scales: {
-      y: { ticks: { callback: v => '$'+(v/1000).toFixed(0)+'K' }, grid: { color: '#EEF1F6' } },
-      x: { stacked: false }
-    }
+    scales: { y: { ticks:{callback:fmt}, grid:{color:'#EEF1F6'} } }
   }
 });
 
-// ── 4. PIE — participación por año ────────────────────────────────────────
-new Chart(document.getElementById('chartPie'), {
+// ── 4. PIE ──────────────────────────────────────────────────────
+new Chart(document.getElementById('cPie'), {
   type: 'doughnut',
   data: {
-    labels: ['2021', '2023', '2024', '2025 (11m)', '2026 (5m)'],
+    labels: ['2022 — 31.5%', '2023 — 26.8%', '2024 — 18.3%', '2025 — 16.4%', '2026 — 6.9%'],
     datasets: [{
-      data: [759598.34, 755011.60, 515326.03, 419295.92, 193625.56],
-      backgroundColor: [AZUL, AZUL_M, DORADO, AZUL_C, VERDE],
-      borderWidth: 2,
-      borderColor: '#fff',
-      hoverOffset: 12
+      data: [887376, 755011.60, 515326.03, 461684.34, 193625.56],
+      backgroundColor: [AZUL2, AZUL, ORO, ROJO, VERDE],
+      borderWidth: 2, borderColor:'#fff', hoverOffset:10
     }]
   },
   options: {
-    responsive: true,
-    maintainAspectRatio: false,
+    responsive:true, maintainAspectRatio:false,
     plugins: {
-      legend: { position: 'right', labels: { font: { size: 11 }, usePointStyle: true } },
+      legend: { position:'right', labels:{ font:{size:11}, usePointStyle:true } },
       tooltip: {
         callbacks: {
           label: ctx => {
-            const total = ctx.dataset.data.reduce((a,b)=>a+b,0);
-            const pct = ((ctx.parsed / total)*100).toFixed(1);
-            return ` $${ctx.parsed.toLocaleString('es-MX',{minimumFractionDigits:0})} (${pct}%)`;
+            const t = ctx.dataset.data.reduce((a,b)=>a+b,0);
+            return ` ${fmtFull(ctx.parsed)} (${((ctx.parsed/t)*100).toFixed(1)}%)`;
           }
         }
       }
@@ -707,49 +632,28 @@ new Chart(document.getElementById('chartPie'), {
   }
 });
 
-// ── 5. BARRAS 2026 MENSUAL ────────────────────────────────────────────────
-new Chart(document.getElementById('chart2026'), {
+// ── 5. 2026 vs 2025 (mismos meses) ──────────────────────────────
+const mes5 = ['Enero','Febrero','Marzo','Abril','Mayo'];
+const v25_5 = [23979.37,29823.47,34725.22,31240.81,28610.63];
+const v26_5 = [47797.07,43599.36,51730.91,31762.53,18735.69];
+
+new Chart(document.getElementById('c2626'), {
   type: 'bar',
   data: {
-    labels: ['Enero','Febrero','Marzo','Abril','Mayo'],
+    labels: mes5,
     datasets: [
-      {
-        label: 'Ventas 2026 (USD)',
-        data: [47797.07, 43599.36, 51730.91, 31762.53, 18735.69],
-        backgroundColor: [
-          'rgba(46,125,50,0.8)',
-          'rgba(46,125,50,0.8)',
-          'rgba(46,125,50,0.8)',
-          'rgba(200,151,58,0.8)',
-          'rgba(200,151,58,0.8)'
-        ],
-        borderRadius: 8,
-        yAxisID: 'y'
-      },
-      {
-        label: 'Comisión 15%',
-        data: [6180.66, 5637.85, 6689.34, 4107.22, 2422.72],
-        type: 'line',
-        borderColor: AZUL_M,
-        pointBackgroundColor: AZUL_M,
-        pointRadius: 6,
-        borderWidth: 2.5,
-        tension: 0.3,
-        yAxisID: 'y2'
-      }
+      { label: '2025 (Ene–May)', data: v25_5, backgroundColor: 'rgba(198,40,40,0.70)', borderRadius:6 },
+      { label: '2026 (Ene–May)', data: v26_5, backgroundColor: 'rgba(46,125,50,0.78)', borderRadius:6 }
     ]
   },
   options: {
-    responsive: true,
-    maintainAspectRatio: false,
+    responsive:true, maintainAspectRatio:false,
     plugins: {
-      legend: { position: 'top', labels: { usePointStyle: true, font: { size: 11 } } },
-      tooltip: { callbacks: { label: ctx => ` ${ctx.dataset.label}: $${(ctx.parsed.y||0).toLocaleString('es-MX',{minimumFractionDigits:0})}` } }
+      legend: { position:'top', labels:{ usePointStyle:true, font:{size:12} } },
+      tooltip: { callbacks:{ label: ctx => ` ${ctx.dataset.label}: ${fmtFull(ctx.parsed.y)}` } },
+      annotation: {}
     },
-    scales: {
-      y:  { ticks: { callback: v => '$'+(v/1000).toFixed(0)+'K' }, grid: { color: '#EEF1F6' }, title: { display:true, text:'Ventas' } },
-      y2: { position:'right', ticks: { callback: v => '$'+(v/1000).toFixed(1)+'K' }, grid: { drawOnChartArea:false }, title: { display:true, text:'Comisión' } }
-    }
+    scales: { y: { ticks:{callback:fmt}, grid:{color:'#EEF1F6'} } }
   }
 });
 </script>
