@@ -76,12 +76,13 @@ Investigación vía WebSearch/WebFetch sobre la legislación vigente real (no in
 
 ## PUEBLA, GUERRERO, QUINTANA ROO, CAMPECHE
 
-### Puebla, Puebla — Agro Partes Puebla (~179 m², refacciones agrícolas, Hotel One Puebla Finsa)
-- **Uso de Suelo:** Licencia de Uso de Suelo Específico — Código Reglamentario para el Municipio de Puebla (COREMUN) Libro III "Desarrollo Urbano Sustentable"; marco estatal: Ley de Ordenamiento Territorial y Desarrollo Urbano del Edo. de Puebla.
-- **Funcionamiento (sin alcohol):** Código Fiscal y Presupuestario del Municipio de Puebla (arts. 36, 38, 82, 221-225) + COREMUN Cap. 15 "Actividades Comerciales Autorizadas" (arts. 627 Bis, 629-629 Undecies, 630).
-- **Protección Civil:** Ley del Sistema Estatal de Protección Civil de Puebla (arts. 103-105) + Reglamento de Protección Civil y Gestión Integral de Riesgos del Ayuntamiento de Puebla (RES. 2021/292).
-- **Anuncios:** COREMUN Libro III Cap. 18 (arts. 1295-1296, 1303-1309), reformado por RES. 2022/194 y RES. 2023/263.
-- Vacío: no se confirmó si el predio del hotel tiene uso de suelo compatible específico con venta de refacciones agrícolas.
+### Cuautlancingo, Puebla — Agro Partes Puebla (~179 m², refacciones agrícolas, Lateral Sur Autopista México-Puebla 55)
+- **⚠️ CORRECCIÓN PENDIENTE DE VERIFICAR:** el contrato (leído directamente del PDF) ubica el inmueble en **Cuautlancingo**, Puebla — NO en el municipio de Puebla capital. La investigación original abajo se hizo asumiendo "Municipio de Puebla" y cita el COREMUN (Código Reglamentario para el Municipio de Puebla), que solo aplica al ayuntamiento de Puebla capital, no a Cuautlancingo. Cuautlancingo tiene su propio ayuntamiento y reglamentación municipal (zona industrial/FINSA). Esta sección debe rehacerse con fuentes específicas de Cuautlancingo antes de usarse en la pestaña de Permisos. Lo que sigue es la investigación original (Puebla capital), conservada solo como referencia del marco **estatal** (que sí aplica, al ser leyes de Puebla):
+- **Uso de Suelo (marco estatal):** Ley de Ordenamiento Territorial y Desarrollo Urbano del Edo. de Puebla. (Nivel municipal: pendiente de identificar el reglamento de Cuautlancingo, no el COREMUN de Puebla capital.)
+- **Funcionamiento (sin alcohol):** marco estatal vía Ley de Hacienda Municipal del Estado de Puebla; reglamento municipal específico de Cuautlancingo pendiente de confirmar.
+- **Protección Civil:** Ley del Sistema Estatal de Protección Civil de Puebla (arts. 103-105) — aplica a nivel estatal; reglamento municipal de Cuautlancingo pendiente de confirmar.
+- **Anuncios:** pendiente de confirmar reglamento municipal de Cuautlancingo (el COREMUN de Puebla capital no aplica aquí).
+- Vacío: no se confirmó si el predio (zona industrial FINSA) tiene uso de suelo compatible específico con venta de refacciones agrícolas, ni los reglamentos municipales propios de Cuautlancingo.
 
 ### Acapulco de Juárez, Guerrero — Circle K/Primher y TV Azteca (Hotel One Acapulco Costera)
 - **Uso de Suelo:** Constancia de Uso de Suelo (no "licencia") — Reglamento de Construcciones de Acapulco (1999) y/o Plan Municipal de Desarrollo Urbano de Acapulco (PMDUA 2021); marco estatal Ley 790 de Asentamientos Humanos de Guerrero.
