@@ -1,0 +1,648 @@
+{
+  "Agro Partes Puebla": {
+    "facturas": 3,
+    "pendiente": 41634.64,
+    "corriente": 0,
+    "v1_30": 41634.64,
+    "v31_60": 0,
+    "v61_90": 0,
+    "v91_120": 0,
+    "v121": 0,
+    "num_cliente": "APU23020",
+    "facturas_list": [
+      {
+        "num_factura": 24653,
+        "fecha": "2026-05-29 00:00:00",
+        "dias_venc": 2,
+        "importe_or": 1892.6,
+        "pendiente": 1892.6
+      },
+      {
+        "num_factura": 24652,
+        "fecha": "2026-05-29 00:00:00",
+        "dias_venc": 2,
+        "importe_or": 18924.72,
+        "pendiente": 18924.72
+      },
+      {
+        "num_factura": "                    ",
+        "fecha": "          ",
+        "dias_venc": "          ",
+        "importe_or": 20817.32,
+        "pendiente": 20817.32
+      }
+    ]
+  },
+  "Banco Santander Mexico": {
+    "facturas": 3,
+    "pendiente": 557013.74,
+    "corriente": 557013.74,
+    "v1_30": 0,
+    "v31_60": 0,
+    "v61_90": 0,
+    "v91_120": 0,
+    "v121": 0,
+    "num_cliente": "BSM9705",
+    "facturas_list": [
+      {
+        "num_factura": 16652,
+        "fecha": "2026-06-09 00:00:00",
+        "dias_venc": -9,
+        "importe_or": 242179.89,
+        "pendiente": 242179.89
+      },
+      {
+        "num_factura": 16653,
+        "fecha": "2026-06-09 00:00:00",
+        "dias_venc": -9,
+        "importe_or": 36326.98,
+        "pendiente": 36326.98
+      },
+      {
+        "num_factura": "                    ",
+        "fecha": "          ",
+        "dias_venc": "          ",
+        "importe_or": 278506.87,
+        "pendiente": 278506.87
+      }
+    ]
+  },
+  "Corporativo Empresarial Solar": {
+    "facturas": 4,
+    "pendiente": 74325.66,
+    "corriente": 24775.22,
+    "v1_30": 24775.22,
+    "v31_60": 0,
+    "v61_90": 0,
+    "v91_120": 24775.22,
+    "v121": 0,
+    "num_cliente": "CES9912",
+    "facturas_list": [
+      {
+        "num_factura": 15944,
+        "fecha": "2026-02-06 00:00:00",
+        "dias_venc": 114,
+        "importe_or": 12387.61,
+        "pendiente": 12387.61
+      },
+      {
+        "num_factura": 16674,
+        "fecha": "2026-06-09 00:00:00",
+        "dias_venc": -9,
+        "importe_or": 12387.61,
+        "pendiente": 12387.61
+      },
+      {
+        "num_factura": 16495,
+        "fecha": "2026-05-11 00:00:00",
+        "dias_venc": 20,
+        "importe_or": 12387.61,
+        "pendiente": 12387.61
+      },
+      {
+        "num_factura": "                    ",
+        "fecha": "          ",
+        "dias_venc": "          ",
+        "importe_or": 37162.83,
+        "pendiente": 37162.83
+      }
+    ]
+  },
+  "David Valdez Romo (Fisher)": {
+    "facturas": 2,
+    "pendiente": 49085.38,
+    "corriente": 0,
+    "v1_30": 0,
+    "v31_60": 0,
+    "v61_90": 49085.38,
+    "v91_120": 0,
+    "v121": 0,
+    "num_cliente": "VARD910",
+    "facturas_list": [
+      {
+        "num_factura": 24133,
+        "fecha": "2026-03-12 00:00:00",
+        "dias_venc": 80,
+        "importe_or": 24542.69,
+        "pendiente": 24542.69
+      },
+      {
+        "num_factura": "                    ",
+        "fecha": "          ",
+        "dias_venc": "          ",
+        "importe_or": 24542.69,
+        "pendiente": 24542.69
+      }
+    ]
+  },
+  "Divol Norte": {
+    "facturas": 2,
+    "pendiente": 559034.78,
+    "corriente": 559034.78,
+    "v1_30": 0,
+    "v31_60": 0,
+    "v61_90": 0,
+    "v91_120": 0,
+    "v121": 0,
+    "num_cliente": "DNO1601",
+    "facturas_list": [
+      {
+        "num_factura": 16654,
+        "fecha": "2026-06-09 00:00:00",
+        "dias_venc": -9,
+        "importe_or": 279517.39,
+        "pendiente": 279517.39
+      },
+      {
+        "num_factura": "                    ",
+        "fecha": "          ",
+        "dias_venc": "          ",
+        "importe_or": 279517.39,
+        "pendiente": 279517.39
+      }
+    ]
+  },
+  "Julio Cesar Torres Rojo": {
+    "facturas": 5,
+    "pendiente": 173356.44,
+    "corriente": 87191.26000000001,
+    "v1_30": 86165.18,
+    "v31_60": 0,
+    "v61_90": 0,
+    "v91_120": 0,
+    "v121": 0,
+    "num_cliente": "TORJ751",
+    "facturas_list": [
+      {
+        "num_factura": 16671,
+        "fecha": "2026-06-09 00:00:00",
+        "dias_venc": -9,
+        "importe_or": 227.2,
+        "pendiente": 3963.58
+      },
+      {
+        "num_factura": 24574,
+        "fecha": "2026-05-21 00:00:00",
+        "dias_venc": 10,
+        "importe_or": 2271.79,
+        "pendiente": 39165.66
+      },
+      {
+        "num_factura": 24575,
+        "fecha": "2026-05-21 00:00:00",
+        "dias_venc": 10,
+        "importe_or": 227.2,
+        "pendiente": 3916.93
+      },
+      {
+        "num_factura": 16670,
+        "fecha": "2026-06-09 00:00:00",
+        "dias_venc": -9,
+        "importe_or": 2271.79,
+        "pendiente": 39632.05
+      },
+      {
+        "num_factura": "                    ",
+        "fecha": "          ",
+        "dias_venc": "          ",
+        "importe_or": 4997.98,
+        "pendiente": 86678.22
+      }
+    ]
+  },
+  "Operadora Hotelera In House (multiples)": {
+    "facturas": 4,
+    "pendiente": 2346710.16,
+    "corriente": 0,
+    "v1_30": 1418710.16,
+    "v31_60": 928000,
+    "v61_90": 0,
+    "v91_120": 0,
+    "v121": 0,
+    "num_cliente": "OHI2102",
+    "facturas_list": [
+      {
+        "num_factura": 16515,
+        "fecha": "2026-05-11 00:00:00",
+        "dias_venc": 20,
+        "importe_or": 245355.08,
+        "pendiente": 245355.08
+      },
+      {
+        "num_factura": 24291,
+        "fecha": "08-ABR-26",
+        "dias_venc": 53,
+        "importe_or": 464000,
+        "pendiente": 464000
+      },
+      {
+        "num_factura": 24514,
+        "fecha": "2026-05-14 00:00:00",
+        "dias_venc": 17,
+        "importe_or": 464000,
+        "pendiente": 464000
+      },
+      {
+        "num_factura": "                    ",
+        "fecha": "          ",
+        "dias_venc": "          ",
+        "importe_or": 1173355.08,
+        "pendiente": 1173355.08
+      }
+    ]
+  },
+  "Traigo Todo (Sonora Grill)": {
+    "facturas": 10,
+    "pendiente": 3255253.5,
+    "corriente": 0,
+    "v1_30": 785247.24,
+    "v31_60": 747718.5,
+    "v61_90": 760681.28,
+    "v91_120": 720867.66,
+    "v121": 240738.82,
+    "num_cliente": "OVA2103",
+    "facturas_list": [
+      {
+        "num_factura": 24110,
+        "fecha": "2026-03-11 00:00:00",
+        "dias_venc": 81,
+        "importe_or": 117693.87,
+        "pendiente": 117693.87
+      },
+      {
+        "num_factura": 23989,
+        "fecha": "2026-02-19 00:00:00",
+        "dias_venc": 101,
+        "importe_or": 97787.06,
+        "pendiente": 97787.06
+      },
+      {
+        "num_factura": 16398,
+        "fecha": "13-ABR-26",
+        "dias_venc": 48,
+        "importe_or": 262646.77,
+        "pendiente": 262646.77
+      },
+      {
+        "num_factura": 24111,
+        "fecha": "2026-03-11 00:00:00",
+        "dias_venc": 81,
+        "importe_or": 262646.77,
+        "pendiente": 262646.77
+      },
+      {
+        "num_factura": 24010,
+        "fecha": "2026-02-19 00:00:00",
+        "dias_venc": 101,
+        "importe_or": 262646.77,
+        "pendiente": 262646.77
+      },
+      {
+        "num_factura": 23909,
+        "fecha": "27-ENE-26",
+        "dias_venc": 124,
+        "importe_or": 120369.41,
+        "pendiente": 120369.41
+      },
+      {
+        "num_factura": 24532,
+        "fecha": "2026-05-18 00:00:00",
+        "dias_venc": 13,
+        "importe_or": 129976.85,
+        "pendiente": 129976.85
+      },
+      {
+        "num_factura": 24533,
+        "fecha": "2026-05-18 00:00:00",
+        "dias_venc": 13,
+        "importe_or": 262646.77,
+        "pendiente": 262646.77
+      },
+      {
+        "num_factura": 16397,
+        "fecha": "13-ABR-26",
+        "dias_venc": 48,
+        "importe_or": 111212.48,
+        "pendiente": 111212.48
+      },
+      {
+        "num_factura": "                    ",
+        "fecha": "          ",
+        "dias_venc": "          ",
+        "importe_or": 1627626.75,
+        "pendiente": 1627626.75
+      }
+    ]
+  },
+  "Primeflight Aviation Mexico": {
+    "facturas": 19,
+    "pendiente": 559110.12,
+    "corriente": 196993.90000000002,
+    "v1_30": 174921.12,
+    "v31_60": 0,
+    "v61_90": 187195.1,
+    "v91_120": 0,
+    "v121": 0,
+    "num_cliente": "ACM9209",
+    "facturas_list": [
+      {
+        "num_factura": 16490,
+        "fecha": "2026-05-11 00:00:00",
+        "dias_venc": 20,
+        "importe_or": 34775.37,
+        "pendiente": 34775.37
+      },
+      {
+        "num_factura": 16662,
+        "fecha": "2026-06-09 00:00:00",
+        "dias_venc": -9,
+        "importe_or": 3855.61,
+        "pendiente": 3855.61
+      },
+      {
+        "num_factura": 16068,
+        "fecha": "2026-03-10 00:00:00",
+        "dias_venc": 82,
+        "importe_or": 44389.51,
+        "pendiente": 44389.51
+      },
+      {
+        "num_factura": 16070,
+        "fecha": "2026-03-10 00:00:00",
+        "dias_venc": 82,
+        "importe_or": 33394.25,
+        "pendiente": 33394.25
+      },
+      {
+        "num_factura": 16659,
+        "fecha": "2026-06-09 00:00:00",
+        "dias_venc": -9,
+        "importe_or": 3059.15,
+        "pendiente": 3059.15
+      },
+      {
+        "num_factura": 16488,
+        "fecha": "2026-05-11 00:00:00",
+        "dias_venc": 20,
+        "importe_or": 44389.51,
+        "pendiente": 44389.51
+      },
+      {
+        "num_factura": 16489,
+        "fecha": "2026-05-11 00:00:00",
+        "dias_venc": 20,
+        "importe_or": 4440.07,
+        "pendiente": 4440.07
+      },
+      {
+        "num_factura": 16661,
+        "fecha": "2026-06-09 00:00:00",
+        "dias_venc": -9,
+        "importe_or": 34775.37,
+        "pendiente": 34775.37
+      },
+      {
+        "num_factura": 16491,
+        "fecha": "2026-05-11 00:00:00",
+        "dias_venc": 20,
+        "importe_or": 3855.61,
+        "pendiente": 3855.61
+      },
+      {
+        "num_factura": 16657,
+        "fecha": "2026-06-09 00:00:00",
+        "dias_venc": -9,
+        "importe_or": 44389.51,
+        "pendiente": 44389.51
+      },
+      {
+        "num_factura": 16663,
+        "fecha": "2026-06-09 00:00:00",
+        "dias_venc": -9,
+        "importe_or": 6905.61,
+        "pendiente": 6905.61
+      },
+      {
+        "num_factura": 16199,
+        "fecha": "2026-03-19 00:00:00",
+        "dias_venc": 73,
+        "importe_or": 765.63,
+        "pendiente": 765.63
+      },
+      {
+        "num_factura": 16198,
+        "fecha": "2026-03-19 00:00:00",
+        "dias_venc": 73,
+        "importe_or": 6905.61,
+        "pendiente": 6905.61
+      },
+      {
+        "num_factura": 16658,
+        "fecha": "2026-06-09 00:00:00",
+        "dias_venc": -9,
+        "importe_or": 4440.07,
+        "pendiente": 4440.07
+      },
+      {
+        "num_factura": 16664,
+        "fecha": "2026-06-09 00:00:00",
+        "dias_venc": -9,
+        "importe_or": 765.63,
+        "pendiente": 765.63
+      },
+      {
+        "num_factura": 16069,
+        "fecha": "2026-03-10 00:00:00",
+        "dias_venc": 82,
+        "importe_or": 4440.07,
+        "pendiente": 4440.07
+      },
+      {
+        "num_factura": 16071,
+        "fecha": "2026-03-10 00:00:00",
+        "dias_venc": 82,
+        "importe_or": 3702.48,
+        "pendiente": 3702.48
+      },
+      {
+        "num_factura": 16660,
+        "fecha": "2026-06-09 00:00:00",
+        "dias_venc": -9,
+        "importe_or": 306,
+        "pendiente": 306
+      },
+      {
+        "num_factura": "                    ",
+        "fecha": "          ",
+        "dias_venc": "          ",
+        "importe_or": 279555.06,
+        "pendiente": 279555.06
+      }
+    ]
+  },
+  "Waldo's Dolar Mart de Mexico": {
+    "facturas": 7,
+    "pendiente": 726491.8,
+    "corriente": 386629.0,
+    "v1_30": 339862.8,
+    "v31_60": 0,
+    "v61_90": 0,
+    "v91_120": 0,
+    "v121": 0,
+    "num_cliente": "WDM9901",
+    "facturas_list": [
+      {
+        "num_factura": 16647,
+        "fecha": "2026-06-09 00:00:00",
+        "dias_venc": -9,
+        "importe_or": 23183.55,
+        "pendiente": 23183.55
+      },
+      {
+        "num_factura": 16480,
+        "fecha": "2026-05-11 00:00:00",
+        "dias_venc": 20,
+        "importe_or": 22166.81,
+        "pendiente": 22166.81
+      },
+      {
+        "num_factura": 16649,
+        "fecha": "2026-06-09 00:00:00",
+        "dias_venc": -9,
+        "importe_or": 2033.48,
+        "pendiente": 2033.48
+      },
+      {
+        "num_factura": 16479,
+        "fecha": "2026-05-11 00:00:00",
+        "dias_venc": 20,
+        "importe_or": 147764.59,
+        "pendiente": 147764.59
+      },
+      {
+        "num_factura": 16648,
+        "fecha": "2026-06-09 00:00:00",
+        "dias_venc": -9,
+        "importe_or": 13555.25,
+        "pendiente": 13555.25
+      },
+      {
+        "num_factura": 16646,
+        "fecha": "2026-06-09 00:00:00",
+        "dias_venc": -9,
+        "importe_or": 154542.22,
+        "pendiente": 154542.22
+      },
+      {
+        "num_factura": "                    ",
+        "fecha": "          ",
+        "dias_venc": "          ",
+        "importe_or": 363245.9,
+        "pendiente": 363245.9
+      }
+    ]
+  },
+  "Zapata": {
+    "facturas": 4,
+    "pendiente": 225504,
+    "corriente": 0,
+    "v1_30": 75168,
+    "v31_60": 75168,
+    "v61_90": 75168,
+    "v91_120": 0,
+    "v121": 0,
+    "num_cliente": "ZAP5604",
+    "facturas_list": [
+      {
+        "num_factura": 24332,
+        "fecha": "13-ABR-26",
+        "dias_venc": 48,
+        "importe_or": 37584,
+        "pendiente": 37584
+      },
+      {
+        "num_factura": 16179,
+        "fecha": "2026-03-13 00:00:00",
+        "dias_venc": 79,
+        "importe_or": 37584,
+        "pendiente": 37584
+      },
+      {
+        "num_factura": 24472,
+        "fecha": "2026-05-11 00:00:00",
+        "dias_venc": 20,
+        "importe_or": 37584,
+        "pendiente": 37584
+      },
+      {
+        "num_factura": "                    ",
+        "fecha": "          ",
+        "dias_venc": "          ",
+        "importe_or": 112752,
+        "pendiente": 112752
+      }
+    ]
+  },
+  "Grupo Posadas": {
+    "facturas": 7,
+    "pendiente": 44564867.82,
+    "corriente": 43737212.46,
+    "v1_30": 827655.36,
+    "v31_60": 0,
+    "v61_90": 0,
+    "v91_120": 0,
+    "v121": 0,
+    "num_cliente": "GPO",
+    "facturas_list": [
+      {
+        "num_factura": 24712,
+        "fecha": "2026-06-09 00:00:00",
+        "dias_venc": -9,
+        "importe_or": 485718.68,
+        "pendiente": 485718.68
+      },
+      {
+        "num_factura": 24474,
+        "fecha": "2026-05-11 00:00:00",
+        "dias_venc": 20,
+        "importe_or": 413827.68,
+        "pendiente": 413827.68
+      },
+      {
+        "num_factura": "                    ",
+        "fecha": "          ",
+        "dias_venc": "          ",
+        "importe_or": 899546.36,
+        "pendiente": 899546.36
+      },
+      {
+        "num_factura": 24692,
+        "fecha": "2026-06-09 00:00:00",
+        "dias_venc": -9,
+        "importe_or": 1206946.88,
+        "pendiente": 20919768.88
+      },
+      {
+        "num_factura": "                    ",
+        "fecha": "          ",
+        "dias_venc": "          ",
+        "importe_or": 1206946.88,
+        "pendiente": 20919768.88
+      },
+      {
+        "num_factura": 24732,
+        "fecha": "2026-06-12 00:00:00",
+        "dias_venc": -12,
+        "importe_or": 463118.67,
+        "pendiente": 463118.67
+      },
+      {
+        "num_factura": "                    ",
+        "fecha": "          ",
+        "dias_venc": "          ",
+        "importe_or": 463118.67,
+        "pendiente": 463118.67
+      }
+    ]
+  }
+}
