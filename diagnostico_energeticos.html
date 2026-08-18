@@ -1,0 +1,544 @@
+<title>Diagnóstico Energéticos 2026</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Source+Sans+3:wght@300;400;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+:root {
+  --navy:     #0C2340;
+  --navy-mid: #1A3A5C;
+  --navy-lt:  #2A5280;
+  --gold:     #B8943A;
+  --gold-lt:  #D4AD55;
+  --green:    #1D6B4F;
+  --green-lt: #2A8F6A;
+  --green-bg: #E6F4EE;
+  --red:      #B83232;
+  --red-lt:   #D94848;
+  --red-bg:   #FDEAEA;
+  --amber:    #B86A00;
+  --amber-bg: #FEF3E2;
+  --bg:       #F2F6FA;
+  --surface:  #FFFFFF;
+  --surf2:    #EBF0F6;
+  --border:   #D0DCE8;
+  --t-main:   #0C2340;
+  --t-body:   #2E4562;
+  --t-muted:  #5C7A96;
+  --radius:   8px;
+  --shadow:   0 2px 12px rgba(12,35,64,.08), 0 1px 3px rgba(12,35,64,.04);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#060F1C;--surface:#0C2340;--surf2:#0F2B4A;--border:#1E3D5C;
+  --t-main:#E4EDF5;--t-body:#A8BCCC;--t-muted:#6A8BA8;
+  --green-bg:#0A2B1F;--red-bg:#2B0A0A;--amber-bg:#261800;--shadow:0 2px 12px rgba(0,0,0,.3);
+}}
+:root[data-theme="dark"]{
+  --bg:#060F1C;--surface:#0C2340;--surf2:#0F2B4A;--border:#1E3D5C;
+  --t-main:#E4EDF5;--t-body:#A8BCCC;--t-muted:#6A8BA8;
+  --green-bg:#0A2B1F;--red-bg:#2B0A0A;--amber-bg:#261800;--shadow:0 2px 12px rgba(0,0,0,.3);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',system-ui,sans-serif;font-size:15px;line-height:1.6;background:var(--bg);color:var(--t-body);-webkit-font-smoothing:antialiased}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+.page{max-width:1080px;margin:0 auto;padding:2rem 1.25rem 4rem}
+
+/* ── HEADER ── */
+.hdr{background:var(--navy);border-radius:12px;padding:2.2rem 2.6rem 2rem;margin-bottom:1.8rem;position:relative;overflow:hidden}
+.hdr::before{content:'';position:absolute;top:-80px;right:-80px;width:300px;height:300px;border-radius:50%;background:var(--gold);opacity:.06}
+.hdr::after{content:'';position:absolute;bottom:-60px;left:25%;width:200px;height:200px;border-radius:50%;background:#fff;opacity:.03}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-lt);margin-bottom:.4rem}
+.hdr-title{font-family:'DM Serif Display',Georgia,serif;font-size:2.1rem;color:#fff;line-height:1.15;margin-bottom:1.2rem;text-wrap:balance}
+.hdr-meta{display:flex;flex-wrap:wrap;gap:.4rem 1.8rem;font-size:13px;color:rgba(255,255,255,.6);position:relative;z-index:1}
+.hdr-meta span strong{color:rgba(255,255,255,.9)}
+
+/* ── SUMMARY TILES ── */
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.8rem}
+@media(max-width:680px){.tiles{grid-template-columns:1fr 1fr}}
+.tile{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.1rem 1.3rem;box-shadow:var(--shadow);border-top:3px solid transparent}
+.tile.t-navy{border-top-color:var(--navy-mid)}
+.tile.t-green{border-top-color:var(--green)}
+.tile.t-red{border-top-color:var(--red)}
+.tile.t-gold{border-top-color:var(--gold)}
+.tile-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--t-muted);margin-bottom:.3rem}
+.tile-val{font-family:'DM Serif Display',Georgia,serif;font-size:1.9rem;color:var(--t-main);line-height:1;font-variant-numeric:tabular-nums}
+.tile-sub{font-size:11.5px;color:var(--t-muted);margin-top:.3rem}
+
+/* ── DONUT CHARTS ── */
+.charts-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.8rem}
+@media(max-width:560px){.charts-row{grid-template-columns:1fr}}
+.chart-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.4rem 1.6rem;display:flex;align-items:center;gap:1.6rem}
+.donut-wrap{position:relative;flex-shrink:0}
+.donut-wrap canvas{display:block}
+.donut-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none}
+.donut-pct{font-family:'DM Serif Display',Georgia,serif;font-size:1.5rem;color:var(--t-main);line-height:1;font-variant-numeric:tabular-nums}
+.donut-lbl{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--t-muted);margin-top:.1rem}
+.chart-legend{flex:1;min-width:0}
+.chart-title{font-weight:700;font-size:14px;color:var(--t-main);margin-bottom:.7rem}
+.legend-item{display:flex;align-items:center;gap:.55rem;font-size:13px;color:var(--t-body);margin-bottom:.4rem}
+.leg-dot{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+.leg-n{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--t-main);margin-left:auto;font-variant-numeric:tabular-nums}
+
+/* ── SECTION ── */
+.sec-hdr{display:flex;align-items:center;gap:.8rem;margin:1.8rem 0 .9rem}
+.sec-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.sec-icon.local{background:var(--navy);color:var(--gold-lt)}
+.sec-icon.ant{background:var(--navy-mid);color:var(--gold-lt)}
+.sec-title{font-family:'DM Serif Display',Georgia,serif;font-size:1.2rem;color:var(--t-main)}
+.sec-sub{font-size:12px;color:var(--t-muted);margin-top:.05rem}
+
+/* ── HOTEL GROUP ── */
+.hotel-group{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:.9rem;overflow:hidden}
+.hotel-hdr{display:flex;align-items:center;gap:.8rem;padding:.8rem 1.2rem;background:var(--surf2);border-bottom:1px solid var(--border);cursor:pointer;user-select:none}
+.hotel-code{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;color:var(--gold);letter-spacing:.05em;min-width:54px}
+.hotel-name{font-weight:600;font-size:13.5px;color:var(--t-main);flex:1}
+.hotel-pills{display:flex;gap:.4rem;flex-wrap:wrap;margin-left:auto}
+.pill{display:inline-flex;align-items:center;gap:.3rem;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:.2rem .55rem;border-radius:100px;white-space:nowrap}
+.pill-ind{background:var(--green-bg);color:var(--green)}
+.pill-dep{background:var(--red-bg);color:var(--red)}
+.pill-amb{background:var(--amber-bg);color:var(--amber)}
+
+/* ── TENANT TABLE ── */
+.tenant-tbl{width:100%;border-collapse:collapse;font-size:13px}
+.tenant-tbl th{padding:.5rem 1rem;text-align:left;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--t-muted);font-weight:600;border-bottom:1px solid var(--border);background:var(--surf2)}
+.tenant-tbl td{padding:.55rem 1rem;border-bottom:1px solid var(--border);vertical-align:middle;color:var(--t-body)}
+.tenant-tbl tr:last-child td{border-bottom:none}
+.tenant-tbl tr:hover td{background:var(--surf2)}
+.tname{font-weight:600;color:var(--t-main)}
+.energy-badges{display:flex;gap:.3rem;flex-wrap:wrap}
+.ebadge{font-size:10.5px;font-family:'IBM Plex Mono',monospace;padding:.15rem .5rem;border-radius:4px;font-weight:600;letter-spacing:.03em}
+.ebadge-luz{background:#FEF3E2;color:#7A4800}
+.ebadge-agua{background:#E8F4FF;color:#1A5C8A}
+.ebadge-ind{background:var(--green-bg);color:var(--green)}
+.status-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;display:inline-block;margin-right:4px}
+.dot-green{background:var(--green)}
+.dot-red{background:var(--red)}
+
+/* ── SUMMARY TABLE ── */
+.summary-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;margin-top:1.8rem}
+.summary-card-hdr{background:var(--navy-mid);padding:.8rem 1.4rem}
+.summary-card-hdr span{font-family:'DM Serif Display',Georgia,serif;font-size:1.1rem;color:#fff}
+.sum-tbl{width:100%;border-collapse:collapse;font-size:13.5px;font-variant-numeric:tabular-nums}
+.sum-tbl th{padding:.6rem 1rem;text-align:left;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:#fff;background:var(--navy);white-space:nowrap}
+.sum-tbl td{padding:.6rem 1rem;border-bottom:1px solid var(--border);color:var(--t-body)}
+.sum-tbl tr:nth-child(even) td{background:var(--surf2)}
+.sum-tbl td.bold{font-weight:700;color:var(--t-main)}
+.sum-tbl tfoot td{background:var(--navy-mid);color:#fff;font-weight:700;font-family:'IBM Plex Mono',monospace;font-size:12px;padding:.65rem 1rem}
+.sum-tbl tfoot td.gold{color:var(--gold-lt)}
+
+/* ── FOOTER ── */
+.footer{margin-top:2.5rem;padding-top:1rem;border-top:1px solid var(--border);font-size:12px;color:var(--t-muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
+</style>
+
+<div class="page">
+
+<!-- HEADER -->
+<header class="hdr">
+  <p class="eyebrow">Fibra Hotel Corporativo &nbsp;·&nbsp; Área de Arrendamiento &nbsp;·&nbsp; Objetivo 2</p>
+  <h1 class="hdr-title">Diagnóstico Global de Energéticos<br>Arrendatarios 2026</h1>
+  <div class="hdr-meta">
+    <span><strong>Elaborado por</strong> &nbsp;Gerardo Vega Quinto</span>
+    <span><strong>Período</strong> &nbsp;Enero – Julio 2026</span>
+    <span><strong>Fuente</strong> &nbsp;Solicitudes de facturación jun-26 / Anexos de resultados jul-26</span>
+    <span><strong>Fecha</strong> &nbsp;25 de mayo de 2026</span>
+  </div>
+</header>
+
+<!-- SUMMARY TILES -->
+<div class="tiles">
+  <div class="tile t-navy">
+    <div class="tile-label">Total arrendatarios analizados</div>
+    <div class="tile-val">53</div>
+    <div class="tile-sub">31 locales &nbsp;·&nbsp; 22 antenas</div>
+  </div>
+  <div class="tile t-green">
+    <div class="tile-label">Con energéticos independizados</div>
+    <div class="tile-val">35</div>
+    <div class="tile-sub">66.0% del total</div>
+  </div>
+  <div class="tile t-red">
+    <div class="tile-label">Dependientes del sistema del hotel</div>
+    <div class="tile-val">18</div>
+    <div class="tile-sub">34.0% del total</div>
+  </div>
+  <div class="tile t-gold">
+    <div class="tile-label">Propiedades con arrendatarios</div>
+    <div class="tile-val">29</div>
+    <div class="tile-sub">Hoteles con al menos 1 local o antena</div>
+  </div>
+</div>
+
+<!-- DONUT CHARTS -->
+<div class="charts-row">
+  <div class="chart-card">
+    <div class="donut-wrap">
+      <canvas id="c1" width="120" height="120"></canvas>
+      <div class="donut-center">
+        <div class="donut-pct">74%</div>
+        <div class="donut-lbl">Indep.</div>
+      </div>
+    </div>
+    <div class="chart-legend">
+      <div class="chart-title">Locales Comerciales</div>
+      <div class="legend-item"><span class="leg-dot" style="background:var(--green)"></span>Energéticos independientes<span class="leg-n">23</span></div>
+      <div class="legend-item"><span class="leg-dot" style="background:var(--red)"></span>Dependen del hotel<span class="leg-n">8</span></div>
+      <div class="legend-item" style="margin-top:.4rem;font-size:12px;color:var(--t-muted)">Total locales: <strong style="color:var(--t-main)">31</strong></div>
+    </div>
+  </div>
+  <div class="chart-card">
+    <div class="donut-wrap">
+      <canvas id="c2" width="120" height="120"></canvas>
+      <div class="donut-center">
+        <div class="donut-pct">55%</div>
+        <div class="donut-lbl">Indep.</div>
+      </div>
+    </div>
+    <div class="chart-legend">
+      <div class="chart-title">Antenas</div>
+      <div class="legend-item"><span class="leg-dot" style="background:var(--green)"></span>Energético eléctrico independiente<span class="leg-n">12</span></div>
+      <div class="legend-item"><span class="leg-dot" style="background:var(--red)"></span>Dependen del hotel (electricidad)<span class="leg-n">10</span></div>
+      <div class="legend-item" style="margin-top:.4rem;font-size:12px;color:var(--t-muted)">Total antenas: <strong style="color:var(--t-main)">22</strong> &nbsp;·&nbsp; No requieren agua</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ LOCALES ═══════════════════ -->
+<div class="sec-hdr">
+  <div class="sec-icon local">🏪</div>
+  <div>
+    <div class="sec-title">Locales Comerciales</div>
+    <div class="sec-sub">Requieren independencia de electricidad y agua</div>
+  </div>
+</div>
+
+<!-- ONE ACAPULCO -->
+<div class="hotel-group">
+  <div class="hotel-hdr">
+    <span class="hotel-code">1ACCM</span>
+    <span class="hotel-name">One Acapulco Costera</span>
+    <div class="hotel-pills"><span class="pill pill-ind">2 independientes</span></div>
+  </div>
+  <table class="tenant-tbl">
+    <thead><tr><th>Arrendatario</th><th>Local</th><th>Electricidad</th><th>Agua</th><th>Estatus</th></tr></thead>
+    <tbody>
+      <tr><td class="tname">TV Azteca SAB de CV</td><td>Local TV Azteca</td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="dot-green status-dot"></span>Independizado</td></tr>
+      <tr><td class="tname">Circle K <span style="font-size:11px;color:var(--gold);font-weight:600">★ Nuevo Q1-26</span></td><td>Local #2</td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="dot-green status-dot"></span>Sin reembolso registrado</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ONE AGUASCALIENTES -->
+<div class="hotel-group">
+  <div class="hotel-hdr">
+    <span class="hotel-code">1AGCI</span>
+    <span class="hotel-name">One Aguascalientes Sur</span>
+    <div class="hotel-pills"><span class="pill pill-ind">1 independiente</span></div>
+  </div>
+  <table class="tenant-tbl">
+    <thead><tr><th>Arrendatario</th><th>Local</th><th>Electricidad</th><th>Agua</th><th>Estatus</th></tr></thead>
+    <tbody>
+      <tr><td class="tname">Comercial Automotriz de los Altos</td><td>Local Automotriz</td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="dot-green status-dot"></span>Independizado</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ONE MONTERREY AEROPUERTO -->
+<div class="hotel-group">
+  <div class="hotel-hdr">
+    <span class="hotel-code">1MTAP</span>
+    <span class="hotel-name">One Monterrey Aeropuerto (Plaza One Monterrey)</span>
+    <div class="hotel-pills"><span class="pill pill-ind">4 independientes</span><span class="pill pill-dep">2 dependientes</span></div>
+  </div>
+  <table class="tenant-tbl">
+    <thead><tr><th>Arrendatario</th><th>Local</th><th>Electricidad</th><th>Agua</th><th>Estatus</th></tr></thead>
+    <tbody>
+      <tr><td class="tname">7-Eleven México SA de CV</td><td>Local 7-Eleven</td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="dot-green status-dot"></span>Independizado</td></tr>
+      <tr><td class="tname">Servicios Inmobiliarios Alsea SA de CV</td><td>Local Starbucks</td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="dot-green status-dot"></span>Independizado</td></tr>
+      <tr><td class="tname">Consolidadora de Servicios Aduanales SC</td><td>Local 4B</td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="dot-green status-dot"></span>Independizado</td></tr>
+      <tr><td class="tname">Primeflight Aviation Services México</td><td>Bodega / Local Aerocharter</td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="dot-green status-dot"></span>Independizado</td></tr>
+      <tr style="background:var(--red-bg)"><td class="tname">Gloria JH S de RL de CV</td><td>Local Gloria</td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="ebadge" style="background:#DBEEFF;color:#0A4A8A">Reembolso hotel</span></td><td><span class="dot-red status-dot"></span>Agua: depende del hotel</td></tr>
+      <tr style="background:var(--red-bg)"><td class="tname">Proyectos Electrónicos de Entretenimiento LC</td><td>Local Restaurante Hole in One</td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="ebadge" style="background:#DBEEFF;color:#0A4A8A">Reembolso hotel</span></td><td><span class="dot-red status-dot"></span>Agua: depende del hotel</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ONE PUEBLA FINSA -->
+<div class="hotel-group">
+  <div class="hotel-hdr">
+    <span class="hotel-code">1PUFI</span>
+    <span class="hotel-name">One Puebla Finsa</span>
+    <div class="hotel-pills"><span class="pill pill-ind">1 independiente</span></div>
+  </div>
+  <table class="tenant-tbl">
+    <thead><tr><th>Arrendatario</th><th>Local</th><th>Electricidad</th><th>Agua</th><th>Estatus</th></tr></thead>
+    <tbody>
+      <tr><td class="tname">Agro-Partes Puebla</td><td>Local Agro-Partes</td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="dot-green status-dot"></span>Independizado</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ONE CUAUTITLAN -->
+<div class="hotel-group">
+  <div class="hotel-hdr">
+    <span class="hotel-code">1XCUA</span>
+    <span class="hotel-name">One Cuautitlán</span>
+    <div class="hotel-pills"><span class="pill pill-ind">3 independientes</span></div>
+  </div>
+  <table class="tenant-tbl">
+    <thead><tr><th>Arrendatario</th><th>Local</th><th>Electricidad</th><th>Agua</th><th>Estatus</th></tr></thead>
+    <tbody>
+      <tr><td class="tname">Banco Santander México SA</td><td>Local Santander</td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="dot-green status-dot"></span>Independizado</td></tr>
+      <tr><td class="tname">Waldo's Dolar Mart de México S de RL</td><td>Local Waldo's</td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="dot-green status-dot"></span>Independizado</td></tr>
+      <tr><td class="tname">Zapata</td><td>Local Ford</td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="dot-green status-dot"></span>Independizado</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- FAAG -->
+<div class="hotel-group">
+  <div class="hotel-hdr">
+    <span class="hotel-code">FAAG</span>
+    <span class="hotel-name">Fiesta Americana Aguascalientes</span>
+    <div class="hotel-pills"><span class="pill pill-ind">1 independiente</span></div>
+  </div>
+  <table class="tenant-tbl">
+    <thead><tr><th>Arrendatario</th><th>Local</th><th>Electricidad</th><th>Agua</th><th>Estatus</th></tr></thead>
+    <tbody>
+      <tr><td class="tname">David Valdez Romo</td><td>Local Fishers</td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="dot-green status-dot"></span>Independizado</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- FACC -->
+<div class="hotel-group">
+  <div class="hotel-hdr">
+    <span class="hotel-code">FACC</span>
+    <span class="hotel-name">Fiesta Americana Condesa Cancún</span>
+    <div class="hotel-pills"><span class="pill pill-ind">2 independientes</span></div>
+  </div>
+  <table class="tenant-tbl">
+    <thead><tr><th>Arrendatario</th><th>Local</th><th>Electricidad</th><th>Agua</th><th>Estatus</th></tr></thead>
+    <tbody>
+      <tr><td class="tname">Amazon Tours</td><td>Local Aqua World</td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="dot-green status-dot"></span>Independizado</td></tr>
+      <tr><td class="tname">T.I. Experiencias en Grupos y Convenciones</td><td>Local Tropical Elite Travel</td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="dot-green status-dot"></span>Independizado</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- FAHE -->
+<div class="hotel-group">
+  <div class="hotel-hdr">
+    <span class="hotel-code">FAHE</span>
+    <span class="hotel-name">Fiesta Americana Hermosillo</span>
+    <div class="hotel-pills"><span class="pill pill-dep">1 dependiente</span></div>
+  </div>
+  <table class="tenant-tbl">
+    <thead><tr><th>Arrendatario</th><th>Local</th><th>Electricidad</th><th>Agua</th><th>Estatus</th></tr></thead>
+    <tbody>
+      <tr style="background:var(--red-bg)"><td class="tname">Operadora Valiente</td><td>Sonora Grill</td><td><span class="ebadge ebadge-luz">Reembolso hotel</span></td><td><span class="ebadge" style="background:#DBEEFF;color:#0A4A8A">Reembolso hotel</span></td><td><span class="dot-red status-dot"></span>Luz y agua: dependen del hotel</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- FICDJ -->
+<div class="hotel-group">
+  <div class="hotel-hdr">
+    <span class="hotel-code">FICDJ</span>
+    <span class="hotel-name">Fiesta Inn Ciudad Juárez</span>
+    <div class="hotel-pills"><span class="pill pill-dep">1 dependiente</span></div>
+  </div>
+  <table class="tenant-tbl">
+    <thead><tr><th>Arrendatario</th><th>Local</th><th>Electricidad</th><th>Agua</th><th>Estatus</th></tr></thead>
+    <tbody>
+      <tr style="background:var(--red-bg)"><td class="tname">María Irene Vota Echavarri</td><td>Tabaquería</td><td><span class="ebadge ebadge-luz">Reembolso hotel</span></td><td><span class="ebadge ebadge-ind">N/A</span></td><td><span class="dot-red status-dot"></span>Electricidad: depende del hotel</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- FICDO -->
+<div class="hotel-group">
+  <div class="hotel-hdr">
+    <span class="hotel-code">FICDO</span>
+    <span class="hotel-name">Fiesta Inn Ciudad Obregón</span>
+    <div class="hotel-pills"><span class="pill pill-ind">1 independiente</span><span class="pill pill-dep">1 dependiente</span></div>
+  </div>
+  <table class="tenant-tbl">
+    <thead><tr><th>Arrendatario</th><th>Local</th><th>Electricidad</th><th>Agua</th><th>Estatus</th></tr></thead>
+    <tbody>
+      <tr><td class="tname">Super Carnes Clasificadas Chihuahua SA de CV</td><td>Local Carnicería</td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="dot-green status-dot"></span>Independizado</td></tr>
+      <tr style="background:var(--red-bg)"><td class="tname">Coyotas Lulú SA de CV</td><td>Local Repostería</td><td><span class="ebadge ebadge-luz">Reembolso hotel</span></td><td><span class="ebadge ebadge-ind">N/A</span></td><td><span class="dot-red status-dot"></span>Electricidad: depende del hotel</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- FIPER -->
+<div class="hotel-group">
+  <div class="hotel-hdr">
+    <span class="hotel-code">FIPER</span>
+    <span class="hotel-name">Fiesta Inn Perinorte</span>
+    <div class="hotel-pills"><span class="pill pill-ind">1 independiente</span></div>
+  </div>
+  <table class="tenant-tbl">
+    <thead><tr><th>Arrendatario</th><th>Local</th><th>Electricidad</th><th>Agua</th><th>Estatus</th></tr></thead>
+    <tbody>
+      <tr><td class="tname">DIVOL SA</td><td>Local DIVOL</td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="dot-green status-dot"></span>Independizado</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- FIQRO -->
+<div class="hotel-group">
+  <div class="hotel-hdr">
+    <span class="hotel-code">FIQRO</span>
+    <span class="hotel-name">Fiesta Inn Querétaro</span>
+    <div class="hotel-pills"><span class="pill pill-ind">1 independiente</span></div>
+  </div>
+  <table class="tenant-tbl">
+    <thead><tr><th>Arrendatario</th><th>Local</th><th>Electricidad</th><th>Agua</th><th>Estatus</th></tr></thead>
+    <tbody>
+      <tr><td class="tname">Click Mobility</td><td>Local Alamo</td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="dot-green status-dot"></span>Independizado</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- GTIOT -->
+<div class="hotel-group">
+  <div class="hotel-hdr">
+    <span class="hotel-code">GTIOT</span>
+    <span class="hotel-name">Gamma Tijuana Otay</span>
+    <div class="hotel-pills"><span class="pill pill-dep">3 dependientes</span></div>
+  </div>
+  <table class="tenant-tbl">
+    <thead><tr><th>Arrendatario</th><th>Local</th><th>Electricidad</th><th>Agua</th><th>Estatus</th></tr></thead>
+    <tbody>
+      <tr style="background:var(--red-bg)"><td class="tname">DAQU de Sonora SA de CV</td><td>Dairy Queen</td><td><span class="ebadge ebadge-luz">Reembolso hotel</span></td><td><span class="ebadge" style="background:#DBEEFF;color:#0A4A8A">Reembolso hotel</span></td><td><span class="dot-red status-dot"></span>Luz y agua: dependen del hotel</td></tr>
+      <tr style="background:var(--red-bg)"><td class="tname">Yokomy Sushi S de RL de CV</td><td>Local Yokomi Sushi</td><td><span class="ebadge ebadge-luz">Reembolso hotel</span></td><td><span class="ebadge" style="background:#DBEEFF;color:#0A4A8A">Reembolso hotel</span></td><td><span class="dot-red status-dot"></span>Luz y agua: dependen del hotel</td></tr>
+      <tr style="background:var(--red-bg)"><td class="tname">Julio César Torres Rojo</td><td>Renta Local</td><td><span class="ebadge ebadge-luz">Reembolso hotel</span></td><td><span class="ebadge" style="background:#DBEEFF;color:#0A4A8A">Reembolso hotel</span></td><td><span class="dot-red status-dot"></span>Luz y agua: dependen del hotel</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- MTYCW -->
+<div class="hotel-group">
+  <div class="hotel-hdr">
+    <span class="hotel-code">MTYCW</span>
+    <span class="hotel-name">Wyndham Ambassador Monterrey Centro</span>
+    <div class="hotel-pills"><span class="pill pill-ind">6 independientes</span></div>
+  </div>
+  <table class="tenant-tbl">
+    <thead><tr><th>Arrendatario</th><th>Local</th><th>Electricidad</th><th>Agua</th><th>Estatus</th></tr></thead>
+    <tbody>
+      <tr><td class="tname">Alquiladora de Vehículos Automotores SA de CV</td><td>Local Hertz</td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="dot-green status-dot"></span>Independizado</td></tr>
+      <tr><td class="tname">Click Mobility</td><td>Local Alamo</td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="dot-green status-dot"></span>Independizado</td></tr>
+      <tr><td class="tname">Auto Arrendadora y Promotora SA de CV</td><td>Local Sixt</td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="dot-green status-dot"></span>Independizado</td></tr>
+      <tr><td class="tname">Juan Carlos Alberto Ayala Olvera</td><td>Local Oficina</td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="dot-green status-dot"></span>Independizado</td></tr>
+      <tr><td class="tname">Corporativo Empresarial Solar</td><td>Local Corporativo</td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="dot-green status-dot"></span>Independizado</td></tr>
+      <tr><td class="tname">Gestoría Administrativa Profesional</td><td>Local Gestoría</td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="dot-green status-dot"></span>Independizado</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ═══════════════════ ANTENAS ═══════════════════ -->
+<div class="sec-hdr">
+  <div class="sec-icon ant">📡</div>
+  <div>
+    <div class="sec-title">Antenas</div>
+    <div class="sec-sub">Solo requieren independencia de electricidad · No aplica agua</div>
+  </div>
+</div>
+
+<!-- ANTENAS NO INDEPENDIENTES -->
+<div class="hotel-group">
+  <div class="hotel-hdr" style="background:var(--red-bg)">
+    <span class="hotel-code" style="color:var(--red)">GRUPO</span>
+    <span class="hotel-name">Antenas con electricidad dependiente del hotel</span>
+    <div class="hotel-pills"><span class="pill pill-dep">10 dependientes</span></div>
+  </div>
+  <table class="tenant-tbl">
+    <thead><tr><th>Hotel</th><th>Clave</th><th>Arrendatario</th><th>Electricidad</th><th>Agua</th></tr></thead>
+    <tbody>
+      <tr style="background:var(--red-bg)"><td>Fiesta Americana Condesa Cancún</td><td class="hotel-code" style="color:var(--red)">FACC</td><td class="tname">Canalizaciones y Accesos Profesionales S de RL</td><td><span class="ebadge ebadge-luz">Reembolso hotel</span></td><td><span class="ebadge ebadge-ind">N/A</span></td></tr>
+      <tr style="background:var(--red-bg)"><td>Fiesta Americana Hermosillo</td><td class="hotel-code" style="color:var(--red)">FAHE</td><td class="tname">Intelli Site Solutions SAPI de CV</td><td><span class="ebadge ebadge-luz">Reembolso hotel</span></td><td><span class="ebadge ebadge-ind">N/A</span></td></tr>
+      <tr style="background:var(--red-bg)"><td>Fiesta Americana Hacienda Galindo</td><td class="hotel-code" style="color:var(--red)">FAHG</td><td class="tname">Grupo AT&T Celullar</td><td><span class="ebadge ebadge-luz">Reembolso hotel</span></td><td><span class="ebadge ebadge-ind">N/A</span></td></tr>
+      <tr style="background:var(--red-bg)"><td>Fiesta Inn Cuautitlán</td><td class="hotel-code" style="color:var(--red)">FICUA</td><td class="tname">Canalizaciones y Accesos Profesionales S de RL</td><td><span class="ebadge ebadge-luz">Reembolso hotel</span></td><td><span class="ebadge ebadge-ind">N/A</span></td></tr>
+      <tr style="background:var(--red-bg)"><td>Fiesta Inn Durango</td><td class="hotel-code" style="color:var(--red)">FIDUR</td><td class="tname">Canalizaciones y Accesos Profesionales S de RL</td><td><span class="ebadge ebadge-luz">Reembolso hotel</span></td><td><span class="ebadge ebadge-ind">N/A</span></td></tr>
+      <tr style="background:var(--red-bg)"><td>Fiesta Inn Morelia Altozano</td><td class="hotel-code" style="color:var(--red)">FIMOA</td><td class="tname">MXT Capital Partners SAPI de CV</td><td><span class="ebadge ebadge-luz">Reembolso hotel</span></td><td><span class="ebadge ebadge-ind">N/A</span></td></tr>
+      <tr style="background:var(--red-bg)"><td>Fiesta Inn Perinorte</td><td class="hotel-code" style="color:var(--red)">FIPER</td><td class="tname">TXM Terrenos S de RL de CV</td><td><span class="ebadge ebadge-luz">Reembolso hotel</span></td><td><span class="ebadge ebadge-ind">N/A</span></td></tr>
+      <tr style="background:var(--red-bg)"><td>Fiesta Inn Perisur</td><td class="hotel-code" style="color:var(--red)">FISUR</td><td class="tname">Megacable Comunicaciones de México SA de CV</td><td><span class="ebadge ebadge-luz">Reembolso hotel</span></td><td><span class="ebadge ebadge-ind">N/A</span></td></tr>
+      <tr style="background:var(--red-bg)"><td>One Monterrey Aeropuerto</td><td class="hotel-code" style="color:var(--red)">1MTAP</td><td class="tname">Megacable Comunicaciones de México SA de CV</td><td><span class="ebadge ebadge-luz">Reembolso hotel</span></td><td><span class="ebadge ebadge-ind">N/A</span></td></tr>
+      <tr style="background:var(--red-bg)"><td>One Toluca Aeropuerto</td><td class="hotel-code" style="color:var(--red)">1TOAP</td><td class="tname">TXM Terrenos S de RL de CV</td><td><span class="ebadge ebadge-luz">Reembolso hotel</span></td><td><span class="ebadge ebadge-ind">N/A</span></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ANTENAS INDEPENDIENTES -->
+<div class="hotel-group">
+  <div class="hotel-hdr" style="background:var(--green-bg)">
+    <span class="hotel-code" style="color:var(--green)">GRUPO</span>
+    <span class="hotel-name">Antenas con electricidad independiente</span>
+    <div class="hotel-pills"><span class="pill pill-ind">12 independientes</span></div>
+  </div>
+  <table class="tenant-tbl">
+    <thead><tr><th>Hotel</th><th>Clave</th><th>Arrendatario</th><th>Electricidad</th><th>Agua</th></tr></thead>
+    <tbody>
+      <tr><td>One Guadalajara Tapatío</td><td class="hotel-code">1GDTA</td><td class="tname">Nuviax SA de CV</td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="ebadge ebadge-ind">N/A</span></td></tr>
+      <tr><td>AC Antea Querétaro</td><td class="hotel-code">QROQA</td><td class="tname">MXT Capital Partners SAPI de CV</td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="ebadge ebadge-ind">N/A</span></td></tr>
+      <tr><td>Camino Real Puebla</td><td class="hotel-code">CRPUE</td><td class="tname">Canalizaciones y Accesos Profesionales S de RL</td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="ebadge ebadge-ind">N/A</span></td></tr>
+      <tr><td>Camino Real Puebla</td><td class="hotel-code">CRPUE</td><td class="tname">ATyT Comunicaciones Digitales S de RL de CV</td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="ebadge ebadge-ind">N/A</span></td></tr>
+      <tr><td>Fiesta Americana Hacienda Galindo</td><td class="hotel-code">FAHG</td><td class="tname">Operadora de Sites Mexicanos SA de CV</td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="ebadge ebadge-ind">N/A</span></td></tr>
+      <tr><td>Fiesta Inn Chihuahua</td><td class="hotel-code">FICHI</td><td class="tname">ATyT Comunicaciones Digitales S de RL de CV</td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="ebadge ebadge-ind">N/A</span></td></tr>
+      <tr><td>Fiesta Inn Chihuahua</td><td class="hotel-code">FICHI</td><td class="tname">Intelli Site Solutions SAPI de CV</td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="ebadge ebadge-ind">N/A</span></td></tr>
+      <tr><td>Fiesta Inn Guadalajara Expo</td><td class="hotel-code">FIGDL</td><td class="tname">Canalizaciones y Accesos Profesionales S de RL</td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="ebadge ebadge-ind">N/A</span></td></tr>
+      <tr><td>Fiesta Inn Nuevo Laredo</td><td class="hotel-code">FINVL</td><td class="tname">ATyT Comunicaciones Digitales S de RL de CV</td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="ebadge ebadge-ind">N/A</span></td></tr>
+      <tr><td>Fiesta Inn Oaxaca</td><td class="hotel-code">FIOAX</td><td class="tname">Canalizaciones y Accesos Profesionales S de RL</td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="ebadge ebadge-ind">N/A</span></td></tr>
+      <tr><td>Fiesta Inn Perinorte</td><td class="hotel-code">FIPER</td><td class="tname">Mexico Tower Partners SAPI de CV</td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="ebadge ebadge-ind">N/A</span></td></tr>
+      <tr><td>Live Aqua San Miguel de Allende</td><td class="hotel-code">AQSM</td><td class="tname">Mexico Tower Partners</td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="ebadge ebadge-ind">N/A</span></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- RESUMEN CONSOLIDADO -->
+<div class="summary-card">
+  <div class="summary-card-hdr"><span>Resumen Consolidado · Prioridades de Independización</span></div>
+  <div style="overflow-x:auto">
+  <table class="sum-tbl">
+    <thead><tr><th>Tipo</th><th>Total</th><th>Independizados</th><th>% Indep.</th><th>Dependen del hotel</th><th>% Depend.</th><th>Prioridad</th></tr></thead>
+    <tbody>
+      <tr><td class="bold">Locales — Luz y agua</td><td>5</td><td>1</td><td>20%</td><td>4 (Tijuana×3, Hermosillo)</td><td>80%</td><td><span class="pill pill-dep">Alta</span></td></tr>
+      <tr><td class="bold">Locales — Solo agua</td><td>2</td><td>0</td><td>0%</td><td>2 (One Monterrey)</td><td>100%</td><td><span class="pill pill-dep">Alta</span></td></tr>
+      <tr><td class="bold">Locales — Solo luz</td><td>2</td><td>0</td><td>0%</td><td>2 (Cdad. Juárez, Cdad. Obregón)</td><td>100%</td><td><span class="pill pill-dep">Alta</span></td></tr>
+      <tr><td class="bold">Locales — Totalmente independientes</td><td>22</td><td>22</td><td>100%</td><td>—</td><td>0%</td><td><span class="pill pill-ind">Cumplido</span></td></tr>
+      <tr><td class="bold">Antenas — Con electricidad del hotel</td><td>10</td><td>0</td><td>0%</td><td>10 sitios en 10 hoteles</td><td>100%</td><td><span class="pill pill-amb">Media</span></td></tr>
+      <tr><td class="bold">Antenas — Electricidad independiente</td><td>12</td><td>12</td><td>100%</td><td>—</td><td>0%</td><td><span class="pill pill-ind">Cumplido</span></td></tr>
+    </tbody>
+    <tfoot>
+      <tr><td class="bold">TOTAL</td><td class="gold">53</td><td class="gold">35</td><td class="gold">66.0%</td><td class="gold">18</td><td class="gold">34.0%</td><td></td></tr>
+    </tfoot>
+  </table>
+  </div>
+</div>
+
+<div class="footer">
+  <span>Elaborado por: <strong>Gerardo Vega Quinto</strong> — Área de Arrendamiento, Fibra Hotel Corporativo &nbsp;·&nbsp; Objetivo 2: Independización de Energéticos</span>
+  <span>Fuente: Solicitudes de Facturación jun-26 / Anexos de Resultados jul-26</span>
+</div>
+</div>
+
+<script>
+function donut(id, pct, colorFill, colorBg){
+  const canvas = document.getElementById(id);
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const cx=60, cy=60, r=48, lw=14;
+  const angle = pct/100 * 2*Math.PI;
+  ctx.clearRect(0,0,120,120);
+  // Background arc
+  ctx.beginPath();ctx.arc(cx,cy,r,0,2*Math.PI);
+  ctx.strokeStyle=colorBg;ctx.lineWidth=lw;ctx.stroke();
+  // Fill arc
+  ctx.beginPath();ctx.arc(cx,cy,r,-Math.PI/2,-Math.PI/2+angle);
+  ctx.strokeStyle=colorFill;ctx.lineWidth=lw;ctx.lineCap='round';ctx.stroke();
+}
+// detect dark
+const dark = window.matchMedia('(prefers-color-scheme:dark)').matches;
+const bg = dark ? '#1E3D5C' : '#EBF0F6';
+donut('c1', 74.2, '#1D6B4F', bg);
+donut('c2', 54.5, '#1D6B4F', bg);
+</script>
