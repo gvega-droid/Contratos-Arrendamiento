@@ -150,13 +150,13 @@ body{font-family:'Source Sans 3',system-ui,sans-serif;font-size:15px;line-height
   </div>
   <div class="tile t-green">
     <div class="tile-label">Con energéticos independizados</div>
-    <div class="tile-val">35</div>
-    <div class="tile-sub">66.0% del total</div>
+    <div class="tile-val">25</div>
+    <div class="tile-sub">47.2% del total</div>
   </div>
   <div class="tile t-red">
     <div class="tile-label">Dependientes del sistema del hotel</div>
-    <div class="tile-val">18</div>
-    <div class="tile-sub">34.0% del total</div>
+    <div class="tile-val">28</div>
+    <div class="tile-sub">52.8% del total</div>
   </div>
   <div class="tile t-gold">
     <div class="tile-label">Propiedades con arrendatarios</div>
@@ -171,14 +171,14 @@ body{font-family:'Source Sans 3',system-ui,sans-serif;font-size:15px;line-height
     <div class="donut-wrap">
       <canvas id="c1" width="120" height="120"></canvas>
       <div class="donut-center">
-        <div class="donut-pct">74%</div>
+        <div class="donut-pct">42%</div>
         <div class="donut-lbl">Indep.</div>
       </div>
     </div>
     <div class="chart-legend">
       <div class="chart-title">Locales Comerciales</div>
-      <div class="legend-item"><span class="leg-dot" style="background:var(--green)"></span>Energéticos independientes<span class="leg-n">23</span></div>
-      <div class="legend-item"><span class="leg-dot" style="background:var(--red)"></span>Dependen del hotel<span class="leg-n">8</span></div>
+      <div class="legend-item"><span class="leg-dot" style="background:var(--green)"></span>Energéticos independientes<span class="leg-n">13</span></div>
+      <div class="legend-item"><span class="leg-dot" style="background:var(--red)"></span>Dependen del hotel<span class="leg-n">18</span></div>
       <div class="legend-item" style="margin-top:.4rem;font-size:12px;color:var(--t-muted)">Total locales: <strong style="color:var(--t-main)">31</strong></div>
     </div>
   </div>
@@ -296,12 +296,12 @@ body{font-family:'Source Sans 3',system-ui,sans-serif;font-size:15px;line-height
   <div class="hotel-hdr">
     <span class="hotel-code">FAAG</span>
     <span class="hotel-name">Fiesta Americana Aguascalientes</span>
-    <div class="hotel-pills"><span class="pill pill-ind">1 independiente</span></div>
+    <div class="hotel-pills"><span class="pill pill-dep">1 dependiente</span></div>
   </div>
   <table class="tenant-tbl">
     <thead><tr><th>Arrendatario</th><th>Local</th><th>Electricidad</th><th>Agua</th><th>Estatus</th></tr></thead>
     <tbody>
-      <tr><td class="tname">David Valdez Romo</td><td>Local Fishers</td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="dot-green status-dot"></span>Independizado</td></tr>
+      <tr style="background:var(--red-bg)"><td class="tname">David Valdez Romo</td><td>Local Fishers</td><td><span class="ebadge ebadge-luz">Reembolso hotel</span></td><td><span class="ebadge" style="background:#DBEEFF;color:#0A4A8A">Reembolso hotel</span></td><td><span class="dot-red status-dot"></span>Luz y agua: dependen del hotel</td></tr>
     </tbody>
   </table>
 </div>
@@ -311,13 +311,13 @@ body{font-family:'Source Sans 3',system-ui,sans-serif;font-size:15px;line-height
   <div class="hotel-hdr">
     <span class="hotel-code">FACC</span>
     <span class="hotel-name">Fiesta Americana Condesa Cancún</span>
-    <div class="hotel-pills"><span class="pill pill-ind">2 independientes</span></div>
+    <div class="hotel-pills"><span class="pill pill-dep">2 dependientes</span><span class="pill pill-amb">Acuerdo contractual</span></div>
   </div>
   <table class="tenant-tbl">
     <thead><tr><th>Arrendatario</th><th>Local</th><th>Electricidad</th><th>Agua</th><th>Estatus</th></tr></thead>
     <tbody>
-      <tr><td class="tname">Amazon Tours</td><td>Local Aqua World</td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="dot-green status-dot"></span>Independizado</td></tr>
-      <tr><td class="tname">T.I. Experiencias en Grupos y Convenciones</td><td>Local Tropical Elite Travel</td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="dot-green status-dot"></span>Independizado</td></tr>
+      <tr style="background:var(--amber-bg)"><td class="tname">Amazon Tours</td><td>Local Aqua World</td><td><span class="ebadge ebadge-luz">Reembolso hotel</span></td><td><span class="ebadge" style="background:#DBEEFF;color:#0A4A8A">Reembolso hotel</span></td><td><span class="status-dot" style="background:var(--amber);display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px"></span>Dep. hotel — acuerdo contractual</td></tr>
+      <tr style="background:var(--amber-bg)"><td class="tname">T.I. Experiencias en Grupos y Convenciones</td><td>Local Tropical Elite Travel</td><td><span class="ebadge ebadge-luz">Reembolso hotel</span></td><td><span class="ebadge" style="background:#DBEEFF;color:#0A4A8A">Reembolso hotel</span></td><td><span class="status-dot" style="background:var(--amber);display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px"></span>Dep. hotel — acuerdo contractual</td></tr>
     </tbody>
   </table>
 </div>
@@ -420,17 +420,17 @@ body{font-family:'Source Sans 3',system-ui,sans-serif;font-size:15px;line-height
   <div class="hotel-hdr">
     <span class="hotel-code">MTYCW</span>
     <span class="hotel-name">Wyndham Ambassador Monterrey Centro</span>
-    <div class="hotel-pills"><span class="pill pill-ind">6 independientes</span></div>
+    <div class="hotel-pills"><span class="pill pill-dep">6 dependientes</span></div>
   </div>
   <table class="tenant-tbl">
     <thead><tr><th>Arrendatario</th><th>Local</th><th>Electricidad</th><th>Agua</th><th>Estatus</th></tr></thead>
     <tbody>
-      <tr><td class="tname">Alquiladora de Vehículos Automotores SA de CV</td><td>Local Hertz</td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="dot-green status-dot"></span>Independizado</td></tr>
-      <tr><td class="tname">Click Mobility</td><td>Local Alamo</td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="dot-green status-dot"></span>Independizado</td></tr>
-      <tr><td class="tname">Auto Arrendadora y Promotora SA de CV</td><td>Local Sixt</td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="dot-green status-dot"></span>Independizado</td></tr>
-      <tr><td class="tname">Juan Carlos Alberto Ayala Olvera</td><td>Local Oficina</td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="dot-green status-dot"></span>Independizado</td></tr>
-      <tr><td class="tname">Corporativo Empresarial Solar</td><td>Local Corporativo</td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="dot-green status-dot"></span>Independizado</td></tr>
-      <tr><td class="tname">Gestoría Administrativa Profesional</td><td>Local Gestoría</td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="ebadge ebadge-ind">Indep.</span></td><td><span class="dot-green status-dot"></span>Independizado</td></tr>
+      <tr style="background:var(--red-bg)"><td class="tname">Alquiladora de Vehículos Automotores SA de CV</td><td>Local Hertz</td><td><span class="ebadge ebadge-luz">Reembolso hotel</span></td><td><span class="ebadge" style="background:#DBEEFF;color:#0A4A8A">Reembolso hotel</span></td><td><span class="dot-red status-dot"></span>Luz y agua: dependen del hotel</td></tr>
+      <tr style="background:var(--red-bg)"><td class="tname">Click Mobility</td><td>Local Alamo</td><td><span class="ebadge ebadge-luz">Reembolso hotel</span></td><td><span class="ebadge" style="background:#DBEEFF;color:#0A4A8A">Reembolso hotel</span></td><td><span class="dot-red status-dot"></span>Luz y agua: dependen del hotel</td></tr>
+      <tr style="background:var(--red-bg)"><td class="tname">Auto Arrendadora y Promotora SA de CV</td><td>Local Sixt</td><td><span class="ebadge ebadge-luz">Reembolso hotel</span></td><td><span class="ebadge" style="background:#DBEEFF;color:#0A4A8A">Reembolso hotel</span></td><td><span class="dot-red status-dot"></span>Luz y agua: dependen del hotel</td></tr>
+      <tr style="background:var(--red-bg)"><td class="tname">Juan Carlos Alberto Ayala Olvera</td><td>Local Oficina</td><td><span class="ebadge ebadge-luz">Reembolso hotel</span></td><td><span class="ebadge" style="background:#DBEEFF;color:#0A4A8A">Reembolso hotel</span></td><td><span class="dot-red status-dot"></span>Luz y agua: dependen del hotel</td></tr>
+      <tr style="background:var(--red-bg)"><td class="tname">Corporativo Empresarial Solar</td><td>Local Corporativo</td><td><span class="ebadge ebadge-luz">Reembolso hotel</span></td><td><span class="ebadge" style="background:#DBEEFF;color:#0A4A8A">Reembolso hotel</span></td><td><span class="dot-red status-dot"></span>Luz y agua: dependen del hotel</td></tr>
+      <tr style="background:var(--red-bg)"><td class="tname">Gestoría Administrativa Profesional</td><td>Local Gestoría</td><td><span class="ebadge ebadge-luz">Reembolso hotel</span></td><td><span class="ebadge" style="background:#DBEEFF;color:#0A4A8A">Reembolso hotel</span></td><td><span class="dot-red status-dot"></span>Luz y agua: dependen del hotel</td></tr>
     </tbody>
   </table>
 </div>
@@ -501,19 +501,21 @@ body{font-family:'Source Sans 3',system-ui,sans-serif;font-size:15px;line-height
   <table class="sum-tbl">
     <thead><tr><th>Tipo</th><th>Total</th><th>Independizados</th><th>% Indep.</th><th>Dependen del hotel</th><th>% Depend.</th><th>Prioridad</th></tr></thead>
     <tbody>
-      <tr><td class="bold">Locales — Luz y agua</td><td>5</td><td>1</td><td>20%</td><td>4 (Tijuana×3, Hermosillo)</td><td>80%</td><td><span class="pill pill-dep">Alta</span></td></tr>
+      <tr><td class="bold">Locales — Luz y agua</td><td>14</td><td>0</td><td>0%</td><td>14 (Tijuana×3, Hermosillo, Aguascalientes, Cancún×2*, Wyndham×6)</td><td>100%</td><td><span class="pill pill-dep">Alta</span></td></tr>
       <tr><td class="bold">Locales — Solo agua</td><td>2</td><td>0</td><td>0%</td><td>2 (One Monterrey)</td><td>100%</td><td><span class="pill pill-dep">Alta</span></td></tr>
       <tr><td class="bold">Locales — Solo luz</td><td>2</td><td>0</td><td>0%</td><td>2 (Cdad. Juárez, Cdad. Obregón)</td><td>100%</td><td><span class="pill pill-dep">Alta</span></td></tr>
-      <tr><td class="bold">Locales — Totalmente independientes</td><td>22</td><td>22</td><td>100%</td><td>—</td><td>0%</td><td><span class="pill pill-ind">Cumplido</span></td></tr>
+      <tr><td class="bold">Locales — Totalmente independientes</td><td>13</td><td>13</td><td>100%</td><td>—</td><td>0%</td><td><span class="pill pill-ind">Cumplido</span></td></tr>
       <tr><td class="bold">Antenas — Con electricidad del hotel</td><td>10</td><td>0</td><td>0%</td><td>10 sitios en 10 hoteles</td><td>100%</td><td><span class="pill pill-amb">Media</span></td></tr>
       <tr><td class="bold">Antenas — Electricidad independiente</td><td>12</td><td>12</td><td>100%</td><td>—</td><td>0%</td><td><span class="pill pill-ind">Cumplido</span></td></tr>
     </tbody>
     <tfoot>
-      <tr><td class="bold">TOTAL</td><td class="gold">53</td><td class="gold">35</td><td class="gold">66.0%</td><td class="gold">18</td><td class="gold">34.0%</td><td></td></tr>
+      <tr><td class="bold">TOTAL</td><td class="gold">53</td><td class="gold">25</td><td class="gold">47.2%</td><td class="gold">28</td><td class="gold">52.8%</td><td></td></tr>
     </tfoot>
   </table>
   </div>
 </div>
+
+<p style="font-size:11.5px;color:var(--t-muted);margin-top:.8rem">* Fiesta Americana Condesa Cancún: Amazon Tours y T.I. Experiencias dependen del sistema del hotel por mutuo acuerdo y disposición contractual.</p>
 
 <div class="footer">
   <span>Elaborado por: <strong>Gerardo Vega Quinto</strong> — Área de Arrendamiento, Fibra Hotel Corporativo &nbsp;·&nbsp; Objetivo 2: Independización de Energéticos</span>
@@ -539,6 +541,6 @@ function donut(id, pct, colorFill, colorBg){
 // detect dark
 const dark = window.matchMedia('(prefers-color-scheme:dark)').matches;
 const bg = dark ? '#1E3D5C' : '#EBF0F6';
-donut('c1', 74.2, '#1D6B4F', bg);
+donut('c1', 41.9, '#1D6B4F', bg);
 donut('c2', 54.5, '#1D6B4F', bg);
 </script>

@@ -94,7 +94,7 @@ set_row_text(res_t.rows[0],
     ["Total arrendatarios", "Independizados", "Dependientes del hotel", "Propiedades analizadas"],
     color=WHITE, bold=True, size=10, bg="0C2340")
 set_row_text(res_t.rows[1],
-    ["53  (31 locales · 22 antenas)", "35  (66.0%)", "18  (34.0%)", "29 hoteles"],
+    ["53  (31 locales · 22 antenas)", "25  (47.2%)", "28  (52.8%)", "29 hoteles"],
     color=WHITE, bold=True, size=11, bg="1A3A5C")
 
 doc.add_paragraph()
@@ -129,11 +129,11 @@ local_data = [
         ("Zapata", "Local Ford", "Indep.", "Indep.", "Independizado"),
     ]),
     ("FAAG", "Fiesta Americana Aguascalientes", [
-        ("David Valdez Romo", "Local Fishers", "Indep.", "Indep.", "Independizado"),
+        ("David Valdez Romo", "Local Fishers", "Reembolso hotel", "Reembolso hotel", "DEPENDIENTE — luz y agua"),
     ]),
-    ("FACC", "Fiesta Americana Condesa Cancun", [
-        ("Amazon Tours", "Local Aqua World", "Indep.", "Indep.", "Independizado"),
-        ("T.I. Experiencias en Grupos y Convenciones", "Local Tropical Elite Travel", "Indep.", "Indep.", "Independizado"),
+    ("FACC", "Fiesta Americana Condesa Cancun (acuerdo contractual)", [
+        ("Amazon Tours", "Local Aqua World", "Reembolso hotel", "Reembolso hotel", "DEPENDIENTE — acuerdo contractual"),
+        ("T.I. Experiencias en Grupos y Convenciones", "Local Tropical Elite Travel", "Reembolso hotel", "Reembolso hotel", "DEPENDIENTE — acuerdo contractual"),
     ]),
     ("FAHE", "Fiesta Americana Hermosillo", [
         ("Operadora Valiente", "Sonora Grill", "Reembolso hotel", "Reembolso hotel", "DEPENDIENTE — luz y agua"),
@@ -157,12 +157,12 @@ local_data = [
         ("Julio Cesar Torres Rojo", "Renta Local", "Reembolso hotel", "Reembolso hotel", "DEPENDIENTE — luz y agua"),
     ]),
     ("MTYCW", "Wyndham Ambassador Monterrey Centro", [
-        ("Alquiladora de Vehículos Automotores", "Local Hertz", "Indep.", "Indep.", "Independizado"),
-        ("Click Mobility", "Local Alamo", "Indep.", "Indep.", "Independizado"),
-        ("Auto Arrendadora y Promotora SA de CV", "Local Sixt", "Indep.", "Indep.", "Independizado"),
-        ("Juan Carlos Alberto Ayala Olvera", "Local Oficina", "Indep.", "Indep.", "Independizado"),
-        ("Corporativo Empresarial Solar", "Local Corporativo", "Indep.", "Indep.", "Independizado"),
-        ("Gestoria Administrativa Profesional", "Local Gestoria", "Indep.", "Indep.", "Independizado"),
+        ("Alquiladora de Vehículos Automotores", "Local Hertz", "Reembolso hotel", "Reembolso hotel", "DEPENDIENTE — luz y agua"),
+        ("Click Mobility", "Local Alamo", "Reembolso hotel", "Reembolso hotel", "DEPENDIENTE — luz y agua"),
+        ("Auto Arrendadora y Promotora SA de CV", "Local Sixt", "Reembolso hotel", "Reembolso hotel", "DEPENDIENTE — luz y agua"),
+        ("Juan Carlos Alberto Ayala Olvera", "Local Oficina", "Reembolso hotel", "Reembolso hotel", "DEPENDIENTE — luz y agua"),
+        ("Corporativo Empresarial Solar", "Local Corporativo", "Reembolso hotel", "Reembolso hotel", "DEPENDIENTE — luz y agua"),
+        ("Gestoria Administrativa Profesional", "Local Gestoria", "Reembolso hotel", "Reembolso hotel", "DEPENDIENTE — luz y agua"),
     ]),
 ]
 
@@ -265,10 +265,10 @@ set_row_text(sum_t.rows[0],
     color=WHITE, bold=True, size=9, bg="0C2340")
 
 sum_data = [
-    ("Locales — Luz y agua", "5", "1", "20%", "4 (Tijuana x3, Hermosillo)", "80%", "Alta"),
+    ("Locales — Luz y agua", "14", "0", "0%", "14 (Tijuana x3, Hermosillo, Aguascalientes, Cancun x2*, Wyndham x6)", "100%", "Alta"),
     ("Locales — Solo agua", "2", "0", "0%", "2 (One Monterrey)", "100%", "Alta"),
     ("Locales — Solo luz", "2", "0", "0%", "2 (Cdad. Juarez, Cdad. Obregon)", "100%", "Alta"),
-    ("Locales — Totalmente independientes", "22", "22", "100%", "—", "0%", "Cumplido"),
+    ("Locales — Totalmente independientes", "13", "13", "100%", "—", "0%", "Cumplido"),
     ("Antenas — Electricidad del hotel", "10", "0", "0%", "10 sitios en 10 hoteles", "100%", "Media"),
     ("Antenas — Electricidad independiente", "12", "12", "100%", "—", "0%", "Cumplido"),
 ]
