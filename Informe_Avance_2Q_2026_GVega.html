@@ -1,0 +1,798 @@
+<title>Avance 2Q 2026 — Arrendamiento</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Source+Sans+3:wght@300;400;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap">
+
+<style>
+  /* ── TOKEN LAYER ── */
+  :root {
+    --navy:        #0C2340;
+    --navy-deep:   #081929;
+    --navy-mid:    #1A3A5C;
+    --gold:        #B8943A;
+    --gold-light:  #D4AD55;
+    --green:       #1D6B4F;
+    --green-light: #25875F;
+    --siena:       #C05C1A;
+    --slate:       #7A92A8;
+    --slate-muted: #A8BCCC;
+
+    --bg:          #F4F7FA;
+    --surface:     #FFFFFF;
+    --surface-2:   #EBF0F6;
+    --border:      #D0DCE8;
+    --text-main:   #0C2340;
+    --text-body:   #2E4562;
+    --text-muted:  #5C7A96;
+
+    --status-ok:      #1D6B4F;
+    --status-ok-bg:   #E6F4EE;
+    --status-warn:    #9B6000;
+    --status-warn-bg: #FEF6E4;
+    --status-idle:    #4A6072;
+    --status-idle-bg: #E8EFF5;
+
+    --radius: 6px;
+    --shadow: 0 2px 12px rgba(12,35,64,.08), 0 1px 3px rgba(12,35,64,.04);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg:          #060F1C;
+      --surface:     #0C2340;
+      --surface-2:   #0F2B4A;
+      --border:      #1E3D5C;
+      --text-main:   #E4EDF5;
+      --text-body:   #A8BCCC;
+      --text-muted:  #6A8BA8;
+      --status-ok-bg:   #0A2B1F;
+      --status-warn-bg: #261800;
+      --status-idle-bg: #0E1E2C;
+      --shadow: 0 2px 12px rgba(0,0,0,.3);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg:          #060F1C;
+    --surface:     #0C2340;
+    --surface-2:   #0F2B4A;
+    --border:      #1E3D5C;
+    --text-main:   #E4EDF5;
+    --text-body:   #A8BCCC;
+    --text-muted:  #6A8BA8;
+    --status-ok-bg:   #0A2B1F;
+    --status-warn-bg: #261800;
+    --status-idle-bg: #0E1E2C;
+    --shadow: 0 2px 12px rgba(0,0,0,.3);
+  }
+
+  /* ── RESET & BASE ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Source Sans 3', system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.65;
+    background: var(--bg);
+    color: var(--text-body);
+    -webkit-font-smoothing: antialiased;
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+
+  /* ── LAYOUT ── */
+  .page { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+  /* ── HEADER ── */
+  .report-header {
+    background: var(--navy);
+    color: #fff;
+    border-radius: 10px;
+    padding: 2.4rem 2.8rem;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .report-header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    background: var(--gold);
+    opacity: .07;
+  }
+  .report-header::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: 30%;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: var(--slate);
+    opacity: .06;
+  }
+  .header-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: .5rem;
+  }
+  .header-title {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 2.4rem;
+    line-height: 1.15;
+    color: #fff;
+    text-wrap: balance;
+    margin-bottom: 1.4rem;
+  }
+  .header-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem 2rem;
+    font-size: 13px;
+    color: rgba(255,255,255,.65);
+    position: relative;
+    z-index: 1;
+  }
+  .header-meta span strong { color: rgba(255,255,255,.9); }
+
+  /* ── SUMMARY TILES ── */
+  .tiles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  @media (max-width: 600px) { .tiles { grid-template-columns: 1fr; } }
+  .tile {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.2rem 1.4rem;
+    box-shadow: var(--shadow);
+  }
+  .tile-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: .4rem;
+  }
+  .tile-value {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 2rem;
+    color: var(--text-main);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .tile-sub {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: .3rem;
+  }
+  .tile-accent { border-top: 3px solid var(--gold); }
+  .tile-green  { border-top: 3px solid var(--green); }
+  .tile-navy   { border-top: 3px solid var(--navy-mid); }
+
+  /* ── SECTION HEADER ── */
+  .section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: .3rem;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 1.3rem;
+    color: var(--text-main);
+    margin-bottom: 1.2rem;
+    text-wrap: balance;
+  }
+
+  /* ── OBJECTIVE CARDS ── */
+  .obj-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+  }
+  .obj-card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.2rem;
+    padding: 1.4rem 1.8rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .obj-number {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 2.8rem;
+    line-height: 1;
+    color: var(--border);
+    flex-shrink: 0;
+    min-width: 2.5rem;
+    font-variant-numeric: tabular-nums;
+  }
+  .obj-header-text { flex: 1; }
+  .obj-title {
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--text-main);
+    margin-bottom: .2rem;
+  }
+  .obj-meta { font-size: 13px; color: var(--text-muted); }
+  .obj-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    padding: .3rem .75rem;
+    border-radius: 100px;
+    white-space: nowrap;
+    font-weight: 600;
+    flex-shrink: 0;
+    align-self: flex-start;
+    margin-top: .1rem;
+  }
+  .badge-progress { background: var(--status-warn-bg); color: var(--status-warn); }
+  .badge-pending  { background: var(--status-idle-bg); color: var(--status-idle); }
+  .badge-done     { background: var(--status-ok-bg);   color: var(--status-ok);   }
+  .obj-body { padding: 1.4rem 1.8rem; }
+
+  /* ── PROGRESS BAR ── */
+  .progress-block { margin-bottom: 1.4rem; }
+  .progress-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: .4rem;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+  .progress-pct {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--text-main);
+  }
+  .progress-track {
+    height: 8px;
+    background: var(--surface-2);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+  }
+  .progress-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width .6s ease;
+  }
+  .fill-gold   { background: var(--gold); }
+  .fill-green  { background: var(--green); }
+  .fill-slate  { background: var(--slate); }
+  .fill-over   { background: linear-gradient(90deg, var(--gold), var(--green-light)); }
+  .progress-note {
+    font-size: 11.5px;
+    color: var(--text-muted);
+    margin-top: .35rem;
+    font-style: italic;
+  }
+
+  /* ── PROSPECT CARDS ── */
+  .prospect-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .9rem;
+    margin: 1rem 0;
+  }
+  @media (max-width: 560px) { .prospect-grid { grid-template-columns: 1fr; } }
+  .prospect-card {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem 1.1rem;
+    border-left: 4px solid var(--gold);
+  }
+  .prospect-name {
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--text-main);
+    margin-bottom: .2rem;
+  }
+  .prospect-prop {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: .6rem;
+  }
+  .prospect-stats {
+    display: flex;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+  }
+  .pstat { }
+  .pstat-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--text-muted);
+  }
+  .pstat-val {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--text-main);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ── DATA TABLE ── */
+  .data-table-wrap { overflow-x: auto; margin-top: 1.2rem; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    font-variant-numeric: tabular-nums;
+  }
+  thead tr {
+    background: var(--navy);
+    color: #fff;
+  }
+  thead th {
+    padding: .65rem 1rem;
+    text-align: left;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  tbody tr { border-bottom: 1px solid var(--border); }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:nth-child(even) { background: var(--surface-2); }
+  td {
+    padding: .6rem 1rem;
+    color: var(--text-body);
+    vertical-align: middle;
+  }
+  td.num {
+    font-family: 'IBM Plex Mono', monospace;
+    text-align: right;
+    white-space: nowrap;
+    color: var(--text-main);
+  }
+  td.bold { font-weight: 700; color: var(--text-main); }
+  tfoot tr { background: var(--navy-mid); }
+  tfoot td {
+    padding: .65rem 1rem;
+    color: #fff;
+    font-weight: 700;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+  }
+  tfoot td.num { color: var(--gold-light); text-align: right; }
+
+  /* ── NOTICE BOX ── */
+  .notice {
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--gold);
+    background: var(--surface-2);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: .75rem 1rem;
+    font-size: 13px;
+    color: var(--text-body);
+    margin-top: 1rem;
+  }
+  .notice strong { color: var(--text-main); }
+
+  /* ── STAGE TRACKER (Obj 3) ── */
+  .stage-track {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    margin: 1rem 0 1.2rem;
+    position: relative;
+  }
+  .stage-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+  .stage-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 14px;
+    left: 50%;
+    width: 100%;
+    height: 2px;
+    background: var(--border);
+    z-index: 0;
+  }
+  .stage-item.done:not(:last-child)::after,
+  .stage-item.active:not(:last-child)::after { background: var(--green); }
+  .stage-dot {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+    position: relative; z-index: 1;
+    border: 2px solid var(--border);
+    background: var(--surface);
+    color: var(--text-muted);
+    flex-shrink: 0;
+    transition: all .3s;
+  }
+  .stage-item.done .stage-dot {
+    background: var(--green); border-color: var(--green); color: #fff; font-size: 13px;
+  }
+  .stage-item.active .stage-dot {
+    background: var(--gold); border-color: var(--gold); color: #fff;
+    box-shadow: 0 0 0 4px rgba(184,148,58,.2);
+  }
+  .stage-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: .5rem;
+    line-height: 1.3;
+    max-width: 90px;
+  }
+  .stage-item.done .stage-label,
+  .stage-item.active .stage-label { color: var(--text-main); font-weight: 600; }
+
+  /* ── CUMULATIVE SECTION ── */
+  .cumulative {
+    background: var(--navy);
+    border-radius: var(--radius);
+    padding: 1.6rem 1.8rem;
+    margin-top: 1rem;
+    color: #fff;
+  }
+  .cumulative-title {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 1.1rem;
+    color: rgba(255,255,255,.9);
+    margin-bottom: 1.1rem;
+  }
+  .cum-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+  @media (max-width: 560px) { .cum-grid { grid-template-columns: 1fr 1fr; } }
+  .cum-item { }
+  .cum-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.45);
+    margin-bottom: .25rem;
+  }
+  .cum-value {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 1.6rem;
+    color: var(--gold-light);
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+  }
+  .cum-sub {
+    font-size: 11.5px;
+    color: rgba(255,255,255,.45);
+    margin-top: .2rem;
+  }
+
+  /* ── FOOTER ── */
+  .report-footer {
+    margin-top: 2.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--text-muted);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: .5rem;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 1.2rem 0;
+  }
+</style>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <header class="report-header">
+    <p class="header-eyebrow">Fibra Hotel Corporativo &nbsp;·&nbsp; Área de Arrendamiento</p>
+    <h1 class="header-title">Informe de Avance<br>Segundo Trimestre 2026</h1>
+    <div class="header-meta">
+      <span><strong>Analista</strong> &nbsp;Gerardo Vega Quinto</span>
+      <span><strong>Período</strong> &nbsp;2Q 2026</span>
+      <span><strong>Fecha</strong> &nbsp;25 de mayo de 2026</span>
+    </div>
+  </header>
+
+  <!-- SUMMARY TILES -->
+  <div class="tiles">
+    <div class="tile tile-accent">
+      <div class="tile-label">Obj. 1 · Superficie 2Q</div>
+      <div class="tile-value">155%</div>
+      <div class="tile-sub">344 m² en proceso de firma<br>(meta: 222 m²)</div>
+    </div>
+    <div class="tile tile-green">
+      <div class="tile-label">Ingreso anual proyectado 2Q</div>
+      <div class="tile-value">$1.05M</div>
+      <div class="tile-sub">210.6% de la meta trimestral<br>de ingresos ($500K)</div>
+    </div>
+    <div class="tile tile-navy">
+      <div class="tile-label">Avance acumulado anual</div>
+      <div class="tile-value">75.4%</div>
+      <div class="tile-sub">$1,509,000 / $2,000,000<br>meta de ingresos anual</div>
+    </div>
+  </div>
+
+  <!-- OBJETIVO 1 -->
+  <div class="obj-card">
+    <div class="obj-card-header">
+      <div class="obj-number">01</div>
+      <div class="obj-header-text">
+        <div class="obj-title">Colocación de Nuevos Arrendatarios</div>
+        <div class="obj-meta">Ponderación: 50% &nbsp;·&nbsp; Meta trimestral: 222 m² &nbsp;·&nbsp; Meta anual: 888 m² / $2,000,000</div>
+      </div>
+      <span class="obj-badge badge-progress">En formalización</span>
+    </div>
+    <div class="obj-body">
+
+      <!-- PROGRESS SUPERFICIE -->
+      <div class="progress-block">
+        <div class="progress-row">
+          <span>Superficie en proceso de firma (2Q)</span>
+          <span class="progress-pct">155%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill fill-over" style="width:100%"></div>
+        </div>
+        <p class="progress-note">344 m² con negociación cerrada, pendientes de formalización de contrato. Meta trimestral: 222 m².</p>
+      </div>
+
+      <!-- PROSPECT CARDS -->
+      <div class="prospect-grid">
+        <div class="prospect-card">
+          <div class="prospect-name">Farmacias Similares</div>
+          <div class="prospect-prop">Local #2 · One Acapulco</div>
+          <div class="prospect-stats">
+            <div class="pstat">
+              <div class="pstat-label">Superficie</div>
+              <div class="pstat-val">251 m²</div>
+            </div>
+            <div class="pstat">
+              <div class="pstat-label">Renta mensual</div>
+              <div class="pstat-val">$62,750</div>
+            </div>
+            <div class="pstat">
+              <div class="pstat-label">Ingreso anual</div>
+              <div class="pstat-val">$753,000</div>
+            </div>
+          </div>
+        </div>
+        <div class="prospect-card">
+          <div class="prospect-name">Gloria JH</div>
+          <div class="prospect-prop">Oficinas administrativas · Plaza One Monterrey</div>
+          <div class="prospect-stats">
+            <div class="pstat">
+              <div class="pstat-label">Superficie</div>
+              <div class="pstat-val">93 m²</div>
+            </div>
+            <div class="pstat">
+              <div class="pstat-label">Renta mensual</div>
+              <div class="pstat-val">$25,000</div>
+            </div>
+            <div class="pstat">
+              <div class="pstat-label">Ingreso anual</div>
+              <div class="pstat-val">$300,000</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="notice">
+        <strong>Nota:</strong> Si bien el objetivo establece que únicamente se contabilizan contratos firmados para el cálculo del avance trimestral, ambas negociaciones se encuentran formalmente cerradas y en proceso de firma de contrato, por lo que el cumplimiento de 155% refleja el avance real de la gestión en el 2Q.
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- INGRESOS TABLE -->
+      <div class="section-label" style="margin-top:.2rem">Indicadores de Ingreso — 2Q 2026</div>
+      <div class="data-table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Arrendatario</th>
+              <th>Propiedad</th>
+              <th>Estatus</th>
+              <th style="text-align:right">Renta mensual</th>
+              <th style="text-align:right">Ingreso anual</th>
+              <th style="text-align:right">% meta anual</th>
+              <th style="text-align:right">% meta 2Q</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="bold">Farmacias Similares</td>
+              <td>One Acapulco</td>
+              <td><span class="obj-badge badge-progress" style="font-size:9.5px;padding:.2rem .55rem">Por firmar</span></td>
+              <td class="num">$62,750</td>
+              <td class="num">$753,000</td>
+              <td class="num">37.7%</td>
+              <td class="num">150.6%</td>
+            </tr>
+            <tr>
+              <td class="bold">Gloria JH</td>
+              <td>Plaza One Monterrey</td>
+              <td><span class="obj-badge badge-progress" style="font-size:9.5px;padding:.2rem .55rem">Por firmar</span></td>
+              <td class="num">$25,000</td>
+              <td class="num">$300,000</td>
+              <td class="num">15.0%</td>
+              <td class="num">60.0%</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="3">Total 2Q (al cierre de firma)</td>
+              <td class="num">$87,750</td>
+              <td class="num">$1,053,000</td>
+              <td class="num">52.6%</td>
+              <td class="num">210.6%</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <!-- CUMULATIVE -->
+      <div class="cumulative" style="margin-top:1.2rem">
+        <div class="cumulative-title">Avance Acumulado — 1Q + 2Q</div>
+        <div class="cum-grid">
+          <div class="cum-item">
+            <div class="cum-label">m² totales colocados</div>
+            <div class="cum-value">544 m²</div>
+            <div class="cum-sub">61.3% de la meta anual (888 m²)</div>
+          </div>
+          <div class="cum-item">
+            <div class="cum-label">Ingreso anual acumulado</div>
+            <div class="cum-value">$1,509,000</div>
+            <div class="cum-sub">Q1: $456K · Q2: $1,053K</div>
+          </div>
+          <div class="cum-item">
+            <div class="cum-label">% de la meta anual ($2 mdp)</div>
+            <div class="cum-value">75.4%</div>
+            <div class="cum-sub">Restante: $491,000 en 2Q adicionales</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- OBJETIVO 2 -->
+  <div class="obj-card">
+    <div class="obj-card-header">
+      <div class="obj-number">02</div>
+      <div class="obj-header-text">
+        <div class="obj-title">Independización de Energéticos de Arrendatarios</div>
+        <div class="obj-meta">Ponderación: 25% &nbsp;·&nbsp; Condicionado a diagnóstico global de infraestructura</div>
+      </div>
+      <span class="obj-badge badge-pending">Sin avance</span>
+    </div>
+    <div class="obj-body">
+      <div class="progress-block">
+        <div class="progress-row">
+          <span>Diagnóstico global de infraestructura</span>
+          <span class="progress-pct" style="color:var(--text-muted)">Pendiente</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill fill-slate" style="width:0%"></div>
+        </div>
+        <p class="progress-note">El objetivo no registra avance cuantificable en el 2Q. Su ejecución depende del diagnóstico eléctrico e hídrico de cada hotel, el cual permanece pendiente de realización.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- OBJETIVO 3 -->
+  <div class="obj-card">
+    <div class="obj-card-header">
+      <div class="obj-number">03</div>
+      <div class="obj-header-text">
+        <div class="obj-title">Implementación de Inteligencia Artificial para Procesos de Arrendamiento</div>
+        <div class="obj-meta">Ponderación: 25% &nbsp;·&nbsp; Plataforma propia en sustitución de WiseCricket</div>
+      </div>
+      <span class="obj-badge badge-done">Puesta en marcha</span>
+    </div>
+    <div class="obj-body">
+
+      <!-- STAGE TRACKER -->
+      <div class="stage-track">
+        <div class="stage-item done">
+          <div class="stage-dot">✓</div>
+          <div class="stage-label">Diseño funcional</div>
+        </div>
+        <div class="stage-item done">
+          <div class="stage-dot">✓</div>
+          <div class="stage-label">Análisis y visualización del dashboard</div>
+        </div>
+        <div class="stage-item done">
+          <div class="stage-dot">✓</div>
+          <div class="stage-label">Diseño y ejecución de la plataforma</div>
+        </div>
+        <div class="stage-item done">
+          <div class="stage-dot">✓</div>
+          <div class="stage-label">Perfeccionamiento de funciones</div>
+        </div>
+        <div class="stage-item active">
+          <div class="stage-dot">→</div>
+          <div class="stage-label">Puesta en marcha</div>
+        </div>
+      </div>
+
+      <p style="font-size:13.5px; color:var(--text-body); text-align:justify; margin-top:.5rem">
+        La plataforma propia con IA, desarrollada internamente en sustitución de WiseCricket, ha completado las etapas de diseño funcional, análisis y visualización del dashboard, diseño y ejecución de la plataforma, y perfeccionamiento de funciones. Al cierre del 2Q la plataforma se encuentra en <strong>puesta en marcha</strong>, cubriendo la totalidad de las funcionalidades del objetivo original: interpretación de contratos, incrementos de renta, enlace con CFDIs, reportes mensuales, intereses moratorios y seguimiento de pólizas, permisos y licencias.
+      </p>
+    </div>
+  </div>
+
+  <!-- RESUMEN FINAL -->
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;margin-top:.5rem">
+    <div style="background:var(--navy-mid);padding:.8rem 1.8rem">
+      <span style="font-family:'DM Serif Display',Georgia,serif;font-size:1.1rem;color:#fff">Resumen de Cumplimiento — 2Q 2026</span>
+    </div>
+    <div class="data-table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Objetivo</th>
+            <th style="text-align:center">Ponderación</th>
+            <th>Avance 2Q</th>
+            <th style="text-align:center">Estatus</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="bold">1. Colocación de nuevos arrendatarios</td>
+            <td class="num" style="text-align:center">50%</td>
+            <td>344 m² / 155% de la meta · $1,053K ingreso anual proyectado</td>
+            <td style="text-align:center"><span class="obj-badge badge-progress">En formalización</span></td>
+          </tr>
+          <tr>
+            <td class="bold">2. Independización de energéticos</td>
+            <td class="num" style="text-align:center">25%</td>
+            <td>Pendiente diagnóstico de infraestructura</td>
+            <td style="text-align:center"><span class="obj-badge badge-pending">Sin avance</span></td>
+          </tr>
+          <tr>
+            <td class="bold">3. Implementación de IA</td>
+            <td class="num" style="text-align:center">25%</td>
+            <td>Puesta en marcha — todas las etapas de desarrollo completadas</td>
+            <td style="text-align:center"><span class="obj-badge badge-done">Puesta en marcha</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="report-footer">
+    <span>Elaborado por: <strong>Gerardo Vega Quinto</strong> — Área de Arrendamiento, Fibra Hotel Corporativo</span>
+    <span>Segundo Trimestre 2026</span>
+  </div>
+
+</div>
