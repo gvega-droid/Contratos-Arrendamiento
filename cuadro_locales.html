@@ -218,6 +218,27 @@
     .docs-note{background:rgba(37,99,235,.1);border:1px solid rgba(37,99,235,.3);border-radius:12px;padding:12px 16px;margin-bottom:20px;font-size:12px;color:rgba(255,255,255,.65);line-height:1.6}
     .docs-note strong{color:#93C5FD}
 
+    /* MANT. MENSUAL column */
+    .mant-amount{font-weight:700;font-size:12px;color:#F9A8D4;line-height:1.2}
+    .mant-nota{font-size:9.5px;color:rgba(249,168,212,.55);margin-top:2px;line-height:1.4}
+    .mant-incr{font-size:9.5px;color:rgba(163,230,53,.65);margin-top:1px}
+    /* INCREMENTO — nota de mantenimiento */
+    .incr-mant{font-size:9px;color:rgba(249,168,212,.7);margin-top:3px;letter-spacing:.2px}
+    .incr-formula{font-size:9px;color:rgba(255,255,255,.42);margin-top:2px;font-style:italic}
+    /* ALERTAS DE INCREMENTO */
+    .incr-alert-card{flex:1;min-width:260px;max-width:420px;border-radius:14px;padding:14px 16px;background:rgba(163,230,53,.08);border:1px solid rgba(163,230,53,.25)}
+    .incr-alert-card.next{background:rgba(240,165,0,.1);border-color:rgba(240,165,0,.3)}
+    .incr-alert-card.past{background:rgba(103,232,249,.07);border-color:rgba(103,232,249,.2)}
+    .incr-badge{display:inline-block;font-size:10px;font-weight:800;padding:2px 9px;border-radius:50px;margin-bottom:6px}
+    .incr-badge.recent{background:rgba(103,232,249,.2);color:#67E8F9;border:1px solid rgba(103,232,249,.4)}
+    .incr-badge.upcoming{background:rgba(240,165,0,.2);color:var(--gold);border:1px solid rgba(240,165,0,.4)}
+    .incr-card-hotel{font-size:13.5px;font-weight:700;color:#fff;margin-bottom:2px}
+    .incr-card-op{font-size:10.5px;color:rgba(255,255,255,.45)}
+    .incr-card-meta{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
+    .incr-card-item{background:rgba(0,0,0,.2);border-radius:7px;padding:6px 8px}
+    .incr-card-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.35);margin-bottom:2px}
+    .incr-card-val{font-size:11px;font-weight:600;color:rgba(255,255,255,.82)}
+    .incr-formula-box{background:rgba(0,0,0,.25);border:1px solid rgba(163,230,53,.2);border-radius:8px;padding:7px 10px;margin-top:8px;font-size:10px;color:rgba(163,230,53,.8);font-family:monospace;line-height:1.5}
     /* FOOTER */
     .footer{text-align:center;padding:0 24px 36px;font-size:11px;color:rgba(255,255,255,.27);line-height:1.8}
     .footer strong{color:rgba(255,255,255,.45)}
@@ -316,7 +337,8 @@
           <th onclick="sortTable(5)">RENTA ORIGINAL / BASE<span class="si">⇅</span></th>
           <th>RENTA CONTRACTUAL<br/>ACTUALIZADA<br/><span style="font-size:9px;font-weight:400;text-transform:none;letter-spacing:0;color:rgba(163,230,53,.6)">auto-INPC</span></th>
           <th>COSTO M²<br/><span style="font-size:9px;font-weight:400;text-transform:none;letter-spacing:0;color:rgba(103,232,249,.6)">renta/m²</span></th>
-          <th onclick="sortTable(8)">INCREMENTO<span class="si">⇅</span></th>
+          <th>MANT. MENSUAL<br/><span style="font-size:9px;font-weight:400;text-transform:none;letter-spacing:0;color:rgba(249,168,212,.6)">cuota + INPC anual</span></th>
+          <th onclick="sortTable(9)">INCREMENTO<span class="si">⇅</span></th>
           <th onclick="sortTable(9)">PENALIZACIÓN<span class="si">⇅</span></th>
           <th>PERMISOS Y LICENCIAS<br/><span style="font-size:9px;font-weight:400;text-transform:none;letter-spacing:0;color:rgba(255,255,255,.4)">(obligación arrendatario)</span></th>
         </tr></thead>
@@ -329,7 +351,7 @@
   <td><div class="ciudad-val">Cuautlancingo</div><div class="ciudad-state">Puebla</div></td>
   <td><div class="plazo-years">1 año forz. + 4 vol.</div><div class="plazo-dates">15-abr-2023 → 15-abr-2028</div></td>
   <td><div class="renta-amount">$15,000/mes</div></td>
-  <td><div class="incr-rule">INPC anual</div><div class="incr-note">15 de abril</div></td>
+  <td><div class="incr-rule">INPC anual</div><div class="incr-note">15 de abril · Cláusula 5.6</div><div class="incr-formula">INPC mar.N / INPC mar.(N−1)</div><div class="incr-mant">✦ Aplica también a cuota de mant.</div></td>
   <td class="penal-text">Rentas faltantes × plazo forz. + IVA</td>
   <td><div class="pbadges"><span class="pb pb-uso">USO</span><span class="pb pb-func">FUNC</span><span class="pb pb-pc">PC</span></div><div style="font-size:10px;color:rgba(255,255,255,.38);margin-top:5px">Mpio. Cuautlancingo · Ley PC Puebla</div></td>
 </tr>
@@ -684,6 +706,10 @@
       </div>
     </div>
 
+    <div class="alert-divider"></div>
+    <!-- ── ALERTAS DE INCREMENTO INPC ── -->
+    <div id="incrAlertsSection"></div>
+
   </div>
 </div>
 
@@ -772,6 +798,8 @@ function saveInpcRates(){
   localStorage.setItem('fiho_inpc',JSON.stringify(rates));
   buildRentaActualColumn();
   buildCostoM2Column();
+  buildMantenimientoColumn();
+  buildIncrementAlerts();
   document.getElementById('inpcPanel').classList.remove('open');
   updateInpcSummary();
 }
@@ -917,6 +945,179 @@ function buildCostoM2Column(){
       row.appendChild(cell);
     }
   });
+}
+
+/* ════════ MANT. MENSUAL DATA ════════
+   Cuotas de mantenimiento por contrato (base + mes de incremento).
+   Usar el mismo mes de incremento que la renta según cada contrato.
+   Los importes se cargan conforme se confirmen en los documentos.
+   ════════════════════════════════════ */
+const MANT_DATA={
+  1: {base:null, start:'2023-04-15', mes:4, nota:'Cuota mant. — pendiente confirmar importe'},
+  /* Resto de contratos: null hasta confirmar en documentos */
+};
+
+function buildMantenimientoColumn(){
+  const rates=getInpcRates();
+  const FMT=new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN',maximumFractionDigits:2});
+  document.querySelectorAll('#tableBody tr').forEach(row=>{
+    const rowNum=parseInt(row.cells[0]?.textContent.trim());
+    if(!rowNum) return;
+    let cell=row.querySelector('.mant-td');
+    if(!cell){
+      cell=document.createElement('td');
+      cell.className='mant-td';
+      /* Insert after m2-td, before incremento col (index 9 static → now 10 with ra+m2+mant) */
+      const m2td=row.querySelector('.m2-td');
+      if(m2td) m2td.insertAdjacentElement('afterend',cell);
+      else row.appendChild(cell);
+    }
+    const md=MANT_DATA[rowNum];
+    if(!md||!md.base){
+      cell.innerHTML='<span class="na">—</span>';
+      return;
+    }
+    const {renta:mant,count,nextLabel}=calcRentaActual(md.base,md.start,md.mes,rates,0);
+    const rd=RENTA_DATA[rowNum];
+    let formula='';
+    if(rd&&rd.mes===3){
+      /* Contratos cuyo incremento usa INPC mar(N-1) → mar(N) */
+      formula=`<div class="mant-nota">Fórmula: INPC mar.N / INPC mar.(N−1)</div>`;
+    }
+    cell.innerHTML=`<div class="mant-amount">${FMT.format(mant)}/mes</div>
+      ${md.base!==mant?`<div class="mant-nota">${FMT.format(md.base)}/mes orig.</div>`:''}
+      <div class="mant-incr">+${count} incr. INPC · próx. ${nextLabel}</div>
+      ${formula}
+      ${md.nota?`<div class="mant-nota">${md.nota}</div>`:''}`;
+  });
+}
+
+/* ════════ ALERTAS DE INCREMENTO ════════ */
+function buildIncrementAlerts(){
+  const rates=getInpcRates();
+  const FMT=new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN',maximumFractionDigits:2});
+  const NOMBRES={
+    1:'Agro-Partes Puebla',2:'Comercial Automotriz de los Altos',3:'Banco Santander México',
+    4:'Waldo\'s Dólar Mart',5:'TV Azteca',6:'Traigo Todo (Sonora Grill)',7:'Servicios Inm. Alsea',
+    8:'Op. Hotelera Inhouse (León)',9:'Julio C. Torres Rojo',10:'Zapata S.A. de C.V.',
+    11:'Grupo Posadas (Cancún)',12:'Divol Norte',13:'Tiendas Extra (Circle K)',
+    14:'Aero Charter (Primeflight)',15:'T.I. Experiencias',16:'Quattralia Holding',
+    17:'David Valdez Romo',18:'Corp. Emp. Solar',19:'Op. Hotelera Inhouse (Carmen)',20:'Sin datos'
+  };
+  const CIUDADES={
+    1:'Cuautlancingo, Pue.',2:'Aguascalientes, Ags.',3:'Cuautitlán Izcalli, Edomex',
+    4:'Cuautitlán Izcalli, Edomex',5:'Acapulco, Gro.',6:'Hermosillo, Son.',
+    7:'Apodaca, N.L.',8:'León, Gto.',9:'Tijuana, B.C.',10:'Cuautitlán Izcalli, Edomex',
+    11:'Cancún, Q.Roo',12:'Cuautitlán Izcalli, Edomex',13:'Acapulco, Gro.',
+    14:'Apodaca, N.L.',15:'Cancún, Q.Roo',16:'Naucalpan, Edomex',
+    17:'Aguascalientes, Ags.',18:'Monterrey, N.L.',19:'Cd. del Carmen, Camp.',20:'Cd. Obregón, Son.'
+  };
+
+  const WINDOW_MS=180*24*3600*1000; /* 6 meses hacia adelante */
+  const PAST_WINDOW_MS=60*24*3600*1000; /* 60 días hacia atrás */
+  const hoy=TODAY;
+
+  const cards=[];
+  Object.keys(RENTA_DATA).forEach(k=>{
+    const rn=parseInt(k);
+    const rd=RENTA_DATA[rn];
+    if(!rd||!rd.base||rd.tipo==='vencido'||rd.tipo==='variable'||rd.tipo==='nodata') return;
+
+    const {renta,count,nextLabel}=calcRentaActual(rd.base,rd.start,rd.mes,rates,rd.bonus||0);
+    /* Calcular fecha del próximo incremento */
+    let d=new Date(rd.start);
+    d.setDate(1);d.setMonth(rd.mes-1);
+    if(d<=new Date(rd.start)) d.setFullYear(d.getFullYear()+1);
+    while(d<=hoy) d.setFullYear(d.getFullYear()+1);
+    const msAhead=d-hoy;
+
+    /* También el anterior (el más reciente pasado) */
+    let prev=new Date(d);prev.setFullYear(prev.getFullYear()-1);
+    const msPast=hoy-prev;
+
+    const isUpcoming=msAhead>0&&msAhead<WINDOW_MS;
+    const isRecent=msPast>=0&&msPast<PAST_WINDOW_MS;
+    if(!isUpcoming&&!isRecent) return;
+
+    /* Año aplicado en el incremento anterior */
+    const prevYear=prev.getFullYear();
+    const rateApplied=(rates[prevYear]??rates[prevYear-1]??4.0)+(rd.bonus||0);
+    const prevBase=renta/(1+rateApplied/100);
+    const incrementoMXN=renta-prevBase;
+
+    /* Determinar si usa fórmula mar(N)/mar(N-1) — actualmente sólo contrato 1 (mes=4, cláusula 5.6) */
+    const usaMar=(rn===1);
+
+    /* Mes de comparación INPC para contratos con incremento en abril */
+    const mesCierre=rd.mes-1===0?'diciembre':
+      ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'][rd.mes-2];
+    const mesBase=rd.mes-2<0?'noviembre':
+      ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'][rd.mes-3<0?11:rd.mes-3];
+
+    cards.push({rn,isUpcoming,isRecent,renta,prevBase,rateApplied,incrementoMXN,nextIncr:d,prevIncr:prev,prevYear,usaMar,mesCierre,mesBase,nextLabel,rd,moneda:rd.moneda});
+  });
+
+  /* Ordenar: primero recientes, luego próximos por fecha */
+  cards.sort((a,b)=>{
+    if(a.isRecent&&!b.isRecent) return -1;
+    if(!a.isRecent&&b.isRecent) return 1;
+    return a.nextIncr-b.nextIncr;
+  });
+
+  if(!cards.length){
+    document.getElementById('incrAlertsSection').innerHTML='';
+    return;
+  }
+
+  const FMT_DATE=dt=>dt.toLocaleDateString('es-MX',{day:'2-digit',month:'short',year:'numeric'});
+  const MXN=v=>FMT.format(v);
+
+  let html=`<div class="alert-section-title">
+    <div class="alert-dot" style="background:#A3E635"></div>
+    <h3 style="color:#A3E635">Incrementos INPC — Próximos 6 meses / Recientes</h3>
+    <span class="pc">${cards.length}</span>
+  </div>
+  <div class="alert-cards">`;
+
+  cards.forEach(c=>{
+    const cls=c.isRecent?'past':'next';
+    const badge=c.isRecent?
+      `<span class="incr-badge recent">APLICADO ${FMT_DATE(c.prevIncr)}</span>`:
+      `<span class="incr-badge upcoming">PRÓXIMO ${FMT_DATE(c.nextIncr)}</span>`;
+
+    const tasa=c.rateApplied.toFixed(2);
+    const mant=MANT_DATA[c.rn]&&MANT_DATA[c.rn].base?
+      `<div class="incr-card-item" style="grid-column:1/-1"><div class="incr-card-label">Cuota Mant. (también incrementa)</div><div class="incr-card-val" style="color:#F9A8D4">✦ INPC anual — misma fecha que renta</div></div>`:'';
+
+    let formulaBox='';
+    if(c.usaMar){
+      const yrBase=c.prevIncr.getFullYear()-1;
+      const yrFin=c.prevIncr.getFullYear();
+      formulaBox=`<div class="incr-formula-box">
+        Cláusula 5.6 — INPC mes inmediato anterior al inicio del período:<br/>
+        Porcentaje = (INPC mar.${yrFin} / INPC mar.${yrBase} − 1) × 100<br/>
+        Estimación: ${tasa}% · Renta nueva: ${MXN(c.renta)}/mes<br/>
+        <span style="color:rgba(255,255,255,.4)">Usar índices oficiales INEGI para importe exacto</span>
+      </div>`;
+    }
+
+    html+=`<div class="incr-alert-card ${cls}">
+      ${badge}
+      <div class="incr-card-hotel">${NOMBRES[c.rn]}</div>
+      <div class="incr-card-op">${CIUDADES[c.rn]}</div>
+      <div class="incr-card-meta">
+        <div class="incr-card-item"><div class="incr-card-label">Tasa INPC aplicada</div><div class="incr-card-val">+${tasa}%</div></div>
+        <div class="incr-card-item"><div class="incr-card-label">Renta anterior</div><div class="incr-card-val">${c.moneda==='USD'?'USD':''}${MXN(c.prevBase)}${c.moneda==='USD'?'':'/mes'}</div></div>
+        <div class="incr-card-item"><div class="incr-card-label">Renta nueva</div><div class="incr-card-val" style="color:#A3E635">${c.moneda==='USD'?'USD':''}${MXN(c.renta)}/mes</div></div>
+        <div class="incr-card-item"><div class="incr-card-label">Incremento mensual</div><div class="incr-card-val" style="color:#A3E635">+${MXN(c.incrementoMXN)}</div></div>
+        ${mant}
+      </div>
+      ${formulaBox}
+    </div>`;
+  });
+
+  html+='</div>';
+  document.getElementById('incrAlertsSection').innerHTML=html;
 }
 
 /* ════════ PERMISOS DATA ════════ */
@@ -1187,6 +1388,8 @@ document.addEventListener('DOMContentLoaded',()=>{
   buildInpcEditor();
   buildRentaActualColumn();
   buildCostoM2Column();
+  buildMantenimientoColumn();
+  buildIncrementAlerts();
 });
 </script>
 </body>
