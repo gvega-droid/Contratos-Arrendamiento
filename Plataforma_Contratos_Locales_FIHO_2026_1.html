@@ -180,6 +180,12 @@ td:first-child{text-align:center;font-weight:700;color:var(--gold);font-size:13p
 .airt-incr-badge{display:inline-block;background:rgba(163,230,53,.12);border:1px solid rgba(163,230,53,.25);border-radius:8px;padding:4px 10px;font-size:10.5px;color:#A3E635;margin-bottom:10px;line-height:1.5}
 .airt-special-msg{font-size:11.5px;color:rgba(255,255,255,.45);font-style:italic;margin-bottom:10px;padding:8px 12px;background:rgba(255,255,255,.04);border-radius:8px}
 .airt-card-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.airt-card-header{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:14px 16px;cursor:pointer;user-select:none}
+.airt-card-header:hover{background:rgba(255,255,255,.04)}
+.airt-card-collapse{overflow:hidden;max-height:0;transition:max-height .25s ease}
+.airt-card-collapse.open{max-height:2000px}
+.airt-toggle-icon{font-size:11px;color:rgba(255,255,255,.35);margin-top:2px;flex-shrink:0;transition:transform .2s}
+.airt-card.expanded .airt-toggle-icon{transform:rotate(180deg)}
 .airt-btn-calc{background:rgba(147,197,253,.12);border:1px solid rgba(147,197,253,.3);border-radius:8px;color:#93C5FD;font-size:11px;font-weight:700;padding:6px 14px;cursor:pointer;font-family:'Inter',sans-serif}
 .airt-btn-mail{background:rgba(240,165,0,.15);border:1px solid rgba(240,165,0,.35);border-radius:8px;color:var(--gold);font-size:11px;font-weight:700;padding:6px 14px;cursor:pointer;display:flex;align-items:center;gap:5px;font-family:'Inter',sans-serif}
 .airt-calc-panel{display:none;margin-top:10px;background:rgba(0,0,0,.25);border-radius:10px;padding:12px}
@@ -340,7 +346,7 @@ td:first-child{text-align:center;font-weight:700;color:var(--gold);font-size:13p
   <p>Base de datos · información extraída de contratos originales y soporte de facturas · 18-jun-2026</p>
 </div>
 <div class="stats">
-  <div class="stat-card"><div class="num">20</div><div class="lbl">Contratos</div></div>
+  <div class="stat-card"><div class="num">21</div><div class="lbl">Contratos</div></div>
   <div class="stat-card"><div class="num" id="statVencidos" style="color:#E53E3E">—</div><div class="lbl">Alertas Contrato</div></div>
   <div class="stat-card"><div class="num" id="statDeudores" style="color:#F97316">—</div><div class="lbl">Con adeudo</div></div>
   <div class="stat-card"><div class="num" id="statIncrProx">—</div><div class="lbl">Incrementos ≤90d</div></div>
@@ -393,9 +399,9 @@ td:first-child{text-align:center;font-weight:700;color:var(--gold);font-size:13p
     <table class="inpc-schedule-table">
       <thead><tr><th>Próximo incremento</th><th>Mes ref. cláusula 5.7</th><th>INPC necesario A</th><th>INPC necesario B</th><th>Publ. aprox.</th><th>Contratos</th></tr></thead>
       <tbody>
-        <tr><td>Sep-2026</td><td class="sched-pub">Ago-2026</td><td>INPC ago-2026</td><td>INPC ago-2025 ✓</td><td>~10 sep-2026</td><td>#2 Santander</td></tr>
+        <tr><td>Sep-2026</td><td class="sched-pub">Ago-2026</td><td>INPC ago-2026</td><td>INPC ago-2025 ✓</td><td>~10 sep-2026</td><td>#2 Santander, #7 Primeflight Local (ref. INPC ago.)</td></tr>
         <tr><td>Oct-2026</td><td class="sched-pub">Sep-2026</td><td>INPC sep-2026</td><td>INPC sep-2025 ✓</td><td>~10 oct-2026</td><td>#17 Traigo Todo (Hmo)</td></tr>
-        <tr><td>Nov-2026</td><td class="sched-pub">Oct-2026</td><td>INPC oct-2026</td><td>INPC oct-2025 ✓</td><td>~10 nov-2026</td><td>#7 Primeflight, #11 Zapata</td></tr>
+        <tr><td>Nov-2026</td><td class="sched-pub">Oct-2026</td><td>INPC oct-2026</td><td>INPC oct-2025 ✓</td><td>~10 nov-2026</td><td>#21 Primeflight Bodega (ref. INPC oct.), #11 Zapata</td></tr>
         <tr><td>Dic-2026</td><td class="sched-pub">Nov-2026</td><td>INPC nov-2026</td><td>INPC nov-2025 ✓</td><td>~10 dic-2026</td><td>#5 Fisher</td></tr>
         <tr><td>Feb-2027</td><td class="sched-pub">Ene-2027</td><td>INPC ene-2027</td><td>INPC ene-2026 ✓</td><td>~10 feb-2027</td><td>#3 C.Automotriz (desfase apertura · ref. INPC ene.), #21 Op.Valiente SMA</td></tr>
         <tr><td>Mar-2027</td><td class="sched-pub">Feb-2027</td><td>INPC feb-2027</td><td>INPC feb-2026 ✓</td><td>~10 mar-2027</td><td>#6 Corp.Solar, #20 Waldo's, #12 InHouse Carmen</td></tr>
@@ -677,6 +683,8 @@ const SPEI={banco:'BBVA Bancomer Suc. Empresas Toluca',cuenta:'0191885413',clabe
 // ── INPC (misma lógica plataforma antenas) ──
 const INPC_DEFAULT={2017:6.77,2018:4.83,2019:2.83,2020:3.15,2021:7.36,2022:7.82,2023:4.66,2024:4.72,2025:3.70,2026:4.58};
 const INPC_MONTHLY_IDX={
+  // 2024 — datos provistos por contrato
+  '2024-08':136.013,'2024-10':136.828,
   // 2025 — publicados por INEGI
   '2025-01':138.343,'2025-02':138.726,'2025-03':139.161,'2025-04':139.620,
   '2025-05':140.012,'2025-06':140.405,'2025-07':140.781,'2025-08':140.867,
@@ -792,7 +800,8 @@ const CONTRACTS=[
  {num:4,arrendatario:'Tiendas Extra S.A. de C.V. (Circle K)',rfc:'TEX9302097F3',cat:'Tienda',hotel:'One Acapulco — Av. Costera Miguel Alemán',ciudad:'Acapulco de Juárez, Guerrero',localidad:'Localidad comercial B',superficie:200,giro:'Tienda de autoservicio Circle K',inicio:'2026-06-15',fin:'2041-06-15',plazo:'15 años totales; primeros 5 forzosos',renta_orig:38000,moneda:'MXN',renta_efe:null,renta_data:{base:38000,start:'2026-06-15',mes:6},incremento:'Anual INPC + variable 8% ventas netas si supera renta mínima',mes_incr:6,mantenimiento:'10% renta mensual',mant_efe:null,deposito:'1 mes',penalizacion:'Promedio renta 12 meses × meses faltantes al plazo forzoso + IVA',correo:'america.peralta@cck.com.mx',cobranza:{status:'nuevo',pendiente:0,vencido:0,detalle:'Contrato recién iniciado jun-26'},drive:'https://drive.google.com/drive/folders/1q4cOWxg8UeWTNt3lXcXbqyJl_UL7boCP'},
  {num:5,arrendatario:'David Valdez Romo (Fisher)',rfc:'VARD910',cat:'Restaurante',hotel:'Fiesta Americana Aguascalientes',ciudad:'Aguascalientes, Aguascalientes',localidad:'Local comercial',superficie:252,giro:'Restaurante Fisher',inicio:'2025-12-04',fin:'2031-12-03',plazo:'6 años (renovación; contrato original 04-dic-2019)',renta_orig_texto:'$21,157.49/mes (jun-mar) + $505,000/mes (abr-may)',renta_orig:21157.49,moneda:'MXN',renta_efe:{monto:505000,mes:'abr-26',nota:'Renta especial abr-may'},renta_data:{base:21157.49,start:'2025-12-04',mes:12},incremento:'Anual INPC',mes_incr:12,mantenimiento:'No especificado en convenio',mant_efe:null,deposito:'No especificado',penalizacion:'Conforme contrato original',correo:'',cobranza:{status:'vencido',pendiente:49085.38,vencido:49085.38,detalle:'2 facturas pendientes en cartera'},drive:'https://drive.google.com/drive/folders/1rwxCha58M1TMNZGz3WvAIrLfx8Z3OXcx'},
  {num:6,arrendatario:'Corporativo Empresarial Solar, S.A. de C.V.',rfc:'CES9912',cat:'Oficina',hotel:'Sheraton Ambassador Monterrey',ciudad:'Monterrey, Nuevo León',localidad:'Local 2 Carranza',superficie:41,giro:'Renta de autos',inicio:'2024-02-01',fin:'2027-01-31',plazo:'3 años forzosos para ambas partes',renta_orig:10291,moneda:'MXN',renta_efe:{monto:10678.97,mes:'jun-26'},renta_data:{base:10291,start:'2024-02-01',mes:2},incremento:'Anual INPC (mes inicio)',mes_incr:2,mantenimiento:'No aplica (hoja de condiciones)',mant_efe:null,deposito:'2 meses',penalizacion:'No especificada',correo:'',cobranza:{status:'vencido',pendiente:49550.44,vencido:49550.44,detalle:'Facturas feb-26 pendientes'},drive:'https://drive.google.com/drive/folders/1Ev_DPVF1Nf2ohn3yqpOjArRvqmEol_Kp'},
- {num:7,arrendatario:'Primeflight Aviation Mexico (Aero Charter)',rfc:'ACM9209',cat:'Bodega',hotel:'One Monterrey Aeropuerto — Plaza One MTY',ciudad:'Apodaca, Nuevo León',localidad:'Local No. 09 PB + Bodega',superficie:123.09,giro:'Bodega / servicios de aviación',inicio:'2023-11-03',fin:'2026-11-03',plazo:'3 años (renovación de contrato nov-2020)',renta_orig:27537.53,moneda:'MXN',renta_efe:{monto:38266.82,mes:'jun-26',nota:'Local + bodega'},renta_data:{base:27537.53,start:'2023-11-03',mes:11},incremento:'Anual INPC (mes noviembre)',mes_incr:11,mantenimiento:'10% renta mensual',mant_efe:{monto:3827.65,mes:'jun-26'},deposito:'2 meses',penalizacion:'Rentas faltantes al plazo forzoso + IVA',correo:'',cobranza:{status:'vencido',pendiente:362116.22,vencido:362116.22,detalle:'Múltiples facturas vencidas mar-may-26'},drive:'https://drive.google.com/drive/folders/1aWVZbu_nUh8t_xJOLQ-0LHDwx5sxcX6O'},
+ {num:7,arrendatario:'Primeflight Aviation Mexico — Local',rfc:'ACM9209',cat:'Oficina',hotel:'One Monterrey Aeropuerto — Plaza One MTY',ciudad:'Apodaca, Nuevo León',localidad:'Local No. 09 PB',superficie:null,giro:'Servicios de aviación / oficina',inicio:'2023-11-03',fin:'2026-11-03',plazo:'3 años (renovación de contrato nov-2020)',renta_orig:null,moneda:'MXN',renta_efe:null,renta_data:{base:0,start:'2024-09-01',mes:9},incremento:'Anual INPC (mes sep · ref. INPC ago.)',mes_incr:9,mantenimiento:'10% renta mensual',mant_efe:null,deposito:'2 meses',penalizacion:'Rentas faltantes al plazo forzoso + IVA',correo:'',cobranza:{status:'vencido',pendiente:362116.22,vencido:362116.22,detalle:'Ver desglose con #21 Bodega — múltiples facturas vencidas mar-may-26'},drive:'https://drive.google.com/drive/folders/1aWVZbu_nUh8t_xJOLQ-0LHDwx5sxcX6O'},
+ {num:21,arrendatario:'Primeflight Aviation Mexico — Bodega',rfc:'ACM9209',cat:'Bodega',hotel:'One Monterrey Aeropuerto — Plaza One MTY',ciudad:'Apodaca, Nuevo León',localidad:'Bodega',superficie:null,giro:'Bodega / servicios de aviación',inicio:'2023-11-03',fin:'2026-11-03',plazo:'3 años (renovación de contrato nov-2020)',renta_orig:null,moneda:'MXN',renta_efe:null,renta_data:{base:0,start:'2024-11-01',mes:11},incremento:'Anual INPC (mes nov · ref. INPC oct.)',mes_incr:11,mantenimiento:'10% renta mensual',mant_efe:null,deposito:'2 meses',penalizacion:'Rentas faltantes al plazo forzoso + IVA',correo:'',cobranza:{status:'vencido',pendiente:362116.22,vencido:362116.22,detalle:'Ver desglose con #7 Local — múltiples facturas vencidas mar-may-26'},drive:'https://drive.google.com/drive/folders/1aWVZbu_nUh8t_xJOLQ-0LHDwx5sxcX6O'},
  {num:8,arrendatario:'Grupo Posadas, S.A.B. de C.V.',rfc:'',cat:'Hotel',hotel:'Fiesta Americana Condesa Cancún — Hotel completo',ciudad:'Cancún, Quintana Roo',localidad:'Inmueble completo',superficie:41413,giro:'Operación hotelera Fiesta Americana Condesa Cancún',inicio:'2018-01-01',fin:'2032-12-31',plazo:'Hasta 31-dic-2032 (contrato notariado 14-feb-2018)',renta_orig:1040471.45,moneda:'USD',renta_efe:null,renta_data:{base:1040471.45,start:'2018-01-01',mes:1},incremento:'Anual INPC (mes enero)',mes_incr:1,mantenimiento:'No especificado',mant_efe:null,deposito:'No especificado',penalizacion:'No especificado',correo:'',cobranza:{status:'vencido',pendiente:44564867.82,vencido:827655.36,detalle:'Múltiples facturas en cartera'},drive:'https://drive.google.com/drive/folders/19ACSIlYq-d-0vgPwMXPVOPXuMI9QLjmx'},
  {num:9,arrendatario:'Divol Norte, S.A.P.I. de C.V.',rfc:'DNO1601',cat:'Comercio',hotel:'Hotel — Carretera México-Querétaro Km 32.5',ciudad:'Tultitlán, Estado de México',localidad:'Superficie arrendada',superficie:2266.55,giro:'Distribución y comercio',inicio:'2025-11-01',fin:'2045-10-31',plazo:'20 años totales (nov-2025 a oct-2045)',renta_orig:241563.27,moneda:'MXN',renta_efe:{monto:240963.27,mes:'jun-26'},renta_data:{base:241563.27,start:'2017-08-01',mes:8},incremento:'Anual INPC (mes agosto)',mes_incr:8,mantenimiento:'No especificado',mant_efe:null,deposito:'No especificado',penalizacion:'No especificado',correo:'',cobranza:{status:'corriente',pendiente:559034.78,vencido:0,detalle:'Al corriente (jun-26 incluido)'},drive:'https://drive.google.com/drive/folders/1mLOfVq3_AftgMg0972g6zjC9RpC0rF5t'},
  {num:10,arrendatario:'Julio César Torres Rojo (IBK Interbrokers)',rfc:'TORJ751',cat:'Seguros',hotel:'One Tijuana Otay',ciudad:'Tijuana, Baja California',localidad:'Local comercial 03',superficie:103.55,giro:'Oficina agente de seguros / IBK',inicio:'2025-06-05',fin:'2027-06-03',plazo:'2 años adicionales (prórroga contrato jun-2023)',renta_orig:1958.44,moneda:'USD',renta_efe:{monto:1958.44,mes:'jun-26',moneda:'USD'},renta_data:{base:1958.44,start:'2023-06-05',mes:6},incremento:'Anual INPC (mes junio)',mes_incr:6,mantenimiento:'Según cláusula contrato inicial',mant_efe:{monto:195.86,mes:'jun-26',nota:'MTTO en MXN'},deposito:'No especificado',penalizacion:'Conforme contrato original',correo:'',cobranza:{status:'vencido',pendiente:86165.18,vencido:86165.18,detalle:'Facturas may-jun-26 pendientes (MXN)'},drive:'https://drive.google.com/drive/folders/15d_PxVgb7ETkfAD_pjRAA7oe9vrI1ro3'},
@@ -812,7 +821,8 @@ const ENERGETICOS_DATA={
  1:{elec:null,agua:null,mant:{monto:1631.55,mes:'mayo-26'}},
  2:{elec:null,agua:null,mant:{monto:31316.36,mes:'jun-26'}},
  3:{elec:null,agua:null,mant:null},4:{elec:null,agua:null,mant:null},5:{elec:null,agua:null,mant:null},6:{elec:null,agua:null,mant:null},
- 7:{elec:null,agua:null,mant:{monto:3827.65,mes:'jun-26'}},
+ 7:{elec:null,agua:null,mant:null},
+ 21:{elec:null,agua:null,mant:null},
  8:{elec:null,agua:null,mant:null},9:{elec:null,agua:null,mant:null},
  10:{elec:{monto:842.43,mes:'abr-26'},agua:{monto:2107.38,mes:'abr-26'},mant:{monto:195.86,mes:'jun-26'}},
  11:{elec:null,agua:null,mant:null},12:{elec:null,agua:null,mant:null},13:{elec:null,agua:null,mant:null},14:{elec:null,agua:null,mant:null},15:{elec:null,agua:null,mant:null},
@@ -874,6 +884,14 @@ const PERMISOS_DB=[
   {tipo:'pb-anun',nombre:'Permiso para Anuncio Exterior',base:'Reglamento de Imagen Urbana Monterrey',freq:'anual'},
  ]},
  {num:7,estado:'Nuevo León',permisos:[
+  {tipo:'pb-lic',nombre:'Licencia Municipal de Funcionamiento (Apodaca)',base:'Ley de Desarrollo Económico del Estado de Nuevo León',freq:'anual'},
+  {tipo:'pb-pc',nombre:'Dictamen de Protección Civil',base:'Ley de Protección Civil del Estado de Nuevo León',freq:'anual'},
+  {tipo:'pb-uso',nombre:'Licencia de Uso de Suelo (Bodega/Servicios Aviación)',base:'Plan Municipal de Desarrollo Urbano Apodaca',freq:'unica'},
+  {tipo:'pb-afac',nombre:'Permiso AFAC — operación en área aeroportuaria',base:'Ley de Aviación Civil Art. 9 · Reglamento AFAC',freq:'variable'},
+  {tipo:'pb-semar',nombre:'Registro de Generador de Residuos Peligrosos (combustibles/lubricantes de aviación)',base:'LGPGIR Art. 28 · SEMARNAT',freq:'variable'},
+  {tipo:'pb-sat',nombre:'Alta SAT / RFC · CFDI activo',base:'CFF Art. 27',freq:'variable'},
+ ]},
+ {num:21,estado:'Nuevo León',permisos:[
   {tipo:'pb-lic',nombre:'Licencia Municipal de Funcionamiento (Apodaca)',base:'Ley de Desarrollo Económico del Estado de Nuevo León',freq:'anual'},
   {tipo:'pb-pc',nombre:'Dictamen de Protección Civil',base:'Ley de Protección Civil del Estado de Nuevo León',freq:'anual'},
   {tipo:'pb-uso',nombre:'Licencia de Uso de Suelo (Bodega/Servicios Aviación)',base:'Plan Municipal de Desarrollo Urbano Apodaca',freq:'unica'},
@@ -1006,7 +1024,7 @@ function cmtOpen(num,field,label,btnEl){
   document.getElementById('cmtTextarea').value=cmtGet(num,field);
   const pop=document.getElementById('cmtPopup');
   const r=btnEl.getBoundingClientRect();
-  pop.style.top=(r.bottom+window.scrollY+6)+'px';
+  pop.style.top=(r.bottom+6)+'px';
   pop.style.left=Math.min(r.left,window.innerWidth-258)+'px';
   pop.classList.add('open');
   setTimeout(()=>document.getElementById('cmtTextarea').focus(),50);
@@ -1276,19 +1294,32 @@ function renderAlertaRenta(){
       mailBtn=`<button class="airt-btn-mail" onclick="airtOpenEmail(${c.num})"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg> Preparar correo</button>`;
     }
     return `<div class="airt-card ${urg}" id="airt-card-${c.num}">
-      <div class="airt-card-body">
-        <div class="airt-card-head">
-          <div><span style="display:inline-block;background:${catColor};color:#fff;font-size:9px;font-weight:800;padding:2px 9px;border-radius:50px;margin-bottom:5px">${c.cat}</span>
-            <div class="airt-card-hotel">${c.hotel}</div>
-            <div class="airt-card-op">${c.arrendatario.length>50?c.arrendatario.substring(0,50)+'…':c.arrendatario}</div></div>
+      <div class="airt-card-header" onclick="airtToggleCard(${c.num})">
+        <div><span style="display:inline-block;background:${catColor};color:#fff;font-size:9px;font-weight:800;padding:2px 9px;border-radius:50px;margin-bottom:5px">${c.cat}</span>
+          <div class="airt-card-hotel">${c.hotel}</div>
+          <div class="airt-card-op">${c.arrendatario.length>50?c.arrendatario.substring(0,50)+'…':c.arrendatario}</div></div>
+        <div style="display:flex;align-items:center;gap:8px">
           <div class="airt-countdown">${cdHtml}</div>
+          <div class="airt-toggle-icon">▼</div>
         </div>
-        ${rentaCmp}${incrBadge}
-        <div class="airt-card-actions">${calcBtn}${mailBtn}</div>
-        ${histHtml}
+      </div>
+      <div class="airt-card-collapse" id="airt-collapse-${c.num}">
+        <div style="padding:0 16px 14px">
+          ${rentaCmp}${incrBadge}
+          <div class="airt-card-actions">${calcBtn}${mailBtn}</div>
+          ${histHtml}
+        </div>
       </div>
     </div>`;
   }).join('');
+}
+function airtToggleCard(num){
+  const card=document.getElementById('airt-card-'+num);
+  const collapse=document.getElementById('airt-collapse-'+num);
+  if(!card||!collapse)return;
+  const isOpen=collapse.classList.contains('open');
+  collapse.classList.toggle('open',!isOpen);
+  card.classList.toggle('expanded',!isOpen);
 }
 function airtToggleCalc(num){document.getElementById('airt-calc-'+num)?.classList.toggle('open');}
 function airtOpenEmail(num){
