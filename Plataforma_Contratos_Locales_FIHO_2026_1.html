@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>FIHO — Contratos Locales Comerciales 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@700;900&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--gold:#F0A500;--danger:#E53E3E;--navy:#0D1B3E}
+body{font-family:'Inter',sans-serif;background:linear-gradient(160deg,#0D1B3E 0%,#1a3560 40%,#0f2a50 100%);min-height:100vh;color:#fff}
+.hero{padding:36px 48px 22px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(240,165,0,.18) 0%,transparent 70%);pointer-events:none}
+.hero-badge{display:inline-block;background:rgba(240,165,0,.15);border:1px solid rgba(240,165,0,.45);color:var(--gold);font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;padding:5px 18px;border-radius:50px;margin-bottom:14px}
+.hero h1{font-family:'Montserrat',sans-serif;font-size:clamp(18px,3vw,30px);font-weight:900;color:#fff;line-height:1.15;margin-bottom:6px}
+.hero h1 span{color:var(--gold)}
+.hero p{color:rgba(255,255,255,.5);font-size:12px}
+.stats{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;padding:0 48px 22px}
+.stat-card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:12px 22px;text-align:center;min-width:100px}
+.stat-card .num{font-size:22px;font-weight:800;color:var(--gold);line-height:1}
+.stat-card .lbl{font-size:10px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:1.2px;margin-top:4px}
+.tabs-bar{display:flex;gap:5px;padding:0 28px 16px;flex-wrap:wrap}
+.tab-btn{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:10px;color:rgba(255,255,255,.6);font-family:'Inter',sans-serif;font-size:12.5px;font-weight:600;padding:8px 15px;cursor:pointer;transition:all .18s}
+.tab-btn:hover{background:rgba(255,255,255,.12);color:#fff}
+.tab-btn.active{background:var(--gold);border-color:var(--gold);color:#0D1B3E}
+.tab-btn .abadge{background:var(--danger);color:#fff;font-size:10px;font-weight:800;padding:1px 7px;border-radius:50px}
+.tab-btn.active .abadge{background:rgba(13,27,62,.3);color:#fff}
+.tab-panel{display:none}.tab-panel.active{display:block}
+.inpc-bar{display:flex;align-items:center;gap:10px;background:rgba(163,230,53,.07);border:1px solid rgba(163,230,53,.2);border-radius:10px;padding:8px 16px;margin:0 28px 12px;flex-wrap:wrap}
+.inpc-bar span{font-size:11px;color:rgba(255,255,255,.5)}
+.inpc-bar strong{color:#A3E635;font-size:11px}
+.inpc-edit-btn{background:rgba(163,230,53,.15);border:1px solid rgba(163,230,53,.3);color:#A3E635;font-family:'Inter',sans-serif;font-size:11px;font-weight:600;padding:4px 12px;border-radius:7px;cursor:pointer}
+.inpc-panel{display:none;background:rgba(0,0,0,.35);border:1px solid rgba(163,230,53,.2);border-radius:12px;padding:14px 18px;margin:0 28px 12px}
+.inpc-panel.open{display:block}
+.inpc-grid{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+.inpc-field{display:flex;align-items:center;gap:6px}
+.inpc-field label{font-size:11px;color:rgba(255,255,255,.5);width:35px;font-weight:700}
+.inpc-field input{width:70px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:7px;color:#A3E635;font-size:12px;font-weight:700;font-family:'Inter',sans-serif;padding:4px 8px;outline:none;text-align:right}
+.inpc-note{font-size:10px;color:rgba(255,255,255,.3);margin-top:8px;line-height:1.5}
+.inpc-monthly-sep{border:none;border-top:1px solid rgba(163,230,53,.15);margin:14px 0 10px}
+.inpc-monthly-title{font-size:12px;font-weight:700;color:#93C5FD;margin-bottom:10px}
+.inpc-schedule-table{width:100%;border-collapse:collapse;font-size:10px;margin-bottom:12px}
+.inpc-schedule-table th{color:rgba(255,255,255,.4);font-weight:600;padding:3px 8px;text-align:left;border-bottom:1px solid rgba(255,255,255,.08)}
+.inpc-schedule-table td{padding:3px 8px;color:rgba(255,255,255,.7);border-bottom:1px solid rgba(255,255,255,.05)}
+.inpc-schedule-table td.sched-pub{color:#FCD34D;font-family:monospace}
+.inpc-add-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:rgba(255,255,255,.04);border-radius:8px;padding:8px 12px;margin-bottom:10px}
+.inpc-add-row label{font-size:10px;color:rgba(255,255,255,.4);font-weight:600}
+.inpc-add-row select,.inpc-add-row input[type=number]{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:6px;color:#fff;font-size:11px;padding:4px 7px;outline:none;font-family:'Inter',sans-serif}
+.inpc-add-btn{background:rgba(147,197,253,.18);border:1px solid rgba(147,197,253,.35);border-radius:6px;color:#93C5FD;font-size:11px;font-weight:700;padding:4px 12px;cursor:pointer}
+.inpc-monthly-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.inpc-m-chip{display:inline-flex;align-items:center;gap:5px;background:rgba(147,197,253,.1);border:1px solid rgba(147,197,253,.25);border-radius:20px;padding:3px 10px;font-size:10px;color:#93C5FD}
+.inpc-m-chip.exact{background:rgba(163,230,53,.1);border-color:rgba(163,230,53,.3);color:#A3E635}
+.inpc-m-chip button{background:none;border:none;color:rgba(252,165,165,.6);cursor:pointer;font-size:11px;padding:0;line-height:1}
+.toolbar{display:flex;align-items:center;gap:10px;padding:0 28px 14px;flex-wrap:wrap}
+.search-wrap{position:relative;flex:1;min-width:200px}
+.search-wrap svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,.4)}
+.search-wrap input{width:100%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:10px;color:#fff;font-size:13px;font-family:'Inter',sans-serif;padding:8px 11px 8px 34px;outline:none;transition:border-color .2s}
+.search-wrap input::placeholder{color:rgba(255,255,255,.35)}
+.search-wrap input:focus{border-color:var(--gold)}
+.filter-sel{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:10px;color:#fff;font-size:12px;font-family:'Inter',sans-serif;padding:7px 11px;outline:none;cursor:pointer}
+.filter-sel option{background:#1a3560;color:#fff}
+.count-badge{background:rgba(240,165,0,.15);border:1px solid rgba(240,165,0,.35);color:var(--gold);font-size:12px;font-weight:700;padding:5px 13px;border-radius:50px;white-space:nowrap}
+.table-wrap{margin:0 20px 36px;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.1);box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.table-scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:2300px}
+thead tr{background:linear-gradient(135deg,#0D1B3E 0%,#163260 100%)}
+th{padding:12px 10px;font-size:9.5px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:rgba(255,255,255,.72);text-align:left;border-bottom:2px solid rgba(240,165,0,.35);white-space:nowrap;cursor:pointer;user-select:none;transition:color .15s}
+th:hover{color:var(--gold)} th .si{opacity:.35;margin-left:3px;font-size:9px} th.sorted{color:var(--gold)} th.sorted .si{opacity:1}
+th:first-child{text-align:center;width:36px}
+tbody tr{border-bottom:1px solid rgba(255,255,255,.06);transition:background .15s}
+tbody tr:nth-child(even){background:rgba(255,255,255,.04)}
+tbody tr:nth-child(odd){background:rgba(255,255,255,.015)}
+tbody tr:hover{background:rgba(240,165,0,.07)!important}
+tbody tr.hidden{display:none}
+td{padding:10px 10px;font-size:12px;color:rgba(255,255,255,.82);vertical-align:top;line-height:1.5}
+td:first-child{text-align:center;font-weight:700;color:var(--gold);font-size:13px}
+.op-stripe{border-left:4px solid transparent}
+.op-pill{display:inline-block;padding:2px 8px;border-radius:50px;font-size:9.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;margin-bottom:3px;color:#fff}
+.op-name{font-size:11.5px;font-weight:600;color:#fff;line-height:1.4}
+.hotel-name{font-weight:700;font-size:12.5px;color:#fff}
+.hotel-city{font-size:10.5px;color:rgba(255,255,255,.5);margin-top:1px}
+.plazo-years{display:inline-block;background:rgba(240,165,0,.15);border:1px solid rgba(240,165,0,.3);color:var(--gold);font-size:9px;font-weight:700;padding:2px 7px;border-radius:50px;margin-bottom:3px}
+.plazo-dates{font-size:11px;color:rgba(255,255,255,.62)}
+.plazo-alert{display:inline-block;background:rgba(229,62,62,.18);border:1px solid rgba(229,62,62,.4);color:#FCA5A5;font-size:9px;font-weight:700;padding:2px 7px;border-radius:50px;margin-top:3px}
+.plazo-ok{display:inline-block;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.3);color:#86EFAC;font-size:9px;font-weight:700;padding:2px 7px;border-radius:50px;margin-top:3px}
+.plazo-warn{display:inline-block;background:rgba(240,165,0,.15);border:1px solid rgba(240,165,0,.35);color:var(--gold);font-size:9px;font-weight:700;padding:2px 7px;border-radius:50px;margin-top:3px}
+.renta-amount{font-weight:700;font-size:12.5px;color:#6EE7B7}
+.renta-note{font-size:10px;color:rgba(255,255,255,.42)}
+.ra-amount{font-weight:800;font-size:13px;color:#A3E635;line-height:1.2}
+.ra-incr{font-size:10px;color:rgba(163,230,53,.65);margin-top:1px}
+.ra-next{font-size:9.5px;color:rgba(255,255,255,.35);margin-top:2px}
+.ra-nodata{font-size:10.5px;color:rgba(255,255,255,.28);font-style:italic}
+.re-amount{font-weight:800;font-size:13px;color:#FCD34D;line-height:1.2}
+.re-note{font-size:10px;color:rgba(252,211,77,.55);margin-top:2px}
+.re-mes{font-size:9.5px;color:rgba(255,255,255,.35);margin-top:1px}
+.m2-amount{font-weight:700;font-size:12px;color:#C4B5FD;line-height:1.2}
+.m2-note{font-size:10px;color:rgba(196,181,253,.55)}
+.incr-month{font-weight:700;font-size:12px;color:#93C5FD;text-transform:uppercase}
+.incr-note{font-size:10px;color:rgba(255,255,255,.42);margin-top:2px}
+.mant-chip{display:inline-block;background:rgba(110,231,183,.12);border:1px solid rgba(110,231,183,.25);color:#6EE7B7;font-size:9.5px;font-weight:700;padding:2px 8px;border-radius:50px}
+.dep-chip{display:inline-block;background:rgba(147,197,253,.12);border:1px solid rgba(147,197,253,.25);color:#93C5FD;font-size:9.5px;font-weight:700;padding:2px 8px;border-radius:50px}
+.giro-pill{display:inline-block;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.7);font-size:9.5px;font-weight:600;padding:2px 8px;border-radius:50px;margin-top:3px}
+.renovacion-chip{display:inline-block;background:rgba(240,165,0,.12);border:1px solid rgba(240,165,0,.3);color:var(--gold);font-size:9px;font-weight:700;padding:2px 7px;border-radius:50px;margin-top:3px}
+.na{font-size:10.5px;color:rgba(255,255,255,.28);font-style:italic}
+.no-results{text-align:center;padding:40px;color:rgba(255,255,255,.3);font-size:14px;display:none}
+.cob-ok{font-weight:700;font-size:11px;color:#86EFAC}
+.cob-vencido-badge{background:rgba(220,38,38,.18);border:1px solid rgba(220,38,38,.35);border-radius:8px;padding:5px 9px}
+.cob-vencido-monto{font-weight:700;font-size:12px;color:#FCA5A5}
+.cob-vencido-mes{font-size:10px;color:rgba(252,165,165,.7);margin-top:2px}
+.cob-nodata{font-size:10px;color:rgba(255,255,255,.28);font-style:italic}
+.pb{display:inline-flex;align-items:center;font-size:9px;font-weight:700;letter-spacing:.4px;padding:2px 7px;border-radius:50px;text-transform:uppercase;color:#fff;border:1px solid transparent;margin-right:2px}
+.pb-lic{background:rgba(37,99,235,.35);border-color:rgba(37,99,235,.6);color:#93C5FD}
+.pb-pc{background:rgba(217,119,6,.35);border-color:rgba(217,119,6,.6);color:#FCD34D}
+.pb-uso{background:rgba(124,58,237,.35);border-color:rgba(124,58,237,.6);color:#C4B5FD}
+.pb-anun{background:rgba(13,148,136,.35);border-color:rgba(13,148,136,.6);color:#5EEAD4}
+.pb-sat{background:rgba(146,64,14,.45);border-color:rgba(146,64,14,.7);color:#FDE68A}
+.pb-imss{background:rgba(22,101,52,.45);border-color:rgba(22,101,52,.7);color:#86EFAC}
+.pb-afac{background:rgba(159,18,57,.45);border-color:rgba(159,18,57,.7);color:#FCA5A5}
+.pb-inah{background:rgba(120,40,0,.45);border-color:rgba(120,40,0,.7);color:#FDE68A}
+.pb-semar{background:rgba(4,120,87,.45);border-color:rgba(4,120,87,.7);color:#6EE7B7}
+.pb-alc{background:rgba(190,24,93,.4);border-color:rgba(190,24,93,.65);color:#FBCFE8}
+.pb-san{background:rgba(8,145,178,.35);border-color:rgba(8,145,178,.6);color:#A5F3FC}
+.pb-tur{background:rgba(79,70,229,.35);border-color:rgba(79,70,229,.6);color:#C7D2FE}
+.pb-fin{background:rgba(30,58,138,.4);border-color:rgba(30,58,138,.65);color:#BFDBFE}
+.pb-mov{background:rgba(51,65,85,.5);border-color:rgba(51,65,85,.75);color:#CBD5E1}
+.pbadges{display:flex;flex-wrap:wrap;gap:2px;margin-bottom:3px}
+.perm-legend{display:flex;flex-wrap:wrap;gap:8px;padding:0 28px 14px}
+.pl-item{display:flex;align-items:center;gap:5px;font-size:11px;color:rgba(255,255,255,.6)}
+</style>
+<style>
+.alert-panel{padding:0 28px 44px}
+.alert-section-title{display:flex;align-items:center;gap:10px;margin:22px 0 14px}
+.alert-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}
+.alert-section-title h3{font-size:14px;font-weight:700;margin:0}
+.pc{background:rgba(255,255,255,.1);border-radius:50px;font-size:11px;font-weight:700;padding:2px 10px;color:rgba(255,255,255,.6)}
+.alert-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:12px}
+.alert-divider{height:1px;background:rgba(255,255,255,.08);margin:8px 0}
+.alert-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:14px 16px}
+.alert-card.red{background:rgba(220,38,38,.07);border-color:rgba(220,38,38,.3)}
+.alert-card.orange{background:rgba(217,119,6,.07);border-color:rgba(217,119,6,.3)}
+.alert-card.yellow{background:rgba(240,165,0,.07);border-color:rgba(240,165,0,.3)}
+.alert-card.green{background:rgba(34,197,94,.05);border-color:rgba(34,197,94,.2)}
+.alert-card-header{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:10px}
+.alert-num{font-size:10px;font-weight:700;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.8px}
+.alert-hotel{font-size:13px;font-weight:700;color:#fff;margin-top:2px}
+.alert-op{font-size:11px;color:rgba(255,255,255,.55);margin-top:2px}
+.alert-time-badge{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:6px 12px;text-align:center;font-size:11px;font-weight:700;color:#fff;white-space:nowrap;flex-shrink:0}
+.alert-meta{display:flex;gap:16px;flex-wrap:wrap}
+.alert-meta-item .alert-meta-label{font-size:9.5px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.6px}
+.alert-meta-item .alert-meta-val{font-size:12px;font-weight:600;color:rgba(255,255,255,.85);margin-top:2px}
+.airt-panel{padding:0 28px 44px}
+.airt-header{background:rgba(240,165,0,.07);border:1px solid rgba(240,165,0,.2);border-radius:12px;padding:14px 18px;margin-bottom:18px}
+.airt-header-title{font-size:14px;font-weight:800;color:var(--gold);margin-bottom:4px}
+.airt-header-sub{font-size:11px;color:rgba(255,255,255,.5);line-height:1.5}
+.airt-stats{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+.airt-stat{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:10px 16px;text-align:center;min-width:100px}
+.airt-stat-n{font-size:20px;font-weight:800;color:var(--gold)}
+.airt-stat-l{font-size:9.5px;font-weight:700;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.8px;margin-top:3px}
+.airt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:14px}
+.airt-card{position:relative;border-radius:14px;overflow:hidden;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1)}
+.airt-card.urgente{border-color:rgba(220,38,38,.4);background:rgba(220,38,38,.06)}
+.airt-card.proximo{border-color:rgba(192,87,33,.4);background:rgba(192,87,33,.06)}
+.airt-card.programado{border-color:rgba(240,165,0,.35);background:rgba(240,165,0,.05)}
+.airt-card.tranquilo{border-color:rgba(37,99,235,.3);background:rgba(37,99,235,.04)}
+.airt-card.especial{border-color:rgba(100,116,139,.3);background:rgba(100,116,139,.04)}
+.airt-card-body{padding:14px 16px}
+.airt-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:12px}
+.airt-card-hotel{font-size:13px;font-weight:700;color:#fff}
+.airt-card-op{font-size:11px;color:rgba(255,255,255,.5);margin-top:2px}
+.airt-countdown{text-align:right;flex-shrink:0}
+.airt-countdown-n{font-size:28px;font-weight:900;color:var(--gold);line-height:1}
+.airt-countdown-l{font-size:10px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.8px}
+.airt-countdown-mes{font-size:10px;color:var(--gold);margin-top:2px}
+.airt-renta-cmp{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.04);border-radius:10px;padding:10px 12px;margin-bottom:10px}
+.airt-renta-item{flex:1;text-align:center}
+.airt-renta-lbl{font-size:9.5px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.6px}
+.airt-renta-val{font-size:15px;font-weight:800;margin-top:3px}
+.airt-renta-sub{font-size:10px;color:rgba(255,255,255,.4)}
+.airt-renta-arrow{font-size:18px;color:rgba(255,255,255,.3)}
+.airt-incr-badge{display:inline-block;background:rgba(163,230,53,.12);border:1px solid rgba(163,230,53,.25);border-radius:8px;padding:4px 10px;font-size:10.5px;color:#A3E635;margin-bottom:10px;line-height:1.5}
+.airt-special-msg{font-size:11.5px;color:rgba(255,255,255,.45);font-style:italic;margin-bottom:10px;padding:8px 12px;background:rgba(255,255,255,.04);border-radius:8px}
+.airt-card-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.airt-btn-calc{background:rgba(147,197,253,.12);border:1px solid rgba(147,197,253,.3);border-radius:8px;color:#93C5FD;font-size:11px;font-weight:700;padding:6px 14px;cursor:pointer;font-family:'Inter',sans-serif}
+.airt-btn-mail{background:rgba(240,165,0,.15);border:1px solid rgba(240,165,0,.35);border-radius:8px;color:var(--gold);font-size:11px;font-weight:700;padding:6px 14px;cursor:pointer;display:flex;align-items:center;gap:5px;font-family:'Inter',sans-serif}
+.airt-calc-panel{display:none;margin-top:10px;background:rgba(0,0,0,.25);border-radius:10px;padding:12px}
+.airt-calc-panel.open{display:block}
+.airt-calc-title{font-size:11px;font-weight:700;color:rgba(255,255,255,.7);margin-bottom:8px}
+.airt-calc-table{width:100%;border-collapse:collapse;font-size:10.5px}
+.airt-calc-table th{color:rgba(255,255,255,.45);font-weight:600;padding:3px 7px;text-align:left;border-bottom:1px solid rgba(255,255,255,.08)}
+.airt-calc-table td{padding:3px 7px;color:rgba(255,255,255,.75);border-bottom:1px solid rgba(255,255,255,.05)}
+.airt-calc-next{font-size:11px;color:rgba(255,255,255,.6);margin-top:10px;line-height:1.6;background:rgba(163,230,53,.07);border-radius:8px;padding:8px 10px}
+.ener-panel{padding:0 28px 44px}
+.ener-intro{background:rgba(234,179,8,.08);border:1px solid rgba(234,179,8,.25);border-radius:10px;padding:12px 16px;font-size:11.5px;color:rgba(255,255,255,.7);margin-bottom:18px;line-height:1.6}
+.ener-table-wrap{border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.1);overflow-x:auto}
+.ener-table{width:100%;border-collapse:collapse;font-size:12px;min-width:900px}
+.ener-table thead tr{background:linear-gradient(135deg,#0D1B3E,#163260)}
+.ener-table th{padding:11px 12px;text-align:left;font-size:9.5px;font-weight:700;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(255,255,255,.1)}
+.ener-table td{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.06);color:rgba(255,255,255,.8);vertical-align:top}
+.ener-table tbody tr:hover{background:rgba(255,255,255,.04)}
+.ener-num{text-align:center;font-weight:700;color:var(--gold);font-size:13px}
+.ener-si-elec{font-weight:700;font-size:11px;color:#FCD34D}
+.ener-si-agua{font-weight:700;font-size:11px;color:#93C5FD}
+.ener-si-mant{font-weight:700;font-size:11px;color:#6EE7B7}
+.ener-no{font-size:10.5px;color:rgba(255,255,255,.28);font-style:italic}
+.ener-monto-elec{font-weight:800;font-size:13px;color:#FCD34D}
+.ener-monto-agua{font-weight:800;font-size:13px;color:#93C5FD}
+.ener-monto-mant{font-weight:800;font-size:13px;color:#6EE7B7}
+.ener-nota{font-size:10px;color:rgba(255,255,255,.42)}
+.docs-panel{padding:0 28px 44px}
+.docs-note{background:rgba(99,102,241,.1);border:1px solid rgba(99,102,241,.25);border-radius:8px;padding:10px 14px;font-size:11px;color:rgba(255,255,255,.65);margin-bottom:16px;line-height:1.6}
+.docs-filter select{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:8px;color:#fff;font-size:12px;padding:7px 11px;outline:none;cursor:pointer}
+.docs-filter select option{background:#1a3560}
+.docs-stats{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.docs-stat{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:8px 14px;text-align:center}
+.docs-stat .dn{font-size:18px;font-weight:800;color:var(--gold)}
+.docs-stat .dl{font-size:9.5px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.8px;margin-top:2px}
+.docs-contract{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.09);border-radius:14px;padding:14px 18px;margin-bottom:12px}
+.docs-contract-hdr{display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+.docs-cnum{background:var(--gold);color:#0D1B3E;font-size:11px;font-weight:800;padding:3px 10px;border-radius:50px;flex-shrink:0}
+.docs-hotel{font-size:13px;font-weight:700;color:#fff}
+.docs-ciudad{font-size:11px;color:rgba(255,255,255,.5);margin-top:1px}
+.docs-perm-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:8px}
+.docs-perm-item{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:10px;padding:10px 12px}
+.docs-perm-name{font-size:12px;font-weight:700;color:#fff;margin-bottom:4px}
+.docs-perm-base{font-size:10.5px;color:rgba(255,255,255,.5);margin-bottom:6px;line-height:1.4}
+.docs-perm-row{display:flex;align-items:center;gap:8px;margin-top:6px;flex-wrap:wrap}
+.docs-freq-chip{font-size:9.5px;font-weight:700;padding:2px 9px;border-radius:50px;border:1px solid transparent}
+.freq-anual{background:rgba(239,68,68,.15);border-color:rgba(239,68,68,.35);color:#FCA5A5}
+.freq-unica{background:rgba(34,197,94,.12);border-color:rgba(34,197,94,.3);color:#86EFAC}
+.freq-variable{background:rgba(240,165,0,.12);border-color:rgba(240,165,0,.3);color:var(--gold)}
+.freq-continua{background:rgba(147,197,253,.12);border-color:rgba(147,197,253,.3);color:#93C5FD}
+.btn-upload-mini{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:7px;color:rgba(255,255,255,.7);font-size:10px;font-weight:600;padding:4px 10px;cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s}
+.btn-upload-mini:hover{background:rgba(255,255,255,.12);color:#fff}
+.btn-view-mini{background:rgba(147,197,253,.12);border:1px solid rgba(147,197,253,.3);border-radius:7px;color:#93C5FD;font-size:10px;font-weight:600;padding:4px 10px;cursor:pointer;font-family:'Inter',sans-serif}
+.ctab-panel{padding:0 28px 44px}
+.ctab-note{background:rgba(99,102,241,.1);border:1px solid rgba(99,102,241,.25);border-radius:8px;padding:10px 14px;font-size:11px;color:rgba(255,255,255,.65);margin-bottom:16px;line-height:1.6}
+.ctab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.ctab-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:14px;overflow:hidden}
+.ctab-card-hdr{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;background:rgba(0,0,0,.15);border-bottom:1px solid rgba(255,255,255,.08)}
+.ctab-num{background:rgba(240,165,0,.2);color:var(--gold);font-size:11px;font-weight:800;padding:3px 9px;border-radius:50px;flex-shrink:0;margin-top:1px}
+.ctab-hotel{font-size:12px;font-weight:700;color:#fff;line-height:1.3}
+.ctab-op{font-size:10.5px;color:rgba(255,255,255,.45);margin-top:3px}
+.ctab-status-ok{font-size:10px;font-weight:700;color:#86EFAC;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.3);padding:2px 8px;border-radius:50px}
+.ctab-status-miss{font-size:10px;font-weight:700;color:rgba(255,255,255,.35);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);padding:2px 8px;border-radius:50px}
+.ctab-body{padding:12px 14px}
+.ctab-row{display:flex;align-items:center;gap:8px;margin-bottom:7px;flex-wrap:wrap}
+.ctab-lbl{font-size:10px;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.6px;flex-shrink:0;width:68px}
+.ctab-val{font-size:11px;color:rgba(255,255,255,.75)}
+.ctab-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.btn-upload{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:8px;color:rgba(255,255,255,.7);font-size:11px;font-weight:600;padding:6px 13px;cursor:pointer;transition:all .15s;font-family:'Inter',sans-serif}
+.btn-upload:hover{background:rgba(255,255,255,.12);color:#fff}
+.btn-view{background:rgba(147,197,253,.12);border:1px solid rgba(147,197,253,.3);border-radius:8px;color:#93C5FD;font-size:11px;font-weight:600;padding:6px 13px;cursor:pointer;font-family:'Inter',sans-serif;text-decoration:none;display:inline-flex;align-items:center;gap:4px}
+.fact-panel{padding:0 28px 44px}
+.fact-note{background:rgba(99,102,241,.1);border:1px solid rgba(99,102,241,.25);border-radius:8px;padding:10px 14px;font-size:11px;color:rgba(255,255,255,.65);margin-bottom:16px;line-height:1.6}
+.fact-top{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:18px}
+.fact-month-sel{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:9px 14px}
+.fact-month-sel label{font-size:11px;font-weight:700;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:.8px}
+.fact-month-sel select{background:transparent;border:none;color:#fff;font-size:13px;font-weight:700;outline:none;cursor:pointer}
+.fact-month-sel select option{background:#1a3560;color:#fff}
+.fact-btn{background:linear-gradient(135deg,#22c55e,#16a34a);border:none;border-radius:10px;color:#fff;font-size:13px;font-weight:700;padding:9px 20px;cursor:pointer;display:flex;align-items:center;gap:7px}
+.fact-table-wrap{border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.1);overflow-x:auto}
+.fact-table{width:100%;border-collapse:collapse;font-size:11.5px;min-width:900px}
+.fact-table thead tr{background:linear-gradient(135deg,#0D1B3E,#163260)}
+.fact-table thead th{padding:10px 12px;text-align:left;font-size:9.5px;font-weight:700;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(255,255,255,.1)}
+.fact-table tbody td{padding:9px 12px;border-bottom:1px solid rgba(255,255,255,.06);color:#fff;vertical-align:top}
+.fact-table tbody tr:hover{background:rgba(255,255,255,.04)}
+.fact-table .fact-total-row td{background:rgba(240,165,0,.12);border-top:2px solid rgba(240,165,0,.4);font-weight:700;color:var(--gold)}
+.fact-precio{font-weight:700;color:#A3E635;font-size:12px}
+.fact-total{font-weight:700;color:#FCD34D;font-size:12px}
+.conc-panel{padding:0 28px 44px}
+.conc-section{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.09);border-radius:14px;padding:16px 18px;margin-bottom:18px}
+.conc-section-title{font-size:13px;font-weight:700;color:#fff;margin-bottom:12px}
+.conc-drop{position:relative;border:2px dashed rgba(255,255,255,.18);border-radius:12px;padding:26px 18px;text-align:center;transition:border-color .2s;cursor:pointer}
+.conc-drop:hover{border-color:rgba(240,165,0,.5)}
+.conc-drop input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.conc-drop-lbl{pointer-events:none;font-size:12px;color:rgba(255,255,255,.42);line-height:1.7}
+.conc-drop-lbl strong{display:block;font-size:13px;color:#fff;margin-bottom:4px}
+.conc-file-ok{display:none;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.3);color:#86EFAC;font-size:11px;font-weight:700;padding:6px 12px;border-radius:8px;margin-top:8px}
+.conc-file-ok.show{display:block}
+.conc-btn{background:linear-gradient(135deg,#3b82f6,#2563eb);border:none;border-radius:10px;color:#fff;font-size:13px;font-weight:700;padding:9px 20px;cursor:pointer}
+.conc-btn:disabled{opacity:.4;cursor:not-allowed}
+.conc-note{font-size:11px;color:rgba(255,255,255,.38);margin-top:8px;line-height:1.5}
+.conc-btn-sec{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:8px;color:#fff;font-size:12px;font-weight:600;padding:7px 14px;cursor:pointer}
+.conc-result-wrap{overflow-x:auto;border-radius:12px;border:1px solid rgba(255,255,255,.08)}
+.conc-table{width:100%;border-collapse:collapse;font-size:11px;min-width:700px}
+.conc-table th{background:rgba(13,27,62,.8);padding:8px 10px;text-align:left;font-size:9.5px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(255,255,255,.1)}
+.conc-table td{padding:7px 10px;border-bottom:1px solid rgba(255,255,255,.05);color:rgba(255,255,255,.75)}
+.match-exact{color:#86EFAC;font-weight:700} .match-approx{color:#FCD34D;font-weight:700} .match-none{color:#FCA5A5;font-weight:700}
+.conc-col-map{margin-top:8px;display:flex;flex-wrap:wrap;gap:8px}
+.conc-col-map label{font-size:10px;color:rgba(255,255,255,.45)}
+.conc-col-map select{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:6px;color:#fff;font-size:11px;padding:3px 7px;outline:none}
+.cob-panel{padding:0 28px 44px}
+.cob-spei-box{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 14px;font-size:11px;color:rgba(255,255,255,.55);line-height:1.8;margin-bottom:16px}
+.cob-spei-box strong{color:rgba(255,255,255,.8)}
+.cob-copy-btn{background:rgba(240,165,0,.1);border:1px solid rgba(240,165,0,.3);color:var(--gold);font-size:10px;font-weight:700;padding:3px 10px;border-radius:6px;cursor:pointer;margin-left:8px}
+.cob-summary{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.cob-sum-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:10px 16px;min-width:120px}
+.cob-sum-card .num{font-size:18px;font-weight:800;color:var(--gold)}
+.cob-sum-card .lbl{font-size:9.5px;font-weight:700;color:rgba(255,255,255,.42);text-transform:uppercase;letter-spacing:.8px;margin-top:3px}
+.cob-table-wrap{border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.1);overflow-x:auto}
+.cob-table{width:100%;border-collapse:collapse;font-size:11.5px;min-width:900px}
+.cob-table thead tr{background:linear-gradient(135deg,#0D1B3E,#163260)}
+.cob-table th{padding:10px 12px;text-align:left;font-size:9.5px;font-weight:700;color:rgba(255,255,255,.52);text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(255,255,255,.1)}
+.cob-table td{padding:9px 12px;border-bottom:1px solid rgba(255,255,255,.06);color:rgba(255,255,255,.8);vertical-align:top}
+.cob-table tbody tr:hover{background:rgba(255,255,255,.04)}
+.cob-btn-email,.cob-btn-wa{border-radius:6px;font-size:10px;font-weight:700;padding:3px 10px;cursor:pointer;display:block;white-space:nowrap;margin-bottom:3px;font-family:'Inter',sans-serif}
+.cob-btn-email{background:rgba(59,130,246,.18);border:1px solid rgba(59,130,246,.4);color:#93C5FD}
+.cob-btn-wa{background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.3);color:#86EFAC}
+.cob-log-entry{font-size:10px;color:rgba(255,255,255,.32);margin-top:2px}
+.cob-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.72);display:flex;align-items:center;justify-content:center;z-index:9999;opacity:0;pointer-events:none;transition:opacity .2s}
+.cob-modal-overlay.open{opacity:1;pointer-events:all}
+.cob-modal{background:#0f172a;border:1px solid #1e293b;border-radius:16px;width:min(680px,95vw);max-height:90vh;overflow-y:auto;padding:26px;position:relative}
+.cob-modal-title{font-size:15px;font-weight:800;color:#e2e8f0;margin-bottom:4px}
+.cob-modal-sub{font-size:11px;color:#64748b;margin-bottom:14px;line-height:1.5}
+.cob-email-preview{background:#050a14;border:1px solid #1e293b;border-radius:8px;padding:14px;font-size:11px;color:#94a3b8;font-family:monospace;white-space:pre-wrap;max-height:400px;overflow-y:auto;line-height:1.55}
+.cob-modal-actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.cob-btn-send{background:#1e3a5f;color:#93c5fd;border:none;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:5px}
+.cob-btn-copy2{background:#1e293b;color:#94a3b8;border:none;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:700;cursor:pointer}
+.cob-modal-close{position:absolute;top:14px;right:14px;background:none;border:none;color:#64748b;font-size:18px;cursor:pointer;line-height:1}
+.footer{padding:18px 28px;font-size:10.5px;color:rgba(255,255,255,.3);border-top:1px solid rgba(255,255,255,.07);line-height:1.7;margin-top:20px}
+.footer strong{color:rgba(255,255,255,.5)}
+</style>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+<div class="hero">
+  <div class="hero-badge">Fideicomiso F/1596 &bull; FIHO</div>
+  <h1>Contratos de Arrendamiento<br/><span>Locales Comerciales</span></h1>
+  <p>Base de datos · información extraída de contratos originales y soporte de facturas · 18-jun-2026</p>
+</div>
+<div class="stats">
+  <div class="stat-card"><div class="num">20</div><div class="lbl">Contratos</div></div>
+  <div class="stat-card"><div class="num" id="statVencidos" style="color:#E53E3E">—</div><div class="lbl">Alertas Contrato</div></div>
+  <div class="stat-card"><div class="num" id="statDeudores" style="color:#F97316">—</div><div class="lbl">Con adeudo</div></div>
+  <div class="stat-card"><div class="num" id="statIncrProx">—</div><div class="lbl">Incrementos ≤90d</div></div>
+</div>
+<div class="tabs-bar">
+  <button class="tab-btn active" onclick="switchTab('tabla',this)">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
+    Contratos</button>
+  <button class="tab-btn" onclick="switchTab('alertas',this)">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+    Alertas Vencimiento <span class="abadge" id="alertBadge">—</span></button>
+  <button class="tab-btn" onclick="switchTab('alertas-renta',this)">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+    Alerta Incremento Renta</button>
+  <button class="tab-btn" onclick="switchTab('energeticos',this)">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+    Energéticos</button>
+  <button class="tab-btn" onclick="switchTab('permisos',this)">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+    Permisos y Licencias</button>
+  <button class="tab-btn" onclick="switchTab('docs',this)">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
+    Repositorio Contratos</button>
+  <button class="tab-btn" onclick="switchTab('facturacion',this)">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    Facturación</button>
+  <button class="tab-btn" onclick="switchTab('conciliacion',this)">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22V12m0 0L8 8m4 4l4-4"/><path d="M20 16v-4h-4"/><path d="M4 8v4h4"/></svg>
+    Conciliación</button>
+  <button class="tab-btn" onclick="switchTab('cobranza',this)">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+    Cobranza</button>
+</div>
+<!-- PANEL TABLA -->
+<div class="tab-panel active" id="panel-tabla">
+  <div class="inpc-bar">
+    <span>📈 INPC tasas aplicadas:</span>
+    <strong id="inpcSummary">cargando…</strong>
+    <button class="inpc-edit-btn" onclick="toggleInpcPanel()">✏ Editar tasas</button>
+    <span style="margin-left:auto;font-size:10px">Ref: 18-jun-2026 · Fuente: INEGI</span>
+  </div>
+  <div class="inpc-panel" id="inpcPanel">
+    <div style="font-size:12px;font-weight:700;color:#A3E635;margin-bottom:4px">Tasas INPC anuales (variación anual, fuente INEGI)</div>
+    <div class="inpc-grid" id="inpcGrid"></div>
+    <div class="inpc-note">Las tasas de 2025 y 2026 son estimaciones. Actualice con valores oficiales INEGI en <strong>www.inegi.org.mx</strong>. Los cambios se guardan en este navegador y recalculan las rentas automáticamente.</div>
+    <button class="inpc-edit-btn" onclick="saveInpcRates()" style="margin-top:10px">💾 Guardar y recalcular</button>
+    <hr class="inpc-monthly-sep"/>
+    <div class="inpc-monthly-title">📅 Índices INPC mensuales — Calendario de actualización</div>
+    <div style="font-size:11px;color:rgba(163,230,53,.8);margin-bottom:8px;font-weight:600">Cláusula 5.7 — Para calcular la tasa de cada incremento se necesitan los dos índices del <strong>mes inmediato anterior</strong> al mes de inicio del período:</div>
+    <table class="inpc-schedule-table">
+      <thead><tr><th>Próximo incremento</th><th>Mes ref. cláusula 5.7</th><th>INPC necesario A</th><th>INPC necesario B</th><th>Publ. aprox.</th><th>Contratos</th></tr></thead>
+      <tbody>
+        <tr><td>Sep-2026</td><td class="sched-pub">Ago-2026</td><td>INPC ago-2026</td><td>INPC ago-2025 ✓</td><td>~10 sep-2026</td><td>#2 Santander</td></tr>
+        <tr><td>Oct-2026</td><td class="sched-pub">Sep-2026</td><td>INPC sep-2026</td><td>INPC sep-2025 ✓</td><td>~10 oct-2026</td><td>#17 Traigo Todo (Hmo)</td></tr>
+        <tr><td>Nov-2026</td><td class="sched-pub">Oct-2026</td><td>INPC oct-2026</td><td>INPC oct-2025 ✓</td><td>~10 nov-2026</td><td>#7 Primeflight, #11 Zapata</td></tr>
+        <tr><td>Dic-2026</td><td class="sched-pub">Nov-2026</td><td>INPC nov-2026</td><td>INPC nov-2025 ✓</td><td>~10 dic-2026</td><td>#3 C.Automotriz, #5 Fisher</td></tr>
+        <tr><td>Feb-2027</td><td class="sched-pub">Ene-2027</td><td>INPC ene-2027</td><td>INPC ene-2026 ✓</td><td>~10 feb-2027</td><td>#21 Op.Valiente SMA</td></tr>
+        <tr><td>Mar-2027</td><td class="sched-pub">Feb-2027</td><td>INPC feb-2027</td><td>INPC feb-2026 ✓</td><td>~10 mar-2027</td><td>#6 Corp.Solar, #20 Waldo's, #12 InHouse Carmen</td></tr>
+        <tr><td>Abr-2027</td><td class="sched-pub">Mar-2027</td><td>INPC mar-2027</td><td>INPC mar-2026 ✓</td><td>~10 abr-2027</td><td>#1 Agro-Partes (Cl.5.6 — INPC mes anterior al inicio del período)</td></tr>
+        <tr><td>Jun-2027</td><td class="sched-pub">May-2027</td><td>INPC may-2027</td><td>INPC may-2026 ✓</td><td>~10 jun-2027</td><td>#4 Circle K, #10 Torres Rojo</td></tr>
+        <tr><td>Jul-2027</td><td class="sched-pub">Jun-2027</td><td>INPC jun-2027</td><td>INPC jun-2026 ✓ (cuando se publique)</td><td>~10 jul-2027</td><td>#19 TV Azteca</td></tr>
+      </tbody>
+    </table>
+    <div class="inpc-add-row">
+      <label>Mes</label>
+      <select id="inpcAddMes">
+        <option value="1">Enero</option><option value="2">Febrero</option><option value="3">Marzo</option>
+        <option value="4">Abril</option><option value="5">Mayo</option><option value="6">Junio</option>
+        <option value="7">Julio</option><option value="8">Agosto</option><option value="9">Septiembre</option>
+        <option value="10">Octubre</option><option value="11">Noviembre</option><option value="12">Diciembre</option>
+      </select>
+      <label>Año</label>
+      <select id="inpcAddYear">
+        <option value="2025">2025</option><option value="2026" selected>2026</option>
+        <option value="2027">2027</option><option value="2028">2028</option>
+      </select>
+      <label>Índice INPC</label>
+      <input type="number" id="inpcAddVal" step="0.001" min="100" max="300" placeholder="ej: 146.123" style="width:110px"/>
+      <button class="inpc-add-btn" onclick="inpcAddMonthly()">+ Agregar índice</button>
+    </div>
+    <div id="inpcMonthlyList" class="inpc-monthly-list"></div>
+  </div>
+  <div class="perm-legend">
+    <span style="font-size:10.5px;font-weight:700;color:rgba(255,255,255,.42);margin-right:4px;text-transform:uppercase;letter-spacing:1px">Permisos:</span>
+    <span class="pl-item"><span class="pb pb-lic">LIC</span> Licencia Func.</span>
+    <span class="pl-item"><span class="pb pb-pc">PC</span> Protección Civil</span>
+    <span class="pl-item"><span class="pb pb-uso">USO</span> Uso de Suelo</span>
+    <span class="pl-item"><span class="pb pb-anun">ANUN</span> Anuncios</span>
+    <span class="pl-item"><span class="pb pb-sat">SAT</span> Fiscal</span>
+    <span class="pl-item"><span class="pb pb-imss">IMSS</span> IMSS/INFONAVIT</span>
+    <span class="pl-item"><span class="pb pb-semar">SEMAR</span> Ambiental/Zona Costera</span>
+    <span class="pl-item"><span class="pb pb-afac">AFAC</span> Aeronáutico</span>
+    <span class="pl-item"><span class="pb pb-alc">ALC</span> Bebidas Alcohólicas</span>
+    <span class="pl-item"><span class="pb pb-san">SAN</span> Sanitario/COFEPRIS</span>
+    <span class="pl-item"><span class="pb pb-tur">TUR</span> Turismo/SECTUR</span>
+    <span class="pl-item"><span class="pb pb-fin">FIN</span> Regulación Financiera</span>
+    <span class="pl-item"><span class="pb pb-mov">MOV</span> Movilidad/Transporte</span>
+  </div>
+  <div class="toolbar">
+    <div class="search-wrap">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="searchInput" placeholder="Buscar por arrendatario, hotel, ciudad, giro…" oninput="filterTable()"/>
+    </div>
+    <select class="filter-sel" id="filterEstado" onchange="filterTable()">
+      <option value="">Todos los contratos</option>
+      <option value="vigente">Vigentes (&gt;12 meses)</option>
+      <option value="vencer">Por vencer (&lt;12 meses)</option>
+      <option value="vencido">Vencidos</option>
+    </select>
+    <div class="count-badge" id="countBadge">20 contratos</div>
+  </div>
+  <div class="table-wrap">
+    <div class="table-scroll">
+      <table id="mainTable">
+        <thead><tr>
+          <th onclick="sortTable(0)">#<span class="si">⇅</span></th>
+          <th onclick="sortTable(1)">ARRENDATARIO<span class="si">⇅</span></th>
+          <th onclick="sortTable(2)">INMUEBLE / HOTEL<span class="si">⇅</span></th>
+          <th>LOCALIDAD · SUPERFICIE · GIRO</th>
+          <th onclick="sortTable(4)">PLAZO<span class="si">⇅</span></th>
+          <th onclick="sortTable(5)">RENTA ORIGINAL<span class="si">⇅</span></th>
+          <th>RENTA ACTUAL<br/><span style="font-size:9px;font-weight:400;text-transform:none;letter-spacing:0;color:rgba(163,230,53,.6)">actualizada INPC · jun-2026</span></th>
+          <th>RENTA EFECTIVA<br/><span style="font-size:9px;font-weight:400;text-transform:none;letter-spacing:0;color:rgba(252,211,77,.6)">soporte factura · s/IVA</span></th>
+          <th>COSTO M²<br/><span style="font-size:9px;font-weight:400;text-transform:none;letter-spacing:0;color:rgba(196,181,253,.6)">renta efectiva / m²</span></th>
+          <th>MES INCREMENTO</th>
+          <th>MANT. MENSUAL<br/><span style="font-size:9px;font-weight:400;text-transform:none;letter-spacing:0;color:rgba(110,231,183,.6)">soporte factura</span></th>
+          <th>DEPÓSITO</th>
+          <th>PENALIZACIÓN</th>
+          <th>ESTATUS COBRANZA<br/><span style="font-size:9px;font-weight:400;text-transform:none;letter-spacing:0;color:rgba(252,165,165,.6)">al 12-jun-2026</span></th>
+          <th>PERMISOS OBLIGATORIOS</th>
+        </tr></thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+      <div class="no-results" id="noResults">Sin resultados.</div>
+    </div>
+  </div>
+</div>
+<!-- PANEL ALERTAS VENCIMIENTO -->
+<div class="tab-panel" id="panel-alertas"><div class="alert-panel" id="alertasContent"></div></div>
+<!-- PANEL ALERTA INCREMENTO RENTA -->
+<div class="tab-panel" id="panel-alertas-renta">
+  <div class="airt-panel">
+    <div class="airt-header">
+      <div class="airt-header-title">📈 Alertas de Incremento de Renta — INPC</div>
+      <div class="airt-header-sub">Calcula el próximo incremento de cada contrato conforme a la cláusula INPC pactada. La tasa compara el INPC del mes de referencia entre el año del incremento y el año anterior (fuente INEGI). Actualiza los índices mensuales en el panel INPC para mayor precisión.</div>
+    </div>
+    <div class="airt-stats" id="airtStats"></div>
+    <div class="airt-grid" id="airtGrid"></div>
+  </div>
+</div>
+<!-- PANEL ENERGETICOS -->
+<div class="tab-panel" id="panel-energeticos">
+  <div class="ener-panel">
+    <div class="ener-intro"><strong>Energéticos y Mantenimiento 2026:</strong> Importes extraídos de la hoja "SOPORTE FACTURAS" al 12-jun-2026. Columnas separadas: <strong style="color:#FCD34D">⚡ Electricidad</strong>, <strong style="color:#93C5FD">💧 Agua</strong> y <strong style="color:#6EE7B7">🔧 Mantenimiento</strong>. Solo se muestran arrendatarios con reembolsos activos en el período.</div>
+    <div class="ener-table-wrap">
+      <table class="ener-table">
+        <thead><tr>
+          <th style="text-align:center;width:36px">#</th>
+          <th>ARRENDATARIO</th>
+          <th>HOTEL / INMUEBLE · CIUDAD</th>
+          <th>⚡ ELECTRICIDAD</th>
+          <th>💧 AGUA</th>
+          <th>🔧 MANTENIMIENTO</th>
+          <th>NOTAS</th>
+        </tr></thead>
+        <tbody id="energTableBody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<!-- PANEL PERMISOS -->
+<div class="tab-panel" id="panel-permisos">
+  <div class="docs-panel">
+    <div class="docs-note"><strong>Permisos y Licencias por Arrendatario:</strong> Tarjetas agrupadas por arrendatario (no por inmueble) — cada empresa/persona arrendataria puede requerir permisos distintos según su giro comercial específico y la reglamentación municipal/estatal del lugar donde opera, aun cuando comparta el mismo hotel con otro arrendatario. Fundamentos generales: reglamentos municipales de construcción y uso de suelo, leyes estatales de Protección Civil, CFF (SAT), Ley del Seguro Social/INFONAVIT, LFPIORPI, LGEEPA/SEMARNAT, Ley General de Turismo/SECTUR, Ley General de Salud/COFEPRIS, leyes estatales de bebidas alcohólicas, Ley de Aviación Civil/AFAC y leyes de movilidad estatales, cuando el giro del arrendatario lo amerita. La obligación de obtener y mantener vigentes los permisos corresponde al arrendatario.</div>
+    <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;align-items:center">
+      <div class="docs-filter">
+        <select id="filterPermEst" onchange="renderPermisos()">
+          <option value="">Todos los estados</option>
+          <option value="Puebla">Puebla</option>
+          <option value="Estado de México">Estado de México</option>
+          <option value="Aguascalientes">Aguascalientes</option>
+          <option value="Guerrero">Guerrero</option>
+          <option value="Nuevo León">Nuevo León</option>
+          <option value="Sonora">Sonora</option>
+          <option value="Baja California">Baja California</option>
+          <option value="Quintana Roo">Quintana Roo</option>
+          <option value="Guanajuato">Guanajuato</option>
+          <option value="Campeche">Campeche</option>
+        </select>
+      </div>
+      <button class="btn-upload" onclick="exportPermisos()">⬇ Exportar JSON</button>
+      <label class="btn-upload" style="cursor:pointer">⬆ Importar JSON<input type="file" accept=".json" onchange="importPermisos(event)" style="display:none"></label>
+    </div>
+    <div class="docs-stats" id="permsStats"></div>
+    <div id="permisosContainer"></div>
+  </div>
+</div>
+<!-- PANEL REPOSITORIO -->
+<div class="tab-panel" id="panel-docs">
+  <div class="ctab-panel">
+    <div class="ctab-note"><strong>Repositorio de Contratos:</strong> Cada tarjeta incluye enlace directo al folder de Google Drive del arrendatario. El botón ☁ Drive abre la carpeta en Google Drive (quien acceda podrá solicitar permiso desde Drive). También puede cargar el PDF localmente para visualización rápida en esta plataforma.</div>
+    <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;align-items:center">
+      <button class="btn-upload" onclick="exportContratos()">⬇ Exportar JSON</button>
+      <label class="btn-upload" style="cursor:pointer">⬆ Importar JSON<input type="file" accept=".json" onchange="importContratos(event)" style="display:none"></label>
+    </div>
+    <div class="ctab-grid" id="contratosGrid"></div>
+  </div>
+</div>
+<!-- PANEL FACTURACIÓN -->
+<div class="tab-panel" id="panel-facturacion">
+  <div class="fact-panel">
+    <div class="fact-note"><strong>Solicitud de Facturación Mensual:</strong> Importes de renta efectiva (soporte factura) o INPC calculada cuando no hay factura. Genera el archivo el <strong>día 5 de cada mes</strong>.</div>
+    <div class="fact-top">
+      <div class="fact-month-sel">
+        <label>Mes:</label>
+        <select id="factMes" onchange="renderFacturacion()">
+          <option value="1">ENERO</option><option value="2">FEBRERO</option><option value="3">MARZO</option>
+          <option value="4">ABRIL</option><option value="5">MAYO</option><option value="6" selected>JUNIO</option>
+          <option value="7">JULIO</option><option value="8">AGOSTO</option><option value="9">SEPTIEMBRE</option>
+          <option value="10">OCTUBRE</option><option value="11">NOVIEMBRE</option><option value="12">DICIEMBRE</option>
+        </select>
+        <select id="factAnio" onchange="renderFacturacion()">
+          <option value="2026" selected>2026</option><option value="2027">2027</option><option value="2028">2028</option>
+        </select>
+      </div>
+      <button class="fact-btn" onclick="generateBillingExcel()">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Descargar Excel (Memoline)</button>
+    </div>
+    <div class="fact-table-wrap">
+      <table class="fact-table">
+        <thead><tr><th>#</th><th>CLIENTE / ARRENDATARIO</th><th>DESCRIPCIÓN</th><th>CANT.</th><th>PRECIO UNIT. (s/IVA)</th><th>TOTAL C/IVA</th><th>FUENTE</th><th>CORREO</th></tr></thead>
+        <tbody id="factTableBody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<!-- PANEL CONCILIACIÓN -->
+<div class="tab-panel" id="panel-conciliacion">
+  <div class="conc-panel">
+    <div class="conc-section">
+      <div class="conc-section-title">📂 Paso 1 — Cargar archivos</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div>
+          <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.5);margin-bottom:8px;text-transform:uppercase;letter-spacing:.8px">Estado de cuenta bancario (Excel/CSV)</div>
+          <div class="conc-drop"><input type="file" accept=".xlsx,.xls,.csv" onchange="loadBankFile(event)"/>
+            <div class="conc-drop-lbl"><strong>📊 Arrastrar o seleccionar</strong>Archivo Excel o CSV del banco<br/><span style="font-size:10px;opacity:.6">.xlsx · .xls · .csv</span></div></div>
+          <div class="conc-file-ok" id="bankFileOk">✓ Bancario cargado</div>
+          <div style="margin-top:10px;font-size:11px;color:rgba(255,255,255,.42)">Mapear columnas:</div>
+          <div class="conc-col-map" id="bankColMap"></div>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.5);margin-bottom:8px;text-transform:uppercase;letter-spacing:.8px">Facturación cartera (Excel FIHO)</div>
+          <div class="conc-drop"><input type="file" accept=".xlsx,.xls" onchange="loadBillFile(event)"/>
+            <div class="conc-drop-lbl"><strong>📋 Arrastrar o seleccionar</strong>Archivo FACTURACION_CARTERA<br/><span style="font-size:10px;opacity:.6">.xlsx · .xls</span></div></div>
+          <div class="conc-file-ok" id="billFileOk">✓ Facturación cargada</div>
+        </div>
+      </div>
+    </div>
+    <div class="conc-section">
+      <div class="conc-section-title">⚙️ Paso 2 — Conciliar</div>
+      <button class="conc-btn" id="btnConciliar" onclick="runConciliacion()" disabled>⚡ Ejecutar Conciliación</button>
+      <div class="conc-note">Busca coincidencias por importe exacto (±0.10%) entre depósitos bancarios y facturas.</div>
+    </div>
+    <div class="conc-section" id="concResultSection" style="display:none">
+      <div class="conc-section-title">📊 Resultado</div>
+      <div style="display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap;align-items:center">
+        <div id="concSummary" style="font-size:12px;color:rgba(255,255,255,.6)"></div>
+        <button class="conc-btn-sec" onclick="exportConciliacion()" style="margin-left:auto">⬇ Exportar Excel</button>
+      </div>
+      <div class="conc-result-wrap">
+        <table class="conc-table">
+          <thead><tr><th>#</th><th>DESCRIPCIÓN BANCO</th><th>FECHA</th><th>IMPORTE BANCO</th><th>FOLIO FACTURA</th><th>CONCEPTO FACTURA</th><th>IMPORTE FACTURA</th><th>ESTADO</th></tr></thead>
+          <tbody id="concTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- PANEL COBRANZA -->
+<div class="tab-panel" id="panel-cobranza">
+  <div class="cob-panel">
+    <div class="cob-spei-box">
+      <strong>Datos SPEI:</strong> Banco: <strong>BBVA Bancomer Suc. Empresas Toluca</strong> · Cuenta: <strong>0191885413</strong> · CLABE: <strong>012420001918854135</strong> · Beneficiario: <strong>F-X-DEUTSCHE BANK MEXICO NO. F/1596</strong> · RFC: <strong>FFX121005C6A</strong>
+      <button class="cob-copy-btn" onclick="cobCopySpei()">📋 Copiar SPEI</button>
+    </div>
+    <div class="cob-summary" id="cobSummary"></div>
+    <div class="cob-table-wrap">
+      <table class="cob-table">
+        <thead><tr><th>#</th><th>ARRENDATARIO</th><th>RENTA EFECTIVA</th><th>ESTATUS COBRANZA (12-jun-2026)</th><th>ACCIONES</th><th>BITÁCORA</th></tr></thead>
+        <tbody id="cobTableBody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<!-- MODAL -->
+<div class="cob-modal-overlay" id="cobModal" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="cob-modal">
+    <button class="cob-modal-close" onclick="document.getElementById('cobModal').classList.remove('open')">✕</button>
+    <div class="cob-modal-title" id="cobModalTitle"></div>
+    <div class="cob-modal-sub" id="cobModalSub"></div>
+    <pre class="cob-email-preview" id="cobEmailPreview"></pre>
+    <div class="cob-modal-actions">
+      <a class="cob-btn-send" id="cobMailtoLink" href="#" target="_blank">✉ Abrir en correo</a>
+      <button class="cob-btn-copy2" onclick="cobCopyEmail()">📋 Copiar texto</button>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  <strong>FIBRA HOTELERA MEXICANA — Fideicomiso F/1596 (FIHO)</strong><br/>
+  Permisos y licencias: reglamentos municipales · leyes estatales de Protección Civil · CFF (SAT) · LSS/INFONAVIT · LFPIORPI · LGEEPA (SEMARNAT) cuando aplica.
+  La obligación de obtener y mantener vigentes los permisos corresponde al arrendatario conforme a cada contrato. Ref: 18-jun-2026.
+</div>
+<script>
+'use strict';
+const TODAY=new Date('2026-06-18');
+const MESES_ES=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+const FMT_MXN=new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN',maximumFractionDigits:2});
+const FMT_MXN0=new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN',maximumFractionDigits:0});
+const FMT_USD=new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:2});
+const IVA=0.16;
+const SPEI={banco:'BBVA Bancomer Suc. Empresas Toluca',cuenta:'0191885413',clabe:'012420001918854135',beneficiario:'F-X-DEUTSCHE BANK MEXICO NO. F/1596',rfc:'FFX121005C6A'};
+
+// ── INPC (misma lógica plataforma antenas) ──
+const INPC_DEFAULT={2017:6.77,2018:4.83,2019:2.83,2020:3.15,2021:7.36,2022:7.82,2023:4.66,2024:4.72,2025:3.70,2026:4.58};
+const INPC_MONTHLY_IDX={
+  // 2025 — publicados por INEGI
+  '2025-01':138.343,'2025-02':138.726,'2025-03':139.161,'2025-04':139.620,
+  '2025-05':140.012,'2025-06':140.405,'2025-07':140.781,'2025-08':140.867,
+  '2025-09':141.197,'2025-10':141.709,'2025-11':142.645,'2025-12':143.042,
+  // 2026 — publicados por INEGI al 18-jun-2026
+  '2026-01':143.588,'2026-02':144.308,'2026-03':145.544,'2026-04':145.831,
+  '2026-05':145.622,'2026-06':145.131,
+};
+function getInpcRates(){try{const s=localStorage.getItem('fiho_loc_inpc');return s?JSON.parse(s):{...INPC_DEFAULT};}catch(e){return{...INPC_DEFAULT};}}
+function inpcGetMonthly(){try{return JSON.parse(localStorage.getItem('fiho_loc_inpc_monthly')||'{}');}catch(e){return{};}}
+function inpcSaveMonthly(obj){localStorage.setItem('fiho_loc_inpc_monthly',JSON.stringify(obj));}
+// Cláusula 5.7: INPC mes inmediato anterior al inicio del período actual
+// vs INPC mismo mes del año anterior
+// incrMes = mes en que inicia el período de renta (ej. 3 = marzo)
+// incrYear = año del próximo/actual incremento
+function getInpcMonthlyRate(incrMes, incrYear){
+  const idx=Object.assign({},INPC_MONTHLY_IDX,inpcGetMonthly());
+  const pad=m=>String(m).padStart(2,'0');
+  // Mes inmediato anterior al inicio del período
+  const refMes = incrMes===1 ? 12 : incrMes-1;
+  const refYear = incrMes===1 ? incrYear-1 : incrYear;
+  const k2=`${refYear}-${pad(refMes)}`;       // mes ref año actual del período
+  const k1=`${refYear-1}-${pad(refMes)}`;     // mismo mes año anterior
+  const v2=idx[k2], v1=idx[k1];
+  if(v2!=null&&v1!=null){
+    return{rate:(v2/v1-1)*100,k1,k2,v1,v2,isExact:true,
+           label:`INPC(${fmtInpcKey(k2)}=${v2.toFixed(3)}) / INPC(${fmtInpcKey(k1)}=${v1.toFixed(3)})`};
+  }
+  // Fallback: usar los últimos 2 índices disponibles del mismo mes
+  const sameMonthKeys=Object.keys(idx).filter(k=>k.endsWith('-'+pad(refMes))).sort();
+  if(sameMonthKeys.length>=2){
+    const kB=sameMonthKeys[sameMonthKeys.length-1];
+    const kA=sameMonthKeys[sameMonthKeys.length-2];
+    const vB=idx[kB],vA=idx[kA];
+    if(vB&&vA)return{rate:(vB/vA-1)*100,k1:kA,k2:kB,v1:vA,v2:vB,isExact:false,
+                     label:`INPC(${fmtInpcKey(kB)}=${vB.toFixed(3)}) / INPC(${fmtInpcKey(kA)}=${vA.toFixed(3)}) [ref. más reciente]`};
+  }
+  // Fallback final: último par disponible
+  const allKeys=Object.keys(idx).sort();
+  if(allKeys.length>=2){
+    const kB=allKeys[allKeys.length-1],kA=allKeys[allKeys.length-2];
+    const vB=idx[kB],vA=idx[kA];
+    if(vB&&vA)return{rate:(vB/vA-1)*100,k1:kA,k2:kB,v1:vA,v2:vB,isExact:false,
+                     label:`INPC(${fmtInpcKey(kB)}=${vB.toFixed(3)}) / INPC(${fmtInpcKey(kA)}=${vA.toFixed(3)}) [est.]`};
+  }
+  return null;
+}
+function fmtInpcKey(k){const[y,m]=k.split('-');return `${MESES_ES[parseInt(m)-1].slice(0,3)}-${y}`;}
+function calcRentaActual(base,startStr,incrMonth,rates){
+  const start=new Date(startStr);let renta=base,lastIncrDate=null,lastIncrRate=null;
+  let d=new Date(start);d.setDate(1);d.setMonth(incrMonth-1);
+  if(d<=start)d.setFullYear(d.getFullYear()+1);
+  while(d<=TODAY){
+    const yr=d.getFullYear();
+    // Cláusula 5.7: usar INPC mes anterior al inicio del período
+    const md=getInpcMonthlyRate(incrMonth,yr);
+    let rate;
+    if(md&&md.isExact){rate=md.rate;}
+    else if(md&&!md.isExact){rate=md.rate;}
+    else{rate=rates[yr]??rates[yr-1]??4.0;}
+    renta*=(1+rate/100);lastIncrDate=new Date(d);lastIncrRate=rate;
+    d.setFullYear(d.getFullYear()+1);
+  }
+  const nextLabel=`${d.toLocaleString('es-MX',{month:'long'})}-${d.getFullYear()}`;
+  const lastLabel=lastIncrDate?`${lastIncrDate.toLocaleString('es-MX',{month:'long'})}-${lastIncrDate.getFullYear()}`:null;
+  return{renta,nextLabel,lastLabel,lastIncrRate};
+}
+// Fuente única para renta mensual efectiva: usa soporte de factura si existe;
+// si no, proyecta INPC SOLO cuando el contrato tiene mes de incremento mensual (c.mes_incr).
+// Contratos sin c.mes_incr (pago fijo semestral/anual, sin cláusula INPC mensual) devuelven null.
+function getRentaActualMensual(c,rates){
+  if(c.renta_efe) return c.renta_efe.monto;
+  if(!c.mes_incr) return null;
+  return calcRentaActual(c.renta_orig||0,c.renta_data.start,c.mes_incr,rates).renta;
+}
+function toggleInpcPanel(){document.getElementById('inpcPanel').classList.toggle('open');}
+function saveInpcRates(){
+  const rates={};document.querySelectorAll('.inpc-field input').forEach(inp=>{rates[parseInt(inp.dataset.year)]=parseFloat(inp.value)||0;});
+  localStorage.setItem('fiho_loc_inpc',JSON.stringify(rates));
+  buildTableBody();updateInpcSummary();renderAlertaRenta();renderCobTable();
+  document.getElementById('inpcPanel').classList.remove('open');
+}
+function buildInpcEditor(){
+  const r=getInpcRates();const grid=document.getElementById('inpcGrid');
+  grid.innerHTML=Object.keys(r).sort().map(y=>`<div class="inpc-field"><label>${y}</label><input type="number" step="0.01" min="0" max="50" data-year="${y}" value="${r[y]}"/><span style="font-size:10px;color:rgba(163,230,53,.6)">%</span></div>`).join('');
+  updateInpcSummary();
+}
+function updateInpcSummary(){const r=getInpcRates();const yrs=Object.keys(r).sort().slice(-4);document.getElementById('inpcSummary').textContent=yrs.map(y=>`${y}: ${r[y]}%`).join(' · ');}
+function inpcAddMonthly(){
+  const mes=parseInt(document.getElementById('inpcAddMes').value);
+  const yr=parseInt(document.getElementById('inpcAddYear').value);
+  const val=parseFloat(document.getElementById('inpcAddVal').value);
+  if(!mes||!yr||isNaN(val)||val<=0){alert('Ingresa un índice INPC válido.');return;}
+  const key=`${yr}-${String(mes).padStart(2,'0')}`;
+  const obj=inpcGetMonthly();obj[key]=val;inpcSaveMonthly(obj);
+  document.getElementById('inpcAddVal').value='';
+  inpcRenderMonthlyList();buildTableBody();
+}
+function inpcRemoveMonthly(key){const obj=inpcGetMonthly();delete obj[key];inpcSaveMonthly(obj);inpcRenderMonthlyList();buildTableBody();}
+function inpcRenderMonthlyList(){
+  const el=document.getElementById('inpcMonthlyList');if(!el)return;
+  const obj=inpcGetMonthly();const keys=Object.keys(obj).sort();
+  if(!keys.length){el.innerHTML='<span style="font-size:10px;color:rgba(255,255,255,.25);font-style:italic">Sin índices adicionales. Agrega aquí los nuevos meses publicados por INEGI.</span>';return;}
+  el.innerHTML=keys.map(k=>`<span class="inpc-m-chip exact">${fmtInpcKey(k)}: <strong>${obj[k]}</strong> <button onclick="inpcRemoveMonthly('${k}')">×</button></span>`).join('');
+}
+
+// ── CONTRATOS DATA ──
+const CAT_COLORS={Hotel:'#06B6D4',Comercio:'#22C55E',Banco:'#3B82F6',Restaurante:'#F97316',Oficina:'#8B5CF6',Bodega:'#F59E0B',Tienda:'#EC4899',Tours:'#14B8A6',Seguros:'#84CC16',Publicidad:'#EF4444'};
+const CONTRACTS=[
+ {num:1,arrendatario:'Agro-Partes Puebla, S.A. de C.V.',rfc:'APU2302025Y9',cat:'Oficina',hotel:'One Puebla — Autopista México-Puebla',ciudad:'Cuautlancingo, Puebla',localidad:'Local comercial',superficie:179,giro:'Compraventa equipos y productos agrícolas',inicio:'2023-04-15',fin:'2028-04-15',plazo:'1 año forzoso + 4 voluntarios',renta_orig:15000,moneda:'MXN',renta_efe:{monto:16314.41,mes:'mayo-26'},renta_data:{base:15000,start:'2023-04-15',mes:4},incremento:'Anual INPC (mes apertura · abr. · ref. INPC mar.)',mes_incr:4,mantenimiento:'10% renta mensual',mant_efe:{monto:1631.55,mes:'mayo-26'},deposito:'2 meses',penalizacion:'Rentas faltantes al plazo forzoso + IVA',correo:'agropartespuebla@gmail.com',cobranza:{status:'vencido',pendiente:41634.64,vencido:41634.64,detalle:'Facturas may-26 pendientes'},drive:'https://drive.google.com/drive/folders/1tLYqdkTERuMvtNLhsIQ_tWW8HsDo7gwy'},
+ {num:2,arrendatario:'Banco Santander México, S.A.',rfc:'BSM970519DU8',cat:'Banco',hotel:'One Cuautitlán Izcalli — Plaza San Marcos Power Center',ciudad:'Cuautitlán Izcalli, Estado de México',localidad:'Local F-02A',superficie:432,giro:'Sucursal bancaria',inicio:'2023-09-01',fin:'2030-09-01',plazo:'5 años forzosos (convenio mod. 26-may-2025)',renta_orig:201691.51,moneda:'MXN',renta_efe:{monto:208775.77,mes:'jun-26'},renta_data:{base:201691.51,start:'2023-09-01',mes:9},incremento:'Anual INPC (mes sep)',mes_incr:9,mantenimiento:'10% renta mensual',mant_efe:{monto:31316.36,mes:'jun-26'},deposito:'No especificado en convenio',penalizacion:'Conforme contrato original',correo:'',cobranza:{status:'corriente',pendiente:557013.74,vencido:0,detalle:'Al corriente (jun-26 incluido)'},drive:'https://drive.google.com/drive/folders/1GG_uX6mcN2EmLXGASMVOa32HzABCQ2Ac'},
+ {num:3,arrendatario:'Comercial Automotriz de los Altos, S.A. de C.V.',rfc:'CAA890203661',cat:'Comercio',hotel:'Fiesta Americana Aguascalientes',ciudad:'Aguascalientes, Aguascalientes',localidad:'Locales L-01, L-02 y L-03',superficie:252.06,giro:'Venta de llantas para auto, camioneta y camión',inicio:'2024-12-01',fin:'2029-12-01',plazo:'2 años forzosos arr. / 3 años forzosos arrendador',renta_orig:37809,moneda:'MXN',renta_efe:{monto:39242.45,mes:'mayo-26'},renta_data:{base:37809,start:'2024-12-01',mes:12},incremento:'Anual INPC (mes diciembre)',mes_incr:12,mantenimiento:'No aplica (paga servicios propios)',mant_efe:null,deposito:'2 meses',penalizacion:'Rentas faltantes al plazo forzoso + IVA',correo:'riozano59@yahoo.com.mx',cobranza:{status:'corriente',pendiente:0,vencido:0,detalle:'Sin facturas en cartera al 12-jun-26'},drive:'https://drive.google.com/drive/folders/1ICuc-FgdmIA6pJQ58kO3cawJrNArsMSe'},
+ {num:4,arrendatario:'Tiendas Extra S.A. de C.V. (Circle K)',rfc:'TEX9302097F3',cat:'Tienda',hotel:'One Acapulco — Av. Costera Miguel Alemán',ciudad:'Acapulco de Juárez, Guerrero',localidad:'Localidad comercial B',superficie:200,giro:'Tienda de autoservicio Circle K',inicio:'2026-06-15',fin:'2041-06-15',plazo:'15 años totales; primeros 5 forzosos',renta_orig:38000,moneda:'MXN',renta_efe:null,renta_data:{base:38000,start:'2026-06-15',mes:6},incremento:'Anual INPC + variable 8% ventas netas si supera renta mínima',mes_incr:6,mantenimiento:'10% renta mensual',mant_efe:null,deposito:'1 mes',penalizacion:'Promedio renta 12 meses × meses faltantes al plazo forzoso + IVA',correo:'america.peralta@cck.com.mx',cobranza:{status:'nuevo',pendiente:0,vencido:0,detalle:'Contrato recién iniciado jun-26'},drive:'https://drive.google.com/drive/folders/1q4cOWxg8UeWTNt3lXcXbqyJl_UL7boCP'},
+ {num:5,arrendatario:'David Valdez Romo (Fisher)',rfc:'VARD910',cat:'Restaurante',hotel:'Fiesta Americana Aguascalientes',ciudad:'Aguascalientes, Aguascalientes',localidad:'Local comercial',superficie:252,giro:'Restaurante Fisher',inicio:'2025-12-04',fin:'2031-12-03',plazo:'6 años (renovación; contrato original 04-dic-2019)',renta_orig_texto:'$21,157.49/mes (jun-mar) + $505,000/mes (abr-may)',renta_orig:21157.49,moneda:'MXN',renta_efe:{monto:505000,mes:'abr-26',nota:'Renta especial abr-may'},renta_data:{base:21157.49,start:'2025-12-04',mes:12},incremento:'Anual INPC',mes_incr:12,mantenimiento:'No especificado en convenio',mant_efe:null,deposito:'No especificado',penalizacion:'Conforme contrato original',correo:'',cobranza:{status:'vencido',pendiente:49085.38,vencido:49085.38,detalle:'2 facturas pendientes en cartera'},drive:'https://drive.google.com/drive/folders/1rwxCha58M1TMNZGz3WvAIrLfx8Z3OXcx'},
+ {num:6,arrendatario:'Corporativo Empresarial Solar, S.A. de C.V.',rfc:'CES9912',cat:'Oficina',hotel:'Sheraton Ambassador Monterrey',ciudad:'Monterrey, Nuevo León',localidad:'Local 2 Carranza',superficie:41,giro:'Renta de autos',inicio:'2024-02-01',fin:'2027-01-31',plazo:'3 años forzosos para ambas partes',renta_orig:10291,moneda:'MXN',renta_efe:{monto:10678.97,mes:'jun-26'},renta_data:{base:10291,start:'2024-02-01',mes:2},incremento:'Anual INPC (mes inicio)',mes_incr:2,mantenimiento:'No aplica (hoja de condiciones)',mant_efe:null,deposito:'2 meses',penalizacion:'No especificada',correo:'',cobranza:{status:'vencido',pendiente:49550.44,vencido:49550.44,detalle:'Facturas feb-26 pendientes'},drive:'https://drive.google.com/drive/folders/1Ev_DPVF1Nf2ohn3yqpOjArRvqmEol_Kp'},
+ {num:7,arrendatario:'Primeflight Aviation Mexico (Aero Charter)',rfc:'ACM9209',cat:'Bodega',hotel:'One Monterrey Aeropuerto — Plaza One MTY',ciudad:'Apodaca, Nuevo León',localidad:'Local No. 09 PB + Bodega',superficie:123.09,giro:'Bodega / servicios de aviación',inicio:'2023-11-03',fin:'2026-11-03',plazo:'3 años (renovación de contrato nov-2020)',renta_orig:27537.53,moneda:'MXN',renta_efe:{monto:38266.82,mes:'jun-26',nota:'Local + bodega'},renta_data:{base:27537.53,start:'2023-11-03',mes:11},incremento:'Anual INPC (mes noviembre)',mes_incr:11,mantenimiento:'10% renta mensual',mant_efe:{monto:3827.65,mes:'jun-26'},deposito:'2 meses',penalizacion:'Rentas faltantes al plazo forzoso + IVA',correo:'',cobranza:{status:'vencido',pendiente:362116.22,vencido:362116.22,detalle:'Múltiples facturas vencidas mar-may-26'},drive:'https://drive.google.com/drive/folders/1aWVZbu_nUh8t_xJOLQ-0LHDwx5sxcX6O'},
+ {num:8,arrendatario:'Grupo Posadas, S.A.B. de C.V.',rfc:'',cat:'Hotel',hotel:'Fiesta Americana Condesa Cancún — Hotel completo',ciudad:'Cancún, Quintana Roo',localidad:'Inmueble completo',superficie:41413,giro:'Operación hotelera Fiesta Americana Condesa Cancún',inicio:'2018-01-01',fin:'2032-12-31',plazo:'Hasta 31-dic-2032 (contrato notariado 14-feb-2018)',renta_orig:1040471.45,moneda:'USD',renta_efe:null,renta_data:{base:1040471.45,start:'2018-01-01',mes:1},incremento:'Anual INPC (mes enero)',mes_incr:1,mantenimiento:'No especificado',mant_efe:null,deposito:'No especificado',penalizacion:'No especificado',correo:'',cobranza:{status:'vencido',pendiente:44564867.82,vencido:827655.36,detalle:'Múltiples facturas en cartera'},drive:'https://drive.google.com/drive/folders/19ACSIlYq-d-0vgPwMXPVOPXuMI9QLjmx'},
+ {num:9,arrendatario:'Divol Norte, S.A.P.I. de C.V.',rfc:'DNO1601',cat:'Comercio',hotel:'Hotel — Carretera México-Querétaro Km 32.5',ciudad:'Tultitlán, Estado de México',localidad:'Superficie arrendada',superficie:2266.55,giro:'Distribución y comercio',inicio:'2025-11-01',fin:'2045-10-31',plazo:'20 años totales (nov-2025 a oct-2045)',renta_orig:241563.27,moneda:'MXN',renta_efe:{monto:240963.27,mes:'jun-26'},renta_data:{base:241563.27,start:'2017-08-01',mes:8},incremento:'Anual INPC (mes agosto)',mes_incr:8,mantenimiento:'No especificado',mant_efe:null,deposito:'No especificado',penalizacion:'No especificado',correo:'',cobranza:{status:'corriente',pendiente:559034.78,vencido:0,detalle:'Al corriente (jun-26 incluido)'},drive:'https://drive.google.com/drive/folders/1mLOfVq3_AftgMg0972g6zjC9RpC0rF5t'},
+ {num:10,arrendatario:'Julio César Torres Rojo (IBK Interbrokers)',rfc:'TORJ751',cat:'Seguros',hotel:'One Tijuana Otay',ciudad:'Tijuana, Baja California',localidad:'Local comercial 03',superficie:103.55,giro:'Oficina agente de seguros / IBK',inicio:'2025-06-05',fin:'2027-06-03',plazo:'2 años adicionales (prórroga contrato jun-2023)',renta_orig:1958.44,moneda:'USD',renta_efe:{monto:1958.44,mes:'jun-26',moneda:'USD'},renta_data:{base:1958.44,start:'2023-06-05',mes:6},incremento:'Anual INPC (mes junio)',mes_incr:6,mantenimiento:'Según cláusula contrato inicial',mant_efe:{monto:195.86,mes:'jun-26',nota:'MTTO en MXN'},deposito:'No especificado',penalizacion:'Conforme contrato original',correo:'',cobranza:{status:'vencido',pendiente:86165.18,vencido:86165.18,detalle:'Facturas may-jun-26 pendientes (MXN)'},drive:'https://drive.google.com/drive/folders/15d_PxVgb7ETkfAD_pjRAA7oe9vrI1ro3'},
+ {num:11,arrendatario:'Zapata, S.A. de C.V.',rfc:'ZAP560409293',cat:'Comercio',hotel:'One Cuautitlán Izcalli — Plaza San Marcos',ciudad:'Cuautitlán Izcalli, Estado de México',localidad:'Localidad comercial',superficie:81,giro:'Comercio (distribución Ford / agencia automotriz)',inicio:'2025-11-01',fin:'2030-11-01',plazo:'5 años forzosos',renta_orig:32400,moneda:'MXN',renta_efe:{monto:32400,mes:'mayo-26'},renta_data:{base:32400,start:'2025-11-01',mes:11},incremento:'Anual INPC (mes noviembre)',mes_incr:11,mantenimiento:'10% renta mensual',mant_efe:null,deposito:'2 meses',penalizacion:'Rentas faltantes al plazo forzoso + IVA',correo:'',cobranza:{status:'vencido',pendiente:225504,vencido:225504,detalle:'4 facturas vencidas en cartera'},drive:'https://drive.google.com/drive/folders/1jP1CMeG6F8xVRMfrsazE6muK-nZMcjOb'},
+ {num:12,arrendatario:'Operadora Hotelera In House, S.A.P.I. — Cd. del Carmen',rfc:'OHI2102',cat:'Hotel',hotel:'Hotel Torre E — Av. 10 de julio',ciudad:'Ciudad del Carmen, Campeche',localidad:'Hotel completo',superficie:null,giro:'Operación hotelera completa',inicio:'2026-03-04',fin:'2029-04-30',plazo:'Hasta 30-abr-2029',renta_orig:100000,moneda:'MXN',renta_efe:null,renta_data:{base:100000,start:'2026-03-04',mes:3},incremento:'Anual INPC (mes marzo)',mes_incr:3,mantenimiento:'No especificado',mant_efe:null,deposito:'No especificado',penalizacion:'No especificado',correo:'',cobranza:{status:'vencido',pendiente:2346710.16,vencido:2346710.16,detalle:'Facturas may-jun-26 vencidas (OHI grupo)'},drive:'https://drive.google.com/drive/folders/1YG2GLD3ow72ipVdvzdLZpb7GTLserUhu'},
+ {num:13,arrendatario:'Operadora Hotelera In House, S.A.P.I. — León',rfc:'OHI2102',cat:'Hotel',hotel:'Hotel León — Blvd. Aeropuerto 1452 El Alto',ciudad:'León, Guanajuato',localidad:'Hotel completo — 12,834 m²',superficie:12834,giro:'Operación hotelera completa',inicio:'2024-01-01',fin:'2029-01-01',plazo:'5 años (01-ene-2024 al 01-ene-2029)',renta_orig:350000,moneda:'MXN',renta_efe:null,renta_data:{base:350000,start:'2024-01-01',mes:1},incremento:'Anual INPC (mes enero)',mes_incr:1,mantenimiento:'No especificado',mant_efe:null,deposito:'No especificado',penalizacion:'No especificado',correo:'',cobranza:{status:'vencido',pendiente:2346710.16,vencido:2346710.16,detalle:'Facturas vencidas (OHI grupo)'},drive:'https://drive.google.com/drive/folders/1Ihlj07FHVwLqaTKzPqmYZQS3MApDGZNa'},
+ {num:14,arrendatario:'Operadora Hotelera In House, S.A.P.I. — Cd. Obregón',rfc:'OHI2102',cat:'Hotel',hotel:'Hotel Ciudad Obregón',ciudad:'Ciudad Obregón, Sonora',localidad:'Hotel completo',superficie:null,giro:'Operación hotelera completa',inicio:'2023-08-30',fin:'2029-03-30',plazo:'~5.5 años (30-ago-2023 al 30-mar-2029)',renta_orig:400000,moneda:'MXN',renta_efe:null,renta_data:{base:400000,start:'2023-08-30',mes:8},incremento:'Anual INPC (mes agosto)',mes_incr:8,mantenimiento:'No especificado',mant_efe:null,deposito:'No especificado',penalizacion:'No especificado',correo:'',cobranza:{status:'vencido',pendiente:2346710.16,vencido:2346710.16,detalle:'Facturas vencidas (OHI grupo)'},drive:'https://drive.google.com/drive/folders/1VgjvmiQhA9NdKgaWjV00II3-e-LoZWNR'},
+ {num:15,arrendatario:'Quattralia Holding, S.A. de C.V.',rfc:'QHO1302118P3',cat:'Publicidad',hotel:'Courtyard Toreo — Periférico Blvd. M. Ávila Camacho 150',ciudad:'Naucalpan de Juárez, Estado de México',localidad:'Fachada norte y sur',superficie:750,giro:'Publicidad / espacio comercial en fachada',inicio:'2025-06-17',fin:'2026-06-17',plazo:'1 año forzoso (conv. mod. may-2025). Contrato original: 17-jun-2024.',renta_orig:1365000,moneda:'MXN',renta_efe:null,renta_data:{base:1365000,start:'2024-06-17',mes:6,tipo:'anual'},incremento:'Pago semestral fijo — sin INPC mensual',mes_incr:null,mantenimiento:'No especificado',mant_efe:null,deposito:'No especificado',penalizacion:'Rentas faltantes al vencimiento del plazo forzoso',correo:'',cobranza:{status:'vencido',pendiente:0,vencido:0,detalle:'Contrato vencido jun-2026; pendiente renovación'},drive:'https://drive.google.com/drive/folders/1A7yxvDWbdTMaQMeRkiewk0qq7p4R0WMf'},
+ {num:16,arrendatario:'Servicios Inmobiliarios Alsea, S.A. de C.V. (Starbucks)',rfc:'',cat:'Restaurante',hotel:'One Monterrey Aeropuerto',ciudad:'Apodaca, Nuevo León',localidad:'PAD01 — 450 m²',superficie:450,giro:'Establecimiento Starbucks',inicio:'2016-04-20',fin:'2031-04-20',plazo:'10 años originales + prórroga 5 años forzosos (notif. 24-mar-2026). Vigente hasta 20-abr-2031.',renta_orig:null,moneda:'MXN',renta_efe:{monto:70064.81,mes:'abr-26'},renta_data:{base:70064.81,start:'2016-04-20',mes:4},incremento:'Anual INPC (mes abril)',mes_incr:4,mantenimiento:'No especificado en convenio renovación',mant_efe:{monto:7006.48,mes:'abr-26'},deposito:'Mayor de $45,000 MN',penalizacion:'Conforme contrato original',correo:'',cobranza:{status:'corriente',pendiente:0,vencido:0,detalle:'Sin facturas vencidas en cartera'},drive:'https://drive.google.com/drive/folders/1UbbeUP1n_zp8cf3EUB-DnZgTlI87XAXe'},
+ {num:17,arrendatario:'Traigo Todo, S.A.P.I. de C.V. (Sonora Grill) — Op. Valiente',rfc:'OVA2103',cat:'Restaurante',hotel:'One Hermosillo — Blvd. Eusebio Kino',ciudad:'Hermosillo, Sonora',localidad:'Local 725 m² techados + 245 m² terraza',superficie:725,giro:'Restaurante Sonora Grill',inicio:'2021-10-15',fin:'2031-10-15',plazo:'10 años forzosos (15-oct-2021 al 15-oct-2031)',renta_orig:76717.12,moneda:'MXN',renta_efe:{monto:226419.63,mes:'mayo-26',nota:'Renta variable incl.'},renta_data:{base:76717.12,start:'2021-10-15',mes:10},incremento:'Anual INPC (mes octubre)',mes_incr:10,mantenimiento:'Mayor: $200,000 MN mín. dep.',mant_efe:null,deposito:'No especificado',penalizacion:'Rentas faltantes al plazo forzoso + IVA',correo:'',cobranza:{status:'vencido',pendiente:3255253.50,vencido:3255253.50,detalle:'Múltiples facturas vencidas ene-may-26'},drive:'https://drive.google.com/drive/folders/1-oeSCPB_6HFmdpz-IOAW87b-Ulu4uOPH'},
+ {num:18,arrendatario:'T.I. Experiencias en Grupos y Convenciones, S.A. de C.V.',rfc:'',cat:'Tours',hotel:'Fiesta Americana Condesa Cancún',ciudad:'Cancún, Quintana Roo',localidad:'Escritorio de Ventas de Tours (junto a recepción)',superficie:21,giro:'Venta de tours y servicios turísticos',inicio:'2025-02-01',fin:'2028-01-31',plazo:'3 años forzosos (01-feb-2025 al 31-ene-2028)',renta_orig:null,moneda:'MXN',renta_efe:{monto:3000,mes:'mayo-26'},renta_data:{base:3000,start:'2025-02-01',mes:2},incremento:'Anual INPC (mes febrero)',mes_incr:2,mantenimiento:'10% renta mensual',mant_efe:null,deposito:'2 meses',penalizacion:'Rentas faltantes al plazo forzoso + IVA',correo:'',cobranza:{status:'corriente',pendiente:0,vencido:0,detalle:'Sin facturas en cartera'},drive:'https://drive.google.com/drive/folders/1-h0LUTy28n_6bNVho2mdvIToX-bS_a30'},
+ {num:19,arrendatario:'TV Azteca, S.A.B. de C.V.',rfc:'',cat:'Oficina',hotel:'One Acapulco — Strip Center Acapulco (L04,L05,L06)',ciudad:'Acapulco de Juárez, Guerrero',localidad:'Local No. 4 (379 m²)',superficie:379,giro:'Oficinas / estudios TV Azteca',inicio:'2025-07-04',fin:'2028-07-04',plazo:'3 años (renovación; contrato original 01-jul-2022)',renta_orig:73542,moneda:'MXN',renta_efe:{monto:76717.12,mes:'jun-26'},renta_data:{base:73542,start:'2022-07-01',mes:7},incremento:'Anual INPC (mes julio)',mes_incr:7,mantenimiento:'Según contrato original',mant_efe:{monto:7671.70,mes:'jun-26'},deposito:'2 meses',penalizacion:'Conforme contrato original',correo:'',cobranza:{status:'corriente',pendiente:0,vencido:0,detalle:'Sin facturas vencidas (jun-26 al corriente)'},drive:'https://drive.google.com/drive/folders/1YMCuh_kV5YThYOkDDqQPj0stI3Z1S0x5'},
+ {num:20,arrendatario:"Waldo's Dólar Mart de México, S. de R.L. de C.V.",rfc:'WDM9901',cat:'Tienda',hotel:'One Cuautitlán Izcalli — Plaza San Marcos Power Center',ciudad:'Cuautitlán Izcalli, Estado de México',localidad:'Locales 01 y 02',superficie:853,giro:"Tienda de autoservicio Waldo's",inicio:'2024-03-02',fin:'2026-03-01',plazo:'2 años forzosos (02-mar-2024 al 01-mar-2026). En proceso de renovación.',renta_orig:117524,moneda:'MXN',renta_efe:{monto:133226.05,mes:'jun-26'},renta_data:{base:117524,start:'2024-03-02',mes:3},incremento:'Anual INPC (mes marzo)',mes_incr:3,mantenimiento:'No especificado',mant_efe:{monto:19985.82,mes:'jun-26'},deposito:'2 meses',penalizacion:'Rentas faltantes + IVA',correo:'',cobranza:{status:'vencido',pendiente:339862.80,vencido:339862.80,detalle:'Contrato vencido mar-2026; 7 facturas en cartera'},drive:'https://drive.google.com/drive/folders/1WFNBWiXKCzhxRIWiXk5TwuL5vmUBEx7Q'},
+];
+// ── ENERGÉTICOS (SOPORTE FACTURAS 12-jun-2026) ──
+const ENERGETICOS_DATA={
+ 1:{elec:null,agua:null,mant:{monto:1631.55,mes:'mayo-26'}},
+ 2:{elec:null,agua:null,mant:{monto:31316.36,mes:'jun-26'}},
+ 3:{elec:null,agua:null,mant:null},4:{elec:null,agua:null,mant:null},5:{elec:null,agua:null,mant:null},6:{elec:null,agua:null,mant:null},
+ 7:{elec:null,agua:null,mant:{monto:3827.65,mes:'jun-26'}},
+ 8:{elec:null,agua:null,mant:null},9:{elec:null,agua:null,mant:null},
+ 10:{elec:{monto:842.43,mes:'abr-26'},agua:{monto:2107.38,mes:'abr-26'},mant:{monto:195.86,mes:'jun-26'}},
+ 11:{elec:null,agua:null,mant:null},12:{elec:null,agua:null,mant:null},13:{elec:null,agua:null,mant:null},14:{elec:null,agua:null,mant:null},15:{elec:null,agua:null,mant:null},
+ 16:{elec:null,agua:null,mant:{monto:7006.48,mes:'abr-26'}},
+ 17:{elec:null,agua:null,mant:null},18:{elec:null,agua:null,mant:null},
+ 19:{elec:null,agua:null,mant:{monto:7671.70,mes:'jun-26'}},
+ 20:{elec:null,agua:null,mant:{monto:19985.82,mes:'jun-26'}},
+};
+
+// ── PERMISOS DB (por arrendatario, según giro comercial y reglamentación municipal/estatal) ──
+const PERMISOS_DB=[
+ {num:1,estado:'Puebla',permisos:[
+  {tipo:'pb-lic',nombre:'Licencia Municipal de Funcionamiento (Cuautlancingo)',base:'Ley de Establecimientos Comerciales de Puebla · Regl. Mun. Cuautlancingo',freq:'anual'},
+  {tipo:'pb-pc',nombre:'Dictamen de Protección Civil',base:'Ley de Protección Civil del Estado de Puebla',freq:'anual'},
+  {tipo:'pb-uso',nombre:'Licencia de Uso de Suelo (Oficina/Comercio)',base:'Plan Municipal de Desarrollo Urbano Cuautlancingo',freq:'unica'},
+  {tipo:'pb-sat',nombre:'Alta SAT / RFC · CFDI activo',base:'Código Fiscal de la Federación Art. 27',freq:'variable'},
+  {tipo:'pb-imss',nombre:'Inscripción IMSS / INFONAVIT',base:'Ley del Seguro Social Art. 12 · Ley del INFONAVIT Art. 29',freq:'continua'},
+ ]},
+ {num:2,estado:'Estado de México',permisos:[
+  {tipo:'pb-lic',nombre:'Licencia Municipal de Funcionamiento (Cuautitlán Izcalli)',base:'Ley para la Protección al Comercio y Fomento a la Economía del Estado de México',freq:'anual'},
+  {tipo:'pb-pc',nombre:'Dictamen de Protección Civil',base:'Ley de Protección Civil del Estado de México',freq:'anual'},
+  {tipo:'pb-uso',nombre:'Licencia de Uso de Suelo (Sucursal Bancaria)',base:'Plan Municipal de Desarrollo Urbano Cuautitlán Izcalli',freq:'unica'},
+  {tipo:'pb-fin',nombre:'Aviso de Apertura de Sucursal ante CNBV',base:'Ley de Instituciones de Crédito Art. 6 · Disp. de Carácter General CNBV',freq:'unica'},
+  {tipo:'pb-sat',nombre:'Alta SAT / RFC · CFDI activo · LFPIORPI',base:'CFF Art. 27 · LFPIORPI',freq:'variable'},
+  {tipo:'pb-anun',nombre:'Permiso Anuncio Exterior (fachada)',base:'Reglamento de Imagen Urbana Cuautitlán Izcalli',freq:'anual'},
+ ]},
+ {num:3,estado:'Aguascalientes',permisos:[
+  {tipo:'pb-lic',nombre:'Licencia Municipal de Funcionamiento (Aguascalientes)',base:'Ley de Desarrollo Económico del Estado de Aguascalientes',freq:'anual'},
+  {tipo:'pb-pc',nombre:'Dictamen de Protección Civil',base:'Ley de Protección Civil del Estado de Aguascalientes',freq:'anual'},
+  {tipo:'pb-uso',nombre:'Licencia de Uso de Suelo (Comercio)',base:'Plan de Desarrollo Urbano Municipio Aguascalientes',freq:'unica'},
+  {tipo:'pb-semar',nombre:'Manifiesto de Residuos de Manejo Especial (llantas usadas)',base:'LGPGIR Art. 19 · NOM-161-SEMARNAT-2011 · Regl. Estatal de Residuos de Aguascalientes',freq:'variable'},
+  {tipo:'pb-sat',nombre:'Alta SAT / RFC · CFDI activo',base:'CFF Art. 27',freq:'variable'},
+  {tipo:'pb-anun',nombre:'Permiso para Anuncio Exterior',base:'Reglamento de Imagen Urbana Aguascalientes',freq:'anual'},
+ ]},
+ {num:4,estado:'Guerrero',permisos:[
+  {tipo:'pb-lic',nombre:'Licencia Municipal de Funcionamiento (Acapulco)',base:'Ley de Fomento al Desarrollo Económico del Estado de Guerrero',freq:'anual'},
+  {tipo:'pb-pc',nombre:'Dictamen de Protección Civil (zona costera/hotelera)',base:'Ley de Protección Civil del Estado de Guerrero',freq:'anual'},
+  {tipo:'pb-uso',nombre:'Licencia de Uso de Suelo (Tienda Comercial)',base:'Plan de Desarrollo Urbano Acapulco',freq:'unica'},
+  {tipo:'pb-alc',nombre:'Permiso Estatal de Venta de Bebidas Alcohólicas en Envase Cerrado',base:'Ley de Bebidas Alcohólicas del Estado de Guerrero · Regl. Mun. Acapulco',freq:'anual'},
+  {tipo:'pb-semar',nombre:'Aviso / Autorización SEMARNAT — Zona Costera',base:'LGEEPA Art. 28 · NOM-022-SEMARNAT-2003',freq:'variable'},
+  {tipo:'pb-sat',nombre:'Alta SAT / RFC · CFDI activo',base:'CFF Art. 27',freq:'variable'},
+  {tipo:'pb-imss',nombre:'Inscripción IMSS / INFONAVIT de personal',base:'LSS Art. 12 · LINFONAVIT Art. 29',freq:'continua'},
+ ]},
+ {num:5,estado:'Aguascalientes',permisos:[
+  {tipo:'pb-lic',nombre:'Licencia Municipal de Funcionamiento — Restaurante (Aguascalientes)',base:'Ley de Desarrollo Económico Aguascalientes',freq:'anual'},
+  {tipo:'pb-pc',nombre:'Dictamen de Protección Civil',base:'Ley de Protección Civil Aguascalientes',freq:'anual'},
+  {tipo:'pb-uso',nombre:'Licencia de Uso de Suelo (Restaurante)',base:'Plan de Desarrollo Urbano Aguascalientes',freq:'unica'},
+  {tipo:'pb-san',nombre:'Aviso de Funcionamiento Sanitario (manejo de alimentos)',base:'Ley General de Salud Art. 200 Bis · NOM-251-SSA1-2009',freq:'unica'},
+  {tipo:'pb-alc',nombre:'Permiso Estatal de Venta y Consumo de Bebidas Alcohólicas',base:'Ley de Bebidas Alcohólicas del Estado de Aguascalientes',freq:'anual'},
+  {tipo:'pb-sat',nombre:'Alta SAT / RFC · CFDI activo',base:'CFF Art. 27',freq:'variable'},
+  {tipo:'pb-imss',nombre:'Inscripción IMSS / INFONAVIT de personal',base:'LSS Art. 12 · LINFONAVIT Art. 29',freq:'continua'},
+ ]},
+ {num:6,estado:'Nuevo León',permisos:[
+  {tipo:'pb-lic',nombre:'Licencia Municipal de Funcionamiento (Monterrey área MTY)',base:'Ley de Desarrollo Económico del Estado de Nuevo León',freq:'anual'},
+  {tipo:'pb-pc',nombre:'Dictamen de Protección Civil',base:'Ley de Protección Civil del Estado de Nuevo León',freq:'anual'},
+  {tipo:'pb-uso',nombre:'Licencia de Uso de Suelo (Oficina Renta de Autos)',base:'Plan de Desarrollo Urbano de Monterrey',freq:'unica'},
+  {tipo:'pb-mov',nombre:'Registro Estatal de Arrendadora de Vehículos',base:'Ley de Movilidad y Transporte del Estado de Nuevo León',freq:'unica'},
+  {tipo:'pb-sat',nombre:'Alta SAT / RFC · CFDI activo',base:'CFF Art. 27',freq:'variable'},
+  {tipo:'pb-anun',nombre:'Permiso para Anuncio Exterior',base:'Reglamento de Imagen Urbana Monterrey',freq:'anual'},
+ ]},
+ {num:7,estado:'Nuevo León',permisos:[
+  {tipo:'pb-lic',nombre:'Licencia Municipal de Funcionamiento (Apodaca)',base:'Ley de Desarrollo Económico del Estado de Nuevo León',freq:'anual'},
+  {tipo:'pb-pc',nombre:'Dictamen de Protección Civil',base:'Ley de Protección Civil del Estado de Nuevo León',freq:'anual'},
+  {tipo:'pb-uso',nombre:'Licencia de Uso de Suelo (Bodega/Servicios Aviación)',base:'Plan Municipal de Desarrollo Urbano Apodaca',freq:'unica'},
+  {tipo:'pb-afac',nombre:'Permiso AFAC — operación en área aeroportuaria',base:'Ley de Aviación Civil Art. 9 · Reglamento AFAC',freq:'variable'},
+  {tipo:'pb-semar',nombre:'Registro de Generador de Residuos Peligrosos (combustibles/lubricantes de aviación)',base:'LGPGIR Art. 28 · SEMARNAT',freq:'variable'},
+  {tipo:'pb-sat',nombre:'Alta SAT / RFC · CFDI activo',base:'CFF Art. 27',freq:'variable'},
+ ]},
+ {num:8,estado:'Quintana Roo',permisos:[
+  {tipo:'pb-lic',nombre:'Licencia Municipal de Funcionamiento — Hotel (Benito Juárez)',base:'Ley de Turismo del Estado de Quintana Roo',freq:'anual'},
+  {tipo:'pb-pc',nombre:'Dictamen de Protección Civil',base:'Ley de Protección Civil del Estado de Quintana Roo',freq:'anual'},
+  {tipo:'pb-uso',nombre:'Licencia de Uso de Suelo (Zona Hotelera Cancún)',base:'Plan de Desarrollo Urbano Benito Juárez',freq:'unica'},
+  {tipo:'pb-tur',nombre:'Registro Nacional de Turismo (RNT)',base:'Ley General de Turismo Art. 43 · Ley de Turismo del Estado de Quintana Roo',freq:'unica'},
+  {tipo:'pb-alc',nombre:'Permiso Estatal de Venta y Consumo de Bebidas Alcohólicas (bares/restaurantes del hotel)',base:'Ley de Hacienda del Estado de Quintana Roo · Regl. de Bebidas Alcohólicas',freq:'anual'},
+  {tipo:'pb-san',nombre:'Aviso de Funcionamiento Sanitario (cocinas/alimentos)',base:'Ley General de Salud Art. 200 Bis · NOM-251-SSA1-2009',freq:'unica'},
+  {tipo:'pb-semar',nombre:'Autorización SEMARNAT — Zona Federal Marítimo Terrestre',base:'LGEEPA Art. 28 · Regl. zonas costeras',freq:'variable'},
+  {tipo:'pb-sat',nombre:'Alta SAT / RFC · CFDI activo · LFPIORPI',base:'CFF Art. 27 · LFPIORPI',freq:'variable'},
+ ]},
+ {num:9,estado:'Estado de México',permisos:[
+  {tipo:'pb-lic',nombre:'Licencia Municipal de Funcionamiento (Tultitlán)',base:'Ley para la Protección al Comercio Estado de México',freq:'anual'},
+  {tipo:'pb-pc',nombre:'Dictamen de Protección Civil (nave/bodega de distribución)',base:'Ley de Protección Civil del Estado de México',freq:'anual'},
+  {tipo:'pb-uso',nombre:'Licencia de Uso de Suelo (Comercio/Distribución)',base:'Plan Municipal de Desarrollo Urbano Tultitlán',freq:'unica'},
+  {tipo:'pb-sat',nombre:'Alta SAT / RFC · CFDI activo',base:'CFF Art. 27',freq:'variable'},
+  {tipo:'pb-imss',nombre:'Inscripción IMSS / INFONAVIT de personal',base:'LSS Art. 12',freq:'continua'},
+ ]},
+ {num:10,estado:'Baja California',permisos:[
+  {tipo:'pb-lic',nombre:'Licencia Municipal de Funcionamiento (Tijuana)',base:'Reglamento de Licencias Municipales de Tijuana',freq:'anual'},
+  {tipo:'pb-pc',nombre:'Dictamen de Protección Civil',base:'Ley de Protección Civil del Estado de Baja California',freq:'anual'},
+  {tipo:'pb-uso',nombre:'Licencia de Uso de Suelo (Oficina Seguros)',base:'Plan Municipal de Desarrollo Urbano Tijuana',freq:'unica'},
+  {tipo:'pb-fin',nombre:'Cédula de Agente de Seguros / Registro ante CNSF',base:'Ley de Instituciones de Seguros y de Fianzas Art. 91',freq:'unica'},
+  {tipo:'pb-sat',nombre:'Alta SAT / RFC · CFDI activo',base:'CFF Art. 27',freq:'variable'},
+ ]},
+ {num:11,estado:'Estado de México',permisos:[
+  {tipo:'pb-lic',nombre:'Licencia Municipal de Funcionamiento (Cuautitlán Izcalli)',base:'Ley para la Protección al Comercio Estado de México',freq:'anual'},
+  {tipo:'pb-pc',nombre:'Dictamen de Protección Civil',base:'Ley de Protección Civil del Estado de México',freq:'anual'},
+  {tipo:'pb-uso',nombre:'Licencia de Uso de Suelo (Comercio Automotriz)',base:'Plan Municipal de Desarrollo Urbano Cuautitlán Izcalli',freq:'unica'},
+  {tipo:'pb-semar',nombre:'Manifiesto de Residuos de Manejo Especial (aceites, baterías, refacciones)',base:'LGPGIR Art. 19 · Regl. de Residuos del Estado de México',freq:'variable'},
+  {tipo:'pb-sat',nombre:'Alta SAT / RFC · CFDI activo',base:'CFF Art. 27',freq:'variable'},
+  {tipo:'pb-anun',nombre:'Permiso para Anuncio Exterior (marca Ford)',base:'Reglamento de Imagen Urbana Cuautitlán Izcalli',freq:'anual'},
+ ]},
+ {num:12,estado:'Campeche',permisos:[
+  {tipo:'pb-lic',nombre:'Licencia Municipal de Funcionamiento — Hotel (Cd. del Carmen)',base:'Ley de Turismo del Estado de Campeche',freq:'anual'},
+  {tipo:'pb-pc',nombre:'Dictamen de Protección Civil',base:'Ley de Protección Civil del Estado de Campeche',freq:'anual'},
+  {tipo:'pb-uso',nombre:'Licencia de Uso de Suelo (Hotel)',base:'Plan Municipal de Desarrollo Urbano Cd. del Carmen',freq:'unica'},
+  {tipo:'pb-tur',nombre:'Registro Nacional de Turismo (RNT)',base:'Ley General de Turismo Art. 43 · Ley de Turismo del Estado de Campeche',freq:'unica'},
+  {tipo:'pb-alc',nombre:'Permiso Estatal de Venta y Consumo de Bebidas Alcohólicas',base:'Ley de Hacienda del Estado de Campeche',freq:'anual'},
+  {tipo:'pb-san',nombre:'Aviso de Funcionamiento Sanitario (cocinas/alimentos)',base:'Ley General de Salud Art. 200 Bis · NOM-251-SSA1-2009',freq:'unica'},
+  {tipo:'pb-sat',nombre:'Alta SAT / RFC · CFDI activo · LFPIORPI',base:'CFF Art. 27 · LFPIORPI',freq:'variable'},
+ ]},
+ {num:13,estado:'Guanajuato',permisos:[
+  {tipo:'pb-lic',nombre:'Licencia Municipal de Funcionamiento — Hotel (León)',base:'Ley de Fomento al Turismo del Estado de Guanajuato',freq:'anual'},
+  {tipo:'pb-pc',nombre:'Dictamen de Protección Civil',base:'Ley de Protección Civil del Estado de Guanajuato',freq:'anual'},
+  {tipo:'pb-uso',nombre:'Licencia de Uso de Suelo (Hotel/Hospedaje)',base:'Plan Municipal de Desarrollo Urbano León',freq:'unica'},
+  {tipo:'pb-tur',nombre:'Registro Nacional de Turismo (RNT)',base:'Ley General de Turismo Art. 43 · Ley de Fomento al Turismo del Estado de Guanajuato',freq:'unica'},
+  {tipo:'pb-alc',nombre:'Permiso Estatal de Venta y Consumo de Bebidas Alcohólicas',base:'Ley de Hacienda del Estado de Guanajuato',freq:'anual'},
+  {tipo:'pb-san',nombre:'Aviso de Funcionamiento Sanitario (cocinas/alimentos)',base:'Ley General de Salud Art. 200 Bis · NOM-251-SSA1-2009',freq:'unica'},
+  {tipo:'pb-sat',nombre:'Alta SAT / RFC · CFDI activo · LFPIORPI',base:'CFF Art. 27 · LFPIORPI',freq:'variable'},
+ ]},
+ {num:14,estado:'Sonora',permisos:[
+  {tipo:'pb-lic',nombre:'Licencia Municipal de Funcionamiento — Hotel (Cd. Obregón)',base:'Ley de Turismo del Estado de Sonora',freq:'anual'},
+  {tipo:'pb-pc',nombre:'Dictamen de Protección Civil',base:'Ley de Protección Civil del Estado de Sonora',freq:'anual'},
+  {tipo:'pb-uso',nombre:'Licencia de Uso de Suelo (Hotel/Hospedaje)',base:'Plan Municipal de Desarrollo Urbano Cajeme (Cd. Obregón)',freq:'unica'},
+  {tipo:'pb-tur',nombre:'Registro Nacional de Turismo (RNT)',base:'Ley General de Turismo Art. 43 · Ley de Desarrollo Turístico del Estado de Sonora',freq:'unica'},
+  {tipo:'pb-alc',nombre:'Permiso Estatal de Venta y Consumo de Bebidas Alcohólicas',base:'Ley de Hacienda del Estado de Sonora',freq:'anual'},
+  {tipo:'pb-san',nombre:'Aviso de Funcionamiento Sanitario (cocinas/alimentos)',base:'Ley General de Salud Art. 200 Bis · NOM-251-SSA1-2009',freq:'unica'},
+  {tipo:'pb-sat',nombre:'Alta SAT / RFC · CFDI activo',base:'CFF Art. 27',freq:'variable'},
+ ]},
+ {num:15,estado:'Estado de México',permisos:[
+  {tipo:'pb-lic',nombre:'Licencia Municipal de Funcionamiento (Naucalpan)',base:'Ley para la Protección al Comercio Estado de México',freq:'anual'},
+  {tipo:'pb-pc',nombre:'Dictamen de Protección Civil (estructura de anuncio)',base:'Ley de Protección Civil del Estado de México',freq:'anual'},
+  {tipo:'pb-uso',nombre:'Licencia de Uso de Suelo (Publicidad Exterior)',base:'Reglamento de Imagen Urbana Naucalpan de Juárez',freq:'unica'},
+  {tipo:'pb-anun',nombre:'Permiso Municipal/Estatal para Anuncio Espectacular',base:'Reglamento de Anuncios Publicitarios Naucalpan',freq:'anual'},
+  {tipo:'pb-anun',nombre:'Permiso Federal SCT para Anuncios visibles desde Vía Primaria/Periférico (si aplica)',base:'Reglamento sobre el Peso, Dimensiones y Capacidad de Vehículos · Anuncios en Carreteras Federales SCT',freq:'variable'},
+  {tipo:'pb-sat',nombre:'Alta SAT / RFC · CFDI activo',base:'CFF Art. 27',freq:'variable'},
+ ]},
+ {num:16,estado:'Nuevo León',permisos:[
+  {tipo:'pb-lic',nombre:'Licencia Municipal de Funcionamiento (Apodaca)',base:'Ley de Desarrollo Económico del Estado de Nuevo León',freq:'anual'},
+  {tipo:'pb-pc',nombre:'Dictamen de Protección Civil',base:'Ley de Protección Civil del Estado de Nuevo León',freq:'anual'},
+  {tipo:'pb-uso',nombre:'Licencia de Uso de Suelo (Restaurante/Cafetería)',base:'Plan Municipal de Desarrollo Urbano Apodaca',freq:'unica'},
+  {tipo:'pb-san',nombre:'Aviso de Funcionamiento Sanitario (manejo de alimentos)',base:'Ley General de Salud Art. 200 Bis · NOM-251-SSA1-2009',freq:'unica'},
+  {tipo:'pb-sat',nombre:'Alta SAT / RFC · CFDI activo',base:'CFF Art. 27',freq:'variable'},
+  {tipo:'pb-imss',nombre:'Inscripción IMSS / INFONAVIT de personal',base:'LSS Art. 12 · LINFONAVIT Art. 29',freq:'continua'},
+ ]},
+ {num:17,estado:'Sonora',permisos:[
+  {tipo:'pb-lic',nombre:'Licencia Municipal de Funcionamiento — Restaurante (Hermosillo)',base:'Ley de Desarrollo Turístico del Estado de Sonora',freq:'anual'},
+  {tipo:'pb-pc',nombre:'Dictamen de Protección Civil (local con terraza)',base:'Ley de Protección Civil del Estado de Sonora',freq:'anual'},
+  {tipo:'pb-uso',nombre:'Licencia de Uso de Suelo (Restaurante)',base:'Plan Municipal de Desarrollo Urbano Hermosillo',freq:'unica'},
+  {tipo:'pb-san',nombre:'Aviso de Funcionamiento Sanitario (manejo de alimentos)',base:'Ley General de Salud Art. 200 Bis · NOM-251-SSA1-2009',freq:'unica'},
+  {tipo:'pb-alc',nombre:'Permiso Estatal de Venta y Consumo de Bebidas Alcohólicas',base:'Ley de Hacienda del Estado de Sonora',freq:'anual'},
+  {tipo:'pb-sat',nombre:'Alta SAT / RFC · CFDI activo',base:'CFF Art. 27',freq:'variable'},
+  {tipo:'pb-imss',nombre:'Inscripción IMSS / INFONAVIT de personal',base:'LSS Art. 12 · LINFONAVIT Art. 29',freq:'continua'},
+ ]},
+ {num:18,estado:'Quintana Roo',permisos:[
+  {tipo:'pb-lic',nombre:'Licencia Municipal de Funcionamiento (Benito Juárez / Cancún)',base:'Ley de Turismo del Estado de Quintana Roo',freq:'anual'},
+  {tipo:'pb-pc',nombre:'Dictamen de Protección Civil',base:'Ley de Protección Civil del Estado de Quintana Roo',freq:'anual'},
+  {tipo:'pb-uso',nombre:'Licencia de Uso de Suelo (Servicios Turísticos)',base:'Plan de Desarrollo Urbano Benito Juárez',freq:'unica'},
+  {tipo:'pb-tur',nombre:'Registro Nacional de Turismo / Cédula de Prestador de Servicios Turísticos',base:'Ley General de Turismo Art. 43 · Ley de Turismo del Estado de Quintana Roo',freq:'unica'},
+  {tipo:'pb-semar',nombre:'Autorización SEMARNAT — Zona Hotelera Cancún',base:'LGEEPA Art. 28 · Regl. zonas costeras',freq:'variable'},
+  {tipo:'pb-sat',nombre:'Alta SAT / RFC · CFDI activo',base:'CFF Art. 27',freq:'variable'},
+ ]},
+ {num:19,estado:'Guerrero',permisos:[
+  {tipo:'pb-lic',nombre:'Licencia Municipal de Funcionamiento (Acapulco)',base:'Ley de Fomento al Desarrollo Económico del Estado de Guerrero',freq:'anual'},
+  {tipo:'pb-pc',nombre:'Dictamen de Protección Civil (zona costera)',base:'Ley de Protección Civil del Estado de Guerrero',freq:'anual'},
+  {tipo:'pb-uso',nombre:'Licencia de Uso de Suelo (Oficina/Estudios)',base:'Plan de Desarrollo Urbano Acapulco',freq:'unica'},
+  {tipo:'pb-semar',nombre:'Aviso / Autorización SEMARNAT — Zona Costera',base:'LGEEPA Art. 28',freq:'variable'},
+  {tipo:'pb-afac',nombre:'Concesión/Registro IFT — antena de telecomunicaciones existente',base:'Ley Federal de Telecomunicaciones y Radiodifusión Art. 66-72',freq:'variable'},
+  {tipo:'pb-sat',nombre:'Alta SAT / RFC · CFDI activo',base:'CFF Art. 27',freq:'variable'},
+ ]},
+ {num:20,estado:'Estado de México',permisos:[
+  {tipo:'pb-lic',nombre:'Licencia Municipal de Funcionamiento — Tienda (Cuautitlán Izcalli)',base:'Ley para la Protección al Comercio Estado de México',freq:'anual'},
+  {tipo:'pb-pc',nombre:'Dictamen de Protección Civil',base:'Ley de Protección Civil del Estado de México',freq:'anual'},
+  {tipo:'pb-uso',nombre:'Licencia de Uso de Suelo (Tienda de Autoservicio)',base:'Plan Municipal de Desarrollo Urbano Cuautitlán Izcalli',freq:'unica'},
+  {tipo:'pb-alc',nombre:'Permiso Estatal de Venta de Bebidas Alcohólicas en Envase Cerrado',base:'Ley para la Prevención Social del Alcoholismo del Estado de México',freq:'anual'},
+  {tipo:'pb-sat',nombre:'Alta SAT / RFC · CFDI activo',base:'CFF Art. 27',freq:'variable'},
+  {tipo:'pb-imss',nombre:'Inscripción IMSS / INFONAVIT de personal',base:'LSS Art. 12 · LINFONAVIT Art. 29',freq:'continua'},
+  {tipo:'pb-anun',nombre:"Permiso para Anuncio Exterior (marca Waldo's)",base:'Reglamento de Imagen Urbana Cuautitlán Izcalli',freq:'anual'},
+ ]},
+];
+// ── TABLA PRINCIPAL ──
+function getDaysToEnd(fin){return Math.round((new Date(fin)-TODAY)/(1000*60*60*24));}
+function fmtRentaOrig(c){
+  if(c.renta_orig_texto) return `<div class="renta-amount" style="font-size:10.5px">${c.renta_orig_texto}</div><div class="renta-note">+ IVA</div>`;
+  if(!c.renta_orig) return `<span class="na">Ver notas</span>`;
+  const f=c.moneda==='USD'?FMT_USD:FMT_MXN;
+  const suf=c.renta_data?.tipo==='anual'?'/año':'/mes';
+  return `<div class="renta-amount">${f.format(c.renta_orig)}${suf}</div><div class="renta-note">+ IVA · según contrato</div>`;
+}
+function fmtRentaActual(c){
+  const rates=getInpcRates();
+  if(!c.renta_orig&&!c.renta_efe) return `<span class="ra-nodata">Ver renta efectiva</span>`;
+  if(!c.mes_incr) return `<span class="ra-nodata">Sin incremento mensual INPC<br/>(${c.incremento||'ver contrato'})</span>`;
+  const base=c.renta_orig||c.renta_efe?.monto||0;
+  const {renta,nextLabel,lastLabel,lastIncrRate}=calcRentaActual(base,c.renta_data.start,c.mes_incr,rates);
+  const f=c.moneda==='USD'?FMT_USD:FMT_MXN;
+  return `<div class="ra-amount">${f.format(renta)}/mes</div>
+    ${lastLabel?`<div class="ra-incr">Últ. incr: ${lastLabel} (+${lastIncrRate?.toFixed(2)}%)</div>`:''}
+    <div class="ra-next">Próx.: ${nextLabel}</div>`;
+}
+function fmtRentaEfe(c){
+  if(!c.renta_efe) return `<span class="na">Sin factura</span>`;
+  const isUSD=c.renta_efe.moneda==='USD'||c.moneda==='USD';
+  const f=isUSD?FMT_USD:FMT_MXN;
+  return `<div class="re-amount">${f.format(c.renta_efe.monto)}/mes</div><div class="re-note">+ IVA · s/IVA facturado</div><div class="re-mes">${c.renta_efe.mes}${c.renta_efe.nota?' · '+c.renta_efe.nota:''}</div>`;
+}
+function fmtM2(c){
+  const amt=c.renta_efe?.monto;
+  if(!amt||!c.superficie) return `<span class="na">—</span>`;
+  return `<div class="m2-amount">${FMT_MXN.format(amt/c.superficie)}/m²</div><div class="m2-note">${c.superficie.toLocaleString('es-MX')} m² · efectiva</div>`;
+}
+function fmtMant(c){
+  if(c.mant_efe) return `<span class="mant-chip">✓</span><div style="font-size:11px;color:#6EE7B7;margin-top:3px">${FMT_MXN.format(c.mant_efe.monto)}/mes</div><div style="font-size:9.5px;color:rgba(110,231,183,.55)">${c.mant_efe.mes}${c.mant_efe.nota?' · '+c.mant_efe.nota:''}</div>`;
+  if(c.mantenimiento&&!c.mantenimiento.startsWith('No ')&&c.mantenimiento!=='No aplica') return `<span class="mant-chip">✓</span><div style="font-size:10px;color:rgba(110,231,183,.6);margin-top:3px">${c.mantenimiento.length>30?c.mantenimiento.substring(0,30)+'…':c.mantenimiento}</div>`;
+  return `<span class="na">${c.mantenimiento||'No aplica'}</span>`;
+}
+function fmtCobranza(c){
+  const cb=c.cobranza;if(!cb) return `<span class="cob-nodata">Sin datos</span>`;
+  if(cb.status==='corriente') return `<span class="cob-ok">✓ Al corriente</span>${cb.detalle?`<div style="font-size:10px;color:rgba(255,255,255,.38);margin-top:2px">${cb.detalle}</div>`:''}`;
+  if(cb.status==='nuevo') return `<span style="font-weight:700;font-size:11px;color:#93C5FD">🆕 Contrato nuevo</span>${cb.detalle?`<div style="font-size:10px;color:rgba(147,197,253,.5);margin-top:2px">${cb.detalle}</div>`:''}`;
+  if(cb.status==='vencido') return `<div class="cob-vencido-badge"><div class="cob-vencido-monto">⚠ ${FMT_MXN0.format(cb.vencido)} vencido</div><div class="cob-vencido-mes">${cb.detalle}</div></div>`;
+  return `<span class="cob-nodata">${cb.detalle||'Sin datos'}</span>`;
+}
+function fmtPermisos(c){
+  const p=PERMISOS_DB.find(x=>x.num===c.num);if(!p) return `<span class="na">—</span>`;
+  const badges=p.permisos.slice(0,4).map(x=>`<span class="pb ${x.tipo}">${x.tipo.replace('pb-','').toUpperCase()}</span>`).join('');
+  return `<div class="pbadges">${badges}</div><div style="font-size:10px;color:rgba(255,255,255,.38);margin-top:3px">${p.estado}</div>`;
+}
+function plazoStatus(c){
+  const d=getDaysToEnd(c.fin);
+  if(d<0) return `<span class="plazo-alert">⚠ VENCIDO</span>`;
+  if(d<=180) return `<span class="plazo-alert">⚠ ${d} días</span>`;
+  if(d<=365) return `<span class="plazo-warn">⏰ ${Math.round(d/30)} meses</span>`;
+  if(c.notas&&c.notas.includes('renovación')) return `<span class="renovacion-chip">🔄 En renovación</span>`;
+  return `<span class="plazo-ok">✓ Vigente</span>`;
+}
+function buildTableBody(){
+  const tbody=document.getElementById('tableBody');if(!tbody)return;
+  let html='';let vencidos=0,deudores=0;
+  CONTRACTS.forEach(c=>{
+    const d=getDaysToEnd(c.fin);
+    if(d<0||d<=180) vencidos++;
+    if(c.cobranza?.vencido>0) deudores++;
+    const catColor=CAT_COLORS[c.cat]||'#94A3B8';
+    html+=`<tr data-arrendatario="${c.arrendatario.toLowerCase()}" data-hotel="${c.hotel.toLowerCase()}" data-ciudad="${c.ciudad.toLowerCase()}" data-giro="${c.giro.toLowerCase()}" data-fin="${c.fin}">
+      <td>${c.num}</td>
+      <td class="op-stripe" style="border-left-color:${catColor}">
+        <span class="op-pill" style="background:${catColor}">${c.cat}</span><br/>
+        <span class="op-name">${c.arrendatario}</span>
+        ${c.rfc?`<div style="font-size:9.5px;color:rgba(255,255,255,.28);margin-top:2px">RFC: ${c.rfc}</div>`:''}
+      </td>
+      <td><div class="hotel-name">${c.hotel}</div><div class="hotel-city">${c.ciudad}</div></td>
+      <td>
+        <div style="font-size:11.5px;color:rgba(255,255,255,.8)">${c.localidad}</div>
+        ${c.superficie?`<div style="font-size:10.5px;color:rgba(255,255,255,.45)">${c.superficie.toLocaleString('es-MX')} m²</div>`:''}
+        <span class="giro-pill">${c.giro.length>50?c.giro.substring(0,50)+'…':c.giro}</span>
+      </td>
+      <td>
+        <div class="plazo-years" style="font-size:9px">${c.plazo.length>42?c.plazo.substring(0,42)+'…':c.plazo}</div>
+        <div class="plazo-dates">${c.inicio} → ${c.fin}</div>
+        ${plazoStatus(c)}
+      </td>
+      <td>${fmtRentaOrig(c)}</td>
+      <td>${fmtRentaActual(c)}</td>
+      <td>${fmtRentaEfe(c)}</td>
+      <td>${fmtM2(c)}</td>
+      <td>
+        ${c.mes_incr?`<div class="incr-month">${MESES_ES[c.mes_incr-1]}</div>`:'<span class="na">—</span>'}
+        <div class="incr-note">${c.incremento.length>32?c.incremento.substring(0,32)+'…':c.incremento}</div>
+      </td>
+      <td>${fmtMant(c)}</td>
+      <td>${c.deposito&&!c.deposito.startsWith('No ')?`<span class="dep-chip">${c.deposito}</span>`:`<span class="na">${c.deposito||'N/D'}</span>`}</td>
+      <td style="font-size:11px;color:rgba(255,210,100,.85)">${c.penalizacion||'—'}</td>
+      <td>${fmtCobranza(c)}</td>
+      <td>${fmtPermisos(c)}</td>
+    </tr>`;
+  });
+  tbody.innerHTML=html;
+  document.getElementById('statVencidos').textContent=vencidos;
+  document.getElementById('alertBadge').textContent=vencidos;
+  document.getElementById('statDeudores').textContent=deudores;
+  document.getElementById('countBadge').textContent=`${CONTRACTS.length} contratos`;
+}
+let sc=-1,sa=true;
+function filterTable(){
+  const q=document.getElementById('searchInput').value.toLowerCase();
+  const est=document.getElementById('filterEstado').value;
+  const rows=document.querySelectorAll('#tableBody tr');let vis=0;
+  rows.forEach(r=>{
+    const txt=(r.dataset.arrendatario||'')+(r.dataset.hotel||'')+(r.dataset.ciudad||'')+(r.dataset.giro||'');
+    let show=txt.includes(q);
+    if(show&&est){const d=getDaysToEnd(r.dataset.fin||'2099-01-01');if(est==='vigente')show=d>365;else if(est==='vencer')show=d>=0&&d<=365;else if(est==='vencido')show=d<0;}
+    r.classList.toggle('hidden',!show);if(show)vis++;
+  });
+  document.getElementById('countBadge').textContent=`${vis} contratos`;
+  document.getElementById('noResults').style.display=vis===0?'block':'none';
+}
+function sortTable(col){
+  const tb=document.getElementById('tableBody');const rows=Array.from(tb.querySelectorAll('tr'));
+  sa=sc===col?!sa:true;sc=col;
+  rows.sort((a,b)=>{const va=a.cells[col]?.textContent.trim()||'';const vb=b.cells[col]?.textContent.trim()||'';const na=parseFloat(va.replace(/[^0-9.-]/g,''));const nb=parseFloat(vb.replace(/[^0-9.-]/g,''));if(!isNaN(na)&&!isNaN(nb))return sa?na-nb:nb-na;return sa?va.localeCompare(vb,'es'):vb.localeCompare(va,'es');});
+  rows.forEach(r=>tb.appendChild(r));
+  document.querySelectorAll('th').forEach((th,i)=>{th.classList.toggle('sorted',i===col);const s=th.querySelector('.si');if(s)s.textContent=i===col?(sa?' ↑':' ↓'):' ⇅';});
+}
+// ── ALERTAS VENCIMIENTO ──
+function buildAlertas(){
+  const el=document.getElementById('alertasContent');if(!el)return;
+  const sorted=[...CONTRACTS].sort((a,b)=>getDaysToEnd(a.fin)-getDaysToEnd(b.fin));
+  const buckets=[
+    {label:'Contratos Vencidos',color:'#E53E3E',lblColor:'#FC8181',cls:'red',test:d=>d<0},
+    {label:'Por vencer ≤ 6 meses',color:'#DD6B20',lblColor:'#FBD38D',cls:'orange',test:d=>d>=0&&d<=180},
+    {label:'Por vencer ≤ 12 meses',color:'#D69E2E',lblColor:'#FAF089',cls:'yellow',test:d=>d>180&&d<=365},
+    {label:'Por vencer ≤ 24 meses',color:'#2F855A',lblColor:'#9AE6B4',cls:'green',test:d=>d>365&&d<=730},
+    {label:'Vigentes (más de 24 meses)',color:'#2B6CB0',lblColor:'#90CDF4',cls:'',test:d=>d>730},
+  ];
+  let html='';
+  buckets.forEach(b=>{
+    const items=sorted.filter(c=>b.test(getDaysToEnd(c.fin)));
+    if(!items.length)return;
+    html+=`<div class="alert-section-title"><div class="alert-dot" style="background:${b.color}"></div><h3 style="color:${b.lblColor}">${b.label}</h3><span class="pc">${items.length}</span></div><div class="alert-cards">`;
+    items.forEach(c=>{
+      const d=getDaysToEnd(c.fin);
+      const badge=d<0?`VENCIDO hace ${Math.abs(d)} días`:`Vence en ${d} días (~${Math.round(d/30)} meses)`;
+      html+=`<div class="alert-card ${b.cls}">
+        <div class="alert-card-header">
+          <div><div class="alert-num">CONTRATO #${c.num}</div><div class="alert-hotel">${c.hotel}</div><div class="alert-op">${c.arrendatario}</div></div>
+          <div class="alert-time-badge">${badge}</div>
+        </div>
+        <div class="alert-meta">
+          <div class="alert-meta-item"><div class="alert-meta-label">Vencimiento</div><div class="alert-meta-val">${c.fin}</div></div>
+          <div class="alert-meta-item"><div class="alert-meta-label">Plazo</div><div class="alert-meta-val" style="font-size:11px">${c.plazo.substring(0,40)}</div></div>
+          <div class="alert-meta-item"><div class="alert-meta-label">Renta efectiva</div><div class="alert-meta-val">${c.renta_efe?FMT_MXN.format(c.renta_efe.monto)+'/mes':'Ver contrato'}</div></div>
+          <div class="alert-meta-item"><div class="alert-meta-label">Penalización</div><div class="alert-meta-val" style="font-size:10.5px">${c.penalizacion||'No especificada'}</div></div>
+        </div>
+      </div>`;
+    });
+    html+=`</div><div class="alert-divider"></div>`;
+  });
+  el.innerHTML=html||'<div style="color:rgba(255,255,255,.4);padding:40px;text-align:center">Sin alertas críticas.</div>';
+}
+// ── ALERTA INCREMENTO RENTA ──
+function buildIncrHistoryLocal(base,startStr,incrMonth,rates){
+  const history=[];let d=new Date(startStr);d.setDate(1);d.setMonth(incrMonth-1);
+  if(d<=new Date(startStr))d.setFullYear(d.getFullYear()+1);
+  let r=base;
+  while(d<=TODAY){
+    const yr=d.getFullYear();
+    // Cláusula 5.7
+    const md=getInpcMonthlyRate(incrMonth,yr);
+    const isExact=md?.isExact??false;
+    const rate=md?md.rate:(rates[yr]??rates[yr-1]??4.0);
+    const refLabel=md?md.label:`Tasa anual ${yr} (est.)`;
+    const prev=r;r*=(1+rate/100);
+    history.push({fecha:`${MESES_ES[incrMonth-1]} ${yr}`,rate,prev,nueva:r,isExact,refLabel});
+    d.setFullYear(d.getFullYear()+1);
+  }
+  return history;
+}
+function getNextIncrLocal(c,rates){
+  if(!c.mes_incr) return{tipo:'nodata'};
+  const{base,start}=c.renta_data;
+  const mes=c.mes_incr;
+  let d=new Date(start);d.setDate(1);d.setMonth(mes-1);
+  if(d<=new Date(start))d.setFullYear(d.getFullYear()+1);
+  while(d<=TODAY)d.setFullYear(d.getFullYear()+1);
+  const daysUntil=Math.ceil((d-TODAY)/(1000*60*60*24));
+  const yr=d.getFullYear();
+  // getInpcMonthlyRate ya resta internamente 1 mes (Cláusula 5.7) — se le pasa el mes de incremento tal cual,
+  // igual que calcRentaActual, para no restar el mes de referencia dos veces.
+  const md=getInpcMonthlyRate(mes,yr);
+  const rate=md?md.rate:(rates[yr]??rates[yr-1]??4.0);
+  const refLabel=md?`INPC ${fmtInpcKey(md.k2)}/${fmtInpcKey(md.k1)}${md.isExact?' (INEGI)':' (ref. ant.)'}`:`INPC ${yr} (estimado)`;
+  const curRenta=c.renta_efe?c.renta_efe.monto:calcRentaActual(base,start,mes,rates).renta;
+  const newRenta=curRenta*(1+rate/100);
+  const history=buildIncrHistoryLocal(base,start,mes,rates);
+  return{tipo:'mensual',daysUntil,incrementDate:d,incrYear:yr,incrRate:rate,curRenta,newRenta,history,mesNombre:MESES_ES[mes-1],refLabel,inpcExact:md?.isExact??false};
+}
+function renderAlertaRenta(){
+  const rates=getInpcRates();
+  const grid=document.getElementById('airtGrid');const statsEl=document.getElementById('airtStats');
+  if(!grid||!statsEl)return;
+  const items=CONTRACTS.map(c=>{
+    const incr=getNextIncrLocal(c,rates);
+    let urg='tranquilo';
+    if(incr.tipo==='nodata')urg='especial';
+    else if(incr.daysUntil<=30)urg='urgente';
+    else if(incr.daysUntil<=90)urg='proximo';
+    else if(incr.daysUntil<=365)urg='programado';
+    return{c,incr,urg};
+  }).sort((a,b)=>(a.incr.daysUntil??9999)-(b.incr.daysUntil??9999));
+  const cnt30=items.filter(x=>x.incr.daysUntil>0&&x.incr.daysUntil<=30).length;
+  const cnt90=items.filter(x=>x.incr.daysUntil>30&&x.incr.daysUntil<=90).length;
+  document.getElementById('statIncrProx').textContent=cnt30+cnt90;
+  statsEl.innerHTML=`
+    <div class="airt-stat" style="border-color:rgba(220,38,38,.4)"><div class="airt-stat-n" style="color:#FC8181">${cnt30}</div><div class="airt-stat-l">Urgentes ≤30d</div></div>
+    <div class="airt-stat" style="border-color:rgba(192,87,33,.4)"><div class="airt-stat-n" style="color:#F6AD55">${cnt90}</div><div class="airt-stat-l">Próximos 31–90d</div></div>
+    <div class="airt-stat" style="border-color:rgba(240,165,0,.3)"><div class="airt-stat-n" style="color:var(--gold)">${items.find(x=>x.incr.daysUntil>0)?.incr.daysUntil??'—'}</div><div class="airt-stat-l">Días al siguiente</div></div>`;
+  grid.innerHTML=items.map(({c,incr,urg})=>{
+    const catColor=CAT_COLORS[c.cat]||'#94A3B8';
+    let cdHtml='',rentaCmp='',incrBadge='',histHtml='',calcBtn='',mailBtn='';
+    if(incr.tipo==='nodata'){
+      cdHtml=`<div class="airt-countdown-n" style="color:#A0AEC0;font-size:11px">SIN DATOS</div><div class="airt-countdown-l">sin mes incr.</div>`;
+      rentaCmp=`<div class="airt-special-msg">Contrato sin mes de incremento definido (pago semestral fijo)</div>`;
+    } else {
+      const incMes=`${incr.mesNombre.slice(0,3)}-${incr.incrYear}`;
+      cdHtml=`<div class="airt-countdown-n">${incr.daysUntil}</div><div class="airt-countdown-l">días</div><div class="airt-countdown-mes">${incMes}</div>`;
+      rentaCmp=`<div class="airt-renta-cmp">
+        <div class="airt-renta-item"><div class="airt-renta-lbl">Renta actual</div><div class="airt-renta-val" style="color:rgba(255,255,255,.85)">${FMT_MXN0.format(incr.curRenta)}</div><div class="airt-renta-sub">/mes</div></div>
+        <div class="airt-renta-arrow">→</div>
+        <div class="airt-renta-item"><div class="airt-renta-lbl">Nueva renta</div><div class="airt-renta-val" style="color:#A3E635">${FMT_MXN0.format(incr.newRenta)}</div><div class="airt-renta-sub">/mes</div></div>
+      </div>`;
+      const dif=incr.newRenta-incr.curRenta;
+      const exactMark=incr.inpcExact?'<span style="color:#A3E635"> ✓ INEGI</span>':'<span style="color:#FCD34D"> ~ estimado</span>';
+      incrBadge=`<div class="airt-incr-badge" style="line-height:1.7"><strong>Tasa: +${incr.incrRate.toFixed(4)}%</strong>${exactMark}<br/><span style="font-size:9.5px;opacity:.8">${incr.refLabel}</span><br/><span style="color:#FCD34D">+${FMT_MXN.format(dif)}/mes</span></div>`;
+      if(incr.history?.length){
+        calcBtn=`<button class="airt-btn-calc" onclick="airtToggleCalc(${c.num})">📊 Ver historial</button>`;
+        const histRows=incr.history.map(h=>`<tr><td>${h.fecha}</td><td style="color:${h.isExact?'#A3E635':'#FCD34D'}" title="${h.refLabel}">${h.rate.toFixed(4)}%${h.isExact?' ✓':' ~'}</td><td style="font-size:10px;color:rgba(255,255,255,.5)" title="${h.refLabel}">${h.refLabel&&h.refLabel.length>38?h.refLabel.substring(0,38)+'…':h.refLabel||'—'}</td><td>${FMT_MXN.format(h.prev)}</td><td style="color:#A3E635;font-weight:700">${FMT_MXN.format(h.nueva)}</td></tr>`).join('');
+        histHtml=`<div class="airt-calc-panel" id="airt-calc-${c.num}">
+          <div class="airt-calc-title">Historial INPC (base contrato: ${FMT_MXN.format(c.renta_data.base)})</div>
+          <table class="airt-calc-table"><thead><tr><th>Mes/Año</th><th>Tasa INPC</th><th>Referencia índices (Cláusula 5.7)</th><th>Renta anterior</th><th>Renta nueva</th></tr></thead><tbody>${histRows}</tbody></table>
+          <div class="airt-calc-next"><strong>Próximo ajuste:</strong> ${incr.mesNombre} ${incr.incrYear} &nbsp;|&nbsp; Factor: <strong>+${incr.incrRate.toFixed(4)}%</strong>${incr.inpcExact?' <span style="color:#A3E635;font-size:9px">✓ INEGI</span>':' <span style="color:#FCD34D;font-size:9px">~ estimado</span>'} &nbsp;|&nbsp; Nueva renta: <strong style="color:#A3E635">${FMT_MXN.format(incr.newRenta)}/mes</strong><br/><span style="font-size:10px;opacity:.8">📐 Cláusula 5.7: ${incr.refLabel}</span></div>
+        </div>`;
+      }
+      mailBtn=`<button class="airt-btn-mail" onclick="airtOpenEmail(${c.num})"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg> Preparar correo</button>`;
+    }
+    return `<div class="airt-card ${urg}" id="airt-card-${c.num}">
+      <div class="airt-card-body">
+        <div class="airt-card-head">
+          <div><span style="display:inline-block;background:${catColor};color:#fff;font-size:9px;font-weight:800;padding:2px 9px;border-radius:50px;margin-bottom:5px">${c.cat}</span>
+            <div class="airt-card-hotel">${c.hotel}</div>
+            <div class="airt-card-op">${c.arrendatario.length>50?c.arrendatario.substring(0,50)+'…':c.arrendatario}</div></div>
+          <div class="airt-countdown">${cdHtml}</div>
+        </div>
+        ${rentaCmp}${incrBadge}
+        <div class="airt-card-actions">${calcBtn}${mailBtn}</div>
+        ${histHtml}
+      </div>
+    </div>`;
+  }).join('');
+}
+function airtToggleCalc(num){document.getElementById('airt-calc-'+num)?.classList.toggle('open');}
+function airtOpenEmail(num){
+  const c=CONTRACTS.find(x=>x.num===num);if(!c)return;
+  const incr=getNextIncrLocal(c,getInpcRates());
+  const today=TODAY.toLocaleDateString('es-MX',{year:'numeric',month:'long',day:'numeric'});
+  const subj=`Aviso de Incremento de Renta — ${c.arrendatario} | FIHO F/1596`;
+  const body=`Estimado(a) equipo de ${c.arrendatario},\n\nFIBRA HOTELERA MEXICANA — Fideicomiso F/1596 (FIHO), Gerencia de Arrendamientos, le notifica que conforme a la cláusula de incremento INPC del contrato vigente, la renta mensual será ajustada.\n\nDetalles del próximo incremento:\n  Arrendatario: ${c.arrendatario}\n  Hotel / Inmueble: ${c.hotel}\n  Fecha de incremento: ${incr.mesNombre||'—'} ${incr.incrYear||2026}\n  Renta vigente: ${c.renta_efe?FMT_MXN.format(c.renta_efe.monto)+' MXN/mes':'Ver estado de cuenta'}\n  Factor INPC estimado: +${incr.incrRate?.toFixed(3)||'—'}%\n  Nueva renta estimada: ${FMT_MXN.format(incr.newRenta||0)} MXN/mes\n  Referencia INPC: ${incr.refLabel||'—'}\n\nEsta notificación tiene carácter informativo. La renta definitiva se calculará conforme al INPC del período exacto según contrato.\n\nAtentamente,\nGerardo Vega Quinto\nGerencia de Arrendamientos — FIBRA HOTELERA MEXICANA F/1596\ngvega@fibrahotel.com`;
+  document.getElementById('cobModalTitle').textContent='Aviso de Incremento de Renta';
+  document.getElementById('cobModalSub').textContent=`Para: ${c.arrendatario} · ${c.hotel}`;
+  document.getElementById('cobEmailPreview').textContent=`ASUNTO: ${subj}\n\n${body}`;
+  document.getElementById('cobMailtoLink').href=`mailto:${c.correo||''}?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`;
+  window._cobDraft={text:`ASUNTO: ${subj}\n\n${body}`};
+  document.getElementById('cobModal').classList.add('open');
+}
+// ── ENERGÉTICOS ──
+function renderEnergeticos(){
+  const tbody=document.getElementById('energTableBody');if(!tbody)return;
+  tbody.innerHTML=CONTRACTS.map(c=>{
+    const e=ENERGETICOS_DATA[c.num]||{};
+    const catColor=CAT_COLORS[c.cat]||'#94A3B8';
+    const elecHtml=e.elec?`<span class="ener-si-elec">⚡ Sí paga</span><div class="ener-monto-elec">${FMT_MXN.format(e.elec.monto)}/mes</div><div class="ener-nota">${e.elec.mes}</div>`:`<span class="ener-no">No aplica</span>`;
+    const aguaHtml=e.agua?`<span class="ener-si-agua">💧 Sí paga</span><div class="ener-monto-agua">${FMT_MXN.format(e.agua.monto)}/mes</div><div class="ener-nota">${e.agua.mes}</div>`:`<span class="ener-no">No aplica</span>`;
+    const mantHtml=e.mant?`<span class="ener-si-mant">🔧 Sí paga</span><div class="ener-monto-mant">${FMT_MXN.format(e.mant.monto)}/mes</div><div class="ener-nota">${e.mant.mes}${e.mant.nota?' · '+e.mant.nota:''}</div>`:`<span class="ener-no">No aplica</span>`;
+    const hasAny=e.elec||e.agua||e.mant;
+    return `<tr>
+      <td class="ener-num">${c.num}</td>
+      <td style="border-left:4px solid ${catColor}"><span style="display:inline-block;background:${catColor};color:#fff;font-size:9.5px;font-weight:700;padding:2px 8px;border-radius:50px;margin-bottom:4px">${c.cat}</span><br/><span style="font-size:12px;font-weight:600;color:#fff">${c.arrendatario.length>42?c.arrendatario.substring(0,42)+'…':c.arrendatario}</span></td>
+      <td><div style="font-weight:600;font-size:12px;color:#fff">${c.hotel}</div><div style="font-size:10.5px;color:rgba(255,255,255,.45)">${c.ciudad}</div></td>
+      <td>${elecHtml}</td>
+      <td>${aguaHtml}</td>
+      <td>${mantHtml}</td>
+      <td><span class="ener-nota">${hasAny?'Datos soporte facturas jun-2026':'Sin reembolsos en período'}</span></td>
+    </tr>`;
+  }).join('');
+}
+// ── PERMISOS Y LICENCIAS ──
+const DOCS_LS='fiho_loc_permisos';
+function loadDocs(){try{return JSON.parse(localStorage.getItem(DOCS_LS)||'{}');}catch(e){return{};}}
+function saveDocs(d){localStorage.setItem(DOCS_LS,JSON.stringify(d));}
+function getDoc(pid){return loadDocs()[pid]||null;}
+function setDoc(pid,d){const all=loadDocs();all[pid]=d;saveDocs(all);}
+function renderPermisos(){
+  const cont=document.getElementById('permisosContainer');if(!cont)return;
+  const filterEst=document.getElementById('filterPermEst').value;
+  const docs=loadDocs();let total=0,loaded=0;
+  const html=PERMISOS_DB.filter(p=>!filterEst||p.estado===filterEst)
+   .slice()
+   .sort((a,b)=>{
+     const ca=CONTRACTS.find(x=>x.num===a.num),cb=CONTRACTS.find(x=>x.num===b.num);
+     return (ca?.arrendatario||'').localeCompare(cb?.arrendatario||'','es');
+   })
+   .map(p=>{
+    const c=CONTRACTS.find(x=>x.num===p.num);if(!c)return'';
+    const catColor=CAT_COLORS[c.cat]||'#94A3B8';
+    const permItems=p.permisos.map(perm=>{
+      total++;const docKey=`${p.num}-${perm.tipo}`;const d=docs[docKey];
+      if(d?.uploaded)loaded++;
+      const freqCls=perm.freq==='anual'?'freq-anual':perm.freq==='unica'?'freq-unica':perm.freq==='continua'?'freq-continua':'freq-variable';
+      const freqLabel=perm.freq==='anual'?'Renovación anual':perm.freq==='unica'?'Trámite único':perm.freq==='continua'?'Continua':'Variable';
+      return `<div class="docs-perm-item">
+        <div class="docs-perm-name"><span class="pb ${perm.tipo}" style="margin-right:6px">${perm.tipo.replace('pb-','').toUpperCase()}</span>${perm.nombre}</div>
+        <div class="docs-perm-base">${perm.base}</div>
+        <div class="docs-perm-row">
+          <span class="docs-freq-chip ${freqCls}">${freqLabel}</span>
+          <label class="btn-upload-mini" style="cursor:pointer">${d?.uploaded?'↺ Actualizar':'⬆ Cargar'}<input type="file" accept=".pdf,.jpg,.jpeg,.png" style="display:none" onchange="uploadPermDoc('${docKey}',this)"></label>
+          ${d?.uploaded?`<button class="btn-view-mini" onclick="viewPermDoc('${docKey}')">👁 Ver</button>`:''}
+        </div>
+        ${d?.uploaded?`<div style="font-size:9.5px;color:#86EFAC;margin-top:4px">📄 ${d.filename||'—'} · ${d.uploadDate||'—'}</div>`:`<div style="font-size:10px;color:rgba(255,255,255,.28);margin-top:4px">Sin documento cargado</div>`}
+        <input type="date" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13);border-radius:6px;color:#fff;font-size:10.5px;font-family:Inter,sans-serif;padding:3px 7px;outline:none;margin-top:5px" value="${d?.expiry||''}" onchange="setPermExpiry('${docKey}',this.value)" title="Fecha de vencimiento del permiso"/>
+      </div>`;
+    }).join('');
+    return `<div class="docs-contract">
+      <div class="docs-contract-hdr">
+        <span class="docs-cnum">#${p.num}</span>
+        <div><div class="docs-hotel">${c.arrendatario}${c.rfc?` <span style="font-size:9.5px;font-weight:400;color:rgba(255,255,255,.35)">· RFC ${c.rfc}</span>`:''}</div>
+          <div class="docs-ciudad"><span style="display:inline-block;background:${catColor};color:#fff;font-size:9px;font-weight:700;padding:1px 7px;border-radius:50px;margin-right:5px">${c.cat}</span>${p.estado} · ${c.ciudad}</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.4);margin-top:3px">🏨 ${c.hotel} <span style="color:rgba(255,255,255,.28)">· ${c.giro}</span></div>
+        </div>
+      </div>
+      <div class="docs-perm-grid">${permItems}</div>
+    </div>`;
+  }).join('');
+  cont.innerHTML=html;
+  document.getElementById('permsStats').innerHTML=`
+    <div class="docs-stat"><div class="dn">${total}</div><div class="dl">Permisos total</div></div>
+    <div class="docs-stat"><div class="dn" style="color:#86EFAC">${loaded}</div><div class="dl">Con documento</div></div>
+    <div class="docs-stat"><div class="dn" style="color:#FCA5A5">${total-loaded}</div><div class="dl">Sin documento</div></div>`;
+}
+function uploadPermDoc(key,input){if(!input.files[0])return;const f=input.files[0];const r=new FileReader();r.onload=e=>{setDoc(key,{uploaded:true,filename:f.name,uploadDate:new Date().toLocaleDateString('es-MX'),fileData:e.target.result});renderPermisos();};r.readAsDataURL(f);}
+function viewPermDoc(key){const d=getDoc(key);if(!d?.fileData)return;const w=window.open();if(d.fileData.startsWith('data:application/pdf'))w.document.write(`<iframe src="${d.fileData}" style="width:100%;height:100vh;border:none"></iframe>`);else w.document.write(`<img src="${d.fileData}" style="max-width:100%;display:block;margin:auto">`);}
+function setPermExpiry(key,val){const d=getDoc(key)||{};d.expiry=val;setDoc(key,d);renderPermisos();}
+function exportPermisos(){const a=document.createElement('a');a.href='data:application/json;charset=utf-8,'+encodeURIComponent(JSON.stringify(loadDocs(),null,2));a.download='permisos_locales_'+new Date().toISOString().slice(0,10)+'.json';a.click();}
+function importPermisos(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{saveDocs(JSON.parse(ev.target.result));renderPermisos();alert('Importado correctamente.');}catch{alert('Error al leer el archivo.');}};r.readAsText(f);}
+
+// ── REPOSITORIO ──
+function loadContratos(){try{return JSON.parse(localStorage.getItem('fiho_loc_contratos')||'{}');}catch(e){return{};}}
+function saveContratos(d){localStorage.setItem('fiho_loc_contratos',JSON.stringify(d));}
+function renderContratos(){
+  const grid=document.getElementById('contratosGrid');if(!grid)return;
+  const data=loadContratos();
+  grid.innerHTML=CONTRACTS.map(c=>{
+    const d=data[c.num]||{};const catColor=CAT_COLORS[c.cat]||'#94A3B8';
+    return `<div class="ctab-card">
+      <div class="ctab-card-hdr">
+        <div class="ctab-num">${c.num}</div>
+        <div style="flex:1"><div class="ctab-hotel">${c.hotel}</div>
+          <div class="ctab-op"><span style="display:inline-block;background:${catColor};color:#fff;font-size:9px;font-weight:700;padding:1px 7px;border-radius:50px;margin-right:4px">${c.cat}</span>${c.ciudad}</div>
+        </div>
+        <div>${d.uploaded?`<span class="ctab-status-ok">✓ Cargado</span>`:`<span class="ctab-status-miss">Pendiente</span>`}</div>
+      </div>
+      <div class="ctab-body">
+        ${d.uploaded?`
+          <div class="ctab-row"><span class="ctab-lbl">Archivo</span><span class="ctab-val">📄 ${d.filename||'—'}</span></div>
+          <div class="ctab-row"><span class="ctab-lbl">Cargado</span><span class="ctab-val">${d.uploadDate||'—'}</span></div>
+          <div class="ctab-row"><span class="ctab-lbl">Vigencia</span><input type="date" style="flex:1;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:7px;color:#fff;font-size:11px;font-family:Inter,sans-serif;padding:3px 7px;outline:none" value="${d.expiry||''}" onchange="setContratoExpiry(${c.num},this.value)"/></div>
+          <div class="ctab-row"><span class="ctab-lbl">Notas</span><input type="text" placeholder="Notas opcionales…" style="flex:1;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:7px;color:#fff;font-size:11px;font-family:Inter,sans-serif;padding:3px 7px;outline:none" value="${d.notes||''}" onchange="setContratoNotes(${c.num},this.value)"/></div>`
+        :`<div style="font-size:11px;color:rgba(255,255,255,.28);margin-bottom:8px">No se ha cargado el contrato digitalizado.</div>`}
+        <div class="ctab-actions">
+          <label class="btn-upload" style="padding:5px 11px;font-size:10.5px;cursor:pointer">${d.uploaded?'↺ Actualizar':'⬆ Cargar contrato'}<input type="file" accept=".pdf,.jpg,.jpeg,.png" style="display:none" onchange="uploadContrato(${c.num},this)"></label>
+          ${d.uploaded?`<button class="btn-view" onclick="viewContrato(${c.num})" style="font-size:10.5px;padding:5px 11px">👁 Ver</button>`:''}
+          ${c.drive?`<a href="${c.drive}" target="_blank" class="btn-view" style="font-size:10.5px;padding:5px 11px;text-decoration:none">☁ Drive</a>`:''}
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+function uploadContrato(num,input){if(!input.files[0])return;const f=input.files[0];const r=new FileReader();r.onload=e=>{const data=loadContratos();data[num]={...data[num]||{},uploaded:true,filename:f.name,uploadDate:new Date().toLocaleDateString('es-MX'),fileData:e.target.result};saveContratos(data);renderContratos();};r.readAsDataURL(f);}
+function viewContrato(num){const d=loadContratos()[num];if(!d?.fileData)return;const w=window.open();if(d.fileData.startsWith('data:application/pdf'))w.document.write(`<iframe src="${d.fileData}" style="width:100%;height:100vh;border:none"></iframe>`);else w.document.write(`<img src="${d.fileData}" style="max-width:100%;display:block;margin:auto">`);}
+function setContratoExpiry(num,val){const data=loadContratos();data[num]={...data[num]||{},expiry:val};saveContratos(data);}
+function setContratoNotes(num,val){const data=loadContratos();data[num]={...data[num]||{},notes:val};saveContratos(data);}
+function exportContratos(){const a=document.createElement('a');a.href='data:application/json;charset=utf-8,'+encodeURIComponent(JSON.stringify(loadContratos(),null,2));a.download='contratos_locales_'+new Date().toISOString().slice(0,10)+'.json';a.click();}
+function importContratos(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{saveContratos(JSON.parse(ev.target.result));renderContratos();alert('Importado.');}catch{alert('Error.');}};r.readAsText(f);}
+
+// ── FACTURACIÓN ──
+function renderFacturacion(){
+  const tbody=document.getElementById('factTableBody');if(!tbody)return;
+  const mes=parseInt(document.getElementById('factMes').value);
+  const anio=parseInt(document.getElementById('factAnio').value);
+  const rates=getInpcRates();
+  let html='',total=0,totalIva=0;
+  CONTRACTS.forEach((c,i)=>{
+    const re=c.renta_efe;const r=getRentaActualMensual(c,rates);
+    if(!r)return;
+    const isUSD=re?.moneda==='USD'||c.moneda==='USD';
+    if(!isUSD){total+=r;totalIva+=r*1.16;}
+    const fuente=re?`<span style="font-size:9px;color:rgba(252,211,77,.55)">📄 ${re.mes}</span>`:`<span style="font-size:9px;color:rgba(255,255,255,.28)">INPC est.</span>`;
+    const fmt=isUSD?FMT_USD:FMT_MXN;
+    html+=`<tr>
+      <td>${i+1}</td>
+      <td><div style="font-size:12px;font-weight:600;color:#fff">${c.arrendatario.length>45?c.arrendatario.substring(0,45)+'…':c.arrendatario}</div><div style="font-size:10px;color:rgba(255,255,255,.4)">${c.rfc||'RFC pendiente'}</div></td>
+      <td style="font-size:11px;color:rgba(255,255,255,.7)">Arrendamiento ${MESES_ES[mes-1]} ${anio} · ${c.hotel.substring(0,40)}<br/>${fuente}</td>
+      <td style="text-align:center">1</td>
+      <td><span class="fact-precio">${fmt.format(r)}</span></td>
+      <td><span class="fact-total">${fmt.format(r*1.16)}</span></td>
+      <td style="font-size:9.5px;color:rgba(255,255,255,.4)">${re?re.mes:'INPC calc.'}</td>
+      <td style="font-size:10.5px;color:rgba(255,255,255,.45)">${c.correo||'—'}</td>
+    </tr>`;
+  });
+  html+=`<tr class="fact-total-row"><td colspan="4">TOTAL MXN (renta efectiva donde disponible)</td><td>${FMT_MXN.format(total)}</td><td>${FMT_MXN.format(totalIva)}</td><td colspan="2"></td></tr>`;
+  tbody.innerHTML=html;
+}
+function generateBillingExcel(){
+  if(!window.XLSX){alert('Librería Excel no cargada.');return;}
+  const mes=parseInt(document.getElementById('factMes').value);const anio=parseInt(document.getElementById('factAnio').value);const rates=getInpcRates();
+  const rows=[['Arrendatario','RFC','Hotel','Descripción','Renta s/IVA','IVA','Total c/IVA','Fuente','Correo']];
+  CONTRACTS.forEach(c=>{const re=c.renta_efe;const r=getRentaActualMensual(c,rates);if(!r)return;rows.push([c.arrendatario,c.rfc||'',c.hotel,`Arrendamiento ${MESES_ES[mes-1]} ${anio}`,r,r*IVA,r*1.16,re?`Soporte factura ${re.mes}`:'INPC calculada',c.correo||'']);});
+  const ws=XLSX.utils.aoa_to_sheet(rows);const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,'Facturación');
+  XLSX.writeFile(wb,`Facturacion_Locales_${MESES_ES[mes-1]}_${anio}.xlsx`);
+}
+// ── CONCILIACIÓN ──
+let bankData=null,billData=null,bankHeaders=[];
+function loadBankFile(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{let rows=[];if(f.name.toLowerCase().endsWith('.csv')){rows=ev.target.result.split('\n').map(l=>l.split(',').map(c=>c.replace(/^"|"$/g,'').trim()));}else{const wb=XLSX.read(ev.target.result,{type:'array'});rows=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{header:1,raw:false});}bankHeaders=rows[0]||[];bankData=rows.slice(1).filter(r=>r.some(c=>c));document.getElementById('bankFileOk').textContent=`✓ Cargado: ${f.name} (${bankData.length} filas)`;document.getElementById('bankFileOk').className='conc-file-ok show';buildBankColMap();checkConcReady();}catch(err){alert('Error: '+err.message);}};if(f.name.toLowerCase().endsWith('.csv'))r.readAsText(f,'UTF-8');else r.readAsArrayBuffer(f);}
+function loadBillFile(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{const wb=XLSX.read(ev.target.result,{type:'array'});const sn=wb.SheetNames.find(s=>s.toUpperCase().includes('SOPORTE')||s.toUpperCase().includes('FACTURA'))||wb.SheetNames[0];const rows=XLSX.utils.sheet_to_json(wb.Sheets[sn],{header:1,raw:false,defval:''});let hi=0;for(let i=0;i<Math.min(15,rows.length);i++){if(rows[i].some(c=>String(c).toUpperCase().includes('SUBTOTAL'))){hi=i;break;}}const hdrs=rows[hi];billData=rows.slice(hi+1).filter(r=>r[1]&&String(r[1]).trim()).map(r=>{const o={};hdrs.forEach((h,i)=>{o[String(h).trim()]=r[i];});return o;});document.getElementById('billFileOk').textContent=`✓ Cargado: ${f.name} (${billData.length} facturas)`;document.getElementById('billFileOk').className='conc-file-ok show';checkConcReady();}catch(err){alert('Error: '+err.message);}};r.readAsArrayBuffer(f);}
+function buildBankColMap(){const div=document.getElementById('bankColMap');const opts=bankHeaders.map((h,i)=>`<option value="${i}">${h||'Col '+(i+1)}</option>`).join('');const no='<option value="-1">— No aplica —</option>';div.innerHTML=`<div><label>Fecha</label><select id="colFecha">${no}${opts}</select></div><div><label>Descripción</label><select id="colDesc">${no}${opts}</select></div><div><label>Importe</label><select id="colImporte">${no}${opts}</select></div>`;bankHeaders.forEach((h,i)=>{const hn=String(h).toUpperCase();if(/FECHA|DATE/i.test(hn))document.getElementById('colFecha').value=i;else if(/DESC|CONCEPTO|REF/i.test(hn))document.getElementById('colDesc').value=i;else if(/ABONO|DEP|CRED|IMPORTE|MONTO/i.test(hn))document.getElementById('colImporte').value=i;});}
+function checkConcReady(){document.getElementById('btnConciliar').disabled=!(bankData&&billData);}
+function parseMoney(v){if(v===null||v===undefined||v==='')return null;const n=parseFloat(String(v).replace(/[$,\s]/g,''));return isNaN(n)?null:n;}
+function runConciliacion(){
+  const cF=parseInt(document.getElementById('colFecha')?.value??-1);const cD=parseInt(document.getElementById('colDesc')?.value??-1);const cI=parseInt(document.getElementById('colImporte')?.value??-1);
+  const invs=billData.map(row=>{const ks=Object.keys(row);const fk=ks.find(k=>/FACTURA|FOLIO/i.test(k))||'';const ck=ks.find(k=>/CLIENTE|NOMBRE/i.test(k))||'';const dk=ks.find(k=>/DESC/i.test(k))||'';const tk=ks.find(k=>/^TOTAL$/i.test(k))||ks.find(k=>/TOTAL/i.test(k))||'';const sk=ks.find(k=>/SUBTOTAL/i.test(k))||'';const imp=parseMoney(row[tk])||parseMoney(row[sk]);return{folio:row[fk]||'—',cliente:row[ck]||'—',desc:row[dk]||'—',imp};}).filter(i=>i.imp);
+  const byAmt={};invs.forEach(inv=>{const k=inv.imp.toFixed(2);if(!byAmt[k])byAmt[k]=[];byAmt[k].push(inv);});
+  const results=[];bankData.forEach((row,idx)=>{const fecha=cF>=0?(row[cF]||'—'):'—';const desc=cD>=0?(row[cD]||'—'):'—';const imp=cI>=0?parseMoney(row[cI]):null;if(!imp)return;let match=null,mt='none';if(byAmt[imp.toFixed(2)]){match=byAmt[imp.toFixed(2)][0];mt='exact';}else{for(const[k,il]of Object.entries(byAmt)){if(Math.abs(parseFloat(k)-imp)/imp<=0.001){match=il[0];mt='approx';break;}}}results.push({idx:idx+1,fecha,desc,imp,match,mt});});
+  const ex=results.filter(r=>r.mt==='exact').length,ap=results.filter(r=>r.mt==='approx').length;
+  document.getElementById('concSummary').innerHTML=`<span style="color:#86EFAC">✓ Exactos: ${ex}</span> &nbsp; <span style="color:#FCD34D">≈ Aproximados: ${ap}</span> &nbsp; <span style="color:rgba(255,150,150,.8)">✗ Sin coincidencia: ${results.length-ex-ap}</span> &nbsp; Total: ${results.length}`;
+  document.getElementById('concTableBody').innerHTML=results.map(r=>{const cls=r.mt==='exact'?'match-exact':r.mt==='approx'?'match-approx':'match-none';return`<tr><td style="text-align:center;color:var(--gold);font-weight:700">${r.idx}</td><td>${String(r.desc).slice(0,60)}</td><td>${r.fecha}</td><td style="font-weight:700">${FMT_MXN.format(r.imp)}</td><td class="${cls}">${r.match?r.match.folio:'—'}</td><td style="max-width:200px;font-size:10.5px">${r.match?String(r.match.desc).slice(0,80):'—'}</td><td>${r.match?FMT_MXN.format(r.match.imp):'—'}</td><td class="${cls}">${r.mt==='exact'?'✓ Exacto':r.mt==='approx'?'≈ Aprox.':'✗ Sin coincidencia'}</td></tr>`;}).join('');
+  window._concResults=results;document.getElementById('concResultSection').style.display='block';
+}
+function exportConciliacion(){if(!window._concResults)return;const rows=[['#','Descripción Banco','Fecha','Importe Banco','Folio','Concepto Factura','Importe Factura','Estado']];window._concResults.forEach(r=>{rows.push([r.idx,r.desc,r.fecha,r.imp,r.match?r.match.folio:'',r.match?r.match.desc:'',r.match?r.match.imp:'',r.mt==='exact'?'Exacto':r.mt==='approx'?'Aproximado':'Sin coincidencia']);});const ws=XLSX.utils.aoa_to_sheet(rows);const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,'Conciliación');XLSX.writeFile(wb,'Conciliacion_Locales_'+new Date().toISOString().slice(0,10)+'.xlsx');}
+
+// ── COBRANZA ──
+let cobLogs={};
+function loadCobLogs(){try{const s=localStorage.getItem('fiho_loc_cob');if(s)cobLogs=JSON.parse(s);}catch(e){}}
+function saveCobLogs(){try{localStorage.setItem('fiho_loc_cob',JSON.stringify(cobLogs));}catch(e){}}
+function cobSaveLog(name,msg){if(!cobLogs[name])cobLogs[name]=[];cobLogs[name].push(new Date().toLocaleString('es-MX')+' — '+msg);saveCobLogs();renderCobTable();}
+function renderCobTable(){
+  const tbody=document.getElementById('cobTableBody');if(!tbody)return;
+  const rates=getInpcRates();let pendientes=0;
+  const html=CONTRACTS.map((c,i)=>{
+    const re=c.renta_efe;const r=getRentaActualMensual(c,rates);
+    const isUSD=re?.moneda==='USD'||c.moneda==='USD';const fmt=isUSD?FMT_USD:FMT_MXN;
+    if(c.cobranza?.vencido>0)pendientes++;
+    const log=(cobLogs[c.arrendatario]||[]).slice(-2).reverse().map(l=>`<div class="cob-log-entry">${l}</div>`).join('');
+    return `<tr>
+      <td>${i+1}</td>
+      <td><div style="font-size:12px;font-weight:600;color:#fff">${c.arrendatario.length>45?c.arrendatario.substring(0,45)+'…':c.arrendatario}</div><div style="font-size:10px;color:rgba(255,255,255,.4)">${c.hotel}</div></td>
+      <td>${r?`<span style="color:#FCD34D;font-weight:800">${fmt.format(r)}/mes</span>${re?`<div style="font-size:9.5px;color:rgba(252,211,77,.45);margin-top:1px">📄 ${re.mes}</div>`:'<div style="font-size:9px;color:rgba(255,255,255,.28)">INPC est.</div>'}`:'<span class="cob-nodata">N/D</span>'}</td>
+      <td>${fmtCobranza(c)}</td>
+      <td>
+        <button class="cob-btn-email" onclick="cobOpenEmail('${encodeURIComponent(c.arrendatario)}',1)">✉ Nivel 1</button>
+        <button class="cob-btn-email" onclick="cobOpenEmail('${encodeURIComponent(c.arrendatario)}',2)">✉ Nivel 2</button>
+        <button class="cob-btn-wa" onclick="cobOpenWa('${encodeURIComponent(c.arrendatario)}')">💬 WhatsApp</button>
+      </td>
+      <td>${log||'<span class="cob-nodata">Sin bitácora</span>'}</td>
+    </tr>`;
+  }).join('');
+  tbody.innerHTML=html;
+  document.getElementById('cobSummary').innerHTML=`
+    <div class="cob-sum-card"><div class="num">${CONTRACTS.length}</div><div class="lbl">Arrendatarios</div></div>
+    <div class="cob-sum-card"><div class="num" style="color:#FCA5A5">${pendientes}</div><div class="lbl">Con adeudo</div></div>`;
+}
+function cobOpenEmail(enc,lvl){
+  const name=decodeURIComponent(enc);const c=CONTRACTS.find(x=>x.arrendatario===name);if(!c)return;
+  const r=c.renta_efe?FMT_MXN.format(c.renta_efe.monto)+' MXN':'ver estado de cuenta';
+  const dl=new Date(TODAY.getTime()+7*24*60*60*1000).toLocaleDateString('es-MX',{year:'numeric',month:'long',day:'numeric'});
+  const today=TODAY.toLocaleDateString('es-MX',{year:'numeric',month:'long',day:'numeric'});
+  const t={
+    1:{subj:`Recordatorio de Pago — Arrendamiento ${name} | FIHO F/1596`,body:`Estimado(a) equipo de ${name},\n\nFIBRA HOTELERA MEXICANA — Fideicomiso F/1596 (FIHO), Gerencia de Arrendamientos, le recuerda amablemente que al día ${today} existe saldo pendiente de renta de arrendamiento por ${r}/mes + IVA.\n\nAgradecemos confirmar la fecha de pago o enviar comprobante de transferencia.\n\nDatos SPEI:\n  Banco: ${SPEI.banco}\n  Cuenta: ${SPEI.cuenta}\n  CLABE: ${SPEI.clabe}\n  Beneficiario: ${SPEI.beneficiario}\n  Concepto: Arrendamiento ${name}\n\nAtentamente,\nGerardo Vega Quinto\nGerencia de Arrendamientos — FIHO F/1596\ngvega@fibrahotel.com`},
+    2:{subj:`REQUERIMIENTO FORMAL DE PAGO — ${name} | FIHO F/1596`,body:`Estimado(a) equipo de ${name},\n\nFIBRA HOTELERA MEXICANA — Fideicomiso F/1596 (FIHO) requiere formalmente el pago de rentas adeudadas al ${today}. Conforme al contrato vigente, el incumplimiento en el pago de dos rentas consecutivas constituye causa de rescisión.\n\nSe concede plazo improrrogable hasta el ${dl} para acreditar el pago íntegro. Vencido dicho plazo, se procederá a las acciones legales correspondientes.\n\nDatos SPEI:\n  Banco: ${SPEI.banco}\n  Cuenta: ${SPEI.cuenta}\n  CLABE: ${SPEI.clabe}\n  Beneficiario: ${SPEI.beneficiario}\n  Concepto: Arrendamiento ${name}\n\nAtentamente,\nGerardo Vega Quinto\nGerencia de Arrendamientos — FIHO F/1596\ngvega@fibrahotel.com`},
+  };
+  const tm=t[lvl]||t[1];
+  document.getElementById('cobModalTitle').textContent=`Correo Nivel ${lvl} — ${name}`;
+  document.getElementById('cobModalSub').innerHTML=`<strong>Hotel:</strong> ${c.hotel} &nbsp;·&nbsp; <strong>Plazo límite:</strong> ${dl}`;
+  document.getElementById('cobEmailPreview').textContent=`ASUNTO: ${tm.subj}\n\n${tm.body}`;
+  document.getElementById('cobMailtoLink').href=`mailto:${c.correo||''}?subject=${encodeURIComponent(tm.subj)}&body=${encodeURIComponent(tm.body)}`;
+  window._cobDraft={text:`ASUNTO: ${tm.subj}\n\n${tm.body}`};
+  document.getElementById('cobModal').classList.add('open');
+  cobSaveLog(name,`Correo nivel ${lvl} generado`);
+}
+function cobOpenWa(enc){
+  const name=decodeURIComponent(enc);const c=CONTRACTS.find(x=>x.arrendatario===name);if(!c)return;
+  const r=c.renta_efe?FMT_MXN.format(c.renta_efe.monto)+' MXN':'ver estado de cuenta';
+  const msg=`Hola, buenos días.\n\nEscribo de parte de *FIBRA HOTELERA MEXICANA (FIHO)* — Gerencia de Arrendamientos.\n\nTenemos saldo pendiente de renta *${r}/mes + IVA*.\n\nSolicitamos confirmar fecha de pago o enviar comprobante.\n\nDatos SPEI:\n• Banco: ${SPEI.banco}\n• Cuenta: ${SPEI.cuenta}\n• CLABE: ${SPEI.clabe}\n• Beneficiario: ${SPEI.beneficiario}\n\nGerardo Vega Quinto — FIHO\ngvega@fibrahotel.com`;
+  document.getElementById('cobModalTitle').textContent=`WhatsApp — ${name}`;
+  document.getElementById('cobModalSub').textContent=`Para: ${name}`;
+  document.getElementById('cobEmailPreview').textContent=msg;
+  document.getElementById('cobMailtoLink').href='#';
+  window._cobDraft={text:msg};
+  document.getElementById('cobModal').classList.add('open');
+  cobSaveLog(name,'Mensaje WhatsApp generado');
+}
+function cobCopyEmail(){if(!window._cobDraft)return;navigator.clipboard.writeText(window._cobDraft.text).then(()=>{const btn=document.querySelector('#cobModal .cob-btn-copy2');if(btn){const t=btn.textContent;btn.textContent='✅ Copiado';setTimeout(()=>btn.textContent=t,2000);}}).catch(()=>{});}
+function cobCopySpei(){const t=`Banco: ${SPEI.banco}\nCuenta: ${SPEI.cuenta}\nCLABE: ${SPEI.clabe}\nBeneficiario: ${SPEI.beneficiario}\nRFC: ${SPEI.rfc}`;navigator.clipboard.writeText(t).then(()=>alert('Datos SPEI copiados.')).catch(()=>{});}
+
+// ── TABS ──
+function switchTab(id,btn){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');btn.classList.add('active');
+  if(id==='alertas')buildAlertas();
+  if(id==='alertas-renta')renderAlertaRenta();
+  if(id==='energeticos')renderEnergeticos();
+  if(id==='permisos')renderPermisos();
+  if(id==='docs')renderContratos();
+  if(id==='facturacion')renderFacturacion();
+  if(id==='cobranza')renderCobTable();
+}
+// ── INIT ──
+document.addEventListener('DOMContentLoaded',()=>{
+  buildInpcEditor();inpcRenderMonthlyList();buildTableBody();buildAlertas();renderAlertaRenta();loadCobLogs();renderCobTable();renderFacturacion();renderContratos();
+});
+</script>
+</body>
+</html>
