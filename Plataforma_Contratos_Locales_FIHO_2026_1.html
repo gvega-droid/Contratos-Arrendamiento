@@ -692,7 +692,7 @@ const INPC_MONTHLY_IDX={
   '2025-09':141.197,'2025-10':141.709,'2025-11':142.645,'2025-12':143.042,
   // 2026 — publicados por INEGI al 18-jun-2026
   '2026-01':143.588,'2026-02':144.308,'2026-03':145.544,'2026-04':145.831,
-  '2026-05':145.622,'2026-06':145.131,
+  '2026-05':145.622,'2026-06':145.131,'2026-07':145.169,
 };
 function getInpcRates(){try{const s=localStorage.getItem('fiho_loc_inpc');return s?JSON.parse(s):{...INPC_DEFAULT};}catch(e){return{...INPC_DEFAULT};}}
 function inpcGetMonthly(){try{return JSON.parse(localStorage.getItem('fiho_loc_inpc_monthly')||'{}');}catch(e){return{};}}
