@@ -336,6 +336,29 @@ td:first-child{text-align:center;font-weight:700;color:var(--gold);font-size:13p
 .cmt-save-btn{background:rgba(240,165,0,.2);border:1px solid rgba(240,165,0,.4);border-radius:7px;color:var(--gold);font-size:11px;font-weight:700;padding:4px 12px;cursor:pointer;flex:1;font-family:'Inter',sans-serif}
 .cmt-del-btn{background:rgba(220,38,38,.12);border:1px solid rgba(220,38,38,.3);border-radius:7px;color:#FCA5A5;font-size:11px;font-weight:600;padding:4px 10px;cursor:pointer;font-family:'Inter',sans-serif}
 .cmt-close-btn{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:7px;color:rgba(255,255,255,.5);font-size:11px;font-weight:600;padding:4px 10px;cursor:pointer;font-family:'Inter',sans-serif}
+/* ── AUTH & FIELD EDIT ── */
+.lock-btn{background:rgba(240,165,0,.12);border:1px solid rgba(240,165,0,.3);border-radius:10px;color:var(--gold);font-family:'Inter',sans-serif;font-size:12px;font-weight:700;padding:7px 14px;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all .18s;white-space:nowrap}
+.lock-btn:hover{background:rgba(240,165,0,.22)}
+.lock-btn.unlocked{background:rgba(34,197,94,.12);border-color:rgba(34,197,94,.3);color:#86EFAC}
+.lock-btn.unlocked:hover{background:rgba(34,197,94,.2)}
+.edit-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:3000;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+.edit-box{background:linear-gradient(145deg,#1a3560,#0D1B3E);border:1px solid rgba(240,165,0,.35);border-radius:18px;padding:28px 32px;min-width:340px;max-width:420px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,.7)}
+.edit-box-title{font-size:15px;font-weight:800;color:var(--gold);margin-bottom:4px}
+.edit-box-sub{font-size:11.5px;color:rgba(255,255,255,.45);margin-bottom:18px;line-height:1.4}
+.edit-box input{width:100%;background:rgba(255,255,255,.08);border:1px solid rgba(240,165,0,.35);border-radius:10px;color:#fff;font-family:'Inter',sans-serif;font-size:20px;font-weight:700;padding:11px 14px;outline:none;text-align:right;margin-bottom:16px;letter-spacing:.5px}
+.edit-box input[type=password]{font-size:16px;text-align:left;letter-spacing:3px}
+.edit-box input:focus{border-color:var(--gold);background:rgba(240,165,0,.08)}
+.edit-box-row{display:flex;gap:10px}
+.edit-save-btn{flex:1;background:var(--gold);border:none;border-radius:10px;color:#0D1B3E;font-family:'Inter',sans-serif;font-size:13px;font-weight:800;padding:11px;cursor:pointer;transition:opacity .15s}
+.edit-save-btn:hover{opacity:.88}
+.edit-cancel-btn{flex:1;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:10px;color:rgba(255,255,255,.6);font-family:'Inter',sans-serif;font-size:13px;font-weight:700;padding:11px;cursor:pointer}
+.edit-cancel-btn:hover{background:rgba(255,255,255,.14)}
+.pin-error{color:#FCA5A5;font-size:12px;margin-bottom:12px;display:none;text-align:center}
+.pin-error.show{display:block}
+.edit-cell-btn{background:none;border:none;cursor:pointer;color:rgba(240,165,0,.45);font-size:10px;padding:0 2px;margin-left:3px;vertical-align:middle;transition:color .15s;line-height:1}
+.edit-cell-btn:hover{color:var(--gold)}
+.field-edited{color:#FCD34D!important}
+.edited-note{font-size:9px;color:rgba(252,211,77,.55);margin-top:2px}
 </style>
 <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
 </head>
@@ -459,6 +482,7 @@ td:first-child{text-align:center;font-weight:700;color:var(--gold);font-size:13p
       <option value="vencido">Vencidos</option>
     </select>
     <div class="count-badge" id="countBadge">20 contratos</div>
+    <button class="lock-btn" id="lockBtn" onclick="toggleAuth()">🔒 Edición protegida</button>
   </div>
   <div class="table-wrap">
     <div class="table-scroll">
@@ -762,6 +786,74 @@ function getRentaActualMensual(c,rates){
   if(!c.mes_incr) return null;
   return calcRentaActual(c.renta_orig||0,c.renta_data.start,c.mes_incr,rates).renta;
 }
+// ── AUTENTICACIÓN Y EDICIÓN DE RENTAS — Solo Gerardo Vega Quinto ──
+(function(){
+  const PIN_KEY='fiho_pin_h',EDIT_KEY='fiho_field_edits',AUTH_KEY='fiho_edit_auth';
+  function h(s){let r=0x811c9dc5;for(let i=0;i<s.length;i++){r^=s.charCodeAt(i);r=Math.imul(r,16777619);}return(r>>>0).toString(16);}
+  window._fihoAuth={
+    isAuth:()=>sessionStorage.getItem(AUTH_KEY)==='1',
+    check:(p)=>h(p)===(localStorage.getItem(PIN_KEY)||h('GVQ2026')),
+    unlock:()=>sessionStorage.setItem(AUTH_KEY,'1'),
+    lock:()=>sessionStorage.removeItem(AUTH_KEY),
+    getEdits:()=>{try{return JSON.parse(localStorage.getItem(EDIT_KEY)||'{}')}catch{return{}}},
+    save:(num,field,val)=>{const e=window._fihoAuth.getEdits();(e[num]||(e[num]={}))[field]=val;localStorage.setItem(EDIT_KEY,JSON.stringify(e));},
+    reset:(num,field)=>{const e=window._fihoAuth.getEdits();if(e[num]){delete e[num][field];}localStorage.setItem(EDIT_KEY,JSON.stringify(e));},
+    apply:(c)=>{
+      const e=window._fihoAuth.getEdits()[c.num];if(!e)return c;
+      const cc={...c};
+      if(e.renta_orig!=null)cc.renta_orig=e.renta_orig;
+      if(e.renta_efe_monto!=null)cc.renta_efe={...(c.renta_efe||{monto:0,mes:'editado'}),monto:e.renta_efe_monto};
+      if(e.mant_efe_monto!=null)cc.mant_efe={...(c.mant_efe||{monto:0,mes:'editado'}),monto:e.mant_efe_monto};
+      return cc;
+    }
+  };
+})();
+let _editCtx=null;
+function toggleAuth(){
+  if(window._fihoAuth.isAuth()){window._fihoAuth.lock();updateLockBtn();buildTableBody();}
+  else{document.getElementById('pinOverlay').style.display='flex';setTimeout(()=>document.getElementById('pinInput').focus(),80);}
+}
+function closePinModal(){
+  document.getElementById('pinOverlay').style.display='none';
+  document.getElementById('pinError').classList.remove('show');
+  document.getElementById('pinInput').value='';
+}
+function doUnlock(){
+  const p=document.getElementById('pinInput').value;
+  if(window._fihoAuth.check(p)){window._fihoAuth.unlock();closePinModal();updateLockBtn();buildTableBody();}
+  else{document.getElementById('pinError').classList.add('show');}
+}
+function updateLockBtn(){
+  const btn=document.getElementById('lockBtn');if(!btn)return;
+  const auth=window._fihoAuth.isAuth();
+  btn.className='lock-btn'+(auth?' unlocked':'');
+  btn.innerHTML=auth?'🔓 Gerardo Vega Quinto':'🔒 Edición protegida';
+}
+function openEditModal(num,field,label,currentVal){
+  if(!window._fihoAuth.isAuth())return;
+  _editCtx={num,field};
+  const c=CONTRACTS.find(x=>x.num===num);
+  const isEdited=(window._fihoAuth.getEdits()[num]||{})[field]!=null;
+  document.getElementById('editBoxTitle').textContent='✏ Editar: '+label;
+  document.getElementById('editBoxSub').textContent=(c?c.arrendatario+' · ':'')+'Contrato #'+num+(isEdited?' · ⚠ Valor editado manualmente':'');
+  const inp=document.getElementById('editBoxInput');
+  inp.value=currentVal!=null?currentVal:'';
+  document.getElementById('editOverlay').style.display='flex';
+  setTimeout(()=>inp.select(),80);
+}
+function closeEditModal(){document.getElementById('editOverlay').style.display='none';_editCtx=null;}
+function saveEditModal(){
+  if(!_editCtx)return;
+  const val=parseFloat(document.getElementById('editBoxInput').value);
+  if(isNaN(val)||val<0){alert('Ingresa un valor numérico válido mayor a 0.');return;}
+  window._fihoAuth.save(_editCtx.num,_editCtx.field,val);
+  closeEditModal();buildTableBody();
+}
+function resetEditField(){
+  if(!_editCtx)return;
+  window._fihoAuth.reset(_editCtx.num,_editCtx.field);
+  closeEditModal();buildTableBody();
+}
 function toggleInpcPanel(){document.getElementById('inpcPanel').classList.toggle('open');}
 function saveInpcRates(){
   const rates={};document.querySelectorAll('.inpc-field input').forEach(inp=>{rates[parseInt(inp.dataset.year)]=parseFloat(inp.value)||0;});
@@ -1062,12 +1154,19 @@ document.addEventListener('click',e=>{
 
 // ── TABLA PRINCIPAL ──
 function getDaysToEnd(fin){return Math.round((new Date(fin)-TODAY)/(1000*60*60*24));}
+function _eBtn(num,field,label,val){
+  if(!window._fihoAuth.isAuth())return '';
+  return `<button class="edit-cell-btn" onclick="openEditModal(${num},'${field}','${label}',${val||0})" title="Editar ${label}">✏</button>`;
+}
+function _isEdited(num,field){return(window._fihoAuth.getEdits()[num]||{})[field]!=null;}
 function fmtRentaOrig(c){
-  if(c.renta_orig_texto) return `<div class="renta-amount" style="font-size:10.5px">${c.renta_orig_texto}${cmtBtnHtml(c.num,'orig','Renta Original')}</div><div class="renta-note">+ IVA</div>`;
-  if(!c.renta_orig) return `<span class="na">Ver notas</span>`;
+  const edited=_isEdited(c.num,'renta_orig');
+  const eb=_eBtn(c.num,'renta_orig','Renta Original',c.renta_orig);
+  if(c.renta_orig_texto) return `<div class="renta-amount${edited?' field-edited':''}" style="font-size:10.5px">${c.renta_orig_texto}${cmtBtnHtml(c.num,'orig','Renta Original')}${eb}</div><div class="renta-note">+ IVA${edited?'<div class="edited-note">⚠ editado manualmente</div>':''}</div>`;
+  if(!c.renta_orig) return `<span class="na">Ver notas</span>${eb}`;
   const f=c.moneda==='USD'?FMT_USD:FMT_MXN;
   const suf=c.renta_data?.tipo==='anual'?'/año':'/mes';
-  return `<div class="renta-amount">${f.format(c.renta_orig)}${suf}${cmtBtnHtml(c.num,'orig','Renta Original')}</div><div class="renta-note">+ IVA · según contrato</div>`;
+  return `<div class="renta-amount${edited?' field-edited':''}">${f.format(c.renta_orig)}${suf}${cmtBtnHtml(c.num,'orig','Renta Original')}${eb}</div><div class="renta-note">+ IVA · según contrato${edited?'<div class="edited-note">⚠ editado — recalcula INPC</div>':''}</div>`;
 }
 function fmtRentaActual(c){
   const rates=getInpcRates();
@@ -1076,25 +1175,32 @@ function fmtRentaActual(c){
   const base=c.renta_orig||c.renta_efe?.monto||0;
   const {renta,nextLabel,lastLabel,lastIncrRate}=calcRentaActual(base,c.renta_data.start,c.mes_incr,rates);
   const f=c.moneda==='USD'?FMT_USD:FMT_MXN;
-  return `<div class="ra-amount">${f.format(renta)}/mes${cmtBtnHtml(c.num,'calc','Renta Calculada INPC')}</div>
+  const edited=_isEdited(c.num,'renta_orig');
+  return `<div class="ra-amount${edited?' field-edited':''}">${f.format(renta)}/mes${cmtBtnHtml(c.num,'calc','Renta Calculada INPC')}</div>
     ${lastLabel?`<div class="ra-incr">Últ. incr: ${lastLabel} (+${lastIncrRate?.toFixed(2)}%)</div>`:''}
-    <div class="ra-next">Próx.: ${nextLabel}</div>`;
+    <div class="ra-next">Próx.: ${nextLabel}</div>
+    ${edited?`<div class="edited-note">⚠ calculado con renta orig. editada</div>`:''}`;
 }
 function fmtRentaEfe(c){
-  if(!c.renta_efe) return `<span class="na">Sin factura</span>`;
+  const edited=_isEdited(c.num,'renta_efe_monto');
+  const eb=_eBtn(c.num,'renta_efe_monto','Renta Efectiva',c.renta_efe?.monto);
+  if(!c.renta_efe) return `<span class="na">Sin factura</span>${eb}`;
   const isUSD=c.renta_efe.moneda==='USD'||c.moneda==='USD';
   const f=isUSD?FMT_USD:FMT_MXN;
-  return `<div class="re-amount">${f.format(c.renta_efe.monto)}/mes${cmtBtnHtml(c.num,'efe','Renta Efectiva')}</div><div class="re-note">+ IVA · s/IVA facturado</div><div class="re-mes">${c.renta_efe.mes}${c.renta_efe.nota?' · '+c.renta_efe.nota:''}</div>`;
+  return `<div class="re-amount${edited?' field-edited':''}">${f.format(c.renta_efe.monto)}/mes${cmtBtnHtml(c.num,'efe','Renta Efectiva')}${eb}</div><div class="re-note">+ IVA · s/IVA facturado${edited?'<div class="edited-note">⚠ editado manualmente</div>':''}</div><div class="re-mes">${c.renta_efe.mes}${c.renta_efe.nota?' · '+c.renta_efe.nota:''}</div>`;
 }
 function fmtM2(c){
   const amt=c.renta_efe?.monto;
   if(!amt||!c.superficie) return `<span class="na">—</span>`;
-  return `<div class="m2-amount">${FMT_MXN.format(amt/c.superficie)}/m²</div><div class="m2-note">${c.superficie.toLocaleString('es-MX')} m² · efectiva</div>`;
+  const edited=_isEdited(c.num,'renta_efe_monto');
+  return `<div class="m2-amount${edited?' field-edited':''}">${FMT_MXN.format(amt/c.superficie)}/m²</div><div class="m2-note">${c.superficie.toLocaleString('es-MX')} m²${edited?' · ⚠ edit':' · efectiva'}</div>`;
 }
 function fmtMant(c){
-  if(c.mant_efe) return `<span class="mant-chip">✓</span><div style="font-size:11px;color:#6EE7B7;margin-top:3px">${FMT_MXN.format(c.mant_efe.monto)}/mes</div><div style="font-size:9.5px;color:rgba(110,231,183,.55)">${c.mant_efe.mes}${c.mant_efe.nota?' · '+c.mant_efe.nota:''}</div>`;
-  if(c.mantenimiento&&!c.mantenimiento.startsWith('No ')&&c.mantenimiento!=='No aplica') return `<span class="mant-chip">✓</span><div style="font-size:10px;color:rgba(110,231,183,.6);margin-top:3px">${c.mantenimiento.length>30?c.mantenimiento.substring(0,30)+'…':c.mantenimiento}</div>`;
-  return `<span class="na">${c.mantenimiento||'No aplica'}</span>`;
+  const edited=_isEdited(c.num,'mant_efe_monto');
+  const eb=_eBtn(c.num,'mant_efe_monto','Mant. Mensual',c.mant_efe?.monto||0);
+  if(c.mant_efe) return `<span class="mant-chip">✓</span><div style="font-size:11px;color:#6EE7B7;margin-top:3px" class="${edited?'field-edited':''}">${FMT_MXN.format(c.mant_efe.monto)}/mes${eb}</div><div style="font-size:9.5px;color:rgba(110,231,183,.55)">${c.mant_efe.mes}${c.mant_efe.nota?' · '+c.mant_efe.nota:''}${edited?'<div class="edited-note">⚠ editado</div>':''}</div>`;
+  if(c.mantenimiento&&!c.mantenimiento.startsWith('No ')&&c.mantenimiento!=='No aplica') return `<span class="mant-chip">✓</span><div style="font-size:10px;color:rgba(110,231,183,.6);margin-top:3px">${c.mantenimiento.length>30?c.mantenimiento.substring(0,30)+'…':c.mantenimiento}${eb}</div>`;
+  return `<span class="na">${c.mantenimiento||'No aplica'}</span>${eb}`;
 }
 function fmtCobranza(c){
   const cb=c.cobranza;if(!cb) return `<span class="cob-nodata">Sin datos</span>`;
@@ -1120,6 +1226,7 @@ function buildTableBody(){
   const tbody=document.getElementById('tableBody');if(!tbody)return;
   let html='';let vencidos=0,deudores=0;
   CONTRACTS.forEach(c=>{
+    const ce=window._fihoAuth?window._fihoAuth.apply(c):c;
     const d=getDaysToEnd(c.fin);
     if(d<0||d<=180) vencidos++;
     if(c.cobranza?.vencido>0) deudores++;
@@ -1142,15 +1249,15 @@ function buildTableBody(){
         <div class="plazo-dates">${c.inicio} → ${c.fin}</div>
         ${plazoStatus(c)}
       </td>
-      <td>${fmtRentaOrig(c)}</td>
-      <td>${fmtRentaActual(c)}</td>
-      <td>${fmtRentaEfe(c)}</td>
-      <td>${fmtM2(c)}</td>
+      <td>${fmtRentaOrig(ce)}</td>
+      <td>${fmtRentaActual(ce)}</td>
+      <td>${fmtRentaEfe(ce)}</td>
+      <td>${fmtM2(ce)}</td>
       <td>
         ${c.mes_incr?`<div class="incr-month">${MESES_ES[c.mes_incr-1]}</div>`:'<span class="na">—</span>'}
         <div class="incr-note">${c.incremento.length>32?c.incremento.substring(0,32)+'…':c.incremento}</div>
       </td>
-      <td>${fmtMant(c)}</td>
+      <td>${fmtMant(ce)}</td>
       <td>${c.deposito&&!c.deposito.startsWith('No ')?`<span class="dep-chip">${c.deposito}</span>`:`<span class="na">${c.deposito||'N/D'}</span>`}</td>
       <td style="font-size:11px;color:rgba(255,210,100,.85)">${c.penalizacion||'—'}</td>
       <td>${fmtCobranza(c)}</td>
@@ -1600,8 +1707,36 @@ function switchTab(id,btn){
 }
 // ── INIT ──
 document.addEventListener('DOMContentLoaded',()=>{
-  buildInpcEditor();inpcRenderMonthlyList();buildTableBody();buildAlertas();renderAlertaRenta();loadCobLogs();renderCobTable();renderFacturacion();renderContratos();
+  buildInpcEditor();inpcRenderMonthlyList();buildTableBody();buildAlertas();renderAlertaRenta();loadCobLogs();renderCobTable();renderFacturacion();renderContratos();updateLockBtn();
 });
 </script>
+<!-- MODAL: PIN DE ACCESO -->
+<div class="edit-overlay" id="pinOverlay" style="display:none" onclick="if(event.target===this)closePinModal()">
+  <div class="edit-box">
+    <div class="edit-box-title">🔐 Acceso de editor</div>
+    <div class="edit-box-sub">Ingresa tu PIN personal para habilitar la edición de rentas.<br/>Solo Gerardo Vega Quinto tiene acceso de edición.</div>
+    <input type="password" id="pinInput" placeholder="PIN de acceso" autocomplete="off" onkeydown="if(event.key==='Enter')doUnlock()"/>
+    <div class="pin-error" id="pinError">❌ PIN incorrecto. Intenta de nuevo.</div>
+    <div class="edit-box-row">
+      <button class="edit-save-btn" onclick="doUnlock()">🔓 Desbloquear</button>
+      <button class="edit-cancel-btn" onclick="closePinModal()">Cancelar</button>
+    </div>
+    <div style="font-size:10px;color:rgba(255,255,255,.18);margin-top:16px;text-align:center;line-height:1.5">Las ediciones se guardan en este navegador · PIN por defecto: GVQ2026<br/>La sesión se cierra al cerrar la pestaña</div>
+  </div>
+</div>
+<!-- MODAL: EDITAR CAMPO DE RENTA -->
+<div class="edit-overlay" id="editOverlay" style="display:none" onclick="if(event.target===this)closeEditModal()">
+  <div class="edit-box">
+    <div class="edit-box-title" id="editBoxTitle">Editar campo</div>
+    <div class="edit-box-sub" id="editBoxSub"></div>
+    <input type="number" id="editBoxInput" step="0.01" min="0" placeholder="0.00" onkeydown="if(event.key==='Enter')saveEditModal();else if(event.key==='Escape')closeEditModal()"/>
+    <div class="edit-box-row">
+      <button class="edit-save-btn" onclick="saveEditModal()">💾 Guardar y recalcular</button>
+      <button class="edit-cancel-btn" onclick="closeEditModal()">Cancelar</button>
+    </div>
+    <button onclick="resetEditField()" style="width:100%;margin-top:10px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);border-radius:10px;color:#FCA5A5;font-family:'Inter',sans-serif;font-size:12px;font-weight:700;padding:9px;cursor:pointer">↩ Restaurar valor original del contrato</button>
+    <div style="font-size:9.5px;color:rgba(255,255,255,.2);margin-top:12px;text-align:center">Al cambiar Renta Original → Renta Actual se recalcula automáticamente con INPC</div>
+  </div>
+</div>
 </body>
 </html>
