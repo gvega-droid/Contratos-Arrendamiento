@@ -393,6 +393,7 @@ td:first-child{text-align:center;font-weight:700;color:var(--gold);font-size:13p
     <div class="inpc-grid" id="inpcGrid"></div>
     <div class="inpc-note">Las tasas de 2025 y 2026 son estimaciones. Actualice con valores oficiales INEGI en <strong>www.inegi.org.mx</strong>. Los cambios se guardan en este navegador y recalculan las rentas automáticamente.</div>
     <button class="inpc-edit-btn" onclick="saveInpcRates()" style="margin-top:10px">💾 Guardar y recalcular</button>
+    <button class="inpc-edit-btn" onclick="localStorage.removeItem('fiho_loc_inpc');localStorage.removeItem('fiho_loc_inpc_monthly');location.reload();" style="margin-top:6px;background:rgba(239,68,68,.18);border-color:rgba(239,68,68,.5);color:#FCA5A5">🔄 Restablecer índices INPC (valores por defecto)</button>
     <hr class="inpc-monthly-sep"/>
     <div class="inpc-monthly-title">📅 Índices INPC mensuales — Calendario de actualización</div>
     <div style="font-size:11px;color:rgba(163,230,53,.8);margin-bottom:8px;font-weight:600">Cláusula 5.7 — Para calcular la tasa de cada incremento se necesitan los dos índices del <strong>mes inmediato anterior</strong> al mes de inicio del período:</div>
