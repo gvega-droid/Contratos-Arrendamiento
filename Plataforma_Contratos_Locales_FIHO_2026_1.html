@@ -486,7 +486,7 @@ td:first-child{text-align:center;font-weight:700;color:var(--gold);font-size:13p
       <option value="vencido">Vencidos</option>
     </select>
     <div class="count-badge" id="countBadge">20 contratos</div>
-    <div class="count-badge" style="background:#1e40af;font-size:10px;opacity:.8">v28-ago-26 · E</div>
+    <div class="count-badge" style="background:#1e40af;font-size:10px;opacity:.8">v28-ago-26 · F</div>
     <button class="lock-btn" id="lockBtn" onclick="toggleAuth()">🔒 Edición protegida</button>
     <button class="publish-btn" id="publishBtn" onclick="publishEditsToFile()">📤 Publicar cambios</button>
     <button class="publish-btn" id="resetEditsBtn" onclick="resetAllEdits()" style="display:none;background:#dc2626;">🗑 Limpiar ediciones guardadas</button>
@@ -714,23 +714,43 @@ const IVA=0.16;
 const SPEI={banco:'BBVA Bancomer Suc. Empresas Toluca',cuenta:'0191885413',clabe:'012420001918854135',beneficiario:'F-X-DEUTSCHE BANK MEXICO NO. F/1596',rfc:'FFX121005C6A'};
 
 // ── VERSIÓN DEL ARCHIVO — se actualiza en cada cambio para limpiar ediciones obsoletas del browser ──
-const FILE_VERSION='20260828-006';
+const FILE_VERSION='20260828-007';
 // sessionStorage se limpia automáticamente al cerrar/abrir el archivo — nunca interfiere con versiones nuevas
 
 // ── INPC (misma lógica plataforma antenas) ──
 const INPC_DEFAULT={2017:6.77,2018:4.83,2019:2.83,2020:3.15,2021:7.36,2022:7.82,2023:4.66,2024:4.72,2025:3.70,2026:4.58};
 const INPC_MONTHLY_IDX={
-  // 2023 — derivado del incremento sep-2024 aplicado (208775.77/201691.51 = 3.512% → ago-2023 = 136.013/1.03512)
-  '2023-08':131.398,
-  // 2024 — datos provistos por contrato
-  '2024-08':136.013,'2024-10':136.828,
-  // 2025 — publicados por INEGI
+  // 2019 — INEGI (sep omitido: parcialmente ilegible en tabla)
+  '2019-01':103.108,'2019-02':103.079,'2019-03':103.476,'2019-04':103.531,
+  '2019-05':103.233,'2019-06':103.299,'2019-07':103.687,'2019-08':103.670,
+  '2019-10':104.503,'2019-11':105.346,'2019-12':105.934,
+  // 2020
+  '2020-01':106.447,'2020-02':106.889,'2020-03':106.838,'2020-04':105.755,
+  '2020-05':106.162,'2020-06':106.743,'2020-07':107.444,'2020-08':107.867,
+  '2020-10':108.774,'2020-11':108.856,'2020-12':109.271,
+  // 2021
+  '2021-01':110.210,'2021-02':110.907,'2021-03':111.824,'2021-04':112.190,
+  '2021-05':112.419,'2021-06':113.018,'2021-07':113.682,'2021-08':113.899,
+  '2021-10':115.561,'2021-11':116.884,'2021-12':117.308,
+  // 2022
+  '2022-01':118.002,'2022-02':118.981,'2022-03':120.159,'2022-04':120.809,
+  '2022-05':121.022,'2022-06':122.044,'2022-07':122.948,'2022-08':123.803,
+  '2022-10':125.276,'2022-11':125.997,'2022-12':126.478,
+  // 2023
+  '2023-01':127.336,'2023-02':128.046,'2023-03':128.389,'2023-04':128.363,
+  '2023-05':128.084,'2023-06':128.214,'2023-07':128.832,'2023-08':129.545,
+  '2023-10':130.609,'2023-11':131.445,'2023-12':132.373,
+  // 2024
+  '2024-01':133.555,'2024-02':133.681,'2024-03':134.065,'2024-04':134.336,
+  '2024-05':134.087,'2024-06':134.594,'2024-07':136.003,'2024-08':136.013,
+  '2024-10':136.828,'2024-11':137.424,'2024-12':137.949,
+  // 2025
   '2025-01':138.343,'2025-02':138.726,'2025-03':139.161,'2025-04':139.620,
-  '2025-05':140.012,'2025-06':140.405,'2025-07':140.781,'2025-08':140.867,
-  '2025-09':141.197,'2025-10':141.709,'2025-11':142.645,'2025-12':143.042,
-  // 2026 — publicados por INEGI al 18-jun-2026
-  '2026-01':143.588,'2026-02':144.308,'2026-03':145.544,'2026-04':145.831,
-  '2026-05':145.622,'2026-06':145.131,'2026-07':145.169,
+  '2025-05':140.012,'2025-06':140.405,'2025-07':140.780,'2025-08':140.867,
+  '2025-09':141.197,'2025-10':141.708,'2025-11':142.645,'2025-12':143.042,
+  // 2026
+  '2026-01':143.588,'2026-02':144.307,'2026-03':145.544,'2026-04':145.831,
+  '2026-05':145.527,'2026-06':145.131,'2026-07':145.169,
 };
 function getInpcRates(){try{const s=localStorage.getItem('fiho_loc_inpc');return s?JSON.parse(s):{...INPC_DEFAULT};}catch(e){return{...INPC_DEFAULT};}}
 function inpcGetMonthly(){try{return JSON.parse(localStorage.getItem('fiho_loc_inpc_monthly')||'{}');}catch(e){return{};}}
@@ -980,7 +1000,7 @@ const CONTRACTS=[
  {num:5,arrendatario:'David Valdez Romo (Fisher)',rfc:'VARD910',cat:'Restaurante',hotel:'Fiesta Americana Aguascalientes',ciudad:'Aguascalientes, Aguascalientes',localidad:'Local comercial',superficie:252,giro:'Restaurante Fisher',inicio:'2025-12-04',fin:'2031-12-03',plazo:'6 años (renovación; contrato original 04-dic-2019)',renta_orig_texto:'$21,157.49/mes (jun-mar) + $505,000/mes (abr-may)',renta_orig:21157.49,moneda:'MXN',renta_efe:{monto:505000,mes:'abr-26',nota:'Renta especial abr-may'},renta_data:{base:21157.49,start:'2025-12-04',mes:12},incremento:'Anual INPC',mes_incr:12,mantenimiento:'No especificado en convenio',mant_efe:null,deposito:'No especificado',penalizacion:'Conforme contrato original',correo:'',cobranza:{status:'vencido',pendiente:49085.38,vencido:49085.38,detalle:'2 facturas pendientes en cartera'},drive:'https://drive.google.com/drive/folders/1rwxCha58M1TMNZGz3WvAIrLfx8Z3OXcx'},
  {num:6,arrendatario:'Corporativo Empresarial Solar, S.A. de C.V.',rfc:'CES9912',cat:'Oficina',hotel:'Sheraton Ambassador Monterrey',ciudad:'Monterrey, Nuevo León',localidad:'Local 2 Carranza',superficie:41,giro:'Renta de autos',inicio:'2024-02-01',fin:'2027-01-31',plazo:'3 años forzosos para ambas partes',renta_orig:10291,moneda:'MXN',renta_efe:{monto:10678.97,mes:'jun-26'},renta_data:{base:10291,start:'2024-02-01',mes:2},incremento:'Anual INPC (mes inicio)',mes_incr:2,mantenimiento:'No aplica (hoja de condiciones)',mant_efe:null,deposito:'2 meses',penalizacion:'No especificada',correo:'',cobranza:{status:'vencido',pendiente:24775.22,vencido:12387.61,detalle:'1 factura vencida +121 días · al 24-ago-26'},drive:'https://drive.google.com/drive/folders/1Ev_DPVF1Nf2ohn3yqpOjArRvqmEol_Kp'},
  {num:7,arrendatario:'Primeflight Aviation Services México, S.A. de C.V.',rfc:'ACM920924CG2',cat:'Oficina',hotel:'One Monterrey Aeropuerto — Plaza One MTY',ciudad:'Apodaca, Nuevo León',localidad:'Local No. 10 PB',superficie:146.80,giro:'Servicios de aviación / oficina',inicio:'2022-09-07',fin:'2027-10-26',plazo:'1 año forzoso ambas partes + 1 voluntario · Convenio modificatorio 18-may-2026 · Vigente desde 26-oct-2025',renta_orig:38266.82,moneda:'MXN',renta_efe:{monto:38266.82,mes:'jun-26'},renta_data:{base:38266.82,start:'2025-10-26',mes:9},incremento:'Anual INPC (mes sep · ref. INPC ago.) · Conforme contrato original 07-sep-2022',mes_incr:9,mantenimiento:'10% renta mensual',mant_efe:{monto:3827.65,mes:'jun-26'},deposito:'2 meses',penalizacion:'Rentas faltantes al plazo forzoso + IVA',correo:'',cobranza:{status:'vencido',pendiente:97659.16,vencido:48829.58,detalle:'Renta + mant. mar-26 vencidos (121+ días) · ago-26 al corriente'},drive:'https://drive.google.com/drive/folders/1aWVZbu_nUh8t_xJOLQ-0LHDwx5sxcX6O'},
- {num:21,arrendatario:'Primeflight Aviation Mexico — Bodega',rfc:'ACM9209',cat:'Bodega',hotel:'One Monterrey Aeropuerto — Plaza One MTY',ciudad:'Apodaca, Nuevo León',localidad:'Bodega',superficie:123.09,giro:'Bodega / servicios de aviación',inicio:'2023-11-03',fin:'2026-11-03',plazo:'3 años (renovación de contrato nov-2020)',renta_orig:27537.93,moneda:'MXN',renta_efe:{monto:29978.77,mes:'jun-26'},renta_data:{base:27537.93,start:'2024-11-01',mes:11},incremento:'Anual INPC (mes nov · ref. INPC oct.)',mes_incr:11,mantenimiento:'10% renta mensual',mant_efe:{monto:3323.80,mes:'jun-26'},deposito:'2 meses',penalizacion:'Rentas faltantes al plazo forzoso + IVA',correo:'',cobranza:{status:'vencido',pendiente:83398.95,vencido:44767.97,detalle:'Renta + complemento mar-26 vencidos (121+ días) · ago-26 al corriente'},drive:'https://drive.google.com/drive/folders/1aWVZbu_nUh8t_xJOLQ-0LHDwx5sxcX6O'},
+ {num:21,arrendatario:'Primeflight Aviation Mexico — Bodega',rfc:'ACM9209217X3',cat:'Bodega',hotel:'One Monterrey Aeropuerto — Plaza One MTY',ciudad:'Apodaca, Nuevo León',localidad:'Bodega',superficie:123.09,giro:'Bodega / servicios de aviación',inicio:'2023-11-03',fin:'2026-11-03',plazo:'3 años · renovación nov-2020 / nov-2023',renta_orig:26364.70,moneda:'MXN',renta_efe:{monto:29978.77,mes:'jun-26'},renta_data:{base:29978.77,start:'2025-11-01',mes:11},incremento:'Anual INPC (mes nov · ref. INPC oct.) · Incremento nov-25 aplicado ene/feb-26',mes_incr:11,mantenimiento:'10% renta mensual',mant_efe:{monto:3323.80,mes:'jun-26'},deposito:'2 meses',penalizacion:'Rentas faltantes al plazo forzoso + IVA',correo:'',cobranza:{status:'vencido',pendiente:83398.95,vencido:44767.97,detalle:'Renta + complemento mar-26 vencidos (121+ días) · ago-26 al corriente'},drive:'https://drive.google.com/drive/folders/1aWVZbu_nUh8t_xJOLQ-0LHDwx5sxcX6O'},
  {num:8,arrendatario:'Grupo Posadas, S.A.B. de C.V.',rfc:'GPO920120440',cat:'Hotel',hotel:'Fiesta Americana Condesa Cancún — Hotel completo',ciudad:'Cancún, Quintana Roo',localidad:'Inmueble completo · 41,413 m² · Zona Turística',superficie:41413,giro:'Operación hotelera Fiesta Americana Condesa Cancún',inicio:'2018-01-01',fin:'2032-12-31',plazo:'15 años (01-ene-2018 al 31-dic-2032) · Contrato notariado 14-feb-2018',renta_orig:791666.66,moneda:'USD',renta_efe:{monto:1040471.45,mes:'ago-26'},renta_data:{base:1040471.45,start:'2026-01-01',mes:1,cpi_note:'US CPI 2026: +2.675% (dic-25/dic-24)'},incremento:'Anual US CPI (dic/dic año anterior) · Bureau of Labor Statistics · Pago en MXN al T/C del Día Hábil anterior',mes_incr:1,mantenimiento:'No especificado',mant_efe:null,deposito:'No especificado',penalizacion:'No especificado',correo:'',cobranza:{status:'corriente',pendiente:156751.96,vencido:0,detalle:'Fac.25133 · sala de ventas · al corriente (24-ago-26)'},drive:'https://drive.google.com/drive/folders/19ACSIlYq-d-0vgPwMXPVOPXuMI9QLjmx'},
  {num:9,arrendatario:'Divol Norte, S.A.P.I. de C.V.',rfc:'DNO1601',cat:'Comercio',hotel:'Hotel — Carretera México-Querétaro Km 32.5',ciudad:'Tultitlán, Estado de México',localidad:'Superficie arrendada',superficie:2266.55,giro:'Distribución y comercio',inicio:'2025-11-01',fin:'2045-10-31',plazo:'20 años totales (nov-2025 a oct-2045)',renta_orig:240963.27,moneda:'MXN',renta_efe:{monto:240963.27,mes:'ago-26'},renta_data:{base:240963.27,start:'2025-08-01',mes:8},incremento:'Anual INPC (mes agosto)',mes_incr:8,mantenimiento:'No especificado',mant_efe:null,deposito:'No especificado',penalizacion:'No especificado',correo:'',cobranza:{status:'corriente',pendiente:279517.39,vencido:0,detalle:'Al corriente al 24-ago-26'},drive:'https://drive.google.com/drive/folders/1mLOfVq3_AftgMg0972g6zjC9RpC0rF5t'},
  {num:10,arrendatario:'Julio César Torres Rojo (IBK Interbrokers)',rfc:'TORJ751',cat:'Seguros',hotel:'One Tijuana Otay',ciudad:'Tijuana, Baja California',localidad:'Local comercial 03',superficie:103.55,giro:'Oficina agente de seguros / IBK',inicio:'2025-06-05',fin:'2027-06-03',plazo:'2 años adicionales (prórroga contrato jun-2023)',renta_orig:1958.44,moneda:'USD',renta_efe:{monto:1958.44,mes:'jun-26',moneda:'USD'},renta_data:{base:1958.44,start:'2023-06-05',mes:6},incremento:'Anual INPC (mes junio)',mes_incr:6,mantenimiento:'Según cláusula contrato inicial',mant_efe:{monto:195.86,mes:'jun-26',nota:'MTTO en MXN'},deposito:'No especificado',penalizacion:'Conforme contrato original',correo:'',cobranza:{status:'vencido',pendiente:89959.30,vencido:43082.59,detalle:'Facturas vencidas 61-90 días · al 24-ago-26'},drive:'https://drive.google.com/drive/folders/15d_PxVgb7ETkfAD_pjRAA7oe9vrI1ro3'},
