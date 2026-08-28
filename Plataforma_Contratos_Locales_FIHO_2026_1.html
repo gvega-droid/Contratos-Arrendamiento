@@ -488,6 +488,7 @@ td:first-child{text-align:center;font-weight:700;color:var(--gold);font-size:13p
     <div class="count-badge" id="countBadge">20 contratos</div>
     <button class="lock-btn" id="lockBtn" onclick="toggleAuth()">🔒 Edición protegida</button>
     <button class="publish-btn" id="publishBtn" onclick="publishEditsToFile()">📤 Publicar cambios</button>
+    <button class="publish-btn" id="resetEditsBtn" onclick="resetAllEdits()" style="display:none;background:#dc2626;">🗑 Limpiar ediciones guardadas</button>
   </div>
   <div class="table-wrap">
     <div class="table-scroll">
@@ -839,6 +840,7 @@ function updateLockBtn(){
 }
 function updatePublishBtn(){
   const btn=document.getElementById('publishBtn');if(!btn)return;
+  const resetBtn=document.getElementById('resetEditsBtn');
   const auth=window._fihoAuth.isAuth();
   const edits=window._fihoAuth.getEdits();
   const n=Object.keys(edits).length;
@@ -846,6 +848,7 @@ function updatePublishBtn(){
   btn.classList.toggle('has-edits',auth&&n>0);
   btn.innerHTML=n>0?`📤 Publicar cambios (${n})`:'📤 Publicar cambios';
   btn.title=n>0?`Hay ${n} contrato(s) con valores editados localmente — generar archivo actualizado para todos`:'Sin ediciones locales pendientes';
+  if(resetBtn)resetBtn.style.display=(auth&&n>0)?'':'none';
 }
 function publishEditsToFile(){
   if(!window._fihoAuth.isAuth()){return;}
@@ -887,7 +890,19 @@ function publishEditsToFile(){
     if(e.mant_efe_monto!=null)lineas.push('  Mant.: '+e.mant_efe_monto.toLocaleString('es-MX',{style:'currency',currency:'MXN'}));
     return '• #'+n+' '+(c?.arrendatario||'')+'\n'+lineas.join('\n');
   }).join('\n');
-  alert('✅ Archivo generado y descargado con los cambios permanentes.\n\nContratos actualizados:\n'+resumen+'\n\n→ Reemplaza el archivo actual en el repositorio para que todos los usuarios vean la misma información.\n→ O envía el archivo descargado para que lo comprometamos al repositorio.');
+  alert('✅ Archivo generado y descargado con los cambios permanentes.\n\nContratos actualizados:\n'+resumen+'\n\n→ Abre el archivo descargado (reemplaza el que tenías).\n→ Las ediciones guardadas en este navegador han sido limpiadas automáticamente.');
+  // Limpiar ediciones del localStorage — ya están grabadas en el archivo descargado
+  localStorage.removeItem('fiho_field_edits');
+  buildTableBody();updatePublishBtn();
+}
+function resetAllEdits(){
+  if(!window._fihoAuth.isAuth()){alert('Desbloquea primero con tu PIN.');return;}
+  const n=Object.keys(window._fihoAuth.getEdits()).length;
+  if(!n){alert('No hay ediciones guardadas en este navegador.');return;}
+  if(!confirm('¿Eliminar todas las ediciones manuales guardadas en este navegador?\n\nSi ya las publicaste en un archivo, esto no afecta ese archivo.\nSi NO las publicaste, se perderán.')){return;}
+  localStorage.removeItem('fiho_field_edits');
+  buildTableBody();updatePublishBtn();
+  alert('✅ Ediciones limpiadas. Ahora verás los valores originales del archivo.');
 }
 function openEditModal(num,field,label,currentVal){
   if(!window._fihoAuth.isAuth())return;
