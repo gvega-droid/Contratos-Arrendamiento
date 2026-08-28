@@ -712,6 +712,10 @@ const FMT_USD=new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',max
 const IVA=0.16;
 const SPEI={banco:'BBVA Bancomer Suc. Empresas Toluca',cuenta:'0191885413',clabe:'012420001918854135',beneficiario:'F-X-DEUTSCHE BANK MEXICO NO. F/1596',rfc:'FFX121005C6A'};
 
+// ── VERSIÓN DEL ARCHIVO — se actualiza en cada cambio para limpiar ediciones obsoletas del browser ──
+const FILE_VERSION='20260828-003';
+(function(){try{const k='fiho_file_ver';if(localStorage.getItem(k)!==FILE_VERSION){localStorage.removeItem('fiho_field_edits');localStorage.setItem(k,FILE_VERSION);}}catch(e){}})();
+
 // ── INPC (misma lógica plataforma antenas) ──
 const INPC_DEFAULT={2017:6.77,2018:4.83,2019:2.83,2020:3.15,2021:7.36,2022:7.82,2023:4.66,2024:4.72,2025:3.70,2026:4.58};
 const INPC_MONTHLY_IDX={
@@ -866,10 +870,12 @@ function publishEditsToFile(){
       return cc;
     }catch{return c;}
   });
-  // Obtener el HTML fuente y reemplazar el bloque CONTRACTS
+  // Obtener el HTML fuente y reemplazar el bloque CONTRACTS + bumpar versión
   const src='<!DOCTYPE html>\n'+document.documentElement.outerHTML;
   const newContracts='const CONTRACTS='+JSON.stringify(updated)+';';
-  const newSrc=src.replace(/const CONTRACTS=\[[\s\S]*?\n\];/,newContracts);
+  const newVer="'"+new Date().toISOString().slice(0,10).replace(/-/g,'')+'_pub'+"'";
+  let newSrc=src.replace(/const CONTRACTS=\[[\s\S]*?\n\];/,newContracts);
+  newSrc=newSrc.replace(/const FILE_VERSION='[^']*'/,`const FILE_VERSION=${newVer}`);
   if(newSrc===src){
     alert('Error: no se pudo localizar el bloque CONTRACTS en el archivo. Avise a soporte técnico.');
     return;
