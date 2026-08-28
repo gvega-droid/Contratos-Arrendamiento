@@ -789,7 +789,7 @@ function calcRentaActual(base,startStr,incrMonth,rates){
 function getRentaActualMensual(c,rates){
   if(c.renta_efe) return c.renta_efe.monto;
   if(!c.mes_incr) return null;
-  return calcRentaActual(c.renta_orig||0,c.renta_data.start,c.mes_incr,rates).renta;
+  return calcRentaActual(c.renta_data?.base||c.renta_orig||0,c.renta_data.start,c.mes_incr,rates).renta;
 }
 // ── AUTENTICACIÓN Y EDICIÓN DE RENTAS — Solo Gerardo Vega Quinto ──
 (function(){
@@ -1230,7 +1230,7 @@ function fmtRentaActual(c){
   const rates=getInpcRates();
   if(!c.renta_orig&&!c.renta_efe) return `<span class="ra-nodata">Ver renta efectiva</span>`;
   if(!c.mes_incr) return `<span class="ra-nodata">Sin incremento mensual INPC<br/>(${c.incremento||'ver contrato'})</span>`;
-  const base=c.renta_orig||c.renta_efe?.monto||0;
+  const base=c.renta_data?.base||c.renta_orig||c.renta_efe?.monto||0;
   const {renta,nextLabel,lastLabel,lastIncrRate}=calcRentaActual(base,c.renta_data.start,c.mes_incr,rates);
   const f=c.moneda==='USD'?FMT_USD:FMT_MXN;
   const edited=_isEdited(c.num,'renta_orig');
