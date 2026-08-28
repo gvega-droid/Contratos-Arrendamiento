@@ -714,7 +714,7 @@ const SPEI={banco:'BBVA Bancomer Suc. Empresas Toluca',cuenta:'0191885413',clabe
 
 // ── VERSIÓN DEL ARCHIVO — se actualiza en cada cambio para limpiar ediciones obsoletas del browser ──
 const FILE_VERSION='20260828-003';
-(function(){try{const k='fiho_file_ver';if(localStorage.getItem(k)!==FILE_VERSION){localStorage.removeItem('fiho_field_edits');localStorage.setItem(k,FILE_VERSION);}}catch(e){}})();
+// sessionStorage se limpia automáticamente al cerrar/abrir el archivo — nunca interfiere con versiones nuevas
 
 // ── INPC (misma lógica plataforma antenas) ──
 const INPC_DEFAULT={2017:6.77,2018:4.83,2019:2.83,2020:3.15,2021:7.36,2022:7.82,2023:4.66,2024:4.72,2025:3.70,2026:4.58};
@@ -807,9 +807,9 @@ function getRentaActualMensual(c,rates){
     check:(p)=>h(p)===(localStorage.getItem(PIN_KEY)||h('GVQ2026')),
     unlock:()=>sessionStorage.setItem(AUTH_KEY,'1'),
     lock:()=>sessionStorage.removeItem(AUTH_KEY),
-    getEdits:()=>{try{return JSON.parse(localStorage.getItem(EDIT_KEY)||'{}')}catch{return{}}},
-    save:(num,field,val)=>{const e=window._fihoAuth.getEdits();(e[num]||(e[num]={}))[field]=val;localStorage.setItem(EDIT_KEY,JSON.stringify(e));},
-    reset:(num,field)=>{const e=window._fihoAuth.getEdits();if(e[num]){delete e[num][field];}localStorage.setItem(EDIT_KEY,JSON.stringify(e));},
+    getEdits:()=>{try{return JSON.parse(sessionStorage.getItem(EDIT_KEY)||'{}')}catch{return{}}},
+    save:(num,field,val)=>{const e=window._fihoAuth.getEdits();(e[num]||(e[num]={}))[field]=val;sessionStorage.setItem(EDIT_KEY,JSON.stringify(e));},
+    reset:(num,field)=>{const e=window._fihoAuth.getEdits();if(e[num]){delete e[num][field];}sessionStorage.setItem(EDIT_KEY,JSON.stringify(e));},
     apply:(c)=>{
       const e=window._fihoAuth.getEdits()[c.num];if(!e)return c;
       const cc={...c};
@@ -898,7 +898,7 @@ function publishEditsToFile(){
   }).join('\n');
   alert('✅ Archivo generado y descargado con los cambios permanentes.\n\nContratos actualizados:\n'+resumen+'\n\n→ Abre el archivo descargado (reemplaza el que tenías).\n→ Las ediciones guardadas en este navegador han sido limpiadas automáticamente.');
   // Limpiar ediciones del localStorage — ya están grabadas en el archivo descargado
-  localStorage.removeItem('fiho_field_edits');
+  sessionStorage.removeItem('fiho_field_edits');
   buildTableBody();updatePublishBtn();
 }
 function resetAllEdits(){
@@ -906,7 +906,7 @@ function resetAllEdits(){
   const n=Object.keys(window._fihoAuth.getEdits()).length;
   if(!n){alert('No hay ediciones guardadas en este navegador.');return;}
   if(!confirm('¿Eliminar todas las ediciones manuales guardadas en este navegador?\n\nSi ya las publicaste en un archivo, esto no afecta ese archivo.\nSi NO las publicaste, se perderán.')){return;}
-  localStorage.removeItem('fiho_field_edits');
+  sessionStorage.removeItem('fiho_field_edits');
   buildTableBody();updatePublishBtn();
   alert('✅ Ediciones limpiadas. Ahora verás los valores originales del archivo.');
 }
