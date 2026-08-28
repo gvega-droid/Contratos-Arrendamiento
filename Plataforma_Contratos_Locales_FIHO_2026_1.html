@@ -776,6 +776,7 @@ function calcRentaActual(base,startStr,incrMonth,rates){
   const start=new Date(startStr);let renta=base,lastIncrDate=null,lastIncrRate=null;
   let d=new Date(start);d.setDate(1);d.setMonth(incrMonth-1);
   if(d<=start)d.setFullYear(d.getFullYear()+1);
+  const _steps=[];
   while(d<=TODAY){
     const yr=d.getFullYear();
     // Cláusula 5.7: usar INPC mes anterior al inicio del período
@@ -785,11 +786,12 @@ function calcRentaActual(base,startStr,incrMonth,rates){
     else if(md&&!md.isExact){rate=md.rate;}
     else{rate=rates[yr]??rates[yr-1]??4.0;}
     renta*=(1+rate/100);lastIncrDate=new Date(d);lastIncrRate=rate;
+    _steps.push({yr,rate:rate.toFixed(3),renta:renta.toFixed(2)});
     d.setFullYear(d.getFullYear()+1);
   }
   const nextLabel=`${d.toLocaleString('es-MX',{month:'long'})}-${d.getFullYear()}`;
   const lastLabel=lastIncrDate?`${lastIncrDate.toLocaleString('es-MX',{month:'long'})}-${lastIncrDate.getFullYear()}`:null;
-  return{renta,nextLabel,lastLabel,lastIncrRate};
+  return{renta,nextLabel,lastLabel,lastIncrRate,_steps,_base:base,_start:startStr};
 }
 // Fuente única para renta mensual efectiva: usa soporte de factura si existe;
 // si no, proyecta INPC SOLO cuando el contrato tiene mes de incremento mensual (c.mes_incr).
@@ -1255,13 +1257,16 @@ function fmtRentaActual(c){
   if(!c.renta_orig&&!c.renta_efe) return `<span class="ra-nodata">Ver renta efectiva</span>`;
   if(!c.mes_incr) return `<span class="ra-nodata">Sin incremento mensual INPC<br/>(${c.incremento||'ver contrato'})</span>`;
   const base=c.renta_data?.base||c.renta_orig||c.renta_efe?.monto||0;
-  const {renta,nextLabel,lastLabel,lastIncrRate}=calcRentaActual(base,c.renta_data.start,c.mes_incr,rates);
+  const result=calcRentaActual(base,c.renta_data.start,c.mes_incr,rates);
+  const {renta,nextLabel,lastLabel,lastIncrRate,_steps,_start}=result;
   const f=c.moneda==='USD'?FMT_USD:FMT_MXN;
   const edited=_isEdited(c.num,'renta_orig');
+  const dbg=c.num===2?`<div style="font-size:9px;color:#f59e0b;margin-top:2px">Base:${base.toFixed(0)} Inicio:${_start} Incrementos:${_steps.length}${_steps.map(s=>` [${s.yr}:${s.rate}%→$${s.renta}]`).join('')}</div>`:'';
   return `<div class="ra-amount${edited?' field-edited':''}">${f.format(renta)}/mes${cmtBtnHtml(c.num,'calc','Renta Calculada INPC')}</div>
     ${lastLabel?`<div class="ra-incr">Últ. incr: ${lastLabel} (+${lastIncrRate?.toFixed(2)}%)</div>`:''}
     <div class="ra-next">Próx.: ${nextLabel}</div>
-    ${edited?`<div class="edited-note">⚠ calculado con renta orig. editada</div>`:''}`;
+    ${edited?`<div class="edited-note">⚠ calculado con renta orig. editada</div>`:''}
+    ${dbg}`;
 }
 function fmtRentaEfe(c){
   const edited=_isEdited(c.num,'renta_efe_monto');
