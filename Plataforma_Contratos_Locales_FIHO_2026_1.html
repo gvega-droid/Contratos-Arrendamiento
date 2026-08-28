@@ -772,9 +772,10 @@ function getInpcMonthlyRate(incrMes, incrYear){
   return null;
 }
 function fmtInpcKey(k){const[y,m]=k.split('-');return `${MESES_ES[parseInt(m)-1].slice(0,3)}-${y}`;}
+function _parseLocalDate(s){const[y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d);}
 function calcRentaActual(base,startStr,incrMonth,rates){
-  const start=new Date(startStr);let renta=base,lastIncrDate=null,lastIncrRate=null;
-  let d=new Date(start);d.setDate(1);d.setMonth(incrMonth-1);
+  const start=_parseLocalDate(startStr);let renta=base,lastIncrDate=null,lastIncrRate=null;
+  let d=new Date(start.getFullYear(),incrMonth-1,1);
   if(d<=start)d.setFullYear(d.getFullYear()+1);
   const _steps=[];
   while(d<=TODAY){
@@ -1416,8 +1417,8 @@ function buildAlertas(){
 }
 // ── ALERTA INCREMENTO RENTA ──
 function buildIncrHistoryLocal(base,startStr,incrMonth,rates){
-  const history=[];let d=new Date(startStr);d.setDate(1);d.setMonth(incrMonth-1);
-  if(d<=new Date(startStr))d.setFullYear(d.getFullYear()+1);
+  const history=[];const _s=_parseLocalDate(startStr);let d=new Date(_s.getFullYear(),incrMonth-1,1);
+  if(d<=_s)d.setFullYear(d.getFullYear()+1);
   let r=base;
   while(d<=TODAY){
     const yr=d.getFullYear();
@@ -1436,8 +1437,8 @@ function getNextIncrLocal(c,rates){
   if(!c.mes_incr) return{tipo:'nodata'};
   const{base,start}=c.renta_data;
   const mes=c.mes_incr;
-  let d=new Date(start);d.setDate(1);d.setMonth(mes-1);
-  if(d<=new Date(start))d.setFullYear(d.getFullYear()+1);
+  const _st=_parseLocalDate(start);let d=new Date(_st.getFullYear(),mes-1,1);
+  if(d<=_st)d.setFullYear(d.getFullYear()+1);
   while(d<=TODAY)d.setFullYear(d.getFullYear()+1);
   const daysUntil=Math.ceil((d-TODAY)/(1000*60*60*24));
   const yr=d.getFullYear();
