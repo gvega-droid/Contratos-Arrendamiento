@@ -359,6 +359,10 @@ td:first-child{text-align:center;font-weight:700;color:var(--gold);font-size:13p
 .edit-cell-btn:hover{color:var(--gold)}
 .field-edited{color:#FCD34D!important}
 .edited-note{font-size:9px;color:rgba(252,211,77,.55);margin-top:2px}
+.publish-btn{background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.3);border-radius:10px;color:#A5B4FC;font-family:'Inter',sans-serif;font-size:12px;font-weight:700;padding:7px 14px;cursor:pointer;display:none;align-items:center;gap:6px;transition:all .18s;white-space:nowrap}
+.publish-btn.visible{display:flex}
+.publish-btn:hover{background:rgba(99,102,241,.24)}
+.publish-btn.has-edits{background:rgba(99,102,241,.22);color:#C7D2FE;border-color:rgba(99,102,241,.55)}
 </style>
 <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
 </head>
@@ -483,6 +487,7 @@ td:first-child{text-align:center;font-weight:700;color:var(--gold);font-size:13p
     </select>
     <div class="count-badge" id="countBadge">20 contratos</div>
     <button class="lock-btn" id="lockBtn" onclick="toggleAuth()">🔒 Edición protegida</button>
+    <button class="publish-btn" id="publishBtn" onclick="publishEditsToFile()">📤 Publicar cambios</button>
   </div>
   <div class="table-wrap">
     <div class="table-scroll">
@@ -828,6 +833,59 @@ function updateLockBtn(){
   const auth=window._fihoAuth.isAuth();
   btn.className='lock-btn'+(auth?' unlocked':'');
   btn.innerHTML=auth?'🔓 Gerardo Vega Quinto':'🔒 Edición protegida';
+  updatePublishBtn();
+}
+function updatePublishBtn(){
+  const btn=document.getElementById('publishBtn');if(!btn)return;
+  const auth=window._fihoAuth.isAuth();
+  const edits=window._fihoAuth.getEdits();
+  const n=Object.keys(edits).length;
+  btn.classList.toggle('visible',auth);
+  btn.classList.toggle('has-edits',auth&&n>0);
+  btn.innerHTML=n>0?`📤 Publicar cambios (${n})`:'📤 Publicar cambios';
+  btn.title=n>0?`Hay ${n} contrato(s) con valores editados localmente — generar archivo actualizado para todos`:'Sin ediciones locales pendientes';
+}
+function publishEditsToFile(){
+  if(!window._fihoAuth.isAuth()){return;}
+  const edits=window._fihoAuth.getEdits();
+  const editedNums=Object.keys(edits).map(Number);
+  if(!editedNums.length){alert('No hay ediciones manuales para publicar.\n\nEdite primero algún valor de renta con el botón ✏.');return;}
+  // Aplicar edits permanentemente a los datos de CONTRACTS
+  const updated=CONTRACTS.map(c=>{
+    const e=edits[c.num];if(!e)return c;
+    try{
+      const cc=JSON.parse(JSON.stringify(c));
+      if(e.renta_orig!=null)cc.renta_orig=e.renta_orig;
+      if(e.renta_efe_monto!=null)cc.renta_efe=cc.renta_efe?{...cc.renta_efe,monto:e.renta_efe_monto}:{monto:e.renta_efe_monto,mes:'editado'};
+      if(e.mant_efe_monto!=null)cc.mant_efe=cc.mant_efe?{...cc.mant_efe,monto:e.mant_efe_monto}:{monto:e.mant_efe_monto,mes:'editado'};
+      return cc;
+    }catch{return c;}
+  });
+  // Obtener el HTML fuente y reemplazar el bloque CONTRACTS
+  const src='<!DOCTYPE html>\n'+document.documentElement.outerHTML;
+  const newContracts='const CONTRACTS='+JSON.stringify(updated)+';';
+  const newSrc=src.replace(/const CONTRACTS=\[[\s\S]*?\n\];/,newContracts);
+  if(newSrc===src){
+    alert('Error: no se pudo localizar el bloque CONTRACTS en el archivo. Avise a soporte técnico.');
+    return;
+  }
+  // Descargar el archivo actualizado
+  const blob=new Blob([newSrc],{type:'text/html;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download='Plataforma_Contratos_Locales_FIHO_2026_1.html';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  // Confirmar con resumen de cambios
+  const resumen=editedNums.map(n=>{
+    const c=CONTRACTS.find(x=>x.num===n);const e=edits[n];
+    const lineas=[];
+    if(e.renta_orig!=null)lineas.push('  Renta orig: '+e.renta_orig.toLocaleString('es-MX',{style:'currency',currency:'MXN'}));
+    if(e.renta_efe_monto!=null)lineas.push('  Renta efe: '+e.renta_efe_monto.toLocaleString('es-MX',{style:'currency',currency:'MXN'}));
+    if(e.mant_efe_monto!=null)lineas.push('  Mant.: '+e.mant_efe_monto.toLocaleString('es-MX',{style:'currency',currency:'MXN'}));
+    return '• #'+n+' '+(c?.arrendatario||'')+'\n'+lineas.join('\n');
+  }).join('\n');
+  alert('✅ Archivo generado y descargado con los cambios permanentes.\n\nContratos actualizados:\n'+resumen+'\n\n→ Reemplaza el archivo actual en el repositorio para que todos los usuarios vean la misma información.\n→ O envía el archivo descargado para que lo comprometamos al repositorio.');
 }
 function openEditModal(num,field,label,currentVal){
   if(!window._fihoAuth.isAuth())return;
@@ -847,12 +905,12 @@ function saveEditModal(){
   const val=parseFloat(document.getElementById('editBoxInput').value);
   if(isNaN(val)||val<0){alert('Ingresa un valor numérico válido mayor a 0.');return;}
   window._fihoAuth.save(_editCtx.num,_editCtx.field,val);
-  closeEditModal();buildTableBody();
+  closeEditModal();buildTableBody();updatePublishBtn();
 }
 function resetEditField(){
   if(!_editCtx)return;
   window._fihoAuth.reset(_editCtx.num,_editCtx.field);
-  closeEditModal();buildTableBody();
+  closeEditModal();buildTableBody();updatePublishBtn();
 }
 function toggleInpcPanel(){document.getElementById('inpcPanel').classList.toggle('open');}
 function saveInpcRates(){
