@@ -373,7 +373,7 @@ td:first-child{text-align:center;font-weight:700;color:var(--gold);font-size:13p
   <p>Base de datos · información extraída de contratos originales y soporte de facturas · 18-jun-2026 · Cobranza al 24-ago-2026</p>
 </div>
 <div class="stats">
-  <div class="stat-card"><div class="num">36</div><div class="lbl">Contratos</div></div>
+  <div class="stat-card"><div class="num">35</div><div class="lbl">Contratos</div></div>
   <div class="stat-card"><div class="num" id="statVencidos" style="color:#E53E3E">—</div><div class="lbl">Alertas Contrato</div></div>
   <div class="stat-card"><div class="num" id="statDeudores" style="color:#F97316">—</div><div class="lbl">Con adeudo</div></div>
   <div class="stat-card"><div class="num" id="statIncrProx">—</div><div class="lbl">Incrementos ≤90d</div></div>
@@ -521,7 +521,18 @@ td:first-child{text-align:center;font-weight:700;color:var(--gold);font-size:13p
   </div>
 </div>
 <!-- PANEL ALERTAS VENCIMIENTO -->
-<div class="tab-panel" id="panel-alertas"><div class="alert-panel" id="alertasContent"></div></div>
+<div class="tab-panel" id="panel-alertas">
+  <div style="padding:18px 20px 0;max-width:1200px">
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px">
+      <input type="text" id="alertasSearch" placeholder="🔍 Buscar arrendatario, hotel o ciudad…"
+        oninput="filterAlertas()"
+        style="flex:1;min-width:200px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:10px;color:#fff;font-family:'Inter',sans-serif;font-size:13px;padding:9px 14px;outline:none;transition:border .2s"
+        onfocus="this.style.borderColor='rgba(14,165,233,.6)'" onblur="this.style.borderColor='rgba(255,255,255,.15)'"/>
+      <span id="alertasCount" style="font-size:11.5px;color:rgba(255,255,255,.35);white-space:nowrap"></span>
+    </div>
+  </div>
+  <div class="alert-panel" id="alertasContent"></div>
+</div>
 <!-- PANEL ALERTA INCREMENTO RENTA -->
 <div class="tab-panel" id="panel-alertas-renta">
   <div class="airt-panel">
@@ -558,6 +569,7 @@ td:first-child{text-align:center;font-weight:700;color:var(--gold);font-size:13p
   <div class="docs-panel">
     <div class="docs-note"><strong>Permisos y Licencias por Arrendatario:</strong> Tarjetas agrupadas por arrendatario (no por inmueble) — cada empresa/persona arrendataria puede requerir permisos distintos según su giro comercial específico y la reglamentación municipal/estatal del lugar donde opera, aun cuando comparta el mismo hotel con otro arrendatario. Fundamentos generales: reglamentos municipales de construcción y uso de suelo, leyes estatales de Protección Civil, CFF (SAT), Ley del Seguro Social/INFONAVIT, LFPIORPI, LGEEPA/SEMARNAT, Ley General de Turismo/SECTUR, Ley General de Salud/COFEPRIS, leyes estatales de bebidas alcohólicas, Ley de Aviación Civil/AFAC y leyes de movilidad estatales, cuando el giro del arrendatario lo amerita. La obligación de obtener y mantener vigentes los permisos corresponde al arrendatario.</div>
     <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;align-items:center">
+      <input type="text" id="searchPermisos" placeholder="🔍 Buscar arrendatario, giro o permiso…" oninput="renderPermisos()" style="flex:1;min-width:200px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:10px;color:#fff;font-family:'Inter',sans-serif;font-size:13px;padding:9px 14px;outline:none" onfocus="this.style.borderColor='rgba(14,165,233,.6)'" onblur="this.style.borderColor='rgba(255,255,255,.15)'"/>
       <div class="docs-filter">
         <select id="filterPermEst" onchange="renderPermisos()">
           <option value="">Todos los estados</option>
@@ -681,81 +693,48 @@ td:first-child{text-align:center;font-weight:700;color:var(--gold);font-size:13p
 <!-- AD CONTOR ESTACIONAMIENTO PANEL -->
 <div class="tab-panel" id="panel-adcontor">
   <div style="padding:20px 24px;max-width:1200px">
-    <div style="display:flex;align-items:center;gap:16px;margin-bottom:24px;flex-wrap:wrap">
+    <!-- Header -->
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:22px;flex-wrap:wrap">
       <div style="width:52px;height:52px;background:linear-gradient(135deg,#0EA5E9,#0369A1);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;box-shadow:0 4px 16px rgba(14,165,233,.4)">🅿</div>
       <div style="flex:1;min-width:0">
         <div style="font-size:19px;font-weight:700;color:#F0F9FF;letter-spacing:-.3px">Ad Contor — Estacionamiento Indiviso</div>
-        <div style="font-size:12.5px;color:rgba(255,255,255,.5);margin-top:3px">Fiesta Inn Torreón Galerías · Concesión de estacionamiento · Enero–Agosto 2026</div>
+        <div style="font-size:12px;color:rgba(255,255,255,.45);margin-top:3px">Fiesta Inn Torreón Galerías · CIA 2325 · FITOG · Concesión de estacionamiento · Ene–Ago 2026</div>
       </div>
-      <div style="text-align:right;flex-shrink:0">
-        <div style="font-size:9.5px;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:.8px">Fuente</div>
-        <div style="font-size:11px;color:rgba(255,255,255,.5)">Anexo 2.1.10 / 2.1.17 · AGO-26</div>
-        <div style="font-size:10px;color:rgba(14,165,233,.7);margin-top:2px">CIA 2325 · FITOG</div>
-      </div>
-    </div>
-    <!-- KPI Cards -->
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:24px">
-      <div style="background:rgba(14,165,233,.1);border:1px solid rgba(14,165,233,.28);border-radius:14px;padding:18px 20px">
-        <div style="font-size:10px;color:#7DD3FC;text-transform:uppercase;letter-spacing:.7px;margin-bottom:8px">▲ Ingresos YTD</div>
-        <div style="font-size:24px;font-weight:700;color:#F0F9FF;font-variant-numeric:tabular-nums">$1,531,639</div>
-        <div style="font-size:10.5px;color:rgba(125,211,252,.55);margin-top:5px">Ene–Ago 2026 · MXN s/IVA</div>
-        <div style="margin-top:10px;height:3px;background:rgba(14,165,233,.15);border-radius:2px"><div style="height:100%;width:100%;background:#0EA5E9;border-radius:2px"></div></div>
-      </div>
-      <div style="background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.22);border-radius:14px;padding:18px 20px">
-        <div style="font-size:10px;color:#FCA5A5;text-transform:uppercase;letter-spacing:.7px;margin-bottom:8px">▼ Costos YTD</div>
-        <div style="font-size:24px;font-weight:700;color:#F0F9FF;font-variant-numeric:tabular-nums">$978,288</div>
-        <div style="font-size:10.5px;color:rgba(252,165,165,.55);margin-top:5px">Estacionamiento + Inmobiliaria</div>
-        <div style="margin-top:10px;height:3px;background:rgba(239,68,68,.12);border-radius:2px"><div style="height:100%;width:63.9%;background:#EF4444;border-radius:2px"></div></div>
-      </div>
-      <div style="background:rgba(34,197,94,.09);border:1px solid rgba(34,197,94,.24);border-radius:14px;padding:18px 20px">
-        <div style="font-size:10px;color:#86EFAC;text-transform:uppercase;letter-spacing:.7px;margin-bottom:8px">◆ Utilidad Neta YTD</div>
-        <div style="font-size:24px;font-weight:700;color:#4ADE80;font-variant-numeric:tabular-nums">$553,351</div>
-        <div style="font-size:10.5px;color:rgba(134,239,172,.55);margin-top:5px">8 meses acumulados 2026</div>
-        <div style="margin-top:10px;height:3px;background:rgba(34,197,94,.12);border-radius:2px"><div style="height:100%;width:36.1%;background:#22C55E;border-radius:2px"></div></div>
-      </div>
-      <div style="background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.22);border-radius:14px;padding:18px 20px">
-        <div style="font-size:10px;color:#FDE68A;text-transform:uppercase;letter-spacing:.7px;margin-bottom:8px">% Margen Neto</div>
-        <div style="font-size:24px;font-weight:700;color:#FCD34D;font-variant-numeric:tabular-nums">36.1%</div>
-        <div style="font-size:10.5px;color:rgba(253,230,138,.55);margin-top:5px">Utilidad / Ingresos</div>
-        <div style="margin-top:10px;height:3px;background:rgba(251,191,36,.12);border-radius:2px"><div style="height:100%;width:36.1%;background:#F59E0B;border-radius:2px"></div></div>
+      <div style="text-align:right;flex-shrink:0;background:rgba(14,165,233,.08);border:1px solid rgba(14,165,233,.2);border-radius:10px;padding:10px 16px">
+        <div style="font-size:9px;color:rgba(125,211,252,.6);text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px">Fuente · Actualizado</div>
+        <div style="font-size:11px;color:#7DD3FC;font-weight:600">Anexo 2.1.10 / 2.1.17</div>
+        <div style="font-size:10.5px;color:rgba(255,255,255,.4);margin-top:2px">EEFF Cierre Agosto 2026</div>
       </div>
     </div>
+    <!-- KPI REAL vs PTTO row -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:20px" id="adcontorKpis"></div>
+    <!-- Varianza YTD summary -->
+    <div id="adcontorVarYtd" style="margin-bottom:20px"></div>
     <!-- Chart + Table -->
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start">
-      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:20px">
-        <div style="font-size:11px;font-weight:600;color:rgba(255,255,255,.55);margin-bottom:14px;text-transform:uppercase;letter-spacing:.5px">Ingresos vs Costos vs Utilidad por Mes</div>
-        <canvas id="adcontorChart" style="display:block;width:100%;height:200px"></canvas>
-        <div style="display:flex;gap:14px;margin-top:12px;justify-content:center">
-          <div style="display:flex;align-items:center;gap:5px"><div style="width:10px;height:10px;background:#0EA5E9;border-radius:2px"></div><span style="font-size:10px;color:rgba(255,255,255,.5)">Ingreso</span></div>
-          <div style="display:flex;align-items:center;gap:5px"><div style="width:10px;height:10px;background:#EF4444;border-radius:2px"></div><span style="font-size:10px;color:rgba(255,255,255,.5)">Costo</span></div>
-          <div style="display:flex;align-items:center;gap:5px"><div style="width:10px;height:10px;background:#22C55E;border-radius:2px"></div><span style="font-size:10px;color:rgba(255,255,255,.5)">Utilidad neta</span></div>
+    <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:16px;align-items:start;margin-bottom:18px">
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:18px">
+        <div style="font-size:10.5px;font-weight:700;color:rgba(255,255,255,.5);margin-bottom:14px;text-transform:uppercase;letter-spacing:.5px">Ingreso Real vs Presupuesto por Mes</div>
+        <canvas id="adcontorChart" style="display:block;width:100%;height:180px"></canvas>
+        <div style="display:flex;gap:12px;margin-top:12px;justify-content:center;flex-wrap:wrap">
+          <div style="display:flex;align-items:center;gap:5px"><div style="width:10px;height:10px;background:#0EA5E9;border-radius:2px"></div><span style="font-size:10px;color:rgba(255,255,255,.45)">Ingreso Real</span></div>
+          <div style="display:flex;align-items:center;gap:5px"><div style="width:10px;height:10px;background:rgba(14,165,233,.3);border:1px dashed #0EA5E9;border-radius:2px"></div><span style="font-size:10px;color:rgba(255,255,255,.45)">Presupuesto</span></div>
+          <div style="display:flex;align-items:center;gap:5px"><div style="width:10px;height:10px;background:#22C55E;border-radius:2px"></div><span style="font-size:10px;color:rgba(255,255,255,.45)">Utilidad Real</span></div>
         </div>
       </div>
       <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;overflow:hidden">
-        <table style="width:100%;border-collapse:collapse;font-size:12px">
-          <thead>
-            <tr style="background:rgba(14,165,233,.12)">
-              <th style="padding:10px 14px;text-align:left;color:#7DD3FC;font-weight:600;font-size:10px;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap">Mes</th>
-              <th style="padding:10px 14px;text-align:right;color:#7DD3FC;font-weight:600;font-size:10px;text-transform:uppercase;letter-spacing:.5px">Ingreso</th>
-              <th style="padding:10px 14px;text-align:right;color:#FCA5A5;font-weight:600;font-size:10px;text-transform:uppercase;letter-spacing:.5px">Costo</th>
-              <th style="padding:10px 14px;text-align:right;color:#86EFAC;font-weight:600;font-size:10px;text-transform:uppercase;letter-spacing:.5px">Utilidad</th>
-            </tr>
-          </thead>
-          <tbody id="adcontorTableBody"></tbody>
-          <tfoot>
-            <tr style="background:rgba(14,165,233,.08);border-top:1px solid rgba(14,165,233,.25)">
-              <td style="padding:10px 14px;color:#E2E8F0;font-weight:700;font-size:11.5px">TOTAL</td>
-              <td style="padding:10px 14px;text-align:right;color:#7DD3FC;font-weight:700;font-variant-numeric:tabular-nums">$1,531,639</td>
-              <td style="padding:10px 14px;text-align:right;color:#FCA5A5;font-weight:700;font-variant-numeric:tabular-nums">$978,288</td>
-              <td style="padding:10px 14px;text-align:right;color:#4ADE80;font-weight:700;font-variant-numeric:tabular-nums">$553,351</td>
-            </tr>
-          </tfoot>
-        </table>
+        <div style="padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.07);font-size:10.5px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.5px">Real vs Presupuesto por Mes</div>
+        <div style="overflow-x:auto">
+          <table style="width:100%;border-collapse:collapse;font-size:11.5px;min-width:300px" id="adcontorTableBody"></table>
+        </div>
+        <tfoot id="adcontorTableFoot"></tfoot>
       </div>
     </div>
-    <!-- Nota -->
-    <div style="margin-top:18px;padding:13px 17px;background:rgba(251,191,36,.07);border:1px solid rgba(251,191,36,.18);border-radius:10px;font-size:11px;color:rgba(253,230,138,.75);line-height:1.65">
-      <strong style="color:#FCD34D">Nota:</strong> Ad Contor opera el estacionamiento como concesionario en Fiesta Inn Torreón Galerías. Los <strong style="color:#7DD3FC">ingresos</strong> (Sec. 2.1.10) corresponden a lo generado por el público general vía la concesión. Los <strong style="color:#FCA5A5">costos</strong> (Sec. 2.1.17) son los pagos realizados a Ad Contor (estacionamiento + inmobiliaria). Marzo-2026 muestra utilidad negativa por reversión de provisión contabilizada en feb-26 ($164,523.61). <strong>Fuente: Anexo de Resultados AGO-26, secciones 2.1.10 y 2.1.17.</strong>
+    <!-- Nota actualización mensual -->
+    <div style="padding:13px 17px;background:rgba(14,165,233,.06);border:1px solid rgba(14,165,233,.18);border-radius:10px;font-size:11px;color:rgba(125,211,252,.7);line-height:1.7;margin-bottom:12px">
+      <strong style="color:#7DD3FC">📅 Cómo actualizar mensualmente:</strong> Cada mes, al recibir el Anexo de EEFF (secciones 2.1.10 y 2.1.17), comparte el archivo Excel con el asistente. Los datos de ingreso real, gasto real y utilidad se actualizarán en la función <code style="background:rgba(255,255,255,.08);padding:1px 5px;border-radius:4px;font-size:10px">renderAdContor()</code> → arreglo <code style="background:rgba(255,255,255,.08);padding:1px 5px;border-radius:4px;font-size:10px">data[]</code> dentro de esta plataforma. El presupuesto anual es fijo ($211,162.38 ing / $124,534.98 gas / mes).
+    </div>
+    <div style="padding:12px 16px;background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.16);border-radius:10px;font-size:10.5px;color:rgba(253,230,138,.7);line-height:1.65">
+      <strong style="color:#FCD34D">Nota contable:</strong> Ingresos (2.1.10) = generados por el público vía concesión de estacionamiento. Costos (2.1.17) = pagos a Ad Contor (estacionamiento + inmobiliaria). Mar-26 muestra utilidad negativa por reversión de provisión. <strong>Fuente: EEFF Cierre Agosto 2026.</strong>
     </div>
   </div>
 </div>
@@ -798,7 +777,7 @@ const IVA=0.16;
 const SPEI={banco:'BBVA Bancomer Suc. Empresas Toluca',cuenta:'0191885413',clabe:'012420001918854135',beneficiario:'F-X-DEUTSCHE BANK MEXICO NO. F/1596',rfc:'FFX121005C6A'};
 
 // ── VERSIÓN DEL ARCHIVO — se actualiza en cada cambio para limpiar ediciones obsoletas del browser ──
-const FILE_VERSION='20260910-026';
+const FILE_VERSION='20260910-027';
 // sessionStorage se limpia automáticamente al cerrar/abrir el archivo — nunca interfiere con versiones nuevas
 
 // ── INPC (misma lógica plataforma antenas) ──
@@ -1100,20 +1079,19 @@ const CONTRACTS=[
  {num:20,arrendatario:"Waldo's Dólar Mart de México, S. de R.L. de C.V.",rfc:'WDM9901',cat:'Tienda',hotel:'One Cuautitlán Izcalli — Plaza San Marcos Power Center',ciudad:'Cuautitlán Izcalli, Estado de México',localidad:'Locales 01 y 02',superficie:853,giro:"Tienda de autoservicio Waldo's",inicio:'2024-03-02',fin:'2026-03-01',plazo:'2 años forzosos (02-mar-2024 al 01-mar-2026). En proceso de renovación.',renta_orig:117524,moneda:'MXN',renta_efe:{monto:133226.05,mes:'jun-26'},renta_data:{base:117524,start:'2024-03-02',mes:4},incremento:'Anual INPC (mes abril · ref. INPC mar.) · Cláusula Quinta contrato mar-2024: primer incremento abr-2024, cada 12 meses',mes_incr:4,mantenimiento:'No especificado',mant_efe:{monto:19985.82,mes:'jun-26'},deposito:'2 meses',penalizacion:'Rentas faltantes + IVA',correo:'',cobranza:{status:'vencido',pendiente:718697.44,vencido:540971.67,detalle:'Múltiples facturas vencidas jun-ago-26 (hasta 61-90 días)'},drive:'https://drive.google.com/drive/folders/1WFNBWiXKCzhxRIWiXk5TwuL5vmUBEx7Q'},
  {num:22,arrendatario:'Operadora Hotelera In House, S.A.P.I. — Villahermosa',rfc:'OHI2102',cat:'Hotel',hotel:'Inhouse Hotels Villahermosa — Plaza Sendero',ciudad:'Villahermosa, Tabasco',localidad:'Hotel completo — Circ. Interior Carlos Pellicer Cámara #5202, Col. José María Pino Suárez',superficie:null,giro:'Operación hotelera completa (Inhouse Hotels)',inicio:'2026-07-01',fin:'2029-06-30',plazo:'3 años forzosos (01-jul-2026 al 30-jun-2029)',renta_orig:200000,moneda:'MXN',renta_efe:{monto:200000,mes:'jul-26',nota:'Renta fija $200,000/mes + IVA · Contrato indica escalonamiento $100k/$150k/$200k; renta real vigente = $200k/mes'},renta_data:{base:200000,start:'2026-07-01',mes:7},incremento:'Renta fija escalonada sin INPC · Año 2 (jul-27): $150k/mes · Año 3 (jul-28): $200k/mes',mes_incr:6,mantenimiento:'Reserva 3% ingresos mensuales (cuenta de Arrendataria)',mant_efe:null,deposito:'Fianza $2,400,000 MN (póliza afianzadora, renovación anual)',penalizacion:'Rentas faltantes al plazo forzoso + IVA',correo:'',cobranza:{status:'vencido',pendiente:464000,vencido:464000,detalle:'Renta jul-ago-26 en cartera ($232k+IVA c/u) · adeudo total según CARTERA al 24-ago-26'},drive:''},
  // ── CONTRATOS NUEVOS (sep-2026 · datos de Soporte Facturas CARTERA) ──
- {num:23,arrendatario:'7-Eleven México, S.A. de C.V.',rfc:'SEM980701STA',cat:'Tienda',hotel:'One Monterrey Aeropuerto — Plaza One MTY',ciudad:'Apodaca, Nuevo León',localidad:'Local comercial',superficie:null,giro:'Tienda de autoservicio 7-Eleven',inicio:null,fin:null,plazo:'Pendiente revisión contrato',renta_orig:null,moneda:'MXN',renta_efe:{monto:57733.96,mes:'sep-26'},renta_data:{base:57733.96,start:null},incremento:'Pendiente revisión contrato',mes_incr:null,mantenimiento:'Pendiente revisión contrato',mant_efe:null,deposito:'Pendiente revisión contrato',penalizacion:'Pendiente revisión contrato',correo:'facturas3@collectdemexico.com',cobranza:{status:'corriente',pendiente:0,vencido:0,detalle:'Sep-26 facturado · CARTERA pendiente actualizar'},drive:''},
- {num:24,arrendatario:'Gloria JH, S. de R.L. de C.V.',rfc:'GJH160627F71',cat:'Comercio',hotel:'One Monterrey Aeropuerto — Plaza One MTY',ciudad:'Apodaca, Nuevo León',localidad:'Local comercial',superficie:null,giro:'Pendiente confirmar giro',inicio:null,fin:null,plazo:'En negociación de contrato',renta_orig:null,moneda:'MXN',renta_efe:{monto:58118.53,mes:'sep-26'},renta_data:{base:58118.53,start:null},incremento:'Pendiente negociación',mes_incr:null,mantenimiento:'10% renta mensual (estimado)',mant_efe:{monto:5812.51,mes:'sep-26'},deposito:'Pendiente negociación',penalizacion:'Pendiente negociación',correo:'lee.r.alejandro@gmail.com',cobranza:{status:'corriente',pendiente:0,vencido:0,detalle:'Sep-26 facturado · En negociación'},drive:''},
- {num:25,arrendatario:'Consolidadora de Servicios Aduanales, S.C.',rfc:'CSA990505P9A',cat:'Oficina',hotel:'One Monterrey Aeropuerto — Plaza One MTY',ciudad:'Apodaca, Nuevo León',localidad:'Local comercial',superficie:null,giro:'Servicios aduanales',inicio:null,fin:null,plazo:'En negociación de contrato',renta_orig:null,moneda:'MXN',renta_efe:{monto:11802.63,mes:'sep-26'},renta_data:{base:11802.63,start:null},incremento:'Pendiente negociación',mes_incr:null,mantenimiento:'10% renta mensual (estimado)',mant_efe:{monto:1180.45,mes:'sep-26'},deposito:'Pendiente negociación',penalizacion:'Pendiente negociación',correo:'emmanuel.mireles@consa.com.mx',cobranza:{status:'corriente',pendiente:0,vencido:0,detalle:'Sep-26 facturado · En negociación'},drive:''},
- {num:26,arrendatario:'Amazon Tours, S.A. de C.V. (BJM Delivery · Aqua World)',rfc:'ATO140328FU8',cat:'Tours',hotel:'Fiesta Americana Condesa Cancún',ciudad:'Cancún, Quintana Roo',localidad:'Local comercial · escritorio tours',superficie:null,giro:'Tours acuáticos y servicios turísticos',inicio:null,fin:null,plazo:'Pendiente revisión contrato',renta_orig:null,moneda:'USD',renta_efe:{monto:5669.96,mes:'sep-26',moneda:'USD',nota:'Fija $1,127.20 + Variable $4,542.76 USD · T/C 16.92 · Compl. mar-ago $261.56 USD'},renta_data:{base:5669.96,start:null},incremento:'Pendiente revisión contrato',mes_incr:null,mantenimiento:'Pendiente revisión contrato',mant_efe:null,deposito:'Pendiente revisión contrato',penalizacion:'Pendiente revisión contrato',correo:'',cobranza:{status:'corriente',pendiente:0,vencido:0,detalle:'Sep-26 facturado · CARTERA pendiente actualizar'},drive:''},
- {num:27,arrendatario:'Arrendadora Automotriz Grupo Arhe, S.A. de C.V. (Alamo)',rfc:'SPA090414RP6',cat:'Comercio',hotel:'Fiesta Inn Querétaro',ciudad:'Querétaro, Querétaro',localidad:'Local comercial',superficie:null,giro:'Renta de autos (Alamo)',inicio:null,fin:null,plazo:'Pendiente revisión contrato',renta_orig:null,moneda:'MXN',renta_efe:{monto:10438.49,mes:'sep-26'},renta_data:{base:10438.49,start:null},incremento:'Pendiente revisión contrato',mes_incr:null,mantenimiento:'Pendiente revisión contrato',mant_efe:null,deposito:'Pendiente revisión contrato',penalizacion:'Pendiente revisión contrato',correo:'',cobranza:{status:'corriente',pendiente:0,vencido:0,detalle:'Sep-26 facturado · CARTERA pendiente actualizar'},drive:''},
- {num:28,arrendatario:'Alquiladora de Vehículos Automotores, S.A. de C.V. (Hertz)',rfc:'AVA880310UI1',cat:'Comercio',hotel:'Sheraton Ambassador Monterrey',ciudad:'Monterrey, Nuevo León',localidad:'Local comercial',superficie:null,giro:'Renta de autos Hertz',inicio:null,fin:null,plazo:'Pendiente revisión contrato',renta_orig:null,moneda:'MXN',renta_efe:{monto:38299.35,mes:'sep-26',nota:'Compl. abr-ago $8,141.00 MXN'},renta_data:{base:38299.35,start:null},incremento:'Pendiente revisión contrato',mes_incr:null,mantenimiento:'Pendiente revisión contrato',mant_efe:null,deposito:'Pendiente revisión contrato',penalizacion:'Pendiente revisión contrato',correo:'rentasavasa@avasa.com.mx',cobranza:{status:'corriente',pendiente:0,vencido:0,detalle:'Sep-26 facturado · CARTERA pendiente actualizar'},drive:''},
- {num:29,arrendatario:'Juan Carlos Alberto Ayala Olvera',rfc:'AAOJ710401G66',cat:'Oficina',hotel:'Sheraton Ambassador Monterrey',ciudad:'Monterrey, Nuevo León',localidad:'Local comercial',superficie:null,giro:'Consultoría / servicios profesionales',inicio:null,fin:null,plazo:'Pendiente revisión contrato',renta_orig:null,moneda:'MXN',renta_efe:{monto:4660.15,mes:'sep-26'},renta_data:{base:4660.15,start:null},incremento:'Pendiente revisión contrato',mes_incr:null,mantenimiento:'Pendiente revisión contrato',mant_efe:null,deposito:'Pendiente revisión contrato',penalizacion:'Pendiente revisión contrato',correo:'ayalaconsultores@hotmail.com',cobranza:{status:'corriente',pendiente:0,vencido:0,detalle:'Sep-26 facturado · CARTERA pendiente actualizar'},drive:''},
- {num:30,arrendatario:'Ad Contor (Estacionamiento Indiviso)',rfc:'',cat:'Estacionamiento',hotel:'Fiesta Inn Torreón Galerías',ciudad:'Torreón, Coahuila',localidad:'Estacionamiento indiviso · concesión',superficie:null,giro:'Concesión de estacionamiento indiviso',inicio:null,fin:null,plazo:'Concesión indivisa sin plazo fijo',renta_orig:null,moneda:'MXN',renta_efe:null,renta_data:{base:null,start:null},incremento:'Contraprestación variable según ingresos de estacionamiento',mes_incr:null,mantenimiento:'Ver panel Ad Contor',mant_efe:null,deposito:'Ver contrato de concesión',penalizacion:'Ver contrato de concesión',correo:'',cobranza:{status:'corriente',pendiente:0,vencido:0,detalle:'Ver panel especial Ad Contor · Utilidad neta YTD $553,351 (ene-ago 2026)'},drive:''},
- {num:31,arrendatario:'Yokomy Sushi, S. de R.L. de C.V.',rfc:'YSU1406',cat:'Restaurante',hotel:'One Tijuana Otay',ciudad:'Tijuana, Baja California',localidad:'Local comercial',superficie:null,giro:'Restaurante Yokomy Sushi',inicio:null,fin:null,plazo:'Pendiente revisión contrato',renta_orig:null,moneda:'USD',renta_efe:{monto:2141.90,mes:'sep-26',moneda:'USD',nota:'T/C 16.92'},renta_data:{base:2141.90,start:null},incremento:'Anual INPC (mes pendiente confirmar)',mes_incr:null,mantenimiento:'Pendiente revisión contrato',mant_efe:null,deposito:'Pendiente revisión contrato',penalizacion:'Pendiente revisión contrato',correo:'yokomy_sushi@hotmail.com',cobranza:{status:'corriente',pendiente:0,vencido:0,detalle:'Sep-26 facturado · CARTERA pendiente actualizar'},drive:''},
- {num:32,arrendatario:'Daqu de Sonora, S.A. de C.V. (Dairy Queen)',rfc:'DSO9307',cat:'Restaurante',hotel:'One Tijuana Otay',ciudad:'Tijuana, Baja California',localidad:'Local comercial',superficie:null,giro:'Restaurante Dairy Queen',inicio:null,fin:null,plazo:'Pendiente revisión contrato',renta_orig:null,moneda:'USD',renta_efe:null,renta_data:{base:null,start:null},incremento:'Anual INPC',mes_incr:null,mantenimiento:'Pendiente revisión contrato',mant_efe:null,deposito:'Pendiente revisión contrato',penalizacion:'Pendiente revisión contrato',correo:'rentas@ggef.mx',cobranza:{status:'corriente',pendiente:0,vencido:0,detalle:'Sin renta sep-26 · Solo energéticos facturados'},drive:''},
- {num:33,arrendatario:'Coyotas Lulú, S.A. de C.V.',rfc:'CLU0203',cat:'Restaurante',hotel:'Fiesta Inn Express Ciudad Obregón',ciudad:'Ciudad Obregón, Sonora',localidad:'Local comercial',superficie:null,giro:'Restaurante Coyotas Lulú',inicio:null,fin:null,plazo:'Pendiente revisión contrato',renta_orig:null,moneda:'MXN',renta_efe:{monto:16247.54,mes:'sep-26',nota:'Compl. abr-ago $3,071.92 + $307.52 MXN'},renta_data:{base:16247.54,start:null},incremento:'Anual INPC',mes_incr:null,mantenimiento:'10% renta mensual (estimado)',mant_efe:{monto:1625.14,mes:'sep-26'},deposito:'Pendiente revisión contrato',penalizacion:'Pendiente revisión contrato',correo:'contabilidad@coyotaslulu.com',cobranza:{status:'corriente',pendiente:0,vencido:0,detalle:'Sep-26 facturado · CARTERA pendiente actualizar'},drive:''},
- {num:34,arrendatario:'Proyectos Electrónicos de Entretenimiento LC, S.A. de C.V.',rfc:'PEE1304',cat:'Comercio',hotel:'One Monterrey Aeropuerto — Plaza One MTY',ciudad:'Apodaca, Nuevo León',localidad:'Local comercial',superficie:null,giro:'Entretenimiento electrónico',inicio:null,fin:null,plazo:'Pendiente revisión contrato',renta_orig:null,moneda:'MXN',renta_efe:{monto:19498.23,mes:'sep-26'},renta_data:{base:19498.23,start:null},incremento:'Pendiente revisión contrato',mes_incr:null,mantenimiento:'Pendiente revisión contrato',mant_efe:null,deposito:'Pendiente revisión contrato',penalizacion:'Pendiente revisión contrato',correo:'miguelasolisc@yahoo.com.mx',cobranza:{status:'corriente',pendiente:0,vencido:0,detalle:'Sep-26 facturado · CARTERA pendiente actualizar'},drive:''},
- {num:35,arrendatario:'María Irene Vota Echavarri',rfc:'VOEI441',cat:'Tienda',hotel:'Fiesta Inn Ciudad Juárez',ciudad:'Ciudad Juárez, Chihuahua',localidad:'Local comercial · Tabaquería',superficie:null,giro:'Tabaquería',inicio:null,fin:null,plazo:'Pendiente revisión contrato',renta_orig:null,moneda:'MXN',renta_efe:{monto:7005.86,mes:'sep-26'},renta_data:{base:7005.86,start:null},incremento:'Pendiente revisión contrato',mes_incr:null,mantenimiento:'Pendiente revisión contrato',mant_efe:null,deposito:'Pendiente revisión contrato',penalizacion:'Pendiente revisión contrato',correo:'nenevotta@gmail.com',cobranza:{status:'corriente',pendiente:0,vencido:0,detalle:'Sep-26 facturado · CARTERA pendiente actualizar'},drive:''},
- {num:36,arrendatario:'Gestoría Administrativa Profesional',rfc:'GAP150918PW4',cat:'Oficina',hotel:'Sheraton Ambassador Monterrey',ciudad:'Monterrey, Nuevo León',localidad:'Local comercial · oficina (antes Auto Arrendadora y Promotora / Sixt)',superficie:null,giro:'Gestoría administrativa (antes Sixt — Auto Arrendadora y Promotora SA de CV)',inicio:null,fin:null,plazo:'Pendiente revisión contrato',renta_orig:null,moneda:'MXN',renta_efe:{monto:7038.69,mes:'ago-26'},renta_data:{base:7038.69,start:null},incremento:'Pendiente revisión contrato',mes_incr:null,mantenimiento:'Pendiente revisión contrato',mant_efe:null,deposito:'Pendiente revisión contrato',penalizacion:'Pendiente revisión contrato',correo:'',cobranza:{status:'corriente',pendiente:0,vencido:0,detalle:'Jul-26 y ago-26 facturados $7,038.69 · CARTERA al corriente al 24-ago-26'},drive:''},
+ {num:23,arrendatario:'7-Eleven México, S.A. de C.V.',rfc:'SEM980701STA',cat:'Tienda',hotel:'One Monterrey Aeropuerto — Plaza One MTY',ciudad:'Apodaca, Nuevo León',localidad:'Local comercial',superficie:null,giro:'Tienda de autoservicio 7-Eleven',inicio:null,fin:null,plazo:'Pendiente revisión contrato',renta_orig:57733.96,moneda:'MXN',renta_efe:{monto:57733.96,mes:'sep-26'},renta_data:{base:57733.96,start:null},incremento:'Pendiente revisión contrato',mes_incr:null,mantenimiento:'Pendiente revisión contrato',mant_efe:null,deposito:'Pendiente revisión contrato',penalizacion:'Pendiente revisión contrato',correo:'facturas3@collectdemexico.com',cobranza:{status:'corriente',pendiente:0,vencido:0,detalle:'Sep-26 facturado · CARTERA pendiente actualizar'},drive:''},
+ {num:24,arrendatario:'Gloria JH, S. de R.L. de C.V.',rfc:'GJH160627F71',cat:'Restaurante',hotel:'One Monterrey Aeropuerto — Plaza One MTY',ciudad:'Apodaca, Nuevo León',localidad:'Local comercial',superficie:null,giro:'Restaurante',inicio:null,fin:null,plazo:'En negociación de contrato',renta_orig:58118.53,moneda:'MXN',renta_efe:{monto:58118.53,mes:'sep-26'},renta_data:{base:58118.53,start:null},incremento:'Pendiente negociación',mes_incr:null,mantenimiento:'10% renta mensual (estimado)',mant_efe:{monto:5812.51,mes:'sep-26'},deposito:'Pendiente negociación',penalizacion:'Pendiente negociación',correo:'lee.r.alejandro@gmail.com',cobranza:{status:'corriente',pendiente:0,vencido:0,detalle:'Sep-26 facturado · En negociación'},drive:''},
+ {num:25,arrendatario:'Consolidadora de Servicios Aduanales, S.C.',rfc:'CSA990505P9A',cat:'Oficina',hotel:'One Monterrey Aeropuerto — Plaza One MTY',ciudad:'Apodaca, Nuevo León',localidad:'Local comercial',superficie:null,giro:'Servicios aduanales',inicio:null,fin:null,plazo:'En negociación de contrato',renta_orig:11802.63,moneda:'MXN',renta_efe:{monto:11802.63,mes:'sep-26'},renta_data:{base:11802.63,start:null},incremento:'Pendiente negociación',mes_incr:null,mantenimiento:'10% renta mensual (estimado)',mant_efe:{monto:1180.45,mes:'sep-26'},deposito:'Pendiente negociación',penalizacion:'Pendiente negociación',correo:'emmanuel.mireles@consa.com.mx',cobranza:{status:'corriente',pendiente:0,vencido:0,detalle:'Sep-26 facturado · En negociación'},drive:''},
+ {num:26,arrendatario:'Amazon Tours, S.A. de C.V. (BJM Delivery · Aqua World)',rfc:'ATO140328FU8',cat:'Tours',hotel:'Fiesta Americana Condesa Cancún',ciudad:'Cancún, Quintana Roo',localidad:'Local comercial · escritorio tours',superficie:null,giro:'Tours acuáticos y servicios turísticos',inicio:null,fin:null,plazo:'Pendiente revisión contrato',renta_orig:5669.96,moneda:'USD',renta_efe:{monto:5669.96,mes:'sep-26',moneda:'USD',nota:'Fija $1,127.20 + Variable $4,542.76 USD · T/C 16.92 · Compl. mar-ago $261.56 USD'},renta_data:{base:5669.96,start:null},incremento:'Pendiente revisión contrato',mes_incr:null,mantenimiento:'Pendiente revisión contrato',mant_efe:null,deposito:'Pendiente revisión contrato',penalizacion:'Pendiente revisión contrato',correo:'',cobranza:{status:'corriente',pendiente:0,vencido:0,detalle:'Sep-26 facturado · CARTERA pendiente actualizar'},drive:''},
+ {num:27,arrendatario:'Arrendadora Automotriz Grupo Arhe, S.A. de C.V. (Alamo)',rfc:'SPA090414RP6',cat:'Comercio',hotel:'Fiesta Inn Querétaro',ciudad:'Querétaro, Querétaro',localidad:'Local comercial',superficie:null,giro:'Renta de autos (Alamo)',inicio:null,fin:null,plazo:'Pendiente revisión contrato',renta_orig:10438.49,moneda:'MXN',renta_efe:{monto:10438.49,mes:'sep-26'},renta_data:{base:10438.49,start:null},incremento:'Pendiente revisión contrato',mes_incr:null,mantenimiento:'Pendiente revisión contrato',mant_efe:null,deposito:'Pendiente revisión contrato',penalizacion:'Pendiente revisión contrato',correo:'',cobranza:{status:'corriente',pendiente:0,vencido:0,detalle:'Sep-26 facturado · CARTERA pendiente actualizar'},drive:''},
+ {num:28,arrendatario:'Alquiladora de Vehículos Automotores, S.A. de C.V. (Hertz)',rfc:'AVA880310UI1',cat:'Comercio',hotel:'Sheraton Ambassador Monterrey',ciudad:'Monterrey, Nuevo León',localidad:'Local comercial',superficie:null,giro:'Renta de autos Hertz',inicio:null,fin:null,plazo:'Pendiente revisión contrato',renta_orig:38299.35,moneda:'MXN',renta_efe:{monto:38299.35,mes:'sep-26',nota:'Compl. abr-ago $8,141.00 MXN'},renta_data:{base:38299.35,start:null},incremento:'Pendiente revisión contrato',mes_incr:null,mantenimiento:'Pendiente revisión contrato',mant_efe:null,deposito:'Pendiente revisión contrato',penalizacion:'Pendiente revisión contrato',correo:'rentasavasa@avasa.com.mx',cobranza:{status:'corriente',pendiente:0,vencido:0,detalle:'Sep-26 facturado · CARTERA pendiente actualizar'},drive:''},
+ {num:29,arrendatario:'Juan Carlos Alberto Ayala Olvera',rfc:'AAOJ710401G66',cat:'Oficina',hotel:'Sheraton Ambassador Monterrey',ciudad:'Monterrey, Nuevo León',localidad:'Local comercial',superficie:null,giro:'Consultoría / servicios profesionales',inicio:null,fin:null,plazo:'Pendiente revisión contrato',renta_orig:4660.15,moneda:'MXN',renta_efe:{monto:4660.15,mes:'sep-26'},renta_data:{base:4660.15,start:null},incremento:'Pendiente revisión contrato',mes_incr:null,mantenimiento:'Pendiente revisión contrato',mant_efe:null,deposito:'Pendiente revisión contrato',penalizacion:'Pendiente revisión contrato',correo:'ayalaconsultores@hotmail.com',cobranza:{status:'corriente',pendiente:0,vencido:0,detalle:'Sep-26 facturado · CARTERA pendiente actualizar'},drive:''},
+ {num:31,arrendatario:'Yokomy Sushi, S. de R.L. de C.V.',rfc:'YSU1406',cat:'Restaurante',hotel:'One Tijuana Otay',ciudad:'Tijuana, Baja California',localidad:'Local comercial',superficie:null,giro:'Restaurante Yokomy Sushi',inicio:null,fin:null,plazo:'Pendiente revisión contrato',renta_orig:2141.90,moneda:'USD',renta_efe:{monto:2141.90,mes:'sep-26',moneda:'USD',nota:'T/C 16.92'},renta_data:{base:2141.90,start:null},incremento:'Anual INPC (mes pendiente confirmar)',mes_incr:null,mantenimiento:'Pendiente revisión contrato',mant_efe:null,deposito:'Pendiente revisión contrato',penalizacion:'Pendiente revisión contrato',correo:'yokomy_sushi@hotmail.com',cobranza:{status:'corriente',pendiente:0,vencido:0,detalle:'Sep-26 facturado · CARTERA pendiente actualizar'},drive:''},
+ {num:32,arrendatario:'Daqu de Sonora, S.A. de C.V. (Dairy Queen)',rfc:'DSO930705NU3',cat:'Restaurante',hotel:'One Tijuana Otay',ciudad:'Tijuana, Baja California',localidad:'Local comercial',superficie:null,giro:'Restaurante Dairy Queen',inicio:null,fin:null,plazo:'Pendiente revisión contrato',renta_orig:1931.64,moneda:'USD',renta_efe:{monto:1931.64,mes:'jul-26',moneda:'USD',nota:'Renta Ene-Jul 2026 confirmada CARTERA · Ago-26 no generado al corte 24-ago-26'},renta_data:{base:1931.64,start:null},incremento:'Anual INPC',mes_incr:null,mantenimiento:'Pendiente revisión contrato',mant_efe:null,deposito:'Pendiente revisión contrato',penalizacion:'Pendiente revisión contrato',correo:'rentas@ggef.mx',cobranza:{status:'corriente',pendiente:0,vencido:0,detalle:'Renta Ene-Jul 2026 confirmada $1,931.64 USD/mes · Ago-26 no generado al corte 24-ago-26'},drive:''},
+ {num:33,arrendatario:'Coyotas Lulú, S.A. de C.V.',rfc:'CLU0203',cat:'Restaurante',hotel:'Fiesta Inn Express Ciudad Obregón',ciudad:'Ciudad Obregón, Sonora',localidad:'Local comercial',superficie:null,giro:'Restaurante Coyotas Lulú',inicio:null,fin:null,plazo:'Pendiente revisión contrato',renta_orig:16247.54,moneda:'MXN',renta_efe:{monto:16247.54,mes:'sep-26',nota:'Compl. abr-ago $3,071.92 + $307.52 MXN'},renta_data:{base:16247.54,start:null},incremento:'Anual INPC',mes_incr:null,mantenimiento:'10% renta mensual (estimado)',mant_efe:{monto:1625.14,mes:'sep-26'},deposito:'Pendiente revisión contrato',penalizacion:'Pendiente revisión contrato',correo:'contabilidad@coyotaslulu.com',cobranza:{status:'corriente',pendiente:0,vencido:0,detalle:'Sep-26 facturado · CARTERA pendiente actualizar'},drive:''},
+ {num:34,arrendatario:'Proyectos Electrónicos de Entretenimiento LC, S.A. de C.V.',rfc:'PEE1304',cat:'Comercio',hotel:'One Monterrey Aeropuerto — Plaza One MTY',ciudad:'Apodaca, Nuevo León',localidad:'Local comercial',superficie:null,giro:'Entretenimiento electrónico',inicio:null,fin:null,plazo:'Pendiente revisión contrato',renta_orig:19498.23,moneda:'MXN',renta_efe:{monto:19498.23,mes:'sep-26'},renta_data:{base:19498.23,start:null},incremento:'Pendiente revisión contrato',mes_incr:null,mantenimiento:'Pendiente revisión contrato',mant_efe:null,deposito:'Pendiente revisión contrato',penalizacion:'Pendiente revisión contrato',correo:'miguelasolisc@yahoo.com.mx',cobranza:{status:'corriente',pendiente:0,vencido:0,detalle:'Sep-26 facturado · CARTERA pendiente actualizar'},drive:''},
+ {num:35,arrendatario:'María Irene Vota Echavarri',rfc:'VOEI441',cat:'Tienda',hotel:'Fiesta Inn Ciudad Juárez',ciudad:'Ciudad Juárez, Chihuahua',localidad:'Local comercial · Tabaquería',superficie:null,giro:'Tabaquería',inicio:null,fin:null,plazo:'Pendiente revisión contrato',renta_orig:7005.86,moneda:'MXN',renta_efe:{monto:7005.86,mes:'sep-26'},renta_data:{base:7005.86,start:null},incremento:'Pendiente revisión contrato',mes_incr:null,mantenimiento:'Pendiente revisión contrato',mant_efe:null,deposito:'Pendiente revisión contrato',penalizacion:'Pendiente revisión contrato',correo:'nenevotta@gmail.com',cobranza:{status:'corriente',pendiente:0,vencido:0,detalle:'Sep-26 facturado · CARTERA pendiente actualizar'},drive:''},
+ {num:36,arrendatario:'Gestoría Administrativa Profesional',rfc:'GAP150918PW4',cat:'Oficina',hotel:'Sheraton Ambassador Monterrey',ciudad:'Monterrey, Nuevo León',localidad:'Local comercial · oficina (antes Auto Arrendadora y Promotora / Sixt)',superficie:null,giro:'Gestoría administrativa (antes Sixt — Auto Arrendadora y Promotora SA de CV)',inicio:null,fin:null,plazo:'Pendiente revisión contrato',renta_orig:7038.69,moneda:'MXN',renta_efe:{monto:7038.69,mes:'ago-26'},renta_data:{base:7038.69,start:null},incremento:'Pendiente revisión contrato',mes_incr:null,mantenimiento:'Pendiente revisión contrato',mant_efe:null,deposito:'Pendiente revisión contrato',penalizacion:'Pendiente revisión contrato',correo:'',cobranza:{status:'corriente',pendiente:0,vencido:0,detalle:'Jul-26 y ago-26 facturados $7,038.69 · CARTERA al corriente al 24-ago-26'},drive:''},
 ];
 // ── ENERGÉTICOS (SOPORTE FACTURAS 12-jun-2026) ──
 const ENERGETICOS_DATA={
@@ -1137,7 +1115,6 @@ const ENERGETICOS_DATA={
  27:{elec:null,agua:null,mant:null},
  28:{elec:null,agua:null,mant:null},
  29:{elec:null,agua:null,mant:null},
- 30:{elec:null,agua:null,mant:null},
  31:{elec:{monto:6892.69,mes:'sep-26'},agua:{monto:14947.52,mes:'sep-26'},mant:null},
  32:{elec:{monto:15234.55,mes:'sep-26'},agua:{monto:11516.94,mes:'sep-26'},mant:null},
  33:{elec:null,agua:null,mant:{monto:1625.14,mes:'sep-26'}},
@@ -1447,7 +1424,8 @@ function plazoStatus(c){
 function buildTableBody(){
   const tbody=document.getElementById('tableBody');if(!tbody)return;
   let html='';let vencidos=0,deudores=0;
-  CONTRACTS.forEach(c=>{
+  const _sorted=[...CONTRACTS].sort((a,b)=>a.num-b.num);
+  _sorted.forEach(c=>{
     const ce=window._fihoAuth?window._fihoAuth.apply(c):c;
     const d=getDaysToEnd(c.fin);
     if(d!==null&&(d<0||d<=180)) vencidos++;
@@ -1534,7 +1512,7 @@ function buildAlertas(){
       const badge=d<0?`VENCIDO hace ${Math.abs(d)} días`:`Vence en ${d} días (~${Math.round(d/30)} meses)`;
       html+=`<div class="alert-card ${b.cls}">
         <div class="alert-card-header">
-          <div><div class="alert-num">CONTRATO #${c.num}</div><div class="alert-hotel">${c.hotel}</div><div class="alert-op">${c.arrendatario}</div></div>
+          <div><div class="alert-num">CONTRATO #${c.num}</div><div class="alert-hotel">${c.hotel}</div><div class="alert-op" style="font-weight:700;color:#F0F9FF;font-size:14px;letter-spacing:-.2px">${c.arrendatario}</div></div>
           <div class="alert-time-badge">${badge}</div>
         </div>
         <div class="alert-meta">
@@ -1654,6 +1632,29 @@ function renderAlertaRenta(){
     </div>`;
   }).join('');
 }
+function filterAlertas(){
+  const q=(document.getElementById('alertasSearch')?.value||'').toLowerCase();
+  const cards=document.querySelectorAll('#alertasContent .alert-card');
+  let vis=0;
+  cards.forEach(card=>{
+    const txt=(card.textContent||'').toLowerCase();
+    const show=!q||txt.includes(q);
+    card.style.display=show?'':'none';
+    if(show)vis++;
+  });
+  // Show/hide section titles if all cards in section are hidden
+  document.querySelectorAll('#alertasContent .alert-section-title').forEach(sec=>{
+    let nextEl=sec.nextElementSibling;
+    let anyVisible=false;
+    while(nextEl&&nextEl.classList.contains('alert-cards')){
+      anyVisible=Array.from(nextEl.querySelectorAll('.alert-card')).some(c=>c.style.display!=='none');
+      nextEl=nextEl.nextElementSibling;
+    }
+    sec.style.display=anyVisible||!q?'':'none';
+  });
+  const countEl=document.getElementById('alertasCount');
+  if(countEl)countEl.textContent=q?`${vis} contrato${vis!==1?'s':''} encontrado${vis!==1?'s':''}`:'';
+}
 function airtToggleCard(num){
   const card=document.getElementById('airt-card-'+num);
   const collapse=document.getElementById('airt-collapse-'+num);
@@ -1706,8 +1707,17 @@ function setDoc(pid,d){const all=loadDocs();all[pid]=d;saveDocs(all);}
 function renderPermisos(){
   const cont=document.getElementById('permisosContainer');if(!cont)return;
   const filterEst=document.getElementById('filterPermEst').value;
+  const searchPerm=(document.getElementById('searchPermisos')?.value||''). toLowerCase();
   const docs=loadDocs();let total=0,loaded=0;
-  const html=PERMISOS_DB.filter(p=>!filterEst||p.estado===filterEst)
+  const html=PERMISOS_DB.filter(p=>{
+    if(filterEst&&p.estado!==filterEst)return false;
+    if(searchPerm){
+      const c=CONTRACTS.find(x=>x.num===p.num);
+      const haystack=((c?.arrendatario||'')+' '+(c?.giro||'')+' '+p.estado+' '+p.permisos.map(x=>x.nombre).join(' ')).toLowerCase();
+      return haystack.includes(searchPerm);
+    }
+    return true;
+  })
    .slice()
    .sort((a,b)=>{
      const ca=CONTRACTS.find(x=>x.num===a.num),cb=CONTRACTS.find(x=>x.num===b.num);
@@ -1928,61 +1938,126 @@ function switchTab(id,btn){
   if(id==='cobranza')renderCobTable();
   if(id==='adcontor')renderAdContor();
 }
-// ── AD CONTOR ESTACIONAMIENTO ──
+// ── AD CONTOR ESTACIONAMIENTO — Presupuesto vs Real 2026 ──
+// Para actualizar mensualmente: añadir fila en data[] con {mes,ing,cos} del nuevo mes.
+// Presupuesto mensual fijo: ing 211,162.38 · cos 124,534.98 · util 86,627.40
 function renderAdContor(){
+  const PTTO={ing:211162.38,cos:124534.98,util:86627.40};
+  // Datos reales por mes — Fuente: Anexo 2.1.10 (ingresos) y 2.1.17 (costos) EEFF cierre agosto 2026
   const data=[
-    {mes:'Ene-26',ing:162422.66,cos:120114.14,net:42308.52},
-    {mes:'Feb-26',ing:236688.64,cos:164523.61,net:72165.03},
-    {mes:'Mar-26',ing:106210.90,cos:117419.16,net:-11208.26},
-    {mes:'Abr-26',ing:183935.35,cos:112449.43,net:71485.92},
-    {mes:'May-26',ing:260247.12,cos:115481.22,net:144765.90},
-    {mes:'Jun-26',ing:181652.63,cos:127292.63,net:54360.00},
-    {mes:'Jul-26',ing:178042.15,cos:118506.04,net:59536.11},
-    {mes:'Ago-26',ing:222439.72,cos:102501.82,net:119937.90},
+    {mes:'Ene-26',ing:162422.66,cos:120114.14},
+    {mes:'Feb-26',ing:236688.64,cos:138156.00},
+    {mes:'Mar-26',ing:106210.90,cos:141830.70},
+    {mes:'Abr-26',ing:183935.35,cos:112449.43},
+    {mes:'May-26',ing:260247.12,cos:115481.00},
+    {mes:'Jun-26',ing:181652.63,cos:127292.63},
+    {mes:'Jul-26',ing:178042.15,cos:118506.03},
+    {mes:'Ago-26',ing:222439.72,cos:102501.82},
+    // Septiembre 2026 → agregar cuando se reciba Anexo EEFF sep-26
+    // {mes:'Sep-26',ing:XXX,cos:XXX},
   ];
+  data.forEach(r=>{r.net=r.ing-r.cos;r.varIng=r.ing-PTTO.ing;r.varCos=r.cos-PTTO.cos;r.varUtil=r.net-PTTO.util;r.margen=r.ing>0?(r.net/r.ing)*100:0;});
+  const ytd={ing:data.reduce((s,r)=>s+r.ing,0),cos:data.reduce((s,r)=>s+r.cos,0)};
+  ytd.net=ytd.ing-ytd.cos;ytd.margen=ytd.ing>0?(ytd.net/ytd.ing)*100:0;
+  const meses=data.length;
+  const ytdPtto={ing:PTTO.ing*meses,cos:PTTO.cos*meses,util:PTTO.util*meses};
+  ytd.varIng=ytd.ing-ytdPtto.ing;ytd.varCos=ytd.cos-ytdPtto.cos;ytd.varUtil=ytd.net-ytdPtto.util;
+  const fmt=n=>'$'+Math.round(Math.abs(n)).toLocaleString('es-MX');
+  const fmtVar=(n,pos)=>n>=0?`<span style="color:${pos?'#4ADE80':'#F87171'}">+${fmt(n)}</span>`:`<span style="color:${pos?'#F87171':'#4ADE80'}">-${fmt(n)}</span>`;
+  // KPI cards
+  const kpis=document.getElementById('adcontorKpis');
+  if(kpis){
+    const pctIng=(ytd.varIng/ytdPtto.ing*100).toFixed(1);
+    const pctUtil=(ytd.varUtil/ytdPtto.util*100).toFixed(1);
+    const pctCos=(ytd.varCos/ytdPtto.cos*100).toFixed(1);
+    kpis.innerHTML=`
+      <div style="background:rgba(14,165,233,.1);border:1px solid rgba(14,165,233,.28);border-radius:14px;padding:16px 18px">
+        <div style="font-size:9.5px;color:#7DD3FC;text-transform:uppercase;letter-spacing:.7px;margin-bottom:6px">▲ Ingreso Real YTD</div>
+        <div style="font-size:22px;font-weight:700;color:#F0F9FF;font-variant-numeric:tabular-nums">${fmt(ytd.ing)}</div>
+        <div style="font-size:10px;color:rgba(125,211,252,.5);margin-top:3px">Ptto: ${fmt(ytdPtto.ing)}</div>
+        <div style="margin-top:8px;font-size:11px">${fmtVar(ytd.varIng,true)} vs ptto (${pctIng}%)</div>
+      </div>
+      <div style="background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.22);border-radius:14px;padding:16px 18px">
+        <div style="font-size:9.5px;color:#FCA5A5;text-transform:uppercase;letter-spacing:.7px;margin-bottom:6px">▼ Gasto Real YTD</div>
+        <div style="font-size:22px;font-weight:700;color:#F0F9FF;font-variant-numeric:tabular-nums">${fmt(ytd.cos)}</div>
+        <div style="font-size:10px;color:rgba(252,165,165,.5);margin-top:3px">Ptto: ${fmt(ytdPtto.cos)}</div>
+        <div style="margin-top:8px;font-size:11px">${fmtVar(ytd.varCos,false)} vs ptto (${pctCos}%)</div>
+      </div>
+      <div style="background:rgba(34,197,94,.09);border:1px solid rgba(34,197,94,.24);border-radius:14px;padding:16px 18px">
+        <div style="font-size:9.5px;color:#86EFAC;text-transform:uppercase;letter-spacing:.7px;margin-bottom:6px">◆ Utilidad Real YTD</div>
+        <div style="font-size:22px;font-weight:700;color:${ytd.net>=0?'#4ADE80':'#F87171'};font-variant-numeric:tabular-nums">${ytd.net>=0?'':'-'}${fmt(ytd.net)}</div>
+        <div style="font-size:10px;color:rgba(134,239,172,.5);margin-top:3px">Ptto: ${fmt(ytdPtto.util)}</div>
+        <div style="margin-top:8px;font-size:11px">${fmtVar(ytd.varUtil,true)} vs ptto (${pctUtil}%)</div>
+      </div>
+      <div style="background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.22);border-radius:14px;padding:16px 18px">
+        <div style="font-size:9.5px;color:#FDE68A;text-transform:uppercase;letter-spacing:.7px;margin-bottom:6px">% Margen Real</div>
+        <div style="font-size:22px;font-weight:700;color:#FCD34D;font-variant-numeric:tabular-nums">${ytd.margen.toFixed(1)}%</div>
+        <div style="font-size:10px;color:rgba(253,230,138,.5);margin-top:3px">Ptto: 41.0%</div>
+        <div style="margin-top:8px;font-size:11px;color:${ytd.margen>=41?'#4ADE80':'#F87171'}">${ytd.margen>=41?'▲':'▼'} ${Math.abs(ytd.margen-41).toFixed(1)} pp vs ptto</div>
+      </div>`;
+  }
+  // Monthly table
   const tb=document.getElementById('adcontorTableBody');
   if(tb){
-    tb.innerHTML=data.map((r,i)=>`<tr style="border-top:1px solid rgba(255,255,255,.06);${i%2===0?'background:rgba(255,255,255,.02)':''}">
-      <td style="padding:8px 14px;color:rgba(255,255,255,.8);font-weight:500;white-space:nowrap">${r.mes}</td>
-      <td style="padding:8px 14px;text-align:right;color:#93C5FD;font-variant-numeric:tabular-nums;font-size:12px">$${Math.round(r.ing).toLocaleString('es-MX')}</td>
-      <td style="padding:8px 14px;text-align:right;color:#FCA5A5;font-variant-numeric:tabular-nums;font-size:12px">$${Math.round(r.cos).toLocaleString('es-MX')}</td>
-      <td style="padding:8px 14px;text-align:right;font-weight:600;font-variant-numeric:tabular-nums;font-size:12px;color:${r.net>=0?'#4ADE80':'#F87171'}">$${Math.round(Math.abs(r.net)).toLocaleString('es-MX')}${r.net<0?' (-)':''}</td>
-    </tr>`).join('');
+    const thStyle='padding:8px 12px;font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;white-space:nowrap;';
+    const head=`<thead><tr style="background:rgba(14,165,233,.1);border-bottom:1px solid rgba(14,165,233,.2)">
+      <th style="${thStyle}text-align:left;color:#7DD3FC">Mes</th>
+      <th style="${thStyle}text-align:right;color:#7DD3FC">Ingreso</th>
+      <th style="${thStyle}text-align:right;color:rgba(125,211,252,.5)">Ptto Ing</th>
+      <th style="${thStyle}text-align:right;color:#86EFAC">Utilidad</th>
+      <th style="${thStyle}text-align:right;color:rgba(134,239,172,.5)">Ptto Util</th>
+      <th style="${thStyle}text-align:right;color:#FDE68A">%</th>
+    </tr></thead>`;
+    const rows=data.map((r,i)=>{
+      const rowBg=i%2===0?'background:rgba(255,255,255,.02)':'';
+      return `<tr style="border-top:1px solid rgba(255,255,255,.05);${rowBg}">
+        <td style="padding:7px 12px;color:rgba(255,255,255,.85);font-weight:600;white-space:nowrap;font-size:11.5px">${r.mes}</td>
+        <td style="padding:7px 12px;text-align:right;color:#93C5FD;font-variant-numeric:tabular-nums;font-size:11.5px">${fmt(r.ing)}</td>
+        <td style="padding:7px 12px;text-align:right;color:rgba(125,211,252,.4);font-variant-numeric:tabular-nums;font-size:10.5px">${fmt(PTTO.ing)}</td>
+        <td style="padding:7px 12px;text-align:right;font-weight:600;font-variant-numeric:tabular-nums;font-size:11.5px;color:${r.net>=0?'#4ADE80':'#F87171'}">${r.net>=0?'':'-'}${fmt(r.net)}</td>
+        <td style="padding:7px 12px;text-align:right;color:rgba(134,239,172,.4);font-variant-numeric:tabular-nums;font-size:10.5px">${fmt(PTTO.util)}</td>
+        <td style="padding:7px 12px;text-align:right;font-size:11.5px;font-weight:600;color:${r.margen>=41?'#4ADE80':r.margen>=30?'#FCD34D':'#F87171'}">${r.margen.toFixed(1)}%</td>
+      </tr>`;
+    }).join('');
+    const foot=`<tfoot><tr style="background:rgba(14,165,233,.08);border-top:1px solid rgba(14,165,233,.25)">
+      <td style="padding:9px 12px;color:#E2E8F0;font-weight:700;font-size:11.5px">YTD (${meses}m)</td>
+      <td style="padding:9px 12px;text-align:right;color:#7DD3FC;font-weight:700;font-variant-numeric:tabular-nums;font-size:11.5px">${fmt(ytd.ing)}</td>
+      <td style="padding:9px 12px;text-align:right;color:rgba(125,211,252,.5);font-variant-numeric:tabular-nums;font-size:10.5px">${fmt(ytdPtto.ing)}</td>
+      <td style="padding:9px 12px;text-align:right;color:${ytd.net>=0?'#4ADE80':'#F87171'};font-weight:700;font-variant-numeric:tabular-nums;font-size:11.5px">${ytd.net>=0?'':'-'}${fmt(ytd.net)}</td>
+      <td style="padding:9px 12px;text-align:right;color:rgba(134,239,172,.5);font-variant-numeric:tabular-nums;font-size:10.5px">${fmt(ytdPtto.util)}</td>
+      <td style="padding:9px 12px;text-align:right;font-weight:700;font-size:11.5px;color:${ytd.margen>=41?'#4ADE80':'#FCD34D'}">${ytd.margen.toFixed(1)}%</td>
+    </tr></tfoot>`;
+    tb.innerHTML=head+`<tbody>${rows}</tbody>`+foot;
   }
+  // Canvas chart — Ingreso Real vs Ptto + Utilidad Real
   const canvas=document.getElementById('adcontorChart');
   if(!canvas)return;
   const rect=canvas.getBoundingClientRect();
-  canvas.width=rect.width||420;
-  canvas.height=200;
+  canvas.width=rect.width||400;canvas.height=180;
   const ctx=canvas.getContext('2d');
-  const maxVal=Math.max(...data.map(r=>Math.max(r.ing,r.cos)));
-  const pad={left:8,right:8,top:10,bottom:28};
-  const cW=canvas.width-pad.left-pad.right;
-  const cH=canvas.height-pad.top-pad.bottom;
-  const bW=cW/data.length;
-  const gap=bW*0.15;
-  const bw=(bW-2*gap)/3;
+  const maxVal=Math.max(...data.map(r=>r.ing),PTTO.ing)*1.08;
+  const pad={left:6,right:6,top:10,bottom:26};
+  const cW=canvas.width-pad.left-pad.right;const cH=canvas.height-pad.top-pad.bottom;
+  const bW=cW/data.length;const gap=bW*0.12;const bw=(bW-2*gap)/2;
   ctx.clearRect(0,0,canvas.width,canvas.height);
-  for(let i=0;i<=4;i++){
-    const y=pad.top+cH*(1-i/4);
-    ctx.strokeStyle='rgba(255,255,255,.06)';ctx.lineWidth=1;
-    ctx.beginPath();ctx.moveTo(pad.left,y);ctx.lineTo(pad.left+cW,y);ctx.stroke();
-  }
+  // Grid lines
+  for(let i=0;i<=4;i++){const y=pad.top+cH*(1-i/4);ctx.strokeStyle='rgba(255,255,255,.05)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(pad.left,y);ctx.lineTo(pad.left+cW,y);ctx.stroke();}
+  // Ptto line
+  const pttoY=pad.top+cH*(1-PTTO.ing/maxVal);
+  ctx.strokeStyle='rgba(14,165,233,.35)';ctx.lineWidth=1.5;ctx.setLineDash([4,3]);
+  ctx.beginPath();ctx.moveTo(pad.left,pttoY);ctx.lineTo(pad.left+cW,pttoY);ctx.stroke();ctx.setLineDash([]);
   data.forEach((r,i)=>{
-    const x=pad.left+i*bW+gap;
-    const yB=pad.top+cH;
-    ctx.fillStyle='rgba(14,165,233,.8)';
+    const x=pad.left+i*bW+gap;const yB=pad.top+cH;
+    // Ingreso real bar
     const hI=cH*(r.ing/maxVal);
+    ctx.fillStyle=r.varIng>=0?'rgba(14,165,233,.8)':'rgba(251,113,133,.75)';
     ctx.fillRect(x,yB-hI,bw,hI);
-    ctx.fillStyle='rgba(239,68,68,.75)';
-    const hC=cH*(r.cos/maxVal);
-    ctx.fillRect(x+bw,yB-hC,bw,hC);
+    // Utilidad bar
     const hN=cH*(Math.abs(r.net)/maxVal);
-    if(r.net>=0){ctx.fillStyle='rgba(34,197,94,.8)';ctx.fillRect(x+2*bw,yB-hN,bw,hN);}
-    else{ctx.fillStyle='rgba(248,113,113,.7)';ctx.fillRect(x+2*bw,yB,bw,hN);}
-    ctx.fillStyle='rgba(255,255,255,.4)';
-    ctx.font='8.5px system-ui,sans-serif';ctx.textAlign='center';
-    ctx.fillText(r.mes.replace('-26',''),x+bW/2-gap/2,yB+16);
+    if(r.net>=0){ctx.fillStyle='rgba(34,197,94,.75)';ctx.fillRect(x+bw,yB-hN,bw,hN);}
+    else{ctx.fillStyle='rgba(248,113,113,.7)';ctx.fillRect(x+bw,yB,bw,hN);}
+    ctx.fillStyle='rgba(255,255,255,.38)';ctx.font='8px system-ui,sans-serif';ctx.textAlign='center';
+    ctx.fillText(r.mes.replace('-26',''),x+bW/2-gap/2,yB+17);
   });
 }
 // ── INIT ──
