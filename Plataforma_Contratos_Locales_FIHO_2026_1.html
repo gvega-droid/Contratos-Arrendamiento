@@ -373,7 +373,7 @@ td:first-child{text-align:center;font-weight:700;color:var(--gold);font-size:13p
   <p>Base de datos · información extraída de contratos originales y soporte de facturas · 18-jun-2026 · Cobranza al 24-ago-2026</p>
 </div>
 <div class="stats">
-  <div class="stat-card"><div class="num">35</div><div class="lbl">Contratos</div></div>
+  <div class="stat-card"><div class="num">36</div><div class="lbl">Contratos</div></div>
   <div class="stat-card"><div class="num" id="statVencidos" style="color:#E53E3E">—</div><div class="lbl">Alertas Contrato</div></div>
   <div class="stat-card"><div class="num" id="statDeudores" style="color:#F97316">—</div><div class="lbl">Con adeudo</div></div>
   <div class="stat-card"><div class="num" id="statIncrProx">—</div><div class="lbl">Incrementos ≤90d</div></div>
@@ -798,7 +798,7 @@ const IVA=0.16;
 const SPEI={banco:'BBVA Bancomer Suc. Empresas Toluca',cuenta:'0191885413',clabe:'012420001918854135',beneficiario:'F-X-DEUTSCHE BANK MEXICO NO. F/1596',rfc:'FFX121005C6A'};
 
 // ── VERSIÓN DEL ARCHIVO — se actualiza en cada cambio para limpiar ediciones obsoletas del browser ──
-const FILE_VERSION='20260910-025';
+const FILE_VERSION='20260910-026';
 // sessionStorage se limpia automáticamente al cerrar/abrir el archivo — nunca interfiere con versiones nuevas
 
 // ── INPC (misma lógica plataforma antenas) ──
@@ -1113,6 +1113,7 @@ const CONTRACTS=[
  {num:33,arrendatario:'Coyotas Lulú, S.A. de C.V.',rfc:'CLU0203',cat:'Restaurante',hotel:'Fiesta Inn Express Ciudad Obregón',ciudad:'Ciudad Obregón, Sonora',localidad:'Local comercial',superficie:null,giro:'Restaurante Coyotas Lulú',inicio:null,fin:null,plazo:'Pendiente revisión contrato',renta_orig:null,moneda:'MXN',renta_efe:{monto:16247.54,mes:'sep-26',nota:'Compl. abr-ago $3,071.92 + $307.52 MXN'},renta_data:{base:16247.54,start:null},incremento:'Anual INPC',mes_incr:null,mantenimiento:'10% renta mensual (estimado)',mant_efe:{monto:1625.14,mes:'sep-26'},deposito:'Pendiente revisión contrato',penalizacion:'Pendiente revisión contrato',correo:'contabilidad@coyotaslulu.com',cobranza:{status:'corriente',pendiente:0,vencido:0,detalle:'Sep-26 facturado · CARTERA pendiente actualizar'},drive:''},
  {num:34,arrendatario:'Proyectos Electrónicos de Entretenimiento LC, S.A. de C.V.',rfc:'PEE1304',cat:'Comercio',hotel:'One Monterrey Aeropuerto — Plaza One MTY',ciudad:'Apodaca, Nuevo León',localidad:'Local comercial',superficie:null,giro:'Entretenimiento electrónico',inicio:null,fin:null,plazo:'Pendiente revisión contrato',renta_orig:null,moneda:'MXN',renta_efe:{monto:19498.23,mes:'sep-26'},renta_data:{base:19498.23,start:null},incremento:'Pendiente revisión contrato',mes_incr:null,mantenimiento:'Pendiente revisión contrato',mant_efe:null,deposito:'Pendiente revisión contrato',penalizacion:'Pendiente revisión contrato',correo:'miguelasolisc@yahoo.com.mx',cobranza:{status:'corriente',pendiente:0,vencido:0,detalle:'Sep-26 facturado · CARTERA pendiente actualizar'},drive:''},
  {num:35,arrendatario:'María Irene Vota Echavarri',rfc:'VOEI441',cat:'Tienda',hotel:'Fiesta Inn Ciudad Juárez',ciudad:'Ciudad Juárez, Chihuahua',localidad:'Local comercial · Tabaquería',superficie:null,giro:'Tabaquería',inicio:null,fin:null,plazo:'Pendiente revisión contrato',renta_orig:null,moneda:'MXN',renta_efe:{monto:7005.86,mes:'sep-26'},renta_data:{base:7005.86,start:null},incremento:'Pendiente revisión contrato',mes_incr:null,mantenimiento:'Pendiente revisión contrato',mant_efe:null,deposito:'Pendiente revisión contrato',penalizacion:'Pendiente revisión contrato',correo:'nenevotta@gmail.com',cobranza:{status:'corriente',pendiente:0,vencido:0,detalle:'Sep-26 facturado · CARTERA pendiente actualizar'},drive:''},
+ {num:36,arrendatario:'Gestoría Administrativa Profesional',rfc:'GAP150918PW4',cat:'Oficina',hotel:'Sheraton Ambassador Monterrey',ciudad:'Monterrey, Nuevo León',localidad:'Local comercial · oficina (antes Auto Arrendadora y Promotora / Sixt)',superficie:null,giro:'Gestoría administrativa (antes Sixt — Auto Arrendadora y Promotora SA de CV)',inicio:null,fin:null,plazo:'Pendiente revisión contrato',renta_orig:null,moneda:'MXN',renta_efe:{monto:7038.69,mes:'ago-26'},renta_data:{base:7038.69,start:null},incremento:'Pendiente revisión contrato',mes_incr:null,mantenimiento:'Pendiente revisión contrato',mant_efe:null,deposito:'Pendiente revisión contrato',penalizacion:'Pendiente revisión contrato',correo:'',cobranza:{status:'corriente',pendiente:0,vencido:0,detalle:'Jul-26 y ago-26 facturados $7,038.69 · CARTERA al corriente al 24-ago-26'},drive:''},
 ];
 // ── ENERGÉTICOS (SOPORTE FACTURAS 12-jun-2026) ──
 const ENERGETICOS_DATA={
@@ -1142,6 +1143,7 @@ const ENERGETICOS_DATA={
  33:{elec:null,agua:null,mant:{monto:1625.14,mes:'sep-26'}},
  34:{elec:null,agua:null,mant:null},
  35:{elec:{monto:1395.00,mes:'sep-26'},agua:null,mant:null},
+ 36:{elec:null,agua:null,mant:null},
 };
 
 // ── PERMISOS DB (por arrendatario, según giro comercial y reglamentación municipal/estatal) ──
